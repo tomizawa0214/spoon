@@ -1,0 +1,86 @@
+{% extends "app/base.html" %}
+
+{% block slider %}
+<div id= "slides" class="top carousel slide carousel-fade" data-ride="carousel" data-interval="3000">
+  <ul class="carousel-indicators">
+    <li data-target="#slides" data-slide-to="0" class="active"></li>
+    <li data-target="#slides" data-slide-to="1"></li>
+    <li data-target="#slides" data-slide-to="2"></li>
+    <li data-target="#slides" data-slide-to="3"></li>
+    <li data-target="#slides" data-slide-to="4"></li>
+  </ul>
+  <div class="top__item carousel-inner">
+    <div class="top__item--image1 carousel-item active"></div>
+    <div class="top__item--image2 carousel-item"></div>
+    <div class="top__item--image3 carousel-item"></div>
+    <div class="top__item--image4 carousel-item"></div>
+    <div class="top__item--image5 carousel-item"></div>
+  </div>
+</div>
+{% endblock %}
+
+{% block nav %}
+<nav class="nav navbar navbar-expand">
+  <div class="nav__wrap container-fluid">
+    <ul class="navbar-nav">
+      <li>
+        <a class="nav-link" href="/">
+          PRODUCTS<br class="d-none d-sm-block">
+          <span>-商品のご案内-</span>
+        </a>
+      </li>
+      <hr>
+      <li>
+        <a class="nav-link" href="/">
+          ABOUT<br class="d-none d-sm-block">
+          <span>-当店について-</span>
+        </a>
+      </li>
+      <hr>
+      <li>
+        <a class="nav-link" href="/">
+          GUIDE<br class="d-none d-sm-block">
+          <span>-ご利用方法-</span>
+        </a>
+      </li>
+      <hr>
+      <li>
+        <a class="nav-link" href="/">
+          ACCESS<br class="d-none d-sm-block">
+          <span>-店舗のご案内-</span>
+        </a>
+      </li>
+      <hr>
+      <li>
+        <a class="nav-link" href="/">
+          CONTACT<br class="d-none d-sm-block">
+          <span>-お問い合わせ-</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="title">
+  <span>ALL CATEGORY</span>
+</div>
+<p class="title-text">素材の持つ香りや味わいを大切にし、それぞれの合うこだわりの素材を使用しています。ムダな乾燥を防いで中は水分をしっかりと抱き込みふっくらもちもちに、外皮はパリッとした食感に仕上がるよう、溶岩で作った石窯で焼き上げています。</p>
+<div class="product">
+  {% for item in object_list %}
+  <div class="product__item">
+    <div class="product__item--image">
+      <a href="{% url 'product_detail' item.slug %}">
+        <img src="{{ item.image.url }}">
+        <p class="product__item--image--mask"></p>
+        <p class="product__item--image--caption">READ MORE</p>
+      </a>
+    </div>
+    <!-- <p>{{ item.category }}</p> -->
+    <h4>{{ item.title }}</h4>
+    <h3>{{ item.price }}<span>円(税別)</span></h3>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

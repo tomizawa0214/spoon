@@ -1,0 +1,121 @@
+{% load cart_tags %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>焼きたてパン</title>
+  </head>
+
+  <body>
+    <div class="loading">
+      <div class="loading__packman">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+
+    <!-- header -->
+    <header class="header navbar">
+      <div class="header__wrap container-fluid">
+        <a href="/">
+          <img src="{% static 'img/logo.svg' %}">
+        </a>
+        <ul class="navbar-nav">
+          <li>
+            <a class="nav-link" href="/">
+              <i class="fas fa-home fa-fw" aria-hidden="true"></i>HOME
+              <span>-トップページ-</span>
+            </a>
+          </li>
+          {% if user.is_authenticated %}
+          <li>
+            <a class="nav-link" href="{% url 'profile' %}">
+              <i class="fas fa-user fa-fw" aria-hidden="true"></i>MY PAGE
+              <span>-マイページ-</span>
+            </a>
+          </li>
+          <li>
+            <a class="nav-link" href="{% url 'order' %}">
+              <i class="fas fa-shopping-cart fa-fw" aria-hidden="true"></i>SHOPPING CART
+              <span class="badge badge-pill badge-warning">
+                商品{{ request.user|itemCount }}
+              </span>
+            </a>
+          </li>
+          <li>
+            <a class="nav-link" href="{% url 'account_logout' %}">
+              <i class="fas fa-sign-out-alt fa-fw" aria-hidden="true"></i>LOGOUT
+              <span>-ログアウト-</span>
+            </a>
+          </li>
+          {% else %}
+          <li>
+            <a class="nav-link" href="{% url 'account_signup' %}">
+              <i class="fas fa-user-plus fa-fw" aria-hidden="true"></i>SIGN UP
+              <span>-会員登録-</span>
+            </a>
+          </li>
+          <li>
+            <a class="nav-link" href="{% url 'account_login' %}">
+              <i class="fas fa-sign-in-alt fa-fw" aria-hidden="true"></i>LOGIN
+              <span>-ログイン-</span>
+            </a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+    </header>
+
+    <!-- Image Slider -->
+    {% block slider %}
+    {% endblock %}
+
+    <!-- Navigation-->
+    {% block nav %}
+    {% endblock %}
+
+    <main>
+      <div class="container-fluid">
+        {% block content %}
+        {% endblock %}
+      </div>
+    </main>
+
+    <footer class="footer">
+      <ul class="footer__link">
+        <li class="footer__link--item">
+          <a href="/">特定商取引法に基づく表記</a>
+        </li>
+        <li class="footer__link--item">
+          <a href="/">お支払い方法について</a>
+        </li>
+        <li class="footer__link--item">
+          <a href="/">プライバシーポリシー</a>
+        </li>
+        <li class="footer__link--item">
+          <a href="/">会社概要</a>
+        </li>
+      </ul>
+      <div class="footer__copy">
+        <p>Copyright  &copy; AAAAA AAAAA 2020</p>
+      </div>
+    </footer>
+
+    {% block extra_js %}
+    {% endblock %}
+    <script src="https://kit.fontawesome.com/a29680248f.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{% static 'js/index.js' %}"></script>
+  </body>
+</html>

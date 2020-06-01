@@ -1,0 +1,81 @@
+.profile-title {
+  @include sectionTitle;
+  margin: 0 0 30px;
+  &:after {
+    max-width: 500px;
+  }
+}
+
+.profile {
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: center;
+  h5 {
+    margin: 10px auto 30px;
+  }
+  &__table {
+    margin: 0 auto;
+    width: 100%;
+    border: 1px solid #d1dbeb;
+    border-radius: 8px;
+    border-collapse: separate;
+    overflow: hidden;
+    &--name {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+    tr:not(:last-of-type) {
+      th {
+        span {
+          font-size: 12px;
+        }
+      }
+      td {
+        border-bottom: 1px solid #d1dbeb;
+      }
+    }
+    th {
+      width: 180px;
+      text-align: left;
+      padding: 16px 24px;
+      background: #f1f5fa;
+    }
+    td {
+      text-align: left;
+      padding: 16px 24px;
+    }
+  }
+  a, button {
+    @include button;
+  }
+}
+
+// -----xs(Extra Small)-----
+@media screen and (max-width: 576px) {
+  .profile-title {
+    &:after {
+      max-width: 300px;
+    }
+  }
+
+  .profile {
+    max-width: 300px;
+    &__table {
+      table-layout: fixed;
+      word-break: break-all;
+      word-wrap: break-word;
+      th {
+        display: block;
+        width: 100%;
+        padding: 4px 14px;
+      }
+      td {
+        display: block;
+        width: 100%;
+        padding: 16px 14px;
+        border: 0;
+      }
+    }
+  }
+}

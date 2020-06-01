@@ -1,0 +1,115 @@
+.loading {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  background: #000;
+  &__packman {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    z-index: 100;
+    div:first-of-type {
+      position: relative;
+      width: 0px;
+      height: 0px;
+      left: -30px;
+      border-right: 25px solid transparent;
+      border-top: 25px solid #f0f000;
+      border-left: 25px solid #f0f000;
+      border-bottom: 25px solid #f0f000;
+      border-radius: 25px;
+      animation: rotate_pacman_half_up .5s infinite;
+      @keyframes rotate_pacman_half_up {
+        0% {
+          transform: rotate(270deg);
+        }
+        50% {
+          transform: rotate(360deg);
+        }
+        100% {
+          transform: rotate(270deg);
+        }
+      }
+    }
+    div:nth-child(2) {
+      position: relative;
+      width: 0px;
+      height: 0px;
+      left: -30px;
+      margin-top: -50px;
+      border-right: 25px solid transparent;
+      border-top: 25px solid #f0f000;
+      border-left: 25px solid #f0f000;
+      border-bottom: 25px solid #f0f000;
+      border-radius: 25px;
+      animation: rotate_pacman_half_down .5s infinite;
+      @keyframes rotate_pacman_half_down {
+        0% {
+          transform: rotate(90deg);
+        }
+        50% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(90deg);
+        }
+      }
+    }
+    div:nth-child(3) {
+      animation: pacman-balls 1s -.66s infinite linear;
+    }
+    div:nth-child(4) {
+      animation: pacman-balls 1s -.33s infinite linear;
+    }
+    div:nth-child(5) {
+      animation: pacman-balls 1s infinite linear;
+    }
+    @keyframes pacman-balls {
+      75% {
+        opacity: .7;
+      }
+      100% {
+        transform: translate(-100px, -6.25px);
+      }
+    }
+    div:nth-child(n+3) {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      margin: 2px;
+      top: 50%;
+      left: calc(50% + 70px);
+      background: #f0f000;
+      border-radius: 100%;
+      transform: translate(-50%, -50%);
+    }
+  }
+  &__none {
+    animation: loadingAnime 1s forwards;
+    @keyframes loadingAnime {
+      0% {
+        opacity: 1;
+      }
+      99% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 0;
+        display: none;
+        z-index: -1;
+      }
+    }
+  }
+}

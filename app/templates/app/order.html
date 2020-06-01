@@ -1,0 +1,70 @@
+{% extends "app/base.html" %}
+
+{% block content %}
+<div class="order-title">
+  <span>SHOPPING CART</span>
+</div>
+
+<div class="order row">
+  <div class="order__wrap col-md-8">
+    <div class="card rounded-0">
+      <div class="card-body">
+        {% for order_item in order.items.all %}
+          <div class="row">
+            <div class="col-sm-3 pr-sm-0">
+              <img src="{{ order_item.item.image.url }}" class="img-fluid" alt="{{ order_item.item.title }}">
+            </div>
+            <div class="order__wrap--item col-sm-4">
+              <h5>{{ order_item.item.title }}</h5>
+              <p>
+                数量：
+                <a href="{% url 'removesingleitem' order_item.item.slug %}"><span class="badge badge-warning">－</span></a>
+                {{ order_item.quantity }}
+                <a href="{% url 'additem' order_item.item.slug %}"><span class="badge badge-warning">＋</span></a>
+              </p>
+              <div class="order__wrap--item--cancel">
+                <a href="{% url 'removeitem' order_item.item.slug %}">
+                  <span class="badge badge-danger">取消</span>
+                </a>
+              </div>
+            </div>
+            <div class="order__wrap--subprice col-sm-5">
+              <h6 class="order__wrap--subprice--chara">
+                小計：
+                <span class="order__wrap--subprice--chara--num">{{ order_item.get_total_item_price }}</span>
+                <span>円(税別)</span>
+              </h6>
+            </div>
+          </div>
+          {% if not forloop.last %}
+            <hr>
+          {% endif %}
+
+          {% empty %}
+          <p class="order__wrap--empty">※カートは空です</p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <div class="order__wrap col-md-4">
+    <div class="card rounded-0">
+      <div class="card-body text-center">
+        {% if order.get_subtotal %}
+          <h6 class="order__wrap--total">
+            商品合計：
+            <span class="order__wrap--total--num">{{ order.get_subtotal }}</span>
+            <span>円(税別)</span>
+          </h6>
+          <a class="order__wrap--register btn rounded-pill" href="{% url 'payment' %}" ontouchstart="">
+            <i class="fas fa-cash-register fa-fw" aria-hidden="true"></i>レジに進む
+          </a>
+        {% endif %}
+        <a class="order__wrap--shopping btn rounded-pill" href="/" ontouchstart="">
+          <i class="fas fa-cart-plus fa-fw" aria-hidden="true"></i>買い物を続ける
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

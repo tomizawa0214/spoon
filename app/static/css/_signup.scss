@@ -1,0 +1,32 @@
+.signup-title {
+  @include sectionTitle;
+  margin: 0 15px 30px;
+  &:after {
+    max-width: 500px;
+  }
+}
+
+.signup {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 0;
+  h5 {
+    margin: 10px auto 30px;
+    text-align: center;
+  }
+  &__form {
+    text-align: center;
+    margin: 0px auto 80px;
+    &--item {
+      margin-bottom: 15px;
+      &--name {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+      }
+    }
+    button {
+      @include button;
+    }
+  }
+}

@@ -1,0 +1,57 @@
+.top {
+  &__item {
+    &--image1 {
+      @include slideImage;
+      background-image: url("/static/img/main-image1.png");
+    }
+    &--image2 {
+      @include slideImage;
+      background-image: url("/static/img/main-image2.png");
+    }
+    &--image3 {
+      @include slideImage;
+      background-image: url("/static/img/main-image3.png");
+    }
+    &--image4 {
+      @include slideImage;
+      background-image: url("/static/img/main-image4.png");
+    }
+    &--image5 {
+      @include slideImage;
+      background-image: url("/static/img/main-image5.png");
+    }
+  }
+}
+
+// -----xs(Extra Small)-----
+@media screen and (max-width: 576px) {
+  .top {
+    &__item {
+      &--image1 {
+        height: 400px;
+        background-position: center;
+        background-image: url("/static/img/main-image1.png");
+      }
+      &--image2 {
+        height: 400px;
+        background-position: center;
+        background-image: url("/static/img/main-image2.png");
+      }
+      &--image3 {
+        height: 400px;
+        background-position: center;
+        background-image: url("/static/img/main-image3.png");
+      }
+      &--image4 {
+        height: 400px;
+        background-position: center;
+        background-image: url("/static/img/main-image4.png");
+      }
+      &--image5 {
+        height: 400px;
+        background-position: center;
+        background-image: url("/static/img/main-image5.png");
+      }
+    }
+  }
+}

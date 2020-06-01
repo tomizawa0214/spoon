@@ -1,0 +1,15 @@
+.logout {
+  max-width: 500px;
+  margin: 0 auto;
+  p {
+    margin: 10px auto 20px;
+    text-align: center;
+  }
+  form {
+    text-align: center;
+    margin: 0px auto 80px;
+    button {
+      @include button;
+    }
+  }
+}
