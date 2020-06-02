@@ -7,7 +7,19 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.conf import settings
 from accounts.models import CustomUser
-import stripe
+from . import forms # 必要
+
+# def sizeForm(request):
+#   d = {'form': forms.SizeForm(),}
+#   return render(request, 'app/order.html', d)
+
+class SizeView(View):
+  def get(self, request):
+    form = forms.SizeForm()
+    context = {
+      'form': form
+    }
+    return render(request, 'app/order.html', context)
 
 class ThanksView(LoginRequiredMixin, TemplateView):
   template_name = 'app/thanks.html'

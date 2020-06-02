@@ -4,6 +4,16 @@
 <div class="order-title">
   <span>ORDER</span>
 </div>
+<p class="order-text">①サイズをお選びください。</p>
+<form method="POST" action="">
+  {% csrf_token %}
+  {% for field in form.size %}
+  {{ field }}
+  {% endfor %}
+</form>
+
+<div class="order-select">
+</div>
 
 <div class="order row">
   <div class="order__wrap col-md-8">
