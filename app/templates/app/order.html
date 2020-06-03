@@ -5,7 +5,7 @@
   <span>ORDER</span>
 </div>
 <p class="order-text">1.　サイズをお選びください。</p>
-<form method="POST" action="">
+<form method="post" action="">
   {% csrf_token %}
   {% for field_1 in form.size %}
     {{ field_1 }}
@@ -14,5 +14,12 @@
   {% for field_2 in form.flavor %}
   {{ field_2 }}
   {% endfor %}
+  <p class="order-text">3.　オプションをお選びください。　※任意</p>
+  {% for field_3 in form.option %}
+  {{ field_3 }}
+  {% endfor %}
 </form>
+<div class="button mx-auto">
+  <button class="btn btn-lg btn-warning btn-block" type="submit">注文</button>
+</div>
 {% endblock %}

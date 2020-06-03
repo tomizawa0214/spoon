@@ -1,6 +1,6 @@
 from django import forms
 
-class SizeForm(forms.Form):
+class OrderForm(forms.Form):
   size = forms.ChoiceField (
     choices = (
       ('mini', 'ミニサイズ'),
@@ -20,3 +20,12 @@ class SizeForm(forms.Form):
     widget = forms.CheckboxSelectMultiple,
     required = True,
   )
+
+  option = forms.MultipleChoiceField (
+    choices = (
+      ('corn', 'コーン'),
+    ),
+    widget = forms.CheckboxSelectMultiple,
+    required = False,
+  )
+
