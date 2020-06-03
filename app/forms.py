@@ -1,5 +1,9 @@
 from django import forms
 
+class ImageSelect(forms.widgets.RadioSelect):
+  template_name = 'widgets/size_radio.html'
+  option_template_name = 'widgets/size_radio_option.html'
+
 class SizeForm(forms.Form):
   size = forms.ChoiceField (
     choices = (
@@ -7,6 +11,6 @@ class SizeForm(forms.Form):
       ('single', 'シングルサイズ'),
       ('double', 'ダブルサイズ'),
     ),
-    widget = forms.RadioSelect, 
+    widget = ImageSelect, 
     required = True,
   )
