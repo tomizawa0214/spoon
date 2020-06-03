@@ -10,3 +10,13 @@ class SizeForm(forms.Form):
     widget = forms.RadioSelect, 
     required = True,
   )
+
+  flavor = forms.MultipleChoiceField (
+    choices = (
+      ('vanilla', 'バニラ'),
+      ('orange', 'オレンジ'),
+      ('mango', 'マンゴー'),
+    ),
+    widget = forms.CheckboxSelectMultiple,
+    required = True,
+  )
