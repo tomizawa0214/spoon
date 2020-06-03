@@ -8,6 +8,11 @@
 <form method="POST" action="">
   {% csrf_token %}
   {% for field in form.size %}
+    {% for size in object_list %}
+      <img src="{{ size.image.url }}">
+      <h5 class="font-weight-bold">{{ size.title }}</h5>
+      <h4 class="font-weight-bold">{{ size.price }}円</h4>
+    {% endfor %}
   {{ field }}
   {% endfor %}
 </form>

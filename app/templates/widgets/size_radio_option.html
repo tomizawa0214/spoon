@@ -1,0 +1,18 @@
+{% if widget.wrap_label %}
+<label {% if widget.attrs.id %} for="{{ widget.attrs.id }}"{% endif %}>
+{% endif %}
+
+  <!-- <img src="{{ widget.label.image }}"> -->
+  {% for size in object_list %}
+    <img src="{{ size.image.url }}">
+    <h5 class="font-weight-bold">{{ size.title }}</h5>
+    <h4 class="font-weight-bold">{{ size.price }}円</h4>
+  {% endfor %}
+  <div class="block">
+    <input type="{{ widget.type }}" name="{{ widget.name }}" {% if widget.value != None %} value="{{ widget.value|stringformat:'s' }}"{% endif %} {% include "django/forms/widgets/attrs.html" %}>
+    {{ widget.label.name }}
+  </div>
+
+{% if widget.wrap_label %}
+</label>
+{% endif %}

@@ -1,6 +1,13 @@
-
 from django.conf import settings
-from django.db import models
+from django.db import models#必要
+
+class Size(models.Model):
+  title = models.CharField(max_length=100)
+  price = models.IntegerField()
+  image = models.ImageField(upload_to='images')
+
+  def __str__(self):
+    return self.title
 
 class Item(models.Model):
   title = models.CharField(max_length=100)
