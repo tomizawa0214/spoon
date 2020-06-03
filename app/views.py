@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView, ListView, DetailView, View
-from .models import Size, Item, OrderItem, Order, Payment
+from .models import Item, OrderItem, Order, Payment
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.core.exceptions import ObjectDoesNotExist
@@ -9,10 +9,8 @@ from django.conf import settings
 from accounts.models import CustomUser
 from . import forms # 必要
 
-class SizeView(ListView):
-
+class SizeView(View):
   def get(self, request):
-    model = Size
     form = forms.SizeForm()
     context = {
       'form': form
