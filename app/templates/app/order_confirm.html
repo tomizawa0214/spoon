@@ -2,13 +2,13 @@
 
 {% block content %}
 <div class="order-title">
-  <span>ORDER</span>
+  <span>PLEASE CHECK YOUR ORDER</span>
 </div>
-<p>内容を確認してください</p>
+<p>内容をご確認ください</p>
 <table>
-  <tr><td>サイズ</td><td>{{form.cleaned_data.name}}</td></tr>
-  <tr><td>フレーバー</td><td>{{form.email.value}}</td></tr>
-  <tr><td>オプション</td><td>{{form.message.value}}</td></tr>
+  <tr><td>サイズ</td><td>{{form.cleaned_data.size}}</td></tr>
+  <tr><td>フレーバー</td><td>{{form.cleaned_data.flavor}}</td></tr>
+  <tr><td>オプション</td><td>{{form.cleaned_data.option}}</td></tr>
 </table>
 <form method="POST" action="">
   {% csrf_token %}

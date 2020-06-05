@@ -6,43 +6,24 @@
   <span>ORDER</span>
 </div>
 
-<div class="card text-center contact mx-auto rounded">
-  <div class="card-body">
-      <h2 class="mb-4">Contact Me</h2>
-      <form method="post">
-          {% csrf_token %}
-          <div class="mb-3">
-              {% render_field form.name %}
-          </div>
-          <div class="mb-3">
-              {% render_field form.email class="form-control" placeholder="メールアドレス" %}
-          </div>
-          <div class="mb-3">
-              {% render_field form.message class="form-control" placeholder="メッセージ" %}
-          </div>
-          <div class="mb-3">
-              <button class="btn btn-warning" type="submit"><i class="fas fa-paper-plane" name="next" value="confirm"></i> 送信する</button>
-          </div>
-      </form>
-  </div>
+<div class="text-center mx-auto rounded">
+  <form method="post">
+      {% csrf_token %}
+      <p class="order-text">1.　サイズをお選びください。</p>
+      <div class="mb-3">
+          {% render_field form.size %}
+      </div>
+      <p class="order-text">2.　フレーバーをお選びください。</p>
+      <div class="mb-3">
+          {% render_field form.flavor %}
+      </div>
+      <p class="order-text">3.　オプションをお選びください。　※任意</p>
+      <div class="mb-3">
+          {% render_field form.option %}
+      </div>
+      <div class="mb-3">
+          <button class="btn btn-warning" type="submit"><i class="fas fa-paper-plane" name="next" value="confirm"></i>送信する</button>
+      </div>
+  </form>
 </div>
-
-<!-- <p class="order-text">1.　サイズをお選びください。</p>
-<form method="POST" action="">
-  {% csrf_token %}
-  {% for field_1 in form.size %}
-    {{ field_1 }}
-  {% endfor %}
-  <p class="order-text">2.　フレーバーをお選びください。</p>
-  {% for field_2 in form.flavor %}
-  {{ field_2 }}
-  {% endfor %}
-  <p class="order-text">3.　オプションをお選びください。　※任意</p>
-  {% for field_3 in form.option %}
-  {{ field_3 }}
-  {% endfor %}
-  <div class="button mx-auto">
-    <button class="btn btn-lg btn-warning btn-block" type="submit" name="next" value="confirm">注文</button>
-  </div>
-</form> -->
 {% endblock %}
