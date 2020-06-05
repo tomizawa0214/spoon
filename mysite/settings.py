@@ -111,6 +111,8 @@ ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 try:
     from .local_settings import *
 except ImportError:
