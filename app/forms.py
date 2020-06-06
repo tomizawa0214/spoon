@@ -3,25 +3,25 @@ from django import forms
 class OrderForm(forms.Form):
     size = forms.ChoiceField (
         choices = (
-            ('ミニサイズ', 'ミニサイズ'),
-            ('シングルサイズ', 'シングルサイズ'),
-            ('ダブルサイズ', 'ダブルサイズ'),
+            ('1', 'ミニサイズ'),
+            ('2', 'シングルサイズ'),
+            ('3', 'ダブルサイズ'),
         ),
         widget = forms.RadioSelect,
     )
 
     flavor = forms.MultipleChoiceField (
         choices = (
-            ('バニラ', 'バニラ'),
-            ('オレンジ', 'オレンジ'),
-            ('マンゴー', 'マンゴー'),
+            ('1', 'バニラ'),
+            ('2', 'オレンジ'),
+            ('3', 'マンゴー'),
         ),
         widget = forms.CheckboxSelectMultiple,
     )
 
     option = forms.MultipleChoiceField (
         choices = (
-            ('コーン', 'コーン'),
+            ('1', 'コーン'),
         ),
         widget = forms.CheckboxSelectMultiple,
         required = False,

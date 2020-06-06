@@ -7,7 +7,7 @@
 </div>
 
 <div class="text-center mx-auto rounded">
-  <form method="post">
+  <form method="post" action="{% url 'order_confirm' %}">
       {% csrf_token %}
       <p class="order-text">1.　サイズをお選びください。</p>
       <div class="mb-3">
