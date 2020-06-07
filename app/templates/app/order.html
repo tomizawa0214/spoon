@@ -19,7 +19,17 @@
     </div>
     <p class="order-text">3.　オプションをお選びください。　※任意</p>
     <div class="mb-3">
-        {% render_field form.option %}
+      {% render_field form.option %}
+    </div>
+    <p class="order-text">4.　ご注文様情報をご入力ください。</p>
+    <div class="mb-3">
+      {% render_field form.name class="form-control" placeholder="名前" %}
+    </div>
+    <div class="mb-3">
+        {% render_field form.email class="form-control" placeholder="メールアドレス" %}
+    </div>
+    <div class="mb-3">
+        {% render_field form.phone class="form-control" placeholder="電話番号" %}
     </div>
     <div class="mb-3">
         <button class="btn btn-warning" type="submit"><i class="fas fa-paper-plane"></i>送信する</button>

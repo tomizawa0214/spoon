@@ -35,11 +35,17 @@ class OrderConfirmView(View):
             size = orders['size'][form.cleaned_data['size']]
             flavor = ','.join([orders['flavor'][key] for key in form.cleaned_data['flavor']])
             option = ','.join([orders['option'][key] for key in form.cleaned_data['option']])
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            phone = form.cleaned_data['phone']
 
         return render(request, 'app/order_confirm.html', {
             'size': size,
             'flavor': flavor,
             'option': option,
+            'name': name,
+            'email': email,
+            'phone': phone,
         })
 
 class OrderSendView(View):
@@ -47,8 +53,32 @@ class OrderSendView(View):
         size = self.kwargs['size']
         flavor = self.kwargs['flavor']
         option = self.kwargs['option']
+        name = self.kwargs['name']
+        email = self.kwargs['email']
+        phone = self.kwargs['phone']
+        # name = self.request['name']
+        # email = self.request['email']
+        # phone = self.request['phone']
         subject = 'ご注文ありがとうございます。'
         content = textwrap.dedent('''
+            ※このメールはシステムからの自動返信です。
+            
+            {name} 様
+            
+            ご注文ありがとうございます。
+            以下の内容で受け付けいたしました。
+            店頭にてお待ちしております。
+            
+            --------------------
+            ■お名前
+            {name}様
+
+            ■メールアドレス
+            {email}
+
+            ■電話番号
+            {phone}
+
             ■サイズ
             {size}
             
@@ -61,15 +91,17 @@ class OrderSendView(View):
             ''').format(
                 size=size,
                 flavor=flavor,
-                option=option
+                option=option,
+                name=name,
+                email=email,
+                phone=phone,
             )
 
-        # to_list = [email]
-        to_list = [settings.EMAIL_HOST_USER]
+        to_list = [email]
+        bcc_list = [settings.EMAIL_HOST_USER]
 
         try:
-            # message = EmailMessage(subject=subject, body=content, to=to_list, bcc=bcc_list)
-            message = EmailMessage(subject=subject, body=content, to=to_list)
+            message = EmailMessage(subject=subject, body=content, to=to_list, bcc=bcc_list)
             message.send()
         except BadHeaderError:
             return HttpResponse("無効なヘッダが検出されました。")

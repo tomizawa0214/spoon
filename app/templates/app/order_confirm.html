@@ -18,6 +18,18 @@
     <td>オプション</td>
     <td>{{ option }}</td>
   </tr>
+  <tr>
+    <td>お名前</td>
+    <td>{{ name }}</td>
+  </tr>
+  <tr>
+    <td>メールアドレス</td>
+    <td>{{ email }}</td>
+  </tr>
+  <tr>
+    <td>電話番号</td>
+    <td>{{ phone }}</td>
+  </tr>
 </table>
 <!-- <form method="POST" action="{% url 'order_send' '1' '2' '0' ">
   {% csrf_token %}
@@ -26,7 +38,7 @@
   {% endfor %} -->
   <div class="button mx-auto">
     <input type="button" value="戻る" onClick="javascript:history.go(-1);">
-    <a href="{% url 'order_send' size flavor option %}" class="btn btn-lg btn-warning btn-block">注文</a>
+    <a href="{% url 'order_send' size flavor option name email phone %}" class="btn btn-lg btn-warning btn-block">注文</a>
   </div>
 <!-- </form> -->
 {% endblock %}
