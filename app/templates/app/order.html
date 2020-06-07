@@ -6,24 +6,24 @@
   <span>ORDER</span>
 </div>
 
-<div class="text-center mx-auto rounded">
+<d iv class="text-center mx-auto rounded">
   <form method="post" action="{% url 'order_confirm' %}">
-      {% csrf_token %}
-      <p class="order-text">1.　サイズをお選びください。</p>
-      <div class="mb-3">
-          {% render_field form.size %}
-      </div>
-      <p class="order-text">2.　フレーバーをお選びください。</p>
-      <div class="mb-3">
-          {% render_field form.flavor %}
-      </div>
-      <p class="order-text">3.　オプションをお選びください。　※任意</p>
-      <div class="mb-3">
-          {% render_field form.option %}
-      </div>
-      <div class="mb-3">
-          <button class="btn btn-warning" type="submit"><i class="fas fa-paper-plane"></i>送信する</button>
-      </div>
+    {% csrf_token %}
+    <p class="order-text">1.　サイズをお選びください。</p>
+    <div class="mb-3">
+        {% render_field form.size %}
+    </div>
+    <p class="order-text">2.　フレーバーをお選びください。</p>
+    <div class="mb-3">
+        {% render_field form.flavor %}
+    </div>
+    <p class="order-text">3.　オプションをお選びください。　※任意</p>
+    <div class="mb-3">
+        {% render_field form.option %}
+    </div>
+    <div class="mb-3">
+        <button class="btn btn-warning" type="submit"><i class="fas fa-paper-plane"></i>送信する</button>
+    </div>
   </form>
 </div>
 {% endblock %}
