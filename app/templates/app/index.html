@@ -1,5 +1,9 @@
 {% extends "app/base.html" %}
 
+{% block title %}
+<title>spoon | </title>
+{% endblock %}
+
 {% block slider %}
 <div id= "slides" class="top carousel slide carousel-fade" data-ride="carousel" data-interval="3000">
   <ul class="carousel-indicators">
@@ -74,7 +78,7 @@
   {% for item in object_list %}
   <div class="product__item">
     <div class="product__item--image">
-      <a href="{% url 'product_detail' item.slug %}">
+      <a href="/">
         <img src="{{ item.image.url }}">
         <p class="product__item--image--mask"></p>
         <p class="product__item--image--caption">READ MORE</p>

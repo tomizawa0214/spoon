@@ -1,4 +1,4 @@
-from django.views.generic import ListView, DetailView, View
+from django.views.generic import ListView, View
 from django.shortcuts import render, redirect
 from .forms import OrderForm
 from .models import Item
@@ -106,11 +106,15 @@ class OrderSendView(View):
         except BadHeaderError:
             return HttpResponse("無効なヘッダが検出されました。")
 
-        return redirect('index')
+        return redirect('order_thanks')
+
+class OrderThanksView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'app/order_thanks.html')
     
-class ItemDetailView(DetailView):
-    model = Item
-    template_name = 'app/product_detail.html'
+# class ItemDetailView(DetailView):
+#     model = Item
+#     template_name = 'app/product_detail.html'
 
 class IndexView(ListView):
     model = Item
