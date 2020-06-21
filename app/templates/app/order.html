@@ -11,7 +11,7 @@
 </div>
 
 <d iv class="text-center mx-auto rounded">
-  <form method="post" action="{% url 'order_confirm' %}">
+  <form method="post">
     {% csrf_token %}
     <p class="order-text">1.　サイズをお選びください。</p>
     <div class="mb-3">
@@ -25,7 +25,7 @@
     <div class="mb-3">
       {% render_field form.option %}
     </div>
-    <p class="order-text">4.　ご注文様情報をご入力ください。</p>
+    <!-- <p class="order-text">4.　ご注文様情報をご入力ください。</p>
     <div class="mb-3">
       {% render_field form.name class="form-control" placeholder="名前" %}
     </div>
@@ -34,7 +34,7 @@
     </div>
     <div class="mb-3">
         {% render_field form.phone class="form-control" placeholder="電話番号" %}
-    </div>
+    </div> -->
     <div class="mb-3">
         <button class="btn btn-warning" type="submit"><i class="fas fa-paper-plane"></i>送信する</button>
     </div>
