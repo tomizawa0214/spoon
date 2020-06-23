@@ -1,7 +1,7 @@
 from django.views.generic import ListView, View
 from django.shortcuts import render, redirect
-from .forms import OrderForm
-from .models import Item, Order
+# from .forms import OrderForm
+from .models import Item, Size
 from django.conf import settings
 from django.core.mail import BadHeaderError, EmailMessage
 from django.http import HttpResponse
@@ -9,35 +9,43 @@ import textwrap
 
 class OrderView(View):
     def get(self, request, *args, **kwargs):
-        form = OrderForm(request.POST or None)
+        size = Size.objects.all()
 
         return render(request, 'app/order.html', {
-            'form': form
+            'size': size
         })
 
-    def post(self, request, *args, **kwargs):
-        form = OrderForm(request.POST or None)
+# class OrderView(View):
+#     def get(self, request, *args, **kwargs):
+#         form = OrderForm(request.POST or None)
 
-        if form.is_valid():
-            size = form.cleaned_data['size']
-            flavor = "・".join(form.cleaned_data['flavor'])
-            option = "・".join(form.cleaned_data['option'])
-            return render(request, 'app/order_confirm.html', {
-                'size': size,
-                'flavor': flavor,
-                'option': option,
-            })
+#         return render(request, 'app/order.html', {
+#             'form': form
+#         })
 
-        return render(request, 'app/order.html', {
-            'form': form
-        })
+#     def post(self, request, *args, **kwargs):
+#         form = OrderForm(request.POST or None)
+
+#         if form.is_valid():
+#             size = form.cleaned_data['size']
+#             # flavor = "・".join(form.cleaned_data['flavor'])
+#             # option = "・".join(form.cleaned_data['option'])
+#             return render(request, 'app/order_confirm.html', {
+#                 'size': size,
+#                 # 'flavor': flavor,
+#                 # 'option': option,
+#             })
+
+#         return render(request, 'app/order.html', {
+#             'form': form
+#         })
 
 class OrderConfirmView(View):
     def get(self, request, *args, **kwargs):
         return render(request, 'app/order_confirm.html', {
             'size': size,
-            'flavor': flavor,
-            'option': option,
+            # 'flavor': flavor,
+            # 'option': option,
         })
 
 class OrderThanksView(View):

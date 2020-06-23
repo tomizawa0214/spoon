@@ -7,37 +7,56 @@
 
 {% block content %}
 <div class="order-title">
-  <span>ORDER</span>
+    <span>ORDER</span>
 </div>
 
-<d iv class="text-center mx-auto rounded">
-  <form method="post">
-    {% csrf_token %}
-    <p class="order-text">1.　サイズをお選びください。</p>
-    <div class="mb-3">
-        {% render_field form.size %}
+<div class="text-center mx-auto rounded">
+    <div class="row">
+        <div class="col-9">
+            <form method="post">
+                {% csrf_token %}
+                <p>1.　サイズをお選びください。</p>
+                <div class="d-flex justify-content-around">
+                    {% for size_item in size %}
+                        <div class="flex-column">
+                            <img src="{{ size_item.image.url }}" alt="">
+                            <h5>{{ size_item.title }}</h5>
+                            <h4>{{ size_item.price }}円</h4>
+                        </div>
+                    {% endfor %}
+                </div>
+                <!-- <div class="mb-3">
+                    {% render_field form %}
+                </div> -->
+                <!-- <p class="order-text">2.　フレーバーをお選びください。</p>
+                <div class="mb-3">
+                    {% render_field form.flavor %}
+                </div>
+                <p class="order-text">3.　オプションをお選びください。　※任意</p>
+                <div class="mb-3">
+                {% render_field form.option %}
+                </div> -->
+                <!-- <p class="order-text">4.　ご注文様情報をご入力ください。</p>
+                <div class="mb-3">
+                {% render_field form.name class="form-control" placeholder="名前" %}
+                </div>
+                <div class="mb-3">
+                    {% render_field form.email class="form-control" placeholder="メールアドレス" %}
+                </div>
+                <div class="mb-3">
+                    {% render_field form.phone class="form-control" placeholder="電話番号" %}
+                </div> -->
+                <div class="mb-3">
+                    <button class="btn btn-warning" type="submit"><i class="fas fa-paper-plane"></i>送信する</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-3">
+            <div class="card">
+                <p>ご注文内容</p>
+                <p>小計：</p>
+            </div>
+        </div>
     </div>
-    <p class="order-text">2.　フレーバーをお選びください。</p>
-    <div class="mb-3">
-        {% render_field form.flavor %}
-    </div>
-    <p class="order-text">3.　オプションをお選びください。　※任意</p>
-    <div class="mb-3">
-      {% render_field form.option %}
-    </div>
-    <!-- <p class="order-text">4.　ご注文様情報をご入力ください。</p>
-    <div class="mb-3">
-      {% render_field form.name class="form-control" placeholder="名前" %}
-    </div>
-    <div class="mb-3">
-        {% render_field form.email class="form-control" placeholder="メールアドレス" %}
-    </div>
-    <div class="mb-3">
-        {% render_field form.phone class="form-control" placeholder="電話番号" %}
-    </div> -->
-    <div class="mb-3">
-        <button class="btn btn-warning" type="submit"><i class="fas fa-paper-plane"></i>送信する</button>
-    </div>
-  </form>
 </div>
 {% endblock %}

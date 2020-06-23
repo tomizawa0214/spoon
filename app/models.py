@@ -1,5 +1,14 @@
 from django.db import models
 
+
+class Size(models.Model):
+    title = models.CharField('サイズ', max_length=10)
+    price = models.IntegerField('価格')
+    image = models.ImageField('画像', upload_to='images')
+
+    def __str__(self):
+        return self.title
+
 class Item(models.Model):
     title = models.CharField(max_length=100)
     price = models.IntegerField()
@@ -11,29 +20,22 @@ class Item(models.Model):
     def __str__(self):
         return self.title
 
+# FLAVOR_CHOICES = (
+#     ('バニラ', 'バニラ'),
+#     ('マンゴー', 'マンゴー'),
+#     ('オレンジ', 'オレンジ'),
+# )
 
-SIZE_CHOICES = (
-    ('ミニサイズ', 'ミニサイズ'),
-    ('シングルサイズ', 'シングルサイズ'),
-    ('ダブルサイズ', 'ダブルサイズ'),
-)
+# OPTION_CHOICES = (
+#     ('コーン', 'コーン'),
+#     ('ドライアイス', 'ドライアイス'),
+# )
 
-FLAVOR_CHOICES = (
-    ('バニラ', 'バニラ'),
-    ('マンゴー', 'マンゴー'),
-    ('オレンジ', 'オレンジ'),
-)
+# class Order(models.Model):
+#     size = models.CharField ("サイズ", max_length=10, choices=SIZE_CHOICES, blank=True)
+#     flavor = models.CharField ('フレーバー', max_length=50, choices=FLAVOR_CHOICES, blank=True)
+#     option = models.CharField ('オプション', max_length=10, choices=OPTION_CHOICES, blank=True)
 
-OPTION_CHOICES = (
-    ('コーン', 'コーン'),
-    ('ドライアイス', 'ドライアイス'),
-)
-
-class Order(models.Model):
-    size = models.CharField ("サイズ", max_length=10, choices=SIZE_CHOICES, blank=True)
-    flavor = models.CharField ('フレーバー', max_length=50, choices=FLAVOR_CHOICES, blank=True)
-    option = models.CharField ('オプション', max_length=10, choices=OPTION_CHOICES, blank=True)
-
-    def __str__(self):
-        return self.size
+#     def __str__(self):
+#         return self.size
 
