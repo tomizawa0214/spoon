@@ -1,11 +1,11 @@
-from django.views.generic import ListView, View
+from django.views.generic import View
 from django.shortcuts import render, redirect
 # from .forms import OrderForm
 from .models import Item, Size
-from django.conf import settings
-from django.core.mail import BadHeaderError, EmailMessage
-from django.http import HttpResponse
-import textwrap
+# from django.conf import settings
+# from django.core.mail import BadHeaderError, EmailMessage
+from django.http import JsonResponse, HttpResponse
+# import textwrap
 
 class OrderView(View):
     def get(self, request, *args, **kwargs):
@@ -14,6 +14,18 @@ class OrderView(View):
         return render(request, 'app/order.html', {
             'size': size
         })
+
+def addsize(request):
+    title = request.POST.get('title')
+
+    # size = Size()
+    # size.title = title
+    # size.save()
+
+    d = {
+        'title': title,
+    }
+    return JsonResponse(d)
 
 # class OrderView(View):
 #     def get(self, request, *args, **kwargs):
@@ -157,6 +169,10 @@ class OrderThanksView(View):
 #     model = Item
 #     template_name = 'app/product_detail.html'
 
-class IndexView(ListView):
-    model = Item
-    template_name = 'app/index.html'
+class IndexView(View):
+    def get(self, request, *args, **kwargs):
+        item = Item.objects.all()
+
+        return render(request, 'app/index.html', {
+            'item': item
+        })

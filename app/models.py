@@ -3,7 +3,7 @@ from django.db import models
 
 class Size(models.Model):
     title = models.CharField('サイズ', max_length=10)
-    price = models.IntegerField('価格')
+    price = models.IntegerField('価格', null=True)
     image = models.ImageField('画像', upload_to='images')
 
     def __str__(self):
