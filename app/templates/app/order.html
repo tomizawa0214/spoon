@@ -19,9 +19,7 @@
                 <div class="d-flex justify-content-around">
                     {% for size_item in size %}
                         <div class="flex-column">
-                            {% if size_item.image %}
-                                <img src="{{ size_item.image.url }}">
-                            {% endif %}
+                            <img src="{{ size_item.image.url }}">
                             <h5>{{ size_item.title }}</h5>
                             <h4>{{ size_item.price }}円</h4>
                             <input type="text" class="size_title" require>
@@ -60,7 +58,7 @@
                 <p>ご注文内容</p>
                 <div id="size">
                     {% for size in size_list %}
-                        <p>{{ size.title }}</p>
+                        {{ size.title }}
                     {% endfor %}
                 </div>
                 <p>小計：</p>
