@@ -1,4 +1,5 @@
 {% extends "app/base.html" %}
+{% load static %}
 {% load widget_tweaks %}
 
 {% block title %}
@@ -15,17 +16,28 @@
         <div class="col-9">
             <form id="add_size" method="POST">
                 {% csrf_token %}
-                <p>1.　サイズをお選びください。</p>
-                <div class="d-flex justify-content-around">
-                    {% for size_item in size %}
-                        <div class="flex-column">
-                            <img src="{{ size_item.image.url }}">
-                            <h5>{{ size_item.title }}</h5>
-                            <h4>{{ size_item.price }}円</h4>
-                            <input type="text" class="size_title" require>
-                            <button class="btn btn-primary" type="submit">カートに追加</button>
-                        </div>
-                    {% endfor %}
+                <p>STEP1.　ジェラートのサイズをお選びください。</p>
+                <div class="selection-group">
+                    <input id="a" type="radio" name="size" value="ミニサイズ ￥280" onchange="chk(this.value)">
+                    <label for="a">
+                        <img src="{% static 'img/size_ダミー.png' %}">
+                        <p>ミニサイズ</p>
+                        <p>￥280</p>
+                    </label>
+
+                    <input id="b" type="radio" name="size" value="シングルサイズ ￥330" onchange="chk(this.value)">
+                    <label for="b">
+                        <img src="{% static 'img/size_ダミー.png' %}">
+                        <p>シングルサイズ</p>
+                        <p>￥330</p>
+                    </label>
+
+                    <input id="c" type="radio" name="size" value="ダブルサイズ ￥440" onchange="chk(this.value)">
+                    <label for="c">
+                        <img src="{% static 'img/size_ダミー.png' %}">
+                        <p>ダブルサイズ</p>
+                        <p>￥440</p>
+                    </label>
                 </div>
                 <!-- <div class="mb-3">
                     {% render_field form %}
@@ -56,12 +68,8 @@
         <div class="col-3">
             <div class="card">
                 <p>ご注文内容</p>
-                <div id="size">
-                    {% for size in size_list %}
-                        {{ size.title }}
-                    {% endfor %}
-                </div>
-                <p>小計：</p>
+                <p id="size"></p>
+                <p>合計：</p>
             </div>
         </div>
     </div>
@@ -70,43 +78,8 @@
 
 {% block extrajs %}
 <script>
-    const getCookie = name => {
-        if (document.cookie && document.cookie !== '') {
-            for (const cookie of document.cookie.split(';')) {
-                const [key, value] = cookie.trim().split('=');
-                if (key === name) {
-                    return decodeURIComponent(value);
-                }
-            }
-        }
+    function chk(val) {
+        document.getElementById("size").textContent = val;
     }
-    const csrftoken = getCookie('csrftoken');
-    // カート追加
-    const addSize = document.getElementById('add_size');
-    addSize.addEventListener('submit', e => {
-        e.preventDefault();
-        const url = '{% url "addsize" %}';
-        const size_title = document.querySelectorAll('.size_title');
-        for (let i = 0; i < size_title.length; i++) {
-            fetch(url, {
-                method: 'POST',
-                body: `title=${size_title[i].value}`,
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
-                    'X-CSRFToken': csrftoken,
-                },
-            }).then(response => {
-                return response.json();
-            }).then(response => {
-                size_title[i].value = '';
-                const sizeArea = document.getElementById('size');
-                const p = document.createElement('p');
-                p.textContent = response.title;
-                sizeArea.insertBefore(p, sizeArea.lastChild);
-            }).catch(error => {
-                console.log(error);
-            });
-        }
-    });
 </script>
 {% endblock %}

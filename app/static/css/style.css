@@ -439,6 +439,22 @@ main {
   background: #333;
 }
 
+/* ラジオボタンを非表示 */
+.selection-group input[type="radio"] {
+  display: none;
+}
+
+/* 画像部分に余白を持たせる */
+label img {
+  margin: 3px;
+  padding: 8px;
+}
+
+/* 選択されたラジオボタン画像の背景をスカイブルーに変える */
+.selection-group input[type="radio"]:checked + label img {
+  background: skyblue;
+}
+
 .order {
   margin: 50px 0 0;
 }

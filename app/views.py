@@ -1,31 +1,19 @@
 from django.views.generic import View
 from django.shortcuts import render, redirect
 # from .forms import OrderForm
-from .models import Item, Size
+from .models import Item
 # from django.conf import settings
 # from django.core.mail import BadHeaderError, EmailMessage
-from django.http import JsonResponse, HttpResponse
+from django.http import HttpResponse
 # import textwrap
 
 class OrderView(View):
     def get(self, request, *args, **kwargs):
-        size = Size.objects.all()
+        # size = Size.objects.all()
 
         return render(request, 'app/order.html', {
-            'size': size
+            # 'size': size
         })
-
-def addsize(request):
-    title = request.POST.get('title')
-
-    # size = Size()
-    # size.title = title
-    # size.save()
-
-    d = {
-        'title': title,
-    }
-    return JsonResponse(d)
 
 # class OrderView(View):
 #     def get(self, request, *args, **kwargs):
@@ -55,7 +43,7 @@ def addsize(request):
 class OrderConfirmView(View):
     def get(self, request, *args, **kwargs):
         return render(request, 'app/order_confirm.html', {
-            'size': size,
+            # 'size': size,
             # 'flavor': flavor,
             # 'option': option,
         })
