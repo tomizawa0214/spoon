@@ -14,77 +14,76 @@
 <div class="text-center mx-auto rounded">
     <div class="row">
         <div class="col-9">
-            <form method="POST">
+            <p>STEP1.　ジェラートのサイズをお選びください。</p>
+            <form name="sizeform" class="selection-group">
                 {% csrf_token %}
-                <p>STEP1.　ジェラートのサイズをお選びください。</p>
-                <div class="selection-group">
-                    <input id="mini_size" type="radio" name="size" value="ミニサイズ ￥280" onchange="chk_size(this.value)">
-                    <label for="mini_size">
-                        <img src="{% static 'img/size_ダミー.png' %}">
-                        <p>ミニサイズ</p>
-                        <p>￥280</p>
-                    </label>
-                    <input id="single_size" type="radio" name="size" value="シングルサイズ ￥330" onchange="chk_size(this.value)">
-                    <label for="single_size">
-                        <img src="{% static 'img/size_ダミー.png' %}">
-                        <p>シングルサイズ</p>
-                        <p>￥330</p>
-                    </label>
-                    <input id="double_size" type="radio" name="size" value="ダブルサイズ ￥440" onchange="chk_size(this.value)">
-                    <label for="double_size">
-                        <img src="{% static 'img/size_ダミー.png' %}">
-                        <p>ダブルサイズ</p>
-                        <p>￥440</p>
-                    </label>
-                </div>
-                <p class="order-text">STEP2.　ジェラートのフレーバーをお選びください。</p>
-                <div class="selection-group">
-                    <input id="vanilla" type="radio" name="flavor" value="バニラ" onchange="chk_flavor(this.value)">
-                    <label for="vanilla">
-                        <img src="{% static 'img/flavor_ダミー.png' %}">
-                        <p>バニラ</p>
-                    </label>
-                    <input id="orange" type="radio" name="flavor" value="オレンジ" onchange="chk_flavor(this.value)">
-                    <label for="orange">
-                        <img src="{% static 'img/flavor_ダミー.png' %}">
-                        <p>オレンジ</p>
-                    </label>
-                    <input id="mango" type="radio" name="flavor" value="マンゴー" onchange="chk_flavor(this.value)">
-                    <label for="mango">
-                        <img src="{% static 'img/flavor_ダミー.png' %}">
-                        <p>マンゴー</p>
-                    </label>
-                </div>
-                <p class="order-text">STEP3.　オプションをお選びください。　※任意</p>
-                <div class="selection-group">
-                    <input id="corn" type="radio" name="option" value="コーン ￥50" onchange="chk_option(this.value)">
-                    <label for="corn">
-                        <img src="{% static 'img/コーン_ダミー.png' %}">
-                        <p>コーン</p>
-                        <p>￥50</p>
-                    </label>
-                    <input id="dryice" type="radio" name="option" value="ドライアイス ￥50" onchange="chk_option(this.value)">
-                    <label for="dryice">
-                        <img src="{% static 'img/ドライアイス_ダミー.png' %}">
-                        <p>ドライアイス</p>
-                        <p>￥50</p>
-                    </label>
-                </div>
-                <!-- <p class="order-text">4.　ご注文様情報をご入力ください。</p>
-                <div class="mb-3">
-                {% render_field form.name class="form-control" placeholder="名前" %}
-                </div>
-                <div class="mb-3">
-                    {% render_field form.email class="form-control" placeholder="メールアドレス" %}
-                </div>
-                <div class="mb-3">
-                    {% render_field form.phone class="form-control" placeholder="電話番号" %}
-                </div> -->
-                <div class="mb-3">
-                    <button class="btn btn-primary" type="submit">追加注文する</button>
-                    <button class="btn btn-danger" type="submit">お支払いに進む</button>
-                </div>
+                <input id="mini_size" type="radio" name="size" value="ミニサイズ ￥280" onchange="chk_size(this.value)" onclick="size_price()">
+                <label for="mini_size">
+                    <img src="{% static 'img/size_ダミー.png' %}">
+                    <p>ミニサイズ</p>
+                    <p>￥280</p>
+                </label>
+                <input id="single_size" type="radio" name="size" value="シングルサイズ ￥330" onchange="chk_size(this.value)" onclick="size_price()">
+                <label for="single_size">
+                    <img src="{% static 'img/size_ダミー.png' %}">
+                    <p>シングルサイズ</p>
+                    <p>￥330</p>
+                </label>
+                <input id="double_size" type="radio" name="size" value="ダブルサイズ ￥440" onchange="chk_size(this.value)" onclick="size_price()">
+                <label for="double_size">
+                    <img src="{% static 'img/size_ダミー.png' %}">
+                    <p>ダブルサイズ</p>
+                    <p>￥440</p>
+                </label>
             </form>
+            <p class="order-text">STEP2.　ジェラートのフレーバーをお選びください。</p>
+            <div class="selection-group">
+                <input id="vanilla" type="radio" name="flavor" value="バニラ" onchange="chk_flavor(this.value)">
+                <label for="vanilla">
+                    <img src="{% static 'img/flavor_ダミー.png' %}">
+                    <p>バニラ</p>
+                </label>
+                <input id="orange" type="radio" name="flavor" value="オレンジ" onchange="chk_flavor(this.value)">
+                <label for="orange">
+                    <img src="{% static 'img/flavor_ダミー.png' %}">
+                    <p>オレンジ</p>
+                </label>
+                <input id="mango" type="radio" name="flavor" value="マンゴー" onchange="chk_flavor(this.value)">
+                <label for="mango">
+                    <img src="{% static 'img/flavor_ダミー.png' %}">
+                    <p>マンゴー</p>
+                </label>
+            </div>
+            <p class="order-text">STEP3.　オプションをお選びください。　※任意</p>
+            <form name="optionform" class="selection-group">
+                {% csrf_token %}
+                <input id="corn" type="checkbox" name="option" value="コーン ￥50" onchange="chk_option(this.value)" onclick="size_price()">
+                <label for="corn">
+                    <img src="{% static 'img/コーン_ダミー.png' %}">
+                    <p>コーン</p>
+                    <p>￥50</p>
+                </label>
+                <input id="dryice" type="checkbox" name="option" value="ドライアイス ￥50" onchange="chk_option(this.value)" onclick="size_price()">
+                <label for="dryice">
+                    <img src="{% static 'img/ドライアイス_ダミー.png' %}">
+                    <p>ドライアイス</p>
+                    <p>￥50</p>
+                </label>
+            </form>
+            <!-- <p class="order-text">4.　ご注文様情報をご入力ください。</p>
+            <div class="mb-3">
+            {% render_field form.name class="form-control" placeholder="名前" %}
+            </div>
+            <div class="mb-3">
+                {% render_field form.email class="form-control" placeholder="メールアドレス" %}
+            </div>
+            <div class="mb-3">
+                {% render_field form.phone class="form-control" placeholder="電話番号" %}
+            </div> -->
+            <div class="mb-3">
+                <button class="btn btn-primary" type="submit">追加注文する</button>
+                <button class="btn btn-danger" type="submit">お支払いに進む</button>
+            </div>
         </div>
         <div class="col-3">
             <div class="card">
@@ -98,7 +97,7 @@
                             <span id="option_title"></span>
                             <span id="option_price"></span>
                         </div>
-                <p>合計：<span id="total_price"></span></p>
+                <p>合計：￥<span id="total_price"></span></p>
                 <button class="btn btn-danger">お支払いに進む</button>
             </div>
         </div>
@@ -112,8 +111,6 @@
         const size = val.split(" ");
         document.getElementById("size_title").textContent = size[0];
         document.getElementById("size_price").textContent = size[1];
-        
-        const size_price = size[1].slice(1);
     }
     function chk_flavor(val) {
         document.getElementById("flavor").textContent = val;
@@ -122,9 +119,28 @@
         const option = val.split(" ");
         document.getElementById("option_title").textContent = option[0];
         document.getElementById("option_price").textContent = option[1];
-
-        const option_price = option[1].slice(1);
     }
-    document.getElementById("total_price").textContent = size_price + option_price;
+    const size = [280, 330, 440];
+    const option = [50, 50]
+    function size_price() {
+        let size_total = 0;
+        let option_total = 0;
+        const total = document.getElementById("total_price");
+        const sizeform = document.getElementsByName("size")
+        const optionform = document.getElementsByName("option")
+        for ( i=0; i<=2; i++ ) {
+            if ( sizeform[i].checked == true ) {
+                size_total = size[i];
+            }
+            total.textContent = size_total;
+        }
+        for ( j=0; j<=1; j++ ) {
+            if ( optionform[j].checked == true ) {
+                option_total += option[j];
+            }
+            total.textContent = option_total
+        }
+        total.textContent = size_total + option_total;
+    }
 </script>
 {% endblock %}
