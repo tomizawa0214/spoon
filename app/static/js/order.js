@@ -39,6 +39,27 @@ function total_fee() {
             }
         }
     }
+    
+    let flag = new Array();
+    let count = 0;
+    for ( let m = 0; m < flavorform.length; m++ ) {
+        if ( flavorform[m].checked ) {
+            flag[m] = 'chk'; count++;
+        }
+    }
+    if ( count >= 2 ) {
+        for ( let m = 0; m < flavorform.length; m++ ) {
+            if ( flag[m] == 'chk' ) {
+                flavorform[m].disabled = false;
+            } else {
+                flavorform[m].disabled = true;
+            }
+        }
+    } else {
+        for ( let m = 0; m < flavorform.length; m++ ) {
+            flavorform[m].disabled = false;
+        }
+    }
 
     option_title.textContent = '';
     option_price.textContent = '';
