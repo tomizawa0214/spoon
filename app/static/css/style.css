@@ -439,8 +439,9 @@ main {
   background: #333;
 }
 
-/* ラジオボタンを非表示 */
-.selection-group input[type="radio"] {
+/* ラジオボタンとチェックボックスを非表示 */
+.selection-group input[type="radio"],
+.selection-group input[type="checkbox"] {
   display: none;
 }
 
@@ -450,8 +451,9 @@ label img {
   padding: 8px;
 }
 
-/* 選択されたラジオボタン画像の背景をスカイブルーに変える */
-.selection-group input[type="radio"]:checked + label img {
+/* 選択された画像の背景をスカイブルーに変える */
+.selection-group input[type="radio"]:checked + label img,
+.selection-group input[type="checkbox"]:checked + label img {
   background: skyblue;
 }
 

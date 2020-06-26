@@ -1,8 +1,9 @@
 .order-title {
   @include sectionTitle;
 }
-/* ラジオボタンを非表示 */
-.selection-group input[type="radio"] {
+/* ラジオボタンとチェックボックスを非表示 */
+.selection-group input[type="radio"],
+.selection-group input[type="checkbox"] {
   display: none;
 }
 /* 画像部分に余白を持たせる */
@@ -10,8 +11,9 @@ label img {
   margin: 3px;
   padding: 8px;
 }
-/* 選択されたラジオボタン画像の背景をスカイブルーに変える */
-.selection-group input[type="radio"]:checked + label img {
+/* 選択された画像の背景をスカイブルーに変える */
+.selection-group input[type="radio"]:checked + label img,
+.selection-group input[type="checkbox"]:checked + label img {
   background: skyblue;
 }
 

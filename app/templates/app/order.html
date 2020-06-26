@@ -15,61 +15,61 @@
     <div class="row">
         <div class="col-9">
             <p>STEP1.　ジェラートのサイズをお選びください。</p>
-            <form name="sizeform" class="selection-group">
+            <div class="selection-group">
                 {% csrf_token %}
-                <input id="mini_size" type="radio" name="size" value="ミニサイズ ￥280" onchange="chk_size(this.value)" onclick="size_price()">
+                <input id="mini_size" type="radio" name="size" value="ミニサイズ ￥280" onclick="total_fee()">
                 <label for="mini_size">
                     <img src="{% static 'img/size_ダミー.png' %}">
                     <p>ミニサイズ</p>
                     <p>￥280</p>
                 </label>
-                <input id="single_size" type="radio" name="size" value="シングルサイズ ￥330" onchange="chk_size(this.value)" onclick="size_price()">
+                <input id="single_size" type="radio" name="size" value="シングルサイズ ￥330" onclick="total_fee()">
                 <label for="single_size">
                     <img src="{% static 'img/size_ダミー.png' %}">
                     <p>シングルサイズ</p>
                     <p>￥330</p>
                 </label>
-                <input id="double_size" type="radio" name="size" value="ダブルサイズ ￥440" onchange="chk_size(this.value)" onclick="size_price()">
+                <input id="double_size" type="radio" name="size" value="ダブルサイズ ￥440" onclick="total_fee()">
                 <label for="double_size">
                     <img src="{% static 'img/size_ダミー.png' %}">
                     <p>ダブルサイズ</p>
                     <p>￥440</p>
                 </label>
-            </form>
+            </div>
             <p class="order-text">STEP2.　ジェラートのフレーバーをお選びください。</p>
             <div class="selection-group">
-                <input id="vanilla" type="radio" name="flavor" value="バニラ" onchange="chk_flavor(this.value)">
+                <input id="vanilla" type="checkbox" name="flavor" value="バニラ" onclick="total_fee()">
                 <label for="vanilla">
                     <img src="{% static 'img/flavor_ダミー.png' %}">
                     <p>バニラ</p>
                 </label>
-                <input id="orange" type="radio" name="flavor" value="オレンジ" onchange="chk_flavor(this.value)">
+                <input id="orange" type="checkbox" name="flavor" value="オレンジ" onclick="total_fee()">
                 <label for="orange">
                     <img src="{% static 'img/flavor_ダミー.png' %}">
                     <p>オレンジ</p>
                 </label>
-                <input id="mango" type="radio" name="flavor" value="マンゴー" onchange="chk_flavor(this.value)">
+                <input id="mango" type="checkbox" name="flavor" value="マンゴー" onclick="total_fee()">
                 <label for="mango">
                     <img src="{% static 'img/flavor_ダミー.png' %}">
                     <p>マンゴー</p>
                 </label>
             </div>
             <p class="order-text">STEP3.　オプションをお選びください。　※任意</p>
-            <form name="optionform" class="selection-group">
+            <div class="selection-group">
                 {% csrf_token %}
-                <input id="corn" type="checkbox" name="option" value="コーン ￥50" onchange="chk_option(this.value)" onclick="size_price()">
+                <input id="corn" type="checkbox" name="option" value="コーン ￥50" onclick="total_fee()">
                 <label for="corn">
                     <img src="{% static 'img/コーン_ダミー.png' %}">
                     <p>コーン</p>
                     <p>￥50</p>
                 </label>
-                <input id="dryice" type="checkbox" name="option" value="ドライアイス ￥50" onchange="chk_option(this.value)" onclick="size_price()">
+                <input id="dryice" type="checkbox" name="option" value="ドライアイス ￥50" onclick="total_fee()">
                 <label for="dryice">
                     <img src="{% static 'img/ドライアイス_ダミー.png' %}">
                     <p>ドライアイス</p>
                     <p>￥50</p>
                 </label>
-            </form>
+            </div>
             <!-- <p class="order-text">4.　ご注文様情報をご入力ください。</p>
             <div class="mb-3">
             {% render_field form.name class="form-control" placeholder="名前" %}
@@ -93,11 +93,16 @@
                             <span id="size_price"></span>
                         </div>
                         <span id="flavor" class="text-left"></span>
+                        <span id="flavor_2" class="text-left"></span>
                         <div class="d-flex justify-content-between">
                             <span id="option_title"></span>
                             <span id="option_price"></span>
                         </div>
-                <p>合計：￥<span id="total_price"></span></p>
+                        <div class="d-flex justify-content-between">
+                            <span id="option_title_2"></span>
+                            <span id="option_price_2"></span>
+                        </div>
+                <p>合計：￥<span id="total_price">0</span></p>
                 <button class="btn btn-danger">お支払いに進む</button>
             </div>
         </div>
@@ -106,41 +111,5 @@
 {% endblock %}
 
 {% block extrajs %}
-<script>
-    function chk_size(val) {
-        const size = val.split(" ");
-        document.getElementById("size_title").textContent = size[0];
-        document.getElementById("size_price").textContent = size[1];
-    }
-    function chk_flavor(val) {
-        document.getElementById("flavor").textContent = val;
-    }
-    function chk_option(val) {
-        const option = val.split(" ");
-        document.getElementById("option_title").textContent = option[0];
-        document.getElementById("option_price").textContent = option[1];
-    }
-    const size = [280, 330, 440];
-    const option = [50, 50]
-    function size_price() {
-        let size_total = 0;
-        let option_total = 0;
-        const total = document.getElementById("total_price");
-        const sizeform = document.getElementsByName("size")
-        const optionform = document.getElementsByName("option")
-        for ( i=0; i<=2; i++ ) {
-            if ( sizeform[i].checked == true ) {
-                size_total = size[i];
-            }
-            total.textContent = size_total;
-        }
-        for ( j=0; j<=1; j++ ) {
-            if ( optionform[j].checked == true ) {
-                option_total += option[j];
-            }
-            total.textContent = option_total
-        }
-        total.textContent = size_total + option_total;
-    }
-</script>
+<script src="{% static 'js/order.js' %}"></script>
 {% endblock %}
