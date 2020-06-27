@@ -1,13 +1,29 @@
 from django.db import models
 
 
-# class Size(models.Model):
-#     title = models.CharField('サイズ', max_length=10)
-#     price = models.IntegerField('価格', null=True)
-#     image = models.ImageField('画像', upload_to='images')
+class Size(models.Model):
+    title = models.CharField('サイズ', max_length=100)
+    price = models.IntegerField('価格', null=True)
+    image = models.ImageField('画像', upload_to='images')
 
-#     def __str__(self):
-#         return self.title
+    def __str__(self):
+        return self.title
+
+class Flavor(models.Model):
+    title = models.CharField('フレーバー名', max_length=100)
+    price = models.IntegerField('価格', null=True)
+    image = models.ImageField('画像', upload_to='images')
+
+    def __str__(self):
+        return self.title
+
+class Option(models.Model):
+    title = models.CharField('オプション名', max_length=100)
+    price = models.IntegerField('価格', null=True)
+    image = models.ImageField('画像', upload_to='images')
+
+    def __str__(self):
+        return self.title
 
 class Item(models.Model):
     title = models.CharField(max_length=100)

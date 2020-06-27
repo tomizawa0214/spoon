@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from .models import Item
 # from django.conf import settings
 # from django.core.mail import BadHeaderError, EmailMessage
-from django.http import HttpResponse
+from django.http import JsonResponse, HttpResponse
 # import textwrap
 
 class OrderView(View):
@@ -14,6 +14,21 @@ class OrderView(View):
         return render(request, 'app/order.html', {
             # 'size': size
         })
+
+class AddOrderView(View):
+    def post(self, request, *args, **kwargs):
+        title = request.POST.get('title')
+
+        blog = Blog()
+        blog.title = title
+        blog.save()
+
+        data = {
+            'title': title,
+        }
+        return JsonResponse(data)
+
+
 
 # class OrderView(View):
 #     def get(self, request, *args, **kwargs):
