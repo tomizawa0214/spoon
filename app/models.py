@@ -1,29 +1,46 @@
 from django.db import models
 
 
+class Cart(models.Model):
+    size_title = models.CharField(verbose_name='サイズ', max_length=100)
+    size_price = models.IntegerField(verbose_name='サイズ価格')
+    flavor_title = models.CharField(verbose_name='フレーバー', max_length=100)
+    flavor_title_2 = models.CharField(verbose_name='フレーバー2', max_length=100)
+    option_title = models.CharField(verbose_name='オプション', max_length=100)
+    option_price = models.IntegerField(verbose_name='オプション価格')
+    option_title_2 = models.CharField(verbose_name='オプション2', max_length=100)
+    option_price_2 = models.IntegerField(verbose_name='オプション2価格')
+
+    def __str__(self):
+        return self.size_title
+
+
 class Size(models.Model):
-    title = models.CharField('サイズ', max_length=100)
-    price = models.IntegerField('価格', null=True)
-    image = models.ImageField('画像', upload_to='images')
+    title = models.CharField(verbose_name='サイズ', max_length=100)
+    price = models.IntegerField(verbose_name='価格', default=0)
+    image = models.ImageField(verbose_name='画像', upload_to='images')
 
     def __str__(self):
         return self.title
+
 
 class Flavor(models.Model):
-    title = models.CharField('フレーバー名', max_length=100)
-    price = models.IntegerField('価格', null=True)
-    image = models.ImageField('画像', upload_to='images')
+    title = models.CharField(verbose_name='フレーバー', max_length=100)
+    price = models.IntegerField(verbose_name='価格', default=0)
+    image = models.ImageField(verbose_name='画像', upload_to='images')
 
     def __str__(self):
         return self.title
+
 
 class Option(models.Model):
-    title = models.CharField('オプション名', max_length=100)
-    price = models.IntegerField('価格', null=True)
-    image = models.ImageField('画像', upload_to='images')
+    title = models.CharField(verbose_name='オプション', max_length=100)
+    price = models.IntegerField(verbose_name='価格', default=0)
+    image = models.ImageField(verbose_name='画像', upload_to='images')
 
     def __str__(self):
         return self.title
+
 
 class Item(models.Model):
     title = models.CharField(max_length=100)
@@ -35,23 +52,3 @@ class Item(models.Model):
 
     def __str__(self):
         return self.title
-
-# FLAVOR_CHOICES = (
-#     ('バニラ', 'バニラ'),
-#     ('マンゴー', 'マンゴー'),
-#     ('オレンジ', 'オレンジ'),
-# )
-
-# OPTION_CHOICES = (
-#     ('コーン', 'コーン'),
-#     ('ドライアイス', 'ドライアイス'),
-# )
-
-# class Order(models.Model):
-#     size = models.CharField ("サイズ", max_length=10, choices=SIZE_CHOICES, blank=True)
-#     flavor = models.CharField ('フレーバー', max_length=50, choices=FLAVOR_CHOICES, blank=True)
-#     option = models.CharField ('オプション', max_length=10, choices=OPTION_CHOICES, blank=True)
-
-#     def __str__(self):
-#         return self.size
-

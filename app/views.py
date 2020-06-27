@@ -1,7 +1,7 @@
 from django.views.generic import View
 from django.shortcuts import render, redirect
 # from .forms import OrderForm
-from .models import Item
+from .models import Cart, Size, Flavor, Option, Item
 # from django.conf import settings
 # from django.core.mail import BadHeaderError, EmailMessage
 from django.http import JsonResponse, HttpResponse
@@ -9,22 +9,47 @@ from django.http import JsonResponse, HttpResponse
 
 class OrderView(View):
     def get(self, request, *args, **kwargs):
-        # size = Size.objects.all()
+        cart_data = Cart.objects.all()
 
         return render(request, 'app/order.html', {
-            # 'size': size
+            'cart_data': cart_data,
         })
 
 class AddOrderView(View):
     def post(self, request, *args, **kwargs):
         title = request.POST.get('title')
+        size_title = request.POST.get('size_title')
+        size_price = request.POST.get('size_price')
+        flavor = request.POST.get('flavor')
+        flavor_2 = request.POST.get('flavor_2')
+        option_title = request.POST.get('option_title')
+        option_price = request.POST.get('option_price')
+        option_title_2 = request.POST.get('option_title_2')
+        option_price_2 = request.POST.get('option_price_2')
+        print(size_title)
 
-        blog = Blog()
-        blog.title = title
-        blog.save()
+        cart = Cart()
+        cart.title = title
+        cart.size_title = size_title
+        cart.size_price = size_price
+        cart.flavor = flavor
+        cart.flavor_2 = flavor_2
+        cart.option_title = option_title
+        cart.option_price = option_price
+        cart.option_title_2 = option_title_2
+        cart.option_price_2 = option_price_2
+        cart.save()
 
         data = {
             'title': title,
+            'size_title': size_title,
+            'size_price': size_price,
+            'flavor': flavor,
+            'flavor_2': flavor_2,
+            'option_title': option_title,
+            'option_price': option_price,
+            'option_title_2': option_title_2,
+            'option_price_2': option_price_2,
         }
         return JsonResponse(data)
 
