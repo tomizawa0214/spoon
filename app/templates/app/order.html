@@ -17,19 +17,19 @@
             <p>STEP1.　ジェラートのサイズをお選びください。</p>
             <div class="selection-group">
                 {% csrf_token %}
-                <input id="mini_size" type="radio" name="size" value="ミニサイズ ￥280" onclick="total_fee()">
+                <input id="mini_size" type="radio" name="size" value="ミニサイズ ￥280" onclick="total_fee()" onchange="initialization()">
                 <label for="mini_size">
                     <img src="{% static 'img/size_ダミー.png' %}">
                     <p>ミニサイズ</p>
                     <p>￥280</p>
                 </label>
-                <input id="single_size" type="radio" name="size" value="シングルサイズ ￥330" onclick="total_fee()">
+                <input id="single_size" type="radio" name="size" value="シングルサイズ ￥330" onclick="total_fee()" onchange="initialization()">
                 <label for="single_size">
                     <img src="{% static 'img/size_ダミー.png' %}">
                     <p>シングルサイズ</p>
                     <p>￥330</p>
                 </label>
-                <input id="double_size" type="radio" name="size" value="ダブルサイズ ￥440" onclick="total_fee()">
+                <input id="double_size" type="radio" name="size" value="ダブルサイズ ￥440" onclick="total_fee()" onchange="initialization()">
                 <label for="double_size">
                     <img src="{% static 'img/size_ダミー.png' %}">
                     <p>ダブルサイズ</p>
@@ -56,7 +56,6 @@
             </div>
             <p class="order-text">STEP3.　オプションをお選びください。　※任意</p>
             <div class="selection-group">
-                {% csrf_token %}
                 <input id="corn" type="checkbox" name="option" value="コーン ￥50" onclick="total_fee()">
                 <label for="corn">
                     <img src="{% static 'img/コーン_ダミー.png' %}">
@@ -81,8 +80,14 @@
                 {% render_field form.phone class="form-control" placeholder="電話番号" %}
             </div> -->
             <div class="mb-3">
-                <button class="btn btn-primary" type="submit">追加注文する</button>
-                <button class="btn btn-danger" type="submit">お支払いに進む</button>
+                <form method="POST">
+                    {% csrf_token %}
+                    <button id="order-plus" class="btn btn-primary" type="submit">追加注文する</button>
+                </form>
+                <form method="POST">
+                    {% csrf_token %}
+                    <button class="btn btn-danger" type="submit">お支払いに進む</button>
+                </form>
             </div>
         </div>
         <div class="col-3">
@@ -111,5 +116,154 @@
 {% endblock %}
 
 {% block extrajs %}
-<script src="{% static 'js/order.js' %}"></script>
+<script>
+    'use strict';
+
+    const size = [280, 330, 440];
+    const option = [50, 50];
+    const sizeform = document.getElementsByName('size')
+    const flavorform = document.getElementsByName('flavor')
+    const optionform = document.getElementsByName('option')
+
+    const format = (form) => {
+        for ( let n = 0; n < form.length; n++ ) {
+            form[n].disabled = true;
+        }
+    } 
+    format(flavorform);
+    format(optionform);
+
+    const total_fee = () => {
+        let size_total = 0;
+        let option_total = 0;
+        const total = document.getElementById('total_price');
+        const flavor = document.getElementById('flavor');
+        const flavor_2 = document.getElementById('flavor_2');
+        const option_title = document.getElementById('option_title');
+        const option_price = document.getElementById('option_price');
+        const option_title_2 = document.getElementById('option_title_2');
+        const option_price_2 = document.getElementById('option_price_2');
+
+        const chk = (num) => {
+            let flag = new Array();
+            let count = 0;
+            for ( let m = 0; m < flavorform.length; m++ ) {
+                if ( flavorform[m].checked ) {
+                    flag[m] = 'chk'; count++;
+                }
+            }
+            if ( count >= num ) {
+                for ( let m = 0; m < flavorform.length; m++ ) {
+                    if ( flag[m] == 'chk' ) {
+                        flavorform[m].disabled = false;
+                    } else {
+                        flavorform[m].disabled = true;
+                    }
+                }
+            } else {
+                for ( let m = 0; m < flavorform.length; m++ ) {
+                    flavorform[m].disabled = false;
+                }
+            }
+        }
+
+        for ( let i = 0; i < size.length; i++ ) {
+            if ( sizeform[i].checked ) {
+                for ( let k = 0; k < optionform.length; k++ ) {
+                    optionform[k].disabled = false;
+                }
+                let size_value = sizeform[i].value.split(' ');
+                document.getElementById('size_title').textContent = size_value[0];
+                document.getElementById('size_price').textContent = size_value[1];
+                size_total = size[i];
+                if ( i == 0 || i == 1 ) {
+                    chk(1);
+                } else if ( i == 2 ) {
+                    chk(2);
+                }
+            }
+            total.textContent = size_total;
+        }
+
+        flavor.textContent = '';
+        flavor_2.textContent = '';
+        for ( let j = 0; j < 3; j++ ) {
+            if ( flavorform[j].checked ) {
+                let flavor_value = flavorform[j].value;
+                if ( flavor.textContent == '' && flavor_2.textContent == '' ) {
+                    flavor.textContent = flavor_value;
+                } else if ( flavor_2.textContent == '' ) {
+                    flavor_2.textContent = flavor_value;
+                }
+            }
+        }
+
+        option_title.textContent = '';
+        option_price.textContent = '';
+        option_title_2.textContent = '';
+        option_price_2.textContent = '';
+        for ( let k = 0; k < option.length; k++ ) {
+            if ( optionform[k].checked ) {
+                const option_value = optionform[k].value.split(' ');
+                if ( k == 0 ) {
+                    option_title.textContent = option_value[0];
+                    option_price.textContent = option_value[1];
+                } 
+                if ( k == 1 ) {
+                    option_title_2.textContent = option_value[0];
+                    option_price_2.textContent = option_value[1];
+                }
+                option_total += option[k];
+            }
+            total.textContent = option_total;
+        }
+        total.textContent = size_total + option_total;
+    }
+
+    const initialization = () => {
+        for ( let n = 0; n < flavorform.length; n++ ) {
+            flavorform[n].checked = false;
+        }
+    }
+
+    // CSRF対策
+    const getCookie = name => {
+        if (document.cookie && document.cookie !== '') {
+            for (const cookie of document.cookie.split(';')) {
+                const [key, value] = cookie.trim().split('=');
+                if (key === name) {
+                    return decodeURIComponent(value);
+                }
+            }
+        }
+    };
+    const csrftoken = getCookie('csrftoken');
+
+    const addOrder = document.getElementById('order-plus');
+    addOrder.addEventListener('submit', e => {
+        e.preventDefault();
+        const url = '{% url "add_order" %}';
+        const post_title = document.getElementById('post_title');
+        // URLのクエリパラメータを管理
+        const body = new URLSearchParams();
+        body.append('title', post_title.value);
+
+        fetch(url, {
+            method: 'POST',
+            body: body,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
+                'X-CSRFToken': csrftoken,
+            }
+        }).then(response => {
+            // JSON形式に変換
+            return response.json();
+        }).then(response => {
+            console.log("done")
+        }).catch(error => {
+            console.log(error);
+        });
+    });
+
+</script>
 {% endblock %}
