@@ -25,7 +25,7 @@ class AddOrderView(View):
         option_price = request.POST.get('option_price')
         option_title_2 = request.POST.get('option_title_2')
         option_price_2 = request.POST.get('option_price_2')
-        # total_price = request.POST.get('total_price')
+        total_price = request.POST.get('total_price')
 
         cart = Cart()
         cart.size_title = size_title
@@ -36,8 +36,12 @@ class AddOrderView(View):
         cart.option_price = option_price
         cart.option_title_2 = option_title_2
         cart.option_price_2 = option_price_2
-        # cart.total_price = total_price
+        cart.total_price = total_price
         cart.save()
+
+        # 最新のレコードを取得
+        carts = Cart.objects.latest('total_price')
+        print(carts)
 
         data = {
             'size_title': size_title,
@@ -48,7 +52,8 @@ class AddOrderView(View):
             'option_price': option_price,
             'option_title_2': option_title_2,
             'option_price_2': option_price_2,
-            # 'total_price': total_price,
+            'total_price': total_price,
+            'carts': carts,
         }
         return JsonResponse(data)
 

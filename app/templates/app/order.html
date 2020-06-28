@@ -288,7 +288,7 @@
         const option_price = document.getElementById('option_price');
         const option_title_2 = document.getElementById('option_title_2');
         const option_price_2 = document.getElementById('option_price_2');
-        // const total_price = document.getElementById('total_price');
+        const total_price = document.getElementById('total_price');
         // URLのクエリパラメータを管理
         const body = new URLSearchParams();
         body.append('size_title', size_title.textContent);
@@ -299,7 +299,7 @@
         body.append('option_price', option_price.textContent);
         body.append('option_title_2', option_title_2.textContent);
         body.append('option_price_2', option_price_2.textContent);
-        // body.append('total_price', total_price.textContent);
+        body.append('total_price', total_price.textContent);
 
         fetch(url, {
             method: 'POST',
