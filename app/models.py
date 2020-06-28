@@ -10,6 +10,13 @@ class Cart(models.Model):
     option_price = models.CharField(verbose_name='オプション価格', max_length=100)
     option_title_2 = models.CharField(verbose_name='オプション2', max_length=100)
     option_price_2 = models.CharField(verbose_name='オプション2価格', max_length=100)
+    # total_price = models.IntegerField(verbose_name='合計', default=0)
+
+    def get_total_price(self):
+        size = int(size_price[1:])
+        option = int(option_price[1:])
+        option2 = int(option_price[1:])
+        return self.size + self.option + self.option2
 
     def __str__(self):
         return self.size_title

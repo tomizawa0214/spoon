@@ -134,7 +134,13 @@
                     <span id="option_title_2"></span>
                     <span id="option_price_2"></span>
                 </div>
-                <p>合計：￥<span id="total_price">0</span></p>
+                <p>合計：￥
+                    <span id="total_price">
+                        {% for cart_data in cart %}
+                            <span>{{ cart_data.get_total_price }}</span>
+                        {% endfor %}
+                    </span>
+                </p>
                 <button class="btn btn-danger">お支払いに進む</button>
             </div>
         </div>
@@ -154,6 +160,7 @@
     const flavor_title = document.getElementById('flavor_title');
     const flavor_title_2 = document.getElementById('flavor_title_2');
 
+    // フレーバー選択とオプション選択を無効化しておく
     const format = (form) => {
         for ( let i = 0; i < form.length; i++ ) {
             form[i].disabled = true;
@@ -187,15 +194,14 @@
                         flavorform[k].disabled = true;
                     }
                 }
-            } else {
-                for ( let l = 0; l < flavorform.length; l++ ) {
-                    flavorform[l].disabled = false;
-                }
             }
         }
 
         for ( let o = 0; o < size.length; o++ ) {
             if ( sizeform[o].checked ) {
+                for ( let l = 0; l < flavorform.length; l++ ) {
+                    flavorform[l].disabled = false; // サイズが選択されたらフレーバーの選択を有効化
+                }
                 let size_value = sizeform[o].value.split(' ');
                 document.getElementById('size_title').textContent = size_value[0];
                 document.getElementById('size_price').textContent = size_value[1];
@@ -214,7 +220,7 @@
         for ( let p = 0; p < 3; p++ ) {
             if ( flavorform[p].checked ) {
                 for ( let p = 0; p < optionform.length; p++ ) {
-                    optionform[p].disabled = false;
+                    optionform[p].disabled = false; // フレーバーが選択されたらオプションの選択を有効化
                 }
                 let flavor_value = flavorform[p].value;
                 if ( flavor_title.textContent == '' && flavor_title_2.textContent == '' ) {
@@ -282,6 +288,7 @@
         const option_price = document.getElementById('option_price');
         const option_title_2 = document.getElementById('option_title_2');
         const option_price_2 = document.getElementById('option_price_2');
+        // const total_price = document.getElementById('total_price');
         // URLのクエリパラメータを管理
         const body = new URLSearchParams();
         body.append('size_title', size_title.textContent);
@@ -292,6 +299,7 @@
         body.append('option_price', option_price.textContent);
         body.append('option_title_2', option_title_2.textContent);
         body.append('option_price_2', option_price_2.textContent);
+        // body.append('total_price', total_price.textContent);
 
         fetch(url, {
             method: 'POST',
@@ -315,6 +323,7 @@
             option_price_2.textContent = '';
             // 追加するエレメント
             const postArea = document.getElementById('posts');
+            // const totalArea = document.getElementById('total');
             const element  = Object.assign(document.createElement('div'), { className: 'd-flex justify-content-between'});
             const element2  = Object.assign(document.createElement('span'), { textContent: response.size_title });
             const element3  = Object.assign(document.createElement('span'), { textContent: response.size_price });
@@ -329,6 +338,7 @@
             const element12  = Object.assign(document.createElement('span'), { textContent: response.option_title_2 });
             const element13  = Object.assign(document.createElement('span'), { textContent: response.option_price_2 });
             const element14  = Object.assign(document.createElement('hr'));
+            // const element_price  = Object.assign(document.createElement('span'), { textContent: response.total_price });
             // 階層に合わせて要素をまとめる
             element.appendChild(element2);
             element.appendChild(element3);
@@ -345,6 +355,13 @@
             postArea.insertBefore(element8, postArea.lastChild.nextSibling);
             postArea.insertBefore(element11, postArea.lastChild.nextSibling);
             postArea.insertBefore(element14, postArea.lastChild.nextSibling);
+            // totalArea.appendChild(element_price);
+            // 合計金額を取得
+            // const sizePrice = Number(response.size_price.slice(1));
+            // const optionPrice = Number(response.option_price.slice(1));
+            // const optionPrice2 = Number(response.option_price_2.slice(1));
+            // element_price = sizePrice + optionPrice + optionPrice2;
+            // totalPrice.insertBefore(element_price);
         }).catch(error => {
             console.log(error);
         });
