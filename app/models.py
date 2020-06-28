@@ -3,13 +3,13 @@ from django.db import models
 
 class Cart(models.Model):
     size_title = models.CharField(verbose_name='サイズ', max_length=100)
-    size_price = models.IntegerField(verbose_name='サイズ価格')
+    size_price = models.CharField(verbose_name='サイズ価格', max_length=100)
     flavor_title = models.CharField(verbose_name='フレーバー', max_length=100)
     flavor_title_2 = models.CharField(verbose_name='フレーバー2', max_length=100)
     option_title = models.CharField(verbose_name='オプション', max_length=100)
-    option_price = models.IntegerField(verbose_name='オプション価格')
+    option_price = models.CharField(verbose_name='オプション価格', max_length=100)
     option_title_2 = models.CharField(verbose_name='オプション2', max_length=100)
-    option_price_2 = models.IntegerField(verbose_name='オプション2価格')
+    option_price_2 = models.CharField(verbose_name='オプション2価格', max_length=100)
 
     def __str__(self):
         return self.size_title

@@ -93,24 +93,39 @@
         <div class="col-3">
             <div class="card">
                 <p>ご注文内容</p>
-                <div class="d-flex justify-content-between" id="posts">
+                <div id="posts">
                     {% for cart in cart_data %}
-                        <span>{{ cart.size_title }}</span>
-                        <span>{{ cart.size_price }}</span>
-                        <span>{{ cart.flavor_title }}</span>
-                        <span>{{ cart.flavor_title_2 }}</span>
-                        <span>{{ cart.option_title }}</span>
-                        <span>{{ cart.option_price }}</span>
-                        <span>{{ cart.option_title_2 }}</span>
-                        <span>{{ cart.option_price_2 }}</span>
+                        <div class="d-flex justify-content-between">
+                            <span>{{ cart.size_title }}</span>
+                            <span>{{ cart.size_price }}</span>
+                        </div>
+                        <div class="text-left">
+                            <span>{{ cart.flavor_title }}</span>
+                        </div>
+                        <div class="text-left">
+                            <span>{{ cart.flavor_title_2 }}</span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span>{{ cart.option_title }}</span>
+                            <span>{{ cart.option_price }}</span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span>{{ cart.option_title_2 }}</span>
+                            <span>{{ cart.option_price_2 }}</span>
+                        </div>
+                        <hr>
                     {% endfor %}
                 </div>
                 <div class="d-flex justify-content-between">
                     <span id="size_title"></span>
                     <span id="size_price"></span>
                 </div>
-                <span id="flavor" class="text-left"></span>
-                <span id="flavor_2" class="text-left"></span>
+                <div class="text-left">
+                    <span id="flavor_title"></span>
+                </div>
+                <div class="text-left">
+                    <span id="flavor_title_2"></span>
+                </div>
                 <div class="d-flex justify-content-between">
                     <span id="option_title"></span>
                     <span id="option_price"></span>
@@ -149,8 +164,8 @@
         let size_total = 0;
         let option_total = 0;
         const total = document.getElementById('total_price');
-        const flavor = document.getElementById('flavor');
-        const flavor_2 = document.getElementById('flavor_2');
+        const flavor_title = document.getElementById('flavor_title');
+        const flavor_title_2 = document.getElementById('flavor_title_2');
         const option_title = document.getElementById('option_title');
         const option_price = document.getElementById('option_price');
         const option_title_2 = document.getElementById('option_title_2');
@@ -197,15 +212,15 @@
             total.textContent = size_total;
         }
 
-        flavor.textContent = '';
-        flavor_2.textContent = '';
+        flavor_title.textContent = '';
+        flavor_title_2.textContent = '';
         for ( let p = 0; p < 3; p++ ) {
             if ( flavorform[p].checked ) {
                 let flavor_value = flavorform[p].value;
-                if ( flavor.textContent == '' && flavor_2.textContent == '' ) {
-                    flavor.textContent = flavor_value;
-                } else if ( flavor_2.textContent == '' ) {
-                    flavor_2.textContent = flavor_value;
+                if ( flavor_title.textContent == '' && flavor_title_2.textContent == '' ) {
+                    flavor_title.textContent = flavor_value;
+                } else if ( flavor_title_2.textContent == '' ) {
+                    flavor_title_2.textContent = flavor_value;
                 }
             }
         }
@@ -258,26 +273,22 @@
         const url = '{% url "add_order" %}';
         const size_title = document.getElementById('size_title');
         const size_price = document.getElementById('size_price');
-        const flavor = document.getElementById('flavor');
-        const flavor_2 = document.getElementById('flavor_2');
+        const flavor_title = document.getElementById('flavor_title');
+        const flavor_title_2 = document.getElementById('flavor_title_2');
         const option_title = document.getElementById('option_title');
         const option_price = document.getElementById('option_price');
         const option_title_2 = document.getElementById('option_title_2');
         const option_price_2 = document.getElementById('option_price_2');
         // URLのクエリパラメータを管理
         const body = new URLSearchParams();
-        body.append(
-            'title',
-            size_title.textContent,
-            size_price.textContent,
-            flavor.textContent,
-            flavor_2.textContent,
-            option_title.textContent,
-            option_price.textContent,
-            option_title_2.textContent,
-            option_price_2.textContent
-        );
-        console.log("ここまでOK")
+        body.append('size_title', size_title.textContent);
+        body.append('size_price', size_price.textContent);
+        body.append('flavor_title', flavor_title.textContent);
+        body.append('flavor_title_2', flavor_title_2.textContent);
+        body.append('option_title', option_title.textContent);
+        body.append('option_price', option_price.textContent);
+        body.append('option_title_2', option_title_2.textContent);
+        body.append('option_price_2', option_price_2.textContent);
 
         fetch(url, {
             method: 'POST',
@@ -290,21 +301,47 @@
             // JSON形式に変換
             return response.json();
         }).then(response => {
-            console.log("done")
-            // フォームをクリア
-            // size_title.textContent = '';
-            // size_price.textContent = '';
-            // flavor.textContent = '';
-            // flavor_2.textContent = '';
-            // option_title.textContent = '';
-            // option_price.textContent = '';
-            // option_title_2.textContent = '';
-            // option_price_2.textContent = '';
-            // // 追加するエレメント
-            // const postArea = document.getElementById('posts');
-            // const element  = Object.assign(document.createElement('span'), { textContent: response.title });
-            // // 最後に追加
-            // postArea.insertBefore(element, postArea.lastChild.nextSibling);
+            // 選択したカート情報を初期化
+            size_title.textContent = '';
+            size_price.textContent = '';
+            flavor_title.textContent = '';
+            flavor_title_2.textContent = '';
+            option_title.textContent = '';
+            option_price.textContent = '';
+            option_title_2.textContent = '';
+            option_price_2.textContent = '';
+            // 追加するエレメント
+            const postArea = document.getElementById('posts');
+            const element  = Object.assign(document.createElement('div'), { className: 'd-flex justify-content-between'});
+            const element2  = Object.assign(document.createElement('span'), { textContent: response.size_title });
+            const element3  = Object.assign(document.createElement('span'), { textContent: response.size_price });
+            const element4  = Object.assign(document.createElement('div'), { className: 'text-left'});
+            const element5  = Object.assign(document.createElement('span'), { textContent: response.flavor_title });
+            const element6  = Object.assign(document.createElement('div'), { className: 'text-left'});
+            const element7  = Object.assign(document.createElement('span'), { textContent: response.flavor_title_2 });
+            const element8  = Object.assign(document.createElement('div'), { className: 'd-flex justify-content-between'});
+            const element9  = Object.assign(document.createElement('span'), { textContent: response.option_title });
+            const element10  = Object.assign(document.createElement('span'), { textContent: response.option_price });
+            const element11  = Object.assign(document.createElement('div'), { className: 'd-flex justify-content-between'});
+            const element12  = Object.assign(document.createElement('span'), { textContent: response.option_title_2 });
+            const element13  = Object.assign(document.createElement('span'), { textContent: response.option_price_2 });
+            const element14  = Object.assign(document.createElement('hr'));
+            // 階層に合わせて要素をまとめる
+            element.appendChild(element2);
+            element.appendChild(element3);
+            element4.appendChild(element5);
+            element6.appendChild(element7);
+            element8.appendChild(element9);
+            element8.appendChild(element10);
+            element11.appendChild(element12);
+            element11.appendChild(element13);
+            // 最後に追加
+            postArea.insertBefore(element, postArea.lastChild.nextSibling);
+            postArea.insertBefore(element4, postArea.lastChild.nextSibling);
+            postArea.insertBefore(element6, postArea.lastChild.nextSibling);
+            postArea.insertBefore(element8, postArea.lastChild.nextSibling);
+            postArea.insertBefore(element11, postArea.lastChild.nextSibling);
+            postArea.insertBefore(element14, postArea.lastChild.nextSibling);
         }).catch(error => {
             console.log(error);
         });

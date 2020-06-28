@@ -17,23 +17,20 @@ class OrderView(View):
 
 class AddOrderView(View):
     def post(self, request, *args, **kwargs):
-        title = request.POST.get('title')
         size_title = request.POST.get('size_title')
         size_price = request.POST.get('size_price')
-        flavor = request.POST.get('flavor')
-        flavor_2 = request.POST.get('flavor_2')
+        flavor_title = request.POST.get('flavor_title')
+        flavor_title_2 = request.POST.get('flavor_title_2')
         option_title = request.POST.get('option_title')
         option_price = request.POST.get('option_price')
         option_title_2 = request.POST.get('option_title_2')
         option_price_2 = request.POST.get('option_price_2')
-        print(size_title)
 
         cart = Cart()
-        cart.title = title
         cart.size_title = size_title
         cart.size_price = size_price
-        cart.flavor = flavor
-        cart.flavor_2 = flavor_2
+        cart.flavor_title = flavor_title
+        cart.flavor_title_2 = flavor_title_2
         cart.option_title = option_title
         cart.option_price = option_price
         cart.option_title_2 = option_title_2
@@ -41,11 +38,10 @@ class AddOrderView(View):
         cart.save()
 
         data = {
-            'title': title,
             'size_title': size_title,
             'size_price': size_price,
-            'flavor': flavor,
-            'flavor_2': flavor_2,
+            'flavor_title': flavor_title,
+            'flavor_title_2': flavor_title_2,
             'option_title': option_title,
             'option_price': option_price,
             'option_title_2': option_title_2,
