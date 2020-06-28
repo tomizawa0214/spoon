@@ -10,9 +10,15 @@ from django.http import JsonResponse, HttpResponse
 class OrderView(View):
     def get(self, request, *args, **kwargs):
         cart_data = Cart.objects.all()
+        # 最新の合計金額を取得。初期値は0
+        if Cart.objects.count() == 0:
+            get_total_price = 0
+        else:
+            get_total_price = Cart.objects.order_by("id").last().total_price
 
         return render(request, 'app/order.html', {
             'cart_data': cart_data,
+            'get_total_price': get_total_price,
         })
 
 class AddOrderView(View):
@@ -39,9 +45,11 @@ class AddOrderView(View):
         cart.total_price = total_price
         cart.save()
 
-        # 最新のレコードを取得
-        carts = Cart.objects.latest('total_price')
-        print(carts)
+        # 最新の合計金額を取得。初期値は0
+        if Cart.objects.count() == 0:
+            get_total_price = 0
+        else:
+            get_total_price = Cart.objects.order_by("id").last().total_price
 
         data = {
             'size_title': size_title,
@@ -53,7 +61,7 @@ class AddOrderView(View):
             'option_title_2': option_title_2,
             'option_price_2': option_price_2,
             'total_price': total_price,
-            'carts': carts,
+            'get_total_price': get_total_price,
         }
         return JsonResponse(data)
 

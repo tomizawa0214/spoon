@@ -135,11 +135,8 @@
                     <span id="option_price_2"></span>
                 </div>
                 <p>合計：￥
-                    <span id="total_price">
-                        {% for cart_data in cart %}
-                            <span>{{ cart_data.get_total_price }}</span>
-                        {% endfor %}
-                    </span>
+                    <span id="total" class="d-none">0</span>
+                    <span id="total_price">{{ get_total_price }}</span>
                 </p>
                 <button class="btn btn-danger">お支払いに進む</button>
             </div>
@@ -152,11 +149,14 @@
 <script>
     'use strict';
 
+    //各サイズと各オプションの金額を設定
     const size = [280, 330, 440];
     const option = [50, 50];
+    // サイズ・フレーバー・オプションを配列で取得
     const sizeform = document.getElementsByName('size')
     const flavorform = document.getElementsByName('flavor')
     const optionform = document.getElementsByName('option')
+    // カート内のフレーバーフィールドを取得
     const flavor_title = document.getElementById('flavor_title');
     const flavor_title_2 = document.getElementById('flavor_title_2');
 
@@ -169,60 +169,67 @@
     format(flavorform);
     format(optionform);
 
+    // サイズ・フレーバー・オプションのいずれかを選択すると発動
     const total_fee = () => {
+        // サイズ・オプションの取得金額にデフォルト値を設定
         let size_total = 0;
         let option_total = 0;
-        const total = document.getElementById('total_price');
+        // カート内のオプションフィールドを取得
         const option_title = document.getElementById('option_title');
         const option_price = document.getElementById('option_price');
         const option_title_2 = document.getElementById('option_title_2');
         const option_price_2 = document.getElementById('option_price_2');
 
+        // サイズの選択に合わせたチェックの制限数を設定
         const chk = (num) => {
             let flag = new Array();
             let count = 0;
-            for ( let j = 0; j < flavorform.length; j++ ) {
-                if ( flavorform[j].checked ) {
-                    flag[j] = 'chk'; count++;
+            // フレーバーが選択される毎にflagへ値を追加してカウントを1上げる
+            for ( let i = 0; i < flavorform.length; i++ ) {
+                if ( flavorform[i].checked ) {
+                    flag[i] = 'chk'; count++;
                 }
             }
+            // カウントがnumになったら発動
+            // フレーバーの選択とflagの値を判定
             if ( count >= num ) {
-                for ( let k = 0; k < flavorform.length; k++ ) {
-                    if ( flag[k] == 'chk' ) {
-                        flavorform[k].disabled = false;
+                for ( let j = 0; j < flavorform.length; j++ ) {
+                    if ( flag[j] == 'chk' ) {
+                        flavorform[j].disabled = false;
                     } else {
-                        flavorform[k].disabled = true;
+                        flavorform[j].disabled = true;
                     }
                 }
             }
         }
 
-        for ( let o = 0; o < size.length; o++ ) {
-            if ( sizeform[o].checked ) {
+        for ( let k = 0; k < size.length; k++ ) {
+            if ( sizeform[k].checked ) {
+                // サイズが選択されたらフレーバーの選択を有効化
                 for ( let l = 0; l < flavorform.length; l++ ) {
-                    flavorform[l].disabled = false; // サイズが選択されたらフレーバーの選択を有効化
+                    flavorform[l].disabled = false;
                 }
-                let size_value = sizeform[o].value.split(' ');
+                let size_value = sizeform[k].value.split(' ');
                 document.getElementById('size_title').textContent = size_value[0];
                 document.getElementById('size_price').textContent = size_value[1];
-                size_total = size[o];
-                if ( o == 0 || o == 1 ) {
+                size_total = size[k];
+                if ( k == 0 || k == 1 ) {
                     chk(1);
-                } else if ( o == 2 ) {
+                } else if ( k == 2 ) {
                     chk(2);
                 }
             }
-            total.textContent = size_total;
         }
 
         flavor_title.textContent = '';
         flavor_title_2.textContent = '';
-        for ( let p = 0; p < 3; p++ ) {
-            if ( flavorform[p].checked ) {
-                for ( let p = 0; p < optionform.length; p++ ) {
-                    optionform[p].disabled = false; // フレーバーが選択されたらオプションの選択を有効化
+        for ( let m = 0; m < 3; m++ ) {
+            if ( flavorform[m].checked ) {
+                // フレーバーが選択されたらオプションの選択を有効化
+                for ( let n = 0; n < optionform.length; n++ ) {
+                    optionform[n].disabled = false;
                 }
-                let flavor_value = flavorform[p].value;
+                let flavor_value = flavorform[m].value;
                 if ( flavor_title.textContent == '' && flavor_title_2.textContent == '' ) {
                     flavor_title.textContent = flavor_value;
                 } else if ( flavor_title_2.textContent == '' ) {
@@ -235,28 +242,36 @@
         option_price.textContent = '';
         option_title_2.textContent = '';
         option_price_2.textContent = '';
-        for ( let q = 0; q < option.length; q++ ) {
-            if ( optionform[q].checked ) {
-                const option_value = optionform[q].value.split(' ');
-                if ( q == 0 ) {
+        for ( let o = 0; o < option.length; o++ ) {
+            if ( optionform[o].checked ) {
+                const option_value = optionform[o].value.split(' ');
+                if ( o == 0 ) {
                     option_title.textContent = option_value[0];
                     option_price.textContent = option_value[1];
                 } 
-                if ( q == 1 ) {
+                if ( o == 1 ) {
                     option_title_2.textContent = option_value[0];
                     option_price_2.textContent = option_value[1];
                 }
-                option_total += option[q];
+                option_total += option[o];
             }
-            total.textContent = option_total;
         }
-        total.textContent = size_total + option_total;
+        // 非同期通信状態かリロードされたかを判定
+        const total = document.getElementById('total');
+        if ( total.textContent == 0 ) {
+            // データベースから最新の合計値を取得して足す
+            document.getElementById('total_price').textContent = Number('{{ get_total_price }}') + size_total + option_total;
+        } else {
+            // 非同期通信で合計値を足す
+            document.getElementById('total_price').textContent = Number(total.textContent) + size_total + option_total;
+        }
     }
+
 
     // サイズをクリックで発動。フレーバーの選択を初期化
     const initialization = () => {
-        for ( let r = 0; r < flavorform.length; r++ ) {
-            flavorform[r].checked = false;
+        for ( let i = 0; i < flavorform.length; i++ ) {
+            flavorform[i].checked = false;
             flavor_title.textContent = '';
             flavor_title_2.textContent = '';
         }
@@ -289,6 +304,8 @@
         const option_title_2 = document.getElementById('option_title_2');
         const option_price_2 = document.getElementById('option_price_2');
         const total_price = document.getElementById('total_price');
+        const total = document.getElementById('total');
+
         // URLのクエリパラメータを管理
         const body = new URLSearchParams();
         body.append('size_title', size_title.textContent);
@@ -312,6 +329,16 @@
             // JSON形式に変換
             return response.json();
         }).then(response => {
+             // 選択を初期化
+            for ( let i = 0; i < sizeform.length; i++ ) {
+                sizeform[i].checked = false;
+            }
+            for ( let j = 0; j < flavorform.length; j++ ) {
+                flavorform[j].checked = false;
+            }
+            for ( let k = 0; k < optionform.length; k++ ) {
+                optionform[k].checked = false;
+            }
             // 選択したカート情報を初期化
             size_title.textContent = '';
             size_price.textContent = '';
@@ -321,9 +348,12 @@
             option_price.textContent = '';
             option_title_2.textContent = '';
             option_price_2.textContent = '';
+            total_price.textContent = response.get_total_price;
+            // 仮の合計金額を初期化
+            total.textContent = '';
             // 追加するエレメント
             const postArea = document.getElementById('posts');
-            // const totalArea = document.getElementById('total');
+            const totalArea = document.getElementById('total');
             const element  = Object.assign(document.createElement('div'), { className: 'd-flex justify-content-between'});
             const element2  = Object.assign(document.createElement('span'), { textContent: response.size_title });
             const element3  = Object.assign(document.createElement('span'), { textContent: response.size_price });
@@ -338,7 +368,7 @@
             const element12  = Object.assign(document.createElement('span'), { textContent: response.option_title_2 });
             const element13  = Object.assign(document.createElement('span'), { textContent: response.option_price_2 });
             const element14  = Object.assign(document.createElement('hr'));
-            // const element_price  = Object.assign(document.createElement('span'), { textContent: response.total_price });
+            const element_price  = Object.assign(document.createElement('span'), { textContent: response.get_total_price });
             // 階層に合わせて要素をまとめる
             element.appendChild(element2);
             element.appendChild(element3);
@@ -355,17 +385,10 @@
             postArea.insertBefore(element8, postArea.lastChild.nextSibling);
             postArea.insertBefore(element11, postArea.lastChild.nextSibling);
             postArea.insertBefore(element14, postArea.lastChild.nextSibling);
-            // totalArea.appendChild(element_price);
-            // 合計金額を取得
-            // const sizePrice = Number(response.size_price.slice(1));
-            // const optionPrice = Number(response.option_price.slice(1));
-            // const optionPrice2 = Number(response.option_price_2.slice(1));
-            // element_price = sizePrice + optionPrice + optionPrice2;
-            // totalPrice.insertBefore(element_price);
+            totalArea.appendChild(element_price);
         }).catch(error => {
             console.log(error);
         });
     });
-
 </script>
 {% endblock %}
