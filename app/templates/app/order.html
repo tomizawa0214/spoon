@@ -1,6 +1,7 @@
 {% extends "app/base.html" %}
 {% load static %}
 {% load widget_tweaks %}
+{% load humanize %}
 
 {% block title %}
 <title>商品注文 | spoon</title>
@@ -97,7 +98,10 @@
                     {% for cart in cart_data %}
                         <div class="d-flex justify-content-between">
                             <span>{{ cart.size_title }}</span>
-                            <span>{{ cart.size_price }}</span>
+                            <div>
+                                <span class="mr-2">{{ cart.size_price }}</span>
+                                <span>✕</span>
+                            </div>
                         </div>
                         <div class="text-left">
                             <span>{{ cart.flavor_title }}</span>
@@ -107,11 +111,11 @@
                         </div>
                         <div class="d-flex justify-content-between">
                             <span>{{ cart.option_title }}</span>
-                            <span>{{ cart.option_price }}</span>
+                            <span class="mr-4">{{ cart.option_price }}</span>
                         </div>
                         <div class="d-flex justify-content-between">
                             <span>{{ cart.option_title_2 }}</span>
-                            <span>{{ cart.option_price_2 }}</span>
+                            <span class="mr-4">{{ cart.option_price_2 }}</span>
                         </div>
                         <hr>
                     {% endfor %}
@@ -136,7 +140,7 @@
                 </div>
                 <p>合計：￥
                     <span id="total" class="d-none">0</span>
-                    <span id="total_price">{{ get_total_price }}</span>
+                    <span id="total_price">{{ get_total_price|intcomma }}</span>
                 </p>
                 <button class="btn btn-danger">お支払いに進む</button>
             </div>
@@ -260,10 +264,13 @@
         const total = document.getElementById('total');
         if ( total.textContent == 0 ) {
             // データベースから最新の合計値を取得して足す
-            document.getElementById('total_price').textContent = Number('{{ get_total_price }}') + size_total + option_total;
+            let total_price = Number('{{ get_total_price }}') + size_total + option_total;
+            document.getElementById('total_price').textContent = total_price.toLocaleString();
         } else {
-            // 非同期通信で合計値を足す
-            document.getElementById('total_price').textContent = Number(total.textContent) + size_total + option_total;
+            // カンマを除いて整数値へ変換後、非同期通信で合計値を足す
+            let total_flag = total.textContent.replace( /,/g, '');
+            let total_price = Number(total_flag) + size_total + option_total;
+            document.getElementById('total_price').textContent = total_price.toLocaleString();
         }
     }
 
@@ -348,7 +355,7 @@
             option_price.textContent = '';
             option_title_2.textContent = '';
             option_price_2.textContent = '';
-            total_price.textContent = response.get_total_price;
+            total_price.textContent = response.get_total_price.toLocaleString();
             // 仮の合計金額を初期化
             total.textContent = '';
             // 追加するエレメント
@@ -356,35 +363,39 @@
             const totalArea = document.getElementById('total');
             const element  = Object.assign(document.createElement('div'), { className: 'd-flex justify-content-between'});
             const element2  = Object.assign(document.createElement('span'), { textContent: response.size_title });
-            const element3  = Object.assign(document.createElement('span'), { textContent: response.size_price });
-            const element4  = Object.assign(document.createElement('div'), { className: 'text-left'});
-            const element5  = Object.assign(document.createElement('span'), { textContent: response.flavor_title });
+            const element3  = Object.assign(document.createElement('div'));
+            const element4  = Object.assign(document.createElement('span'), { className: 'mr-2', textContent: response.size_price });
+            const element5  = Object.assign(document.createElement('span'), { textContent: '✕' });
             const element6  = Object.assign(document.createElement('div'), { className: 'text-left'});
-            const element7  = Object.assign(document.createElement('span'), { textContent: response.flavor_title_2 });
-            const element8  = Object.assign(document.createElement('div'), { className: 'd-flex justify-content-between'});
-            const element9  = Object.assign(document.createElement('span'), { textContent: response.option_title });
-            const element10  = Object.assign(document.createElement('span'), { textContent: response.option_price });
-            const element11  = Object.assign(document.createElement('div'), { className: 'd-flex justify-content-between'});
-            const element12  = Object.assign(document.createElement('span'), { textContent: response.option_title_2 });
-            const element13  = Object.assign(document.createElement('span'), { textContent: response.option_price_2 });
-            const element14  = Object.assign(document.createElement('hr'));
-            const element_price  = Object.assign(document.createElement('span'), { textContent: response.get_total_price });
+            const element7  = Object.assign(document.createElement('span'), { textContent: response.flavor_title });
+            const element8  = Object.assign(document.createElement('div'), { className: 'text-left'});
+            const element9  = Object.assign(document.createElement('span'), { textContent: response.flavor_title_2 });
+            const element10  = Object.assign(document.createElement('div'), { className: 'd-flex justify-content-between'});
+            const element11  = Object.assign(document.createElement('span'), { textContent: response.option_title });
+            const element12  = Object.assign(document.createElement('span'), { className: 'mr-4', textContent: response.option_price });
+            const element13  = Object.assign(document.createElement('div'), { className: 'd-flex justify-content-between'});
+            const element14  = Object.assign(document.createElement('span'), { textContent: response.option_title_2 });
+            const element15  = Object.assign(document.createElement('span'), { className: 'mr-4', textContent: response.option_price_2 });
+            const element16  = Object.assign(document.createElement('hr'));
+            const element_price  = Object.assign(document.createElement('span'), { textContent: response.get_total_price.toLocaleString() });
             // 階層に合わせて要素をまとめる
             element.appendChild(element2);
+            element3.appendChild(element4);
+            element3.appendChild(element5);
             element.appendChild(element3);
-            element4.appendChild(element5);
             element6.appendChild(element7);
             element8.appendChild(element9);
-            element8.appendChild(element10);
-            element11.appendChild(element12);
-            element11.appendChild(element13);
+            element10.appendChild(element11);
+            element10.appendChild(element12);
+            element13.appendChild(element14);
+            element13.appendChild(element15);
             // 最後に追加
             postArea.insertBefore(element, postArea.lastChild.nextSibling);
-            postArea.insertBefore(element4, postArea.lastChild.nextSibling);
             postArea.insertBefore(element6, postArea.lastChild.nextSibling);
             postArea.insertBefore(element8, postArea.lastChild.nextSibling);
-            postArea.insertBefore(element11, postArea.lastChild.nextSibling);
-            postArea.insertBefore(element14, postArea.lastChild.nextSibling);
+            postArea.insertBefore(element10, postArea.lastChild.nextSibling);
+            postArea.insertBefore(element13, postArea.lastChild.nextSibling);
+            postArea.insertBefore(element16, postArea.lastChild.nextSibling);
             totalArea.appendChild(element_price);
         }).catch(error => {
             console.log(error);

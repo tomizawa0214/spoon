@@ -11,10 +11,10 @@ class OrderView(View):
     def get(self, request, *args, **kwargs):
         cart_data = Cart.objects.all()
         # 最新の合計金額を取得。初期値は0
-        if Cart.objects.count() == 0:
-            get_total_price = 0
-        else:
+        if cart_data.exists():
             get_total_price = Cart.objects.order_by("id").last().total_price
+        else:
+            get_total_price = 0
 
         return render(request, 'app/order.html', {
             'cart_data': cart_data,
@@ -33,6 +33,9 @@ class AddOrderView(View):
         option_price_2 = request.POST.get('option_price_2')
         total_price = request.POST.get('total_price')
 
+        # 合計値のカンマを除いて整数値に変換
+        total_price = int(total_price.replace(',', ''))
+
         cart = Cart()
         cart.size_title = size_title
         cart.size_price = size_price
@@ -46,10 +49,9 @@ class AddOrderView(View):
         cart.save()
 
         # 最新の合計金額を取得。初期値は0
-        if Cart.objects.count() == 0:
-            get_total_price = 0
-        else:
-            get_total_price = Cart.objects.order_by("id").last().total_price
+        get_total_price = Cart.objects.order_by("id").last().total_price
+        # else:
+        #     get_total_price = 0
 
         data = {
             'size_title': size_title,
