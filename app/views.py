@@ -50,8 +50,6 @@ class AddOrderView(View):
 
         # 最新の合計金額を取得。初期値は0
         get_total_price = Cart.objects.order_by("id").last().total_price
-        # else:
-        #     get_total_price = 0
 
         data = {
             'size_title': size_title,
@@ -64,6 +62,54 @@ class AddOrderView(View):
             'option_price_2': option_price_2,
             'total_price': total_price,
             'get_total_price': get_total_price,
+        }
+        return JsonResponse(data)
+
+
+class DeleteOrderView(View):
+    def post(self, request, *args, **kwargs):
+        num = request.POST.get('num')
+
+        # delete_cart = Cart.objects.get(id=1)
+
+        # delete_cart = Cart.objects.filter(id=1)
+        delete_cart = Cart.objects.all().values_list('id', flat=True)
+        # delete_cart = delete_cart.id
+        # size_price = delete_cart.size_price
+        print(delete_cart)
+        # print(size_price)
+
+        # 合計値のカンマを除いて整数値に変換
+        # total_price = int(total_price.replace(',', ''))
+
+        # cart = Cart()
+        # cart.size_title = size_title
+        # cart.size_price = size_price
+        # cart.flavor_title = flavor_title
+        # cart.flavor_title_2 = flavor_title_2
+        # cart.option_title = option_title
+        # cart.option_price = option_price
+        # cart.option_title_2 = option_title_2
+        # cart.option_price_2 = option_price_2
+        # cart.total_price = total_price
+        # cart.save()
+
+        # 最新の合計金額を取得。初期値は0
+        # get_total_price = Cart.objects.order_by("id").last().total_price
+        # else:
+        #     get_total_price = 0
+
+        data = {
+            # 'size_price': size_price,
+            # 'size_title': size_title,
+            # 'flavor_title': flavor_title,
+            # 'flavor_title_2': flavor_title_2,
+            # 'option_title': option_title,
+            # 'option_price': option_price,
+            # 'option_title_2': option_title_2,
+            # 'option_price_2': option_price_2,
+            # 'total_price': total_price,
+            # 'get_total_price': get_total_price,
         }
         return JsonResponse(data)
 
