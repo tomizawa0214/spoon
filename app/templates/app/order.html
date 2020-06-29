@@ -96,28 +96,30 @@
                 <p>ご注文内容</p>
                 <div id="posts">
                     {% for cart in cart_data %}
-                        <div class="d-flex justify-content-between">
-                            <span>{{ cart.size_title }}</span>
-                            <div>
-                                <span class="mr-2">{{ cart.size_price }}</span>
-                                <span class="order_delete">✕</span>
+                        <div class="order_cart">
+                            <div class="d-flex justify-content-between">
+                                <span>{{ cart.size_title }}</span>
+                                <div>
+                                    <span class="mr-2">{{ cart.size_price }}</span>
+                                    <span class="order_delete" onclick="del_order()">✕</span>
+                                </div>
                             </div>
+                            <div class="text-left">
+                                <span>{{ cart.flavor_title }}</span>
+                            </div>
+                            <div class="text-left">
+                                <span>{{ cart.flavor_title_2 }}</span>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <span>{{ cart.option_title }}</span>
+                                <span class="mr-4">{{ cart.option_price }}</span>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <span>{{ cart.option_title_2 }}</span>
+                                <span class="mr-4">{{ cart.option_price_2 }}</span>
+                            </div>
+                            <hr>
                         </div>
-                        <div class="text-left">
-                            <span>{{ cart.flavor_title }}</span>
-                        </div>
-                        <div class="text-left">
-                            <span>{{ cart.flavor_title_2 }}</span>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <span>{{ cart.option_title }}</span>
-                            <span class="mr-4">{{ cart.option_price }}</span>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <span>{{ cart.option_title_2 }}</span>
-                            <span class="mr-4">{{ cart.option_price_2 }}</span>
-                        </div>
-                        <hr>
                     {% endfor %}
                 </div>
                 <div class="d-flex justify-content-between">
@@ -361,7 +363,6 @@
             total.textContent = '';
             // 追加するエレメント
             const postArea = document.getElementById('posts');
-            const totalArea = document.getElementById('total');
             const element  = Object.assign(document.createElement('div'), { className: 'd-flex justify-content-between'});
             const element2  = Object.assign(document.createElement('span'), { textContent: response.size_title });
             const element3  = Object.assign(document.createElement('div'));
@@ -378,7 +379,7 @@
             const element14  = Object.assign(document.createElement('span'), { textContent: response.option_title_2 });
             const element15  = Object.assign(document.createElement('span'), { className: 'mr-4', textContent: response.option_price_2 });
             const element16  = Object.assign(document.createElement('hr'));
-            const element_price  = Object.assign(document.createElement('span'), { textContent: response.get_total_price.toLocaleString() });
+            const element17  = Object.assign(document.createElement('div'), { className: 'order_cart'});
             // 階層に合わせて要素をまとめる
             element.appendChild(element2);
             element3.appendChild(element4);
@@ -390,84 +391,96 @@
             element10.appendChild(element12);
             element13.appendChild(element14);
             element13.appendChild(element15);
+            element17.appendChild(element);
+            element17.appendChild(element6);
+            element17.appendChild(element8);
+            element17.appendChild(element10);
+            element17.appendChild(element13);
+            element17.appendChild(element16);
             // 最後に追加
-            postArea.insertBefore(element, postArea.lastChild.nextSibling);
-            postArea.insertBefore(element6, postArea.lastChild.nextSibling);
-            postArea.insertBefore(element8, postArea.lastChild.nextSibling);
-            postArea.insertBefore(element10, postArea.lastChild.nextSibling);
-            postArea.insertBefore(element13, postArea.lastChild.nextSibling);
-            postArea.insertBefore(element16, postArea.lastChild.nextSibling);
-            totalArea.appendChild(element_price);
+            postArea.insertBefore(element17, postArea.lastChild.nextSibling);
+            // 仮の合計値も変更
+            const totalArea = document.getElementById('total');
+            totalArea.textContent = response.get_total_price;
         }).catch(error => {
             console.log(error);
         });
+
+        // 追加注文された0.1秒後にorder_deleteを取得
+        // 削除機能を設定
+        window.setTimeout(() => {
+            const deleteOrder = document.getElementsByClassName('order_delete');
+            for ( let i = 0; i < deleteOrder.length; i++ ) {
+                deleteOrder[i].addEventListener('click', () => {
+                    console.log(i)
+                    const url = '{% url "delete_order" %}';
+                    const total_price = document.getElementById('total_price');
+                    // URLのクエリパラメータを管理
+                    const body = new URLSearchParams();
+                    body.append('num', i);
+
+                    fetch(url, {
+                        method: 'POST',
+                        body: body,
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
+                            'X-CSRFToken': csrftoken,
+                        }
+                    }).then(response => {
+                        // JSON形式に変換
+                        return response.json();
+                    }).then(response => {
+                        // 合計値を削除後の金額に変更
+                        total_price.textContent = response.get_total_price.toLocaleString();
+                        // 仮の合計値も削除後の金額に変更
+                        const totalArea = document.getElementById('total');
+                        totalArea.textContent = response.get_total_price;
+
+                        const cart = document.getElementsByClassName('order_cart');
+                        cart[i].style.display = 'none';
+                    }).catch(error => {
+                        console.log(error);
+                    });
+                });
+            }
+        }, 100);
     });
 
+    // リロードに対応
+    const del_order = () => {
+        const deleteOrder = document.getElementsByClassName('order_delete');
+        for ( let i = 0; i < deleteOrder.length; i++ ) {
+            deleteOrder[i].addEventListener('click', () => {
+                const url = '{% url "delete_order" %}';
+                const total_price = document.getElementById('total_price');
+                // URLのクエリパラメータを管理
+                const body = new URLSearchParams();
+                body.append('num', i);
 
-    const deleteOrder = document.querySelectorAll('.order_delete');
-    for ( let i = 0; i < deleteOrder.length; i++ ) {
-        deleteOrder[i].addEventListener('click', () => {
-            const url = '{% url "delete_order" %}';
+                fetch(url, {
+                    method: 'POST',
+                    body: body,
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
+                        'X-CSRFToken': csrftoken,
+                    }
+                }).then(response => {
+                    // JSON形式に変換
+                    return response.json();
+                }).then(response => {
+                    // 合計値を削除後の金額に変更
+                    total_price.textContent = response.get_total_price.toLocaleString();
+                    // 仮の合計値も削除後の金額に変更
+                    const totalArea = document.getElementById('total');
+                    totalArea.textContent = response.get_total_price;
 
-            // URLのクエリパラメータを管理
-            const body = new URLSearchParams();
-            body.append('num', i+1);
-
-            fetch(url, {
-                method: 'POST',
-                body: body,
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
-                    'X-CSRFToken': csrftoken,
-                }
-            }).then(response => {
-                // JSON形式に変換
-                return response.json();
-            }).then(response => {
-                console.log("done")
-                // // 追加するエレメント
-                // const postArea = document.getElementById('posts');
-                // const totalArea = document.getElementById('total');
-                // const element  = Object.assign(document.createElement('div'), { className: 'd-flex justify-content-between'});
-                // const element2  = Object.assign(document.createElement('span'), { textContent: response.size_title });
-                // const element3  = Object.assign(document.createElement('div'));
-                // const element4  = Object.assign(document.createElement('span'), { className: 'mr-2', textContent: response.size_price });
-                // const element5  = Object.assign(document.createElement('span'), { className: 'order_delete', textContent: '✕' });
-                // const element6  = Object.assign(document.createElement('div'), { className: 'text-left'});
-                // const element7  = Object.assign(document.createElement('span'), { textContent: response.flavor_title });
-                // const element8  = Object.assign(document.createElement('div'), { className: 'text-left'});
-                // const element9  = Object.assign(document.createElement('span'), { textContent: response.flavor_title_2 });
-                // const element10  = Object.assign(document.createElement('div'), { className: 'd-flex justify-content-between'});
-                // const element11  = Object.assign(document.createElement('span'), { textContent: response.option_title });
-                // const element12  = Object.assign(document.createElement('span'), { className: 'mr-4', textContent: response.option_price });
-                // const element13  = Object.assign(document.createElement('div'), { className: 'd-flex justify-content-between'});
-                // const element14  = Object.assign(document.createElement('span'), { textContent: response.option_title_2 });
-                // const element15  = Object.assign(document.createElement('span'), { className: 'mr-4', textContent: response.option_price_2 });
-                // const element16  = Object.assign(document.createElement('hr'));
-                // const element_price  = Object.assign(document.createElement('span'), { textContent: response.get_total_price.toLocaleString() });
-                // // 階層に合わせて要素をまとめる
-                // element.appendChild(element2);
-                // element3.appendChild(element4);
-                // element3.appendChild(element5);
-                // element.appendChild(element3);
-                // element6.appendChild(element7);
-                // element8.appendChild(element9);
-                // element10.appendChild(element11);
-                // element10.appendChild(element12);
-                // element13.appendChild(element14);
-                // element13.appendChild(element15);
-                // // 最後に追加
-                // postArea.insertBefore(element, postArea.lastChild.nextSibling);
-                // postArea.insertBefore(element6, postArea.lastChild.nextSibling);
-                // postArea.insertBefore(element8, postArea.lastChild.nextSibling);
-                // postArea.insertBefore(element10, postArea.lastChild.nextSibling);
-                // postArea.insertBefore(element13, postArea.lastChild.nextSibling);
-                // postArea.insertBefore(element16, postArea.lastChild.nextSibling);
-                // totalArea.appendChild(element_price);
-            }).catch(error => {
-                console.log(error);
+                    const cart = document.getElementsByClassName('order_cart');
+                    cart[i].style.display = 'none';
+                }).catch(error => {
+                    console.log(error);
+                });
             });
-        });
+        }
     }
 </script>
 {% endblock %}

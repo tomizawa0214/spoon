@@ -69,47 +69,38 @@ class AddOrderView(View):
 class DeleteOrderView(View):
     def post(self, request, *args, **kwargs):
         num = request.POST.get('num')
+        print(num)
 
-        # delete_cart = Cart.objects.get(id=1)
+        cart_id = Cart.objects.values_list('id', flat=True) # レコードのidを調べる
+        del_id = cart_id[int(num)] # 削除するレコードのidを取得
+        del_record = Cart.objects.filter(pk=del_id) # 削除するレコードを取得
+        size_price = del_record.values_list('size_price', flat=True)[0] # 削除するレコードのサイズ金額を取得
+        option_price = del_record.values_list('option_price', flat=True)[0]  # 削除するレコードのオプション金額を取得
+        option_price_2 = del_record.values_list('option_price_2', flat=True)[0] # 削除するレコードのオプション金額を取得
+        
+        # 削除分の取得金額を整数値に変換。オプション指定が無い場合は0を設定
+        size_price = int(size_price[1:])
+        if option_price == '':
+            option_price = 0
+        else:
+            option_price = int(option_price[1:])
+        if option_price_2 == '':
+            option_price_2 = 0
+        else:
+            option_price_2 = int(option_price_2[1:])
 
-        # delete_cart = Cart.objects.filter(id=1)
-        delete_cart = Cart.objects.all().values_list('id', flat=True)
-        # delete_cart = delete_cart.id
-        # size_price = delete_cart.size_price
-        print(delete_cart)
-        # print(size_price)
+        # 最新レコードの合計値から削除分の金額を引いて更新
+        cart_latest = Cart.objects.order_by("id").last()
+        cart_latest.total_price -= size_price - option_price - option_price_2
+        cart_latest.save()
 
-        # 合計値のカンマを除いて整数値に変換
-        # total_price = int(total_price.replace(',', ''))
+        # 指定レコードを削除
+        del_record.delete()
 
-        # cart = Cart()
-        # cart.size_title = size_title
-        # cart.size_price = size_price
-        # cart.flavor_title = flavor_title
-        # cart.flavor_title_2 = flavor_title_2
-        # cart.option_title = option_title
-        # cart.option_price = option_price
-        # cart.option_title_2 = option_title_2
-        # cart.option_price_2 = option_price_2
-        # cart.total_price = total_price
-        # cart.save()
-
-        # 最新の合計金額を取得。初期値は0
-        # get_total_price = Cart.objects.order_by("id").last().total_price
-        # else:
-        #     get_total_price = 0
+        get_total_price = cart_latest.total_price
 
         data = {
-            # 'size_price': size_price,
-            # 'size_title': size_title,
-            # 'flavor_title': flavor_title,
-            # 'flavor_title_2': flavor_title_2,
-            # 'option_title': option_title,
-            # 'option_price': option_price,
-            # 'option_title_2': option_title_2,
-            # 'option_price_2': option_price_2,
-            # 'total_price': total_price,
-            # 'get_total_price': get_total_price,
+            'get_total_price': get_total_price,
         }
         return JsonResponse(data)
 
