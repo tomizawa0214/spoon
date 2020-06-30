@@ -68,11 +68,11 @@ class AddOrderView(View):
 
 class DeleteOrderView(View):
     def post(self, request, *args, **kwargs):
-        num = request.POST.get('num')
-        print(num)
+        index = request.POST.get('index')
+        print(index)
 
         cart_id = Cart.objects.values_list('id', flat=True) # レコードのidを調べる
-        del_id = cart_id[int(num)] # 削除するレコードのidを取得
+        del_id = cart_id[int(index)] # 削除するレコードのidを取得
         del_record = Cart.objects.filter(pk=del_id) # 削除するレコードを取得
         size_price = del_record.values_list('size_price', flat=True)[0] # 削除するレコードのサイズ金額を取得
         option_price = del_record.values_list('option_price', flat=True)[0]  # 削除するレコードのオプション金額を取得

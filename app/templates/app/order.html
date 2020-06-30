@@ -409,15 +409,19 @@
         // 追加注文された0.1秒後にorder_deleteを取得
         // 削除機能を設定
         window.setTimeout(() => {
-            const deleteOrder = document.getElementsByClassName('order_delete');
+            // 注文アイテムをすべて取得
+            let deleteOrder = document.querySelectorAll('.order_delete');
+            console.log(deleteOrder)
+            // 注文アイテムすべてに以下の要素を追加
             for ( let i = 0; i < deleteOrder.length; i++ ) {
+                // 削除クリックで発動
                 deleteOrder[i].addEventListener('click', () => {
                     console.log(i)
                     const url = '{% url "delete_order" %}';
                     const total_price = document.getElementById('total_price');
                     // URLのクエリパラメータを管理
                     const body = new URLSearchParams();
-                    body.append('num', i);
+                    body.append('index', i);
 
                     fetch(url, {
                         method: 'POST',
@@ -435,9 +439,9 @@
                         // 仮の合計値も削除後の金額に変更
                         const totalArea = document.getElementById('total');
                         totalArea.textContent = response.get_total_price;
-
+                        // HTMLからクリックされた注文アイテムを削除
                         const cart = document.getElementsByClassName('order_cart');
-                        cart[i].style.display = 'none';
+                        cart[i].remove();
                     }).catch(error => {
                         console.log(error);
                     });
