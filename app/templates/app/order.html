@@ -18,19 +18,19 @@
             <p>STEP1.　ジェラートのサイズをお選びください。</p>
             <div class="selection-group">
                 {% csrf_token %}
-                <input id="mini_size" type="radio" name="size" value="ミニサイズ ￥280" onclick="total_fee()" onchange="initialization()">
+                <input id="mini_size" type="radio" name="size" value="ミニサイズ ￥280" onclick="total_fee();" onchange="initialization();">
                 <label for="mini_size">
                     <img src="{% static 'img/size_ダミー.png' %}">
                     <p>ミニサイズ</p>
                     <p>￥280</p>
                 </label>
-                <input id="single_size" type="radio" name="size" value="シングルサイズ ￥330" onclick="total_fee()" onchange="initialization()">
+                <input id="single_size" type="radio" name="size" value="シングルサイズ ￥330" onclick="total_fee();" onchange="initialization();">
                 <label for="single_size">
                     <img src="{% static 'img/size_ダミー.png' %}">
                     <p>シングルサイズ</p>
                     <p>￥330</p>
                 </label>
-                <input id="double_size" type="radio" name="size" value="ダブルサイズ ￥440" onclick="total_fee()" onchange="initialization()">
+                <input id="double_size" type="radio" name="size" value="ダブルサイズ ￥440" onclick="total_fee();" onchange="initialization();">
                 <label for="double_size">
                     <img src="{% static 'img/size_ダミー.png' %}">
                     <p>ダブルサイズ</p>
@@ -39,17 +39,17 @@
             </div>
             <p class="order-text">STEP2.　ジェラートのフレーバーをお選びください。</p>
             <div class="selection-group">
-                <input id="vanilla" type="checkbox" name="flavor" value="バニラ" onclick="total_fee()">
+                <input id="vanilla" type="checkbox" name="flavor" value="バニラ" onclick="total_fee();">
                 <label for="vanilla">
                     <img src="{% static 'img/flavor_ダミー.png' %}">
                     <p>バニラ</p>
                 </label>
-                <input id="orange" type="checkbox" name="flavor" value="オレンジ" onclick="total_fee()">
+                <input id="orange" type="checkbox" name="flavor" value="オレンジ" onclick="total_fee();">
                 <label for="orange">
                     <img src="{% static 'img/flavor_ダミー.png' %}">
                     <p>オレンジ</p>
                 </label>
-                <input id="mango" type="checkbox" name="flavor" value="マンゴー" onclick="total_fee()">
+                <input id="mango" type="checkbox" name="flavor" value="マンゴー" onclick="total_fee();">
                 <label for="mango">
                     <img src="{% static 'img/flavor_ダミー.png' %}">
                     <p>マンゴー</p>
@@ -57,13 +57,13 @@
             </div>
             <p class="order-text">STEP3.　オプションをお選びください。　※任意</p>
             <div class="selection-group">
-                <input id="corn" type="checkbox" name="option" value="コーン ￥50" onclick="total_fee()">
+                <input id="corn" type="checkbox" name="option" value="コーン ￥50" onclick="total_fee();">
                 <label for="corn">
                     <img src="{% static 'img/コーン_ダミー.png' %}">
                     <p>コーン</p>
                     <p>￥50</p>
                 </label>
-                <input id="dryice" type="checkbox" name="option" value="ドライアイス ￥50" onclick="total_fee()">
+                <input id="dryice" type="checkbox" name="option" value="ドライアイス ￥50" onclick="total_fee();">
                 <label for="dryice">
                     <img src="{% static 'img/ドライアイス_ダミー.png' %}">
                     <p>ドライアイス</p>
@@ -96,12 +96,12 @@
                 <p>ご注文内容</p>
                 <div id="posts">
                     {% for cart in cart_data %}
-                        <div class="order_cart">
+                        <div id="order{{ cart.id }}">
                             <div class="d-flex justify-content-between">
                                 <span>{{ cart.size_title }}</span>
                                 <div>
                                     <span class="mr-2">{{ cart.size_price }}</span>
-                                    <span class="order_delete" onclick="del_order()">✕</span>
+                                    <span id="{{ cart.id }}" onclick="delOrder(this);">✕</span>
                                 </div>
                             </div>
                             <div class="text-left">
@@ -367,7 +367,7 @@
             const element2  = Object.assign(document.createElement('span'), { textContent: response.size_title });
             const element3  = Object.assign(document.createElement('div'));
             const element4  = Object.assign(document.createElement('span'), { className: 'mr-2', textContent: response.size_price });
-            const element5  = Object.assign(document.createElement('span'), { className: 'order_delete', textContent: '✕' });
+            const element5  = Object.assign(document.createElement('span'), { id: response.cart_id, textContent: '✕' });
             const element6  = Object.assign(document.createElement('div'), { className: 'text-left'});
             const element7  = Object.assign(document.createElement('span'), { textContent: response.flavor_title });
             const element8  = Object.assign(document.createElement('div'), { className: 'text-left'});
@@ -379,7 +379,7 @@
             const element14  = Object.assign(document.createElement('span'), { textContent: response.option_title_2 });
             const element15  = Object.assign(document.createElement('span'), { className: 'mr-4', textContent: response.option_price_2 });
             const element16  = Object.assign(document.createElement('hr'));
-            const element17  = Object.assign(document.createElement('div'), { className: 'order_cart'});
+            const element17  = Object.assign(document.createElement('div'), { id: 'order' + response.cart_id });
             // 階層に合わせて要素をまとめる
             element.appendChild(element2);
             element3.appendChild(element4);
@@ -399,92 +399,57 @@
             element17.appendChild(element16);
             // 最後に追加
             postArea.insertBefore(element17, postArea.lastChild.nextSibling);
+            
             // 仮の合計値も変更
             const totalArea = document.getElementById('total');
             totalArea.textContent = response.get_total_price;
+
+            // 削除ボタンにonclickを付与
+            // let cart_id = response.cart_id
+            let id = document.getElementById(response.cart_id);
+            id.setAttribute('onclick', 'delOrder(this);');
         }).catch(error => {
             console.log(error);
         });
-
-        // 追加注文された0.1秒後にorder_deleteを取得
-        // 削除機能を設定
-        window.setTimeout(() => {
-            // 注文アイテムをすべて取得
-            let deleteOrder = document.querySelectorAll('.order_delete');
-            console.log(deleteOrder)
-            // 注文アイテムすべてに以下の要素を追加
-            for ( let i = 0; i < deleteOrder.length; i++ ) {
-                // 削除クリックで発動
-                deleteOrder[i].addEventListener('click', () => {
-                    console.log(i)
-                    const url = '{% url "delete_order" %}';
-                    const total_price = document.getElementById('total_price');
-                    // URLのクエリパラメータを管理
-                    const body = new URLSearchParams();
-                    body.append('index', i);
-
-                    fetch(url, {
-                        method: 'POST',
-                        body: body,
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
-                            'X-CSRFToken': csrftoken,
-                        }
-                    }).then(response => {
-                        // JSON形式に変換
-                        return response.json();
-                    }).then(response => {
-                        // 合計値を削除後の金額に変更
-                        total_price.textContent = response.get_total_price.toLocaleString();
-                        // 仮の合計値も削除後の金額に変更
-                        const totalArea = document.getElementById('total');
-                        totalArea.textContent = response.get_total_price;
-                        // HTMLからクリックされた注文アイテムを削除
-                        const cart = document.getElementsByClassName('order_cart');
-                        cart[i].remove();
-                    }).catch(error => {
-                        console.log(error);
-                    });
-                });
-            }
-        }, 100);
     });
 
-    // リロードに対応
-    const del_order = () => {
-        const deleteOrder = document.getElementsByClassName('order_delete');
-        for ( let i = 0; i < deleteOrder.length; i++ ) {
-            deleteOrder[i].addEventListener('click', () => {
-                const url = '{% url "delete_order" %}';
-                const total_price = document.getElementById('total_price');
-                // URLのクエリパラメータを管理
-                const body = new URLSearchParams();
-                body.append('num', i);
 
-                fetch(url, {
-                    method: 'POST',
-                    body: body,
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
-                        'X-CSRFToken': csrftoken,
-                    }
-                }).then(response => {
-                    // JSON形式に変換
-                    return response.json();
-                }).then(response => {
-                    // 合計値を削除後の金額に変更
-                    total_price.textContent = response.get_total_price.toLocaleString();
-                    // 仮の合計値も削除後の金額に変更
-                    const totalArea = document.getElementById('total');
-                    totalArea.textContent = response.get_total_price;
+    // カート注文の削除をクリックで発動
+    const delOrder = (ele) => {
+        let id_value = ele.id;
+        console.log(id_value);
 
-                    const cart = document.getElementsByClassName('order_cart');
-                    cart[i].style.display = 'none';
-                }).catch(error => {
-                    console.log(error);
-                });
-            });
-        }
+        const url = '{% url "delete_order" %}';
+        const total_price = document.getElementById('total_price');
+        // URLのクエリパラメータを管理
+        const body = new URLSearchParams();
+        body.append('id_value', id_value);
+
+        fetch(url, {
+            method: 'POST',
+            body: body,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
+                'X-CSRFToken': csrftoken,
+            }
+        }).then(response => {
+            // JSON形式に変換
+            return response.json();
+        }).then(response => {
+            // 合計値を削除後の金額に変更
+            total_price.textContent = response.get_total_price.toLocaleString();
+
+            // 仮の合計値も削除後の金額に変更
+            const totalArea = document.getElementById('total');
+            totalArea.textContent = response.get_total_price;
+
+            // HTMLからクリックされた注文アイテムを削除
+            let cart = document.getElementById('order' + id_value);
+            console.log(cart)
+            cart.remove();
+        }).catch(error => {
+            console.log(error);
+        });
     }
 </script>
 {% endblock %}

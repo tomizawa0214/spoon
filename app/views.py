@@ -15,10 +15,14 @@ class OrderView(View):
             get_total_price = Cart.objects.order_by("id").last().total_price
         else:
             get_total_price = 0
+        
+        # 最新レコードのidを取得
+        cart_id = Cart.objects.values_list('id', flat=True).last()
 
         return render(request, 'app/order.html', {
             'cart_data': cart_data,
             'get_total_price': get_total_price,
+            'cart_id': cart_id,
         })
 
 class AddOrderView(View):
@@ -48,8 +52,10 @@ class AddOrderView(View):
         cart.total_price = total_price
         cart.save()
 
-        # 最新の合計金額を取得。初期値は0
-        get_total_price = Cart.objects.order_by("id").last().total_price
+        # 最新の合計金額を取得
+        get_total_price = Cart.objects.order_by('id').last().total_price
+        # 最新レコードのidを取得
+        cart_id = Cart.objects.values_list('id', flat=True).last()
 
         data = {
             'size_title': size_title,
@@ -62,18 +68,16 @@ class AddOrderView(View):
             'option_price_2': option_price_2,
             'total_price': total_price,
             'get_total_price': get_total_price,
+            'cart_id': cart_id,
         }
         return JsonResponse(data)
 
 
 class DeleteOrderView(View):
     def post(self, request, *args, **kwargs):
-        index = request.POST.get('index')
-        print(index)
+        id_value = request.POST.get('id_value')
 
-        cart_id = Cart.objects.values_list('id', flat=True) # レコードのidを調べる
-        del_id = cart_id[int(index)] # 削除するレコードのidを取得
-        del_record = Cart.objects.filter(pk=del_id) # 削除するレコードを取得
+        del_record = Cart.objects.filter(pk=id_value) # 削除するレコードを取得
         size_price = del_record.values_list('size_price', flat=True)[0] # 削除するレコードのサイズ金額を取得
         option_price = del_record.values_list('option_price', flat=True)[0]  # 削除するレコードのオプション金額を取得
         option_price_2 = del_record.values_list('option_price_2', flat=True)[0] # 削除するレコードのオプション金額を取得
@@ -97,6 +101,7 @@ class DeleteOrderView(View):
         # 指定レコードを削除
         del_record.delete()
 
+        # 最新レコードの合計値を取得
         get_total_price = cart_latest.total_price
 
         data = {
