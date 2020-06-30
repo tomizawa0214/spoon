@@ -16,6 +16,7 @@
     <div class="row">
         <div class="col-9">
             <p>STEP1.　ジェラートのサイズをお選びください。</p>
+            <p id="size_error" class="d-none"></p>
             <div class="selection-group">
                 {% csrf_token %}
                 <input id="mini_size" type="radio" name="size" value="ミニサイズ ￥280" onclick="total_fee();" onchange="initialization();">

@@ -93,16 +93,15 @@ class DeleteOrderView(View):
         else:
             option_price_2 = int(option_price_2[1:])
 
+
         # 最新レコードの合計値から削除分の金額を引いて更新
         cart_latest = Cart.objects.order_by("id").last()
-        cart_latest.total_price -= size_price - option_price - option_price_2
+        get_total_price = cart_latest.total_price
+        get_total_price -= size_price + option_price + option_price_2
         cart_latest.save()
 
         # 指定レコードを削除
         del_record.delete()
-
-        # 最新レコードの合計値を取得
-        get_total_price = cart_latest.total_price
 
         data = {
             'get_total_price': get_total_price,
