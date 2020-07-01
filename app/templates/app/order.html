@@ -162,6 +162,8 @@
     // エラーフィールドを取得
     const size_error = document.getElementById('size_error');
     const flavor_error = document.getElementById('flavor_error');
+    // 登録フィールドを取得
+    const postArea = document.getElementById('posts')
 
 
     // フレーバー選択とオプション選択を無効化しておく
@@ -261,9 +263,9 @@
             }
         }
         // 非同期通信状態かリロードされたかを判定
-        if ( total.textContent == 0 && '{{ get_total_price }}' > 0 ) {
+        if ( total.textContent == 0 && postArea.children.length == 0 ) {
             total_price.textContent = size_total + option_total;
-        } else if ( total.textContent == 0 ) {
+        } else if ( total.textContent == 0 && '{{ get_total_price }}' > 0 ) {
             // データベースから最新の合計値を取得して足す
             let total_fee = Number('{{ get_total_price }}') + size_total + option_total;
             total_price.textContent = total_fee.toLocaleString();
@@ -349,7 +351,6 @@
             // 仮の合計金額を初期化
             total.textContent = '';
             // 追加するエレメント
-            const postArea = document.getElementById('posts');
             const element  = Object.assign(document.createElement('div'), { className: 'd-flex justify-content-between'});
             const element2  = Object.assign(document.createElement('span'), { textContent: response.size_title });
             const element3  = Object.assign(document.createElement('div'));
@@ -402,12 +403,11 @@
     // 次ページに遷移する前にエラーチェック
     const nextOrder = document.getElementById('order_next');
     const nextOrder_2 = document.getElementById('order_next_2');
-    const postArea = document.getElementById('posts');
 
     const next = (next) => {
         next.addEventListener('click', e => {
             // サイズが選択されてない場合のエラーを出力
-            if ( size_title.textContent == '' && total_price.textContent < 280 ) {
+            if ( size_title.textContent == '' && postArea.children.length == 0 ) {
                 e.preventDefault(); // ページ遷移をキャンセル
                 size_error.className = 'd-block';
                 size_error.style.color = 'red';
@@ -418,7 +418,7 @@
                 flavor_error.className = 'd-block';
                 flavor_error.style.color = 'red';
                 flavor_error.innerHTML = '※ミニサイズ・シングルサイズの場合はフレーバーを1つ選択してください<br>※ダブルサイズの場合はフレーバーを2つ選択してください';
-            } else {
+            } else if ( size_title.textContent != '' && flavor_title.textContent != '' ) {
                 cartRegi();
             }
         });
