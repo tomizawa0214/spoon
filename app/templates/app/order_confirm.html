@@ -20,7 +20,8 @@
   </tr> -->
 </table>
 <div class="button mx-auto">
-  <input type="button" value="戻る" onClick="javascript:history.go(-1);">
+  <!-- <input type="button" value="戻る" onClick="javascript:history.go(-1);"> -->
+  <button type="button" onclick=history.back()>戻る</button>
   <a href="{% url 'order_thanks' %}" class="btn btn-lg btn-warning btn-block">注文</a>
 </div>
 {% endblock %}
