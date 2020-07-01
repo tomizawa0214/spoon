@@ -112,6 +112,11 @@ class DeleteOrderView(View):
         return JsonResponse(data)
 
 
+class OrdererView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'app/orderer.html', {
+            })
+
 
 # class OrderView(View):
 #     def get(self, request, *args, **kwargs):

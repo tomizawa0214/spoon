@@ -72,22 +72,12 @@
                     <p>￥50</p>
                 </label>
             </div>
-            <!-- <p class="order-text">4.　ご注文様情報をご入力ください。</p>
-            <div class="mb-3">
-            {% render_field form.name class="form-control" placeholder="名前" %}
-            </div>
-            <div class="mb-3">
-                {% render_field form.email class="form-control" placeholder="メールアドレス" %}
-            </div>
-            <div class="mb-3">
-                {% render_field form.phone class="form-control" placeholder="電話番号" %}
-            </div> -->
             <div class="mb-3">
                 <form id="order_plus" method="POST">
                     {% csrf_token %}
                     <button class="btn btn-primary" type="submit">追加注文する</button>
                 </form>
-                <form method="POST">
+                <form id="order_next" method="POST" action="{% url 'orderer' %}">
                     {% csrf_token %}
                     <button class="btn btn-danger" type="submit">お支払いに進む</button>
                 </form>
@@ -146,12 +136,15 @@
                     <span id="total" class="d-none">0</span>
                     <span id="total_price">{{ get_total_price|intcomma }}</span>
                 </p>
-                <button class="btn btn-danger">お支払いに進む</button>
+                <form id="order_next_2" method="POST" action="{% url 'orderer' %}">
+                    <button class="btn btn-danger">お支払いに進む</button>
+                </form>
             </div>
         </div>
     </div>
 </div>
 {% endblock %}
+
 
 {% block extrajs %}
 <script>
@@ -298,6 +291,31 @@
             flavor_title_2.textContent = '';
         }
     }
+
+
+    // 次ページに遷移する前にエラーチェック
+    const nextOrder = document.getElementById('order_next');
+    const nextOrder_2 = document.getElementById('order_next_2');
+
+    const next = (next) => {
+        next.addEventListener('click', e => {
+            // サイズが選択されてない場合のエラーを出力
+            if ( size_title.textContent == '' ) {
+                e.preventDefault(); // ページ遷移をキャンセル
+                size_error.className = 'd-block';
+                size_error.style.color = 'red';
+                size_error.textContent = '※サイズを選択してください';
+            // フレーバーが選択されてない場合のエラーを出力
+            } else if ( flavor_title.textContent == '' ) {
+                e.preventDefault(); // ページ遷移をキャンセル
+                flavor_error.className = 'd-block';
+                flavor_error.style.color = 'red';
+                flavor_error.innerHTML = '※ミニサイズ・シングルサイズの場合はフレーバーを1つ選択してください<br>※ダブルサイズの場合はフレーバーを2つ選択してください';
+            }
+        });
+    }
+    next(nextOrder);
+    next(nextOrder_2);
 
 
     // CSRF対策
