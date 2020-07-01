@@ -1,0 +1,66 @@
+{% extends "app/base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}
+<title>注文画面 | spoon</title>
+{% endblock %}
+
+{% block content %}
+<div class="order-title">
+    <span>ORDER</span>
+</div>
+
+<div class="text-center">
+    <p class="order-text">ご注文様の情報とお受け取り希望日時をご入力ください。</p>
+    <form id="order_next" method="POST" url="{% url 'order_confirm' %}">
+        {% csrf_token %}
+        <table class="mx-auto">
+            <tr>
+                <th class="text-left pb-4">
+                    <label for="id_name">お名前</label>
+                </th>
+                <th class="pb-4">
+                    {% render_field form.name class="form-control" placeholder="高崎太郎" %}
+                </th>
+            </tr>
+            <tr>
+                <th class="text-left pr-3 pb-4">
+                    <label for="id_email">メールアドレス</label>
+                </th>
+                <th class="pb-4">
+                    {% render_field form.email class="form-control" placeholder="takasaki.taro@gmail.com" %}
+                </th>
+            </tr>
+            <tr>
+                <th class="text-left pb-4">
+                    <label for="id_phone">電話番号</label>
+                </th>
+                <th class="pb-4">
+                    {% render_field form.phone class="form-control" placeholder="08000000000" %}
+                </th>
+            </tr>
+            <tr>
+                <th class="text-left">
+                    <label for="">受取希望日時</label>
+                </th>
+                <th>
+                    {% render_field form.datetime class="form-control" %}
+                    <span>※営業時間外（18:00以降）にご注文の場合は翌日11:00以降のお受け取りとなります</span>
+                </th>
+            </tr>
+        </table>
+        <div class="mt-5">
+            <a class="btn btn-primary" href="{% url 'order' %}">戻る</a>
+            <button class="btn btn-danger" type="submit">注文確認画面へ</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+
+{% block extrajs %}
+<script>
+    'use strict';
+</script>
+{% endblock %}

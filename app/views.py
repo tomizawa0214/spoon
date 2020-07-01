@@ -1,6 +1,6 @@
 from django.views.generic import View
 from django.shortcuts import render, redirect
-# from .forms import OrderForm
+from .forms import OrderUserForm
 from .models import Cart, Size, Flavor, Option, Item
 # from django.conf import settings
 # from django.core.mail import BadHeaderError, EmailMessage
@@ -112,10 +112,28 @@ class DeleteOrderView(View):
         return JsonResponse(data)
 
 
-class OrdererView(View):
+class OrderUserView(View):
     def get(self, request, *args, **kwargs):
-        return render(request, 'app/orderer.html', {
-            })
+        form = OrderUserForm(request.POST or None)
+
+        return render(request, 'app/order_user.html', {
+            'form': form
+        })
+
+    def post(self, request, *args, **kwargs):
+        form = OrderUserForm(request.POST or None)
+
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            phone = form.cleaned_data['phone']
+            datetime = form.cleaned_data['datetime']
+
+            return redirect('order_confirm')
+
+        return render(request, 'app/order_user.html', {
+            'form': form
+        })
 
 
 # class OrderView(View):

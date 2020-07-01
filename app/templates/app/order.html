@@ -73,7 +73,7 @@
             </div>
             <div class="mb-3">
                 <a id="order_plus" class="btn btn-primary">追加注文する</a>
-                <a id="order_next" class="btn btn-danger" href="{% url 'orderer' %}">ご注文手続きへ</a>
+                <a id="order_next" class="btn btn-danger" href="{% url 'order_user' %}">ご注文手続きへ</a>
             </div>
         </div>
         <div class="col-3">
@@ -129,7 +129,7 @@
                     <span id="total" class="d-none">0</span>
                     <span id="total_price">{{ get_total_price|intcomma }}</span>
                 </p>
-                <a id="order_next_2" class="btn btn-danger" href="{% url 'orderer' %}">ご注文手続きへ</a>
+                <a id="order_next_2" class="btn btn-danger" href="{% url 'order_user' %}">ご注文手続きへ</a>
             </div>
         </div>
     </div>
