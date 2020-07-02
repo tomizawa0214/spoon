@@ -1,9 +1,6 @@
 .login-title {
   @include sectionTitle;
   margin: 0 15px 30px;
-  &:after {
-    max-width: 500px;
-  }
 }
 
 .login {

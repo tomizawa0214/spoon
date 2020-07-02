@@ -1,19 +1,36 @@
 from django import forms
 from allauth.account.forms import SignupForm
 
+
+GENDER_CHOICES = (
+    ('1', '女性'),
+    ('2', '男性'),
+)
 class SignupUserForm(SignupForm):
-    first_name = forms.CharField(max_length=30, label='姓')
-    last_name = forms.CharField(max_length=30, label='名')
+    name = forms.CharField(max_length=30, label='お名前')
+    furigana = forms.CharField(max_length=30, label='フリガナ')
+    # email = forms.EmailField(min_length=7, max_length=256, label='メールアドレス')
+    tel = forms.CharField(min_length=10, max_length=13, label='電話番号')
+    gender = forms.ChoiceField(widget=forms.CheckboxSelectMultiple, choices=GENDER_CHOICES, required=False, label='性別')
+    birthday = forms.DateField(input_formats=['%Y/%m/%d'], required=False, label='誕生日')
+    # password = forms.CharField(widget=forms.PasswordInput(), min_length=6, max_length=20, label='パスワード')
+    # password2 = forms.CharField(widget=forms.PasswordInput(), min_length=6, max_length=20, label='パスワード（確認用）')
 
     def save(self, request):
         user = super(SignupUserForm, self).save(request)
-        user.first_name = self.cleaned_data['first_name']
-        user.last_name = self.cleaned_data['last_name']
+        user.name = self.cleaned_data['name']
+        user.furigana = self.cleaned_data['furigana']
+        # user.email = self.cleaned_data['email']
+        user.tel = self.cleaned_data['tel']
+        user.gender = self.cleaned_data['gender']
+        user.birthday = self.cleaned_data['birthday']
+        # user.password = self.cleaned_data['password']
+        # user.password2 = self.cleaned_data['password2']
         user.save()
         return user
 
 class ProfileForm(forms.Form):
-    first_name = forms.CharField(max_length=30, label='姓')
-    last_name = forms.CharField(max_length=30, label='名')
-    address = forms.CharField(max_length=30, label='住所', required=False)
-    tel = forms.CharField(max_length=30, label='電話番号', required=False)
+    name = forms.CharField(max_length=30, label='お名前')
+    furigana = forms.CharField(max_length=30, label='フリガナ')
+    email = forms.EmailField(min_length=7, max_length=256, label='メールアドレス')
+    tel = forms.CharField(min_length=10, max_length=13, label='電話番号')

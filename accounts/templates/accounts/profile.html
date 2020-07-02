@@ -10,7 +10,11 @@
         <tbody>
             <tr>
                 <th>お名前</th>
-                <td>{{ user_data.name }} 様</td>
+                <td>{{ user_data.name }}</td>
+            </tr>
+            <tr>
+                <th>フリガナ</th>
+                <td>{{ user_data.furigana }}</td>
             </tr>
             <tr>
                 <th>メールアドレス</th>
@@ -22,7 +26,7 @@
             </tr>
             <tr>
                 <th>性別</th>
-                <td>{{ user_data.gender }}</td>
+                <td>{{ user_data.get_gender_display }}</td>
             </tr>
             <tr>
                 <th>誕生日</th>
@@ -30,6 +34,8 @@
             </tr>
         </tbody>
     </table>
+    <p class="text-left">パスワードの変更手続きはこちら</p>
+    <p class="text-left">会員サービスの退会手続きはこちら</p>
     <a class="btn rounded-pill" href="{% url 'profile_edit' %}" ontouchstart="">
         <i class="fas fa-user-edit fa-fw" aria-hidden="true"></i>編集
     </a>

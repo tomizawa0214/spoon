@@ -6,7 +6,7 @@ from datetime import datetime, date, timedelta, time
 class OrderUserForm(forms.Form):
     name = forms.CharField(max_length=30, label='お名前')
     email = forms.EmailField(min_length=7, max_length=256, label='メールアドレス')
-    phone = forms.CharField(min_length=10, max_length=11, label='電話番号')
+    phone = forms.CharField(min_length=10, max_length=13, label='電話番号')
     receipt = forms.DateTimeField(
         label='受取希望日時',
         widget=forms.DateTimeInput(attrs={'type': 'datetime-local', 'value': timezone.datetime.now().strftime('%Y-%m-%dT%H:%M')}),

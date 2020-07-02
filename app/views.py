@@ -1,4 +1,5 @@
 from django.views.generic import View
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from .forms import OrderUserForm
 from .models import Cart, Size, Flavor, Option, Item
@@ -7,7 +8,8 @@ from .models import Cart, Size, Flavor, Option, Item
 from django.http import JsonResponse, HttpResponse
 # import textwrap
 
-class OrderView(View):
+
+class OrderView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         cart_data = Cart.objects.all()
         # 最新の合計金額を取得。初期値は0
@@ -25,7 +27,7 @@ class OrderView(View):
             'cart_id': cart_id,
         })
 
-class AddOrderView(View):
+class AddOrderView(LoginRequiredMixin, View):
     def post(self, request, *args, **kwargs):
         size_title = request.POST.get('size_title')
         size_price = request.POST.get('size_price')
@@ -73,7 +75,7 @@ class AddOrderView(View):
         return JsonResponse(data)
 
 
-class DeleteOrderView(View):
+class DeleteOrderView(LoginRequiredMixin, View):
     def post(self, request, *args, **kwargs):
         id_value = request.POST.get('id_value')
 
@@ -112,7 +114,7 @@ class DeleteOrderView(View):
         return JsonResponse(data)
 
 
-class OrderUserView(View):
+class OrderUserView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         form = OrderUserForm(request.POST or None)
 

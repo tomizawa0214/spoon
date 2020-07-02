@@ -1066,10 +1066,6 @@ label img {
   background: #333;
 }
 
-.login-title:after {
-  max-width: 500px;
-}
-
 .login {
   max-width: 500px;
   margin: 0 auto;
@@ -1117,6 +1113,36 @@ label img {
 
 .login__form button i {
   margin: 0 8px 0 0;
+}
+
+.logout-title {
+  position: relative;
+  margin: 0 0 30px;
+  text-align: center;
+  letter-spacing: 3px;
+  font-size: 20px;
+  margin: 0 15px 30px;
+}
+
+.logout-title span {
+  position: relative;
+  display: inline-block;
+  z-index: 1;
+  padding: 0 15px;
+  background: #fff;
+}
+
+.logout-title:after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  display: block;
+  width: 100%;
+  height: 1px;
+  content: '';
+  background: #333;
 }
 
 .logout {
@@ -1193,12 +1219,8 @@ label img {
   background: #333;
 }
 
-.signup-title:after {
-  max-width: 500px;
-}
-
 .signup {
-  max-width: 500px;
+  max-width: 800px;
   margin: 0 auto;
   padding: 0;
 }

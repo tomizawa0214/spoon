@@ -5,9 +5,11 @@ from accounts.forms import ProfileForm, SignupUserForm
 from django.shortcuts import render, redirect
 from allauth.account import views
 
+
 class SignupView(views.SignupView):
     template_name = 'accounts/signup.html'
     form_class = SignupUserForm
+
 
 class LogoutView(views.LogoutView):
     template_name = 'accounts/logout.html'
@@ -17,8 +19,10 @@ class LogoutView(views.LogoutView):
             self.logout()
         return redirect('/')
 
+
 class LoginView(views.LoginView):
     template_name = 'accounts/login.html'
+
 
 class ProfileEditView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
@@ -26,31 +30,33 @@ class ProfileEditView(LoginRequiredMixin, View):
         form = ProfileForm(
             request.POST or None,
             initial={
-                'first_name': user_data.first_name,
-                'last_name': user_data.last_name,
-                'address': user_data.address,
+                'name': user_data.name,
+                'furigana': user_data.furigana,
+                'email': user_data.email,
                 'tel': user_data.tel
             }
         )
 
         return render(request, 'accounts/profile_edit.html', {
-            'form': form
+            'user_data': user_data,
+            'form': form,
         })
-  
+
     def post(self, request, *args, **kwargs):
         form = ProfileForm(request.POST or None)
         if form.is_valid():
             user_data = CustomUser.objects.get(id=request.user.id)
-            user_data.first_name = form.cleaned_data['first_name']
-            user_data.last_name = form.cleaned_data['last_name']
-            user_data.address = form.cleaned_data['address']
+            user_data.name = form.cleaned_data['name']
+            user_data.furigana = form.cleaned_data['furigana']
+            user_data.email = form.cleaned_data['email']
             user_data.tel = form.cleaned_data['tel']
             user_data.save()
             return redirect('profile')
 
-        return render(request, 'accounts/profile.html', {
-            'form': form
+        return render(request, 'accounts/profile_edit.html', {
+            'form': form,
         })
+
 
 class ProfileView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):

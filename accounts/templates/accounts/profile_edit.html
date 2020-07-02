@@ -12,22 +12,40 @@
         <table class="profile__table">
             <tbody>
                 <tr>
-                    <th>お名前<span>（姓・名）</span></th>
+                    <th>お名前</th>
                     <td>
-                        <div class="profile__table--name">
-                            {% render_field form.first_name class="form-control" placeholder="姓" %}
-                            {% render_field form.last_name class="form-control" placeholder="名" %}
-                        </div>
+                        {% render_field form.name class="form-control"%}
+                    </td>
+                </tr>
+                <tr>
+                    <th>フリガナ</th>
+                    <td>
+                        {% render_field form.furigana class="form-control"%}
+                    </td>
+                </tr>
+                <tr>
+                    <th>メールアドレス</th>
+                    <td>
+                        {% render_field form.email class="form-control"%}
                     </td>
                 </tr>
                 <tr>
                     <th>電話番号</th>
                     <td>
-                        {% render_field form.tel class="form-control" placeholder="電話番号" %}
+                        {% render_field form.tel class="form-control"%}
                     </td>
+                </tr>
+                <tr>
+                    <th>性別</th>
+                    <td>{{ user_data.get_gender_display }}</td>
+                </tr>
+                <tr>
+                    <th>誕生日</th>
+                    <td>{{ user_data.birthday }}</td>
                 </tr>
             </tbody>
         </table>
+        <p class="text-left">※性別・誕生日は変更できません。</p>
         <button class="btn rounded-pill" type="submit" ontouchstart="">
             <i class="fas fa-user-plus fa-fw" aria-hidden="true"></i>登録
         </button>
