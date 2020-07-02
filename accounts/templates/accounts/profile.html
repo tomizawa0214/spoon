@@ -10,7 +10,7 @@
         <tbody>
             <tr>
                 <th>お名前</th>
-                <td>{{ user_data.first_name }} {{ user_data.last_name }} 様</td>
+                <td>{{ user_data.name }} 様</td>
             </tr>
             <tr>
                 <th>メールアドレス</th>
@@ -19,6 +19,14 @@
             <tr>
                 <th>電話番号</th>
                 <td>{{ user_data.tel }}</td>
+            </tr>
+            <tr>
+                <th>性別</th>
+                <td>{{ user_data.gender }}</td>
+            </tr>
+            <tr>
+                <th>誕生日</th>
+                <td>{{ user_data.birthday }}</td>
             </tr>
         </tbody>
     </table>

@@ -3,6 +3,7 @@ from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import UserManager, PermissionsMixin
 from django.utils import timezone
 
+
 class UserManager(UserManager):
     def _create_user(self, email, password, **extra_fields):
         email = self.normalize_email(email)
@@ -27,13 +28,18 @@ class UserManager(UserManager):
 
         return self._create_user(email, password, **extra_fields)
 
+
+GENDER_CHOICES = (
+    ('1', '女性'),
+    ('2', '男性'),
+)
 class CustomUser(AbstractBaseUser, PermissionsMixin):
+    name = models.CharField('お名前', max_length=30)
+    furigana = models.CharField('フリガナ', max_length=30)
     email = models.EmailField('メールアドレス', unique=True)
-    first_name = models.CharField(('姓'), max_length=30)
-    last_name = models.CharField(('名'), max_length=30)
-    address = models.CharField(('住所'), max_length=30, blank=True)
-    tel = models.CharField(('電話番号'), max_length=30, blank=True)
-    created = models.DateTimeField(('入会日'), default=timezone.now)
+    tel = models.CharField('電話番号', max_length=13)
+    gender = models.CharField('性別', max_length=2, choices=GENDER_CHOICES, blank=True)
+    birthday = models.DateField('誕生日', null=True, blank=True)
 
     is_staff = models.BooleanField(
         ('staff status'),
@@ -62,4 +68,3 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     def clean(self):
         super().clean()
         self.email = self.__class__.objects.normalize_email(self.email)
-
