@@ -127,7 +127,7 @@ class OrderUserView(View):
             name = form.cleaned_data['name']
             email = form.cleaned_data['email']
             phone = form.cleaned_data['phone']
-            datetime = form.cleaned_data['datetime']
+            receipt = form.cleaned_data['datetime']
 
             return redirect('order_confirm')
 

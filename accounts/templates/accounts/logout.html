@@ -2,12 +2,12 @@
 
 {% block content %}
 <div class="logout col-12">
-  <p>ログアウトしますか？</p>
-  <form method="post">
-    {% csrf_token %}
-    <button type="submit" class="btn rounded-pill" ontouchstart="">
-      <i class="fas fa-sign-out-alt fa-fw" aria-hidden="true"></i>ログアウト
-    </button>
-  </form>
+    <p>ログアウトしますか？</p>
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn rounded-pill" ontouchstart="">
+            <i class="fas fa-sign-out-alt fa-fw" aria-hidden="true"></i>ログアウト
+        </button>
+    </form>
 </div>
 {% endblock %}

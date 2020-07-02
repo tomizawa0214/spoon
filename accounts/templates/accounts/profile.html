@@ -2,36 +2,28 @@
 
 {% block content %}
 <div class="profile-title">
-  <span>PROFILE</span>
+    <span>PROFILE</span>
 </div>
 
 <div class="profile">
-  <table class="profile__table">
-    <tbody>
-      <tr>
-        <th>お名前</th>
-        <td>{{ user_data.first_name }} {{ user_data.last_name }} 様</td>
-      </tr>
-      <tr>
-        <th>メールアドレス</th>
-        <td>{{ user_data.email }}</td>
-      </tr>
-      <!-- <tr>
-        <th class="header">住所</th>
-        <td class="data">{{ user_data.address }}</td>
-      </tr> -->
-      <tr>
-        <th>電話番号</th>
-        <td>{{ user_data.tel }}</td>
-      </tr>
-      <!-- <tr>
-        <th class="header">入会日</th>
-        <td class="data">{{ user_data.created }}</td>
-      </tr> -->
-    </tbody>
-  </table>
-  <a class="btn rounded-pill" href="{% url 'profile_edit' %}" ontouchstart="">
-    <i class="fas fa-user-edit fa-fw" aria-hidden="true"></i>編集
-  </a>
+    <table class="profile__table">
+        <tbody>
+            <tr>
+                <th>お名前</th>
+                <td>{{ user_data.first_name }} {{ user_data.last_name }} 様</td>
+            </tr>
+            <tr>
+                <th>メールアドレス</th>
+                <td>{{ user_data.email }}</td>
+            </tr>
+            <tr>
+                <th>電話番号</th>
+                <td>{{ user_data.tel }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <a class="btn rounded-pill" href="{% url 'profile_edit' %}" ontouchstart="">
+        <i class="fas fa-user-edit fa-fw" aria-hidden="true"></i>編集
+    </a>
 </div>
 {% endblock %}

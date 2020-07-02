@@ -3,41 +3,34 @@
 
 {% block content %}
 <div class="profile-title">
-  <span>PROFILE</span>
+    <span>PROFILE</span>
 </div>
 
 <div class="profile">
-    <form method="post">
-      {% csrf_token %}
-      <table class="profile__table">
-        <tbody>
-          <tr>
-            <th>お名前<span>（姓・名）</span></th>
-            <td>
-              <div class="profile__table--name">
-                {% render_field form.first_name class="form-control" placeholder="姓" %}
-                {% render_field form.last_name class="form-control" placeholder="名" %}
-              </div>
-            </td>
-          </tr>
-          <!-- <tr>
-            <th class="header">住所</th>
-            <td class="data">
-              {% render_field form.address class="form-control" placeholder="住所" %}
-            </td>
-          </tr> -->
-          <tr>
-            <th>電話番号</th>
-            <td>
-              {% render_field form.tel class="form-control" placeholder="電話番号" %}
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <button class="btn rounded-pill" type="submit" ontouchstart="">
-        <i class="fas fa-user-plus fa-fw" aria-hidden="true"></i>登録
-      </button>
+    <form method="POST">
+        {% csrf_token %}
+        <table class="profile__table">
+            <tbody>
+                <tr>
+                    <th>お名前<span>（姓・名）</span></th>
+                    <td>
+                        <div class="profile__table--name">
+                            {% render_field form.first_name class="form-control" placeholder="姓" %}
+                            {% render_field form.last_name class="form-control" placeholder="名" %}
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>電話番号</th>
+                    <td>
+                        {% render_field form.tel class="form-control" placeholder="電話番号" %}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <button class="btn rounded-pill" type="submit" ontouchstart="">
+            <i class="fas fa-user-plus fa-fw" aria-hidden="true"></i>登録
+        </button>
     </form>
-  </div>
 </div>
 {% endblock %}

@@ -3,30 +3,30 @@
 
 {% block content %}
 <div class="signup-title">
-  <span>SIGN UP</span>
+    <span>SIGN UP</span>
 </div>
 
 <div class="signup col-12">
-  <form method="post" class="login__form">
-    {% csrf_token %}
-    <div class="signup__form--item form-label-group">
-      <div class="signup__form--item--name">
-        {% render_field form.first_name class="form-control" placeholder="姓" %}
-        {% render_field form.last_name class="form-control" placeholder="名" %}
-      </div>
-    </div>
-    <div class="signup__form--item form-label-group">
-      {% render_field form.email class="form-control" placeholder="メールアドレス" %}
-    </div>
-    <div class="signup__form--item form-label-group">
-      {% render_field form.password1 class="form-control" placeholder="パスワード" %}
-    </div>
-    <div class="signup__form--item form-label-group">
-      {% render_field form.password2 class="form-control" placeholder="パスワード（確認用）" %}
-    </div>
-    <button type="submit" class="btn rounded-pill" ontouchstart="">
-      <i class="fas fa-user-plus" aria-hidden="true"></i>登録
-    </button>
-  </form>
+    <form method="POST" class="login__form">
+        {% csrf_token %}
+        <div class="signup__form--item form-label-group">
+            <div class="signup__form--item--name">
+                {% render_field form.first_name class="form-control" placeholder="姓" %}
+                {% render_field form.last_name class="form-control" placeholder="名" %}
+            </div>
+        </div>
+        <div class="signup__form--item form-label-group">
+            {% render_field form.email class="form-control" placeholder="メールアドレス" %}
+        </div>
+        <div class="signup__form--item form-label-group">
+            {% render_field form.password1 class="form-control" placeholder="パスワード" %}
+        </div>
+        <div class="signup__form--item form-label-group">
+            {% render_field form.password2 class="form-control" placeholder="パスワード（確認用）" %}
+        </div>
+        <button type="submit" class="btn rounded-pill" ontouchstart="">
+            <i class="fas fa-user-plus" aria-hidden="true"></i>登録
+        </button>
+    </form>
 </div>
 {% endblock %}
