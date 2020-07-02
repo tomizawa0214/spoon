@@ -42,16 +42,16 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     birthday = models.DateField('誕生日', null=True, blank=True)
 
     is_staff = models.BooleanField(
-        ('staff status'),
+        ('管理サイト使用権限'),
         default=False,
-        help_text=('Designates whether the user can log into this admin site.'),
+        help_text=('ユーザーがこの管理サイトにログインできるかどうかを指定します。'),
     )
     is_active = models.BooleanField(
-        ('active'),
+        ('アクティブ判定'),
         default=True,
         help_text=(
-            'Designates whether this user should be treated as active. '
-            'Unselect this instead of deleting accounts.'
+            'このユーザーをアクティブとして扱うかどうかを指定します。 '
+            'アカウントを削除する代わりに、これを選択解除します。'
         ),
     )
 
