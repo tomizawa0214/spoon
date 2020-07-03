@@ -13,15 +13,15 @@ class SignupUserForm(SignupForm):
     gender = forms.ChoiceField(widget=forms.RadioSelect, choices=GENDER_CHOICES, required=False, label='性別')
     birthday = forms.DateField(input_formats=['%Y/%m/%d'], required=False, label='誕生日')
 
-    def save(self, request):
-        user = super(SignupUserForm, self).save(request)
-        user.name = self.cleaned_data['name']
-        user.furigana = self.cleaned_data['furigana']
-        user.tel = self.cleaned_data['tel']
-        user.gender = self.cleaned_data['gender']
-        user.birthday = self.cleaned_data['birthday']
-        user.save()
-        return user
+    # def save(self, request):
+    #     user = super(SignupUserForm, self).save(request)
+    #     user.name = self.cleaned_data['name']
+    #     user.furigana = self.cleaned_data['furigana']
+    #     user.tel = self.cleaned_data['tel']
+    #     user.gender = self.cleaned_data['gender']
+    #     user.birthday = self.cleaned_data['birthday']
+    #     user.save()
+    #     return user
 
 
 class ProfileForm(forms.Form):

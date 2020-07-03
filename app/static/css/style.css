@@ -1276,6 +1276,13 @@ label img {
   margin: 0 8px 0 0;
 }
 
+.terms {
+  width: 500px;
+  height: 200px;
+  overflow-y: scroll;
+  border: 1px solid #ccc;
+}
+
 .profile-title {
   position: relative;
   margin: 0 0 30px;

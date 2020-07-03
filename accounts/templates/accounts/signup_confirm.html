@@ -1,0 +1,43 @@
+{% extends "app/base.html" %}
+
+{% block content %}
+<div class="signup-title">
+    <span>SIGN UP</span>
+</div>
+
+<div class="profile">
+    <table class="profile__table">
+        <tbody>
+            <tr>
+                <th>お名前</th>
+                <td>{{ name }}</td>
+            </tr>
+            <tr>
+                <th>フリガナ</th>
+                <td>{{ furigana }}</td>
+            </tr>
+            <tr>
+                <th>メールアドレス</th>
+                <td>{{ email }}</td>
+            </tr>
+            <tr>
+                <th>電話番号</th>
+                <td>{{ tel }}</td>
+            </tr>
+            <tr>
+                <th>性別</th>
+                <td>{{ get_gender_display }}</td>
+            </tr>
+            <tr>
+                <th>誕生日</th>
+                <td>{{ birthday }}</td>
+            </tr>
+            <tr>
+                <th>パスワード</th>
+                <td>{{ password }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <a class="btn rounded-pill" href="" ontouchstart="">登録</a>
+</div>
+{% endblock %}
