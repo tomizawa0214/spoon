@@ -6,36 +6,9 @@ from django.shortcuts import render, redirect
 from allauth.account import views
 
 
-# class SignupView(views.SignupView):
-#     template_name = 'accounts/signup.html'
-#     form_class = SignupUserForm
-class SignupView(View):
-    def get(self, request, *args, **kwargs):
-        form = SignupUserForm(request.POST or None)
-
-        return render(request, 'accounts/signup.html', {
-            'form': form,
-        })
-
-    def post(self, request, *args, **kwargs):
-        form = SignupUserForm(request.POST or None)
-
-        if form.is_valid():
-            user = super(SignupUserForm, self).save(request)
-            user.name = self.cleaned_data['name']
-            user.furigana = self.cleaned_data['furigana']
-            user.email = self.cleaned_data['email']
-            user.tel = self.cleaned_data['tel']
-            user.gender = self.cleaned_data['gender']
-            user.birthday = self.cleaned_data['birthday']
-            user.password1 = self.cleaned_data['password1']
-            user.password2 = self.cleaned_data['password2']
-            user.save()
-            return redirect('index')
-
-        return render(request, 'accounts/signup.html', {
-            'form': form,
-        })
+class SignupView(views.SignupView):
+    template_name = 'accounts/signup.html'
+    form_class = SignupUserForm
 
 
 class LogoutView(views.LogoutView):
