@@ -6,6 +6,7 @@
 </div>
 
 <div class="profile">
+    <p>以下の内容でよろしいでしょうか？</p>
     <table class="profile__table">
         <tbody>
             <tr>
@@ -26,7 +27,7 @@
             </tr>
             <tr>
                 <th>性別</th>
-                <td>{{ get_gender_display }}</td>
+                <td id="genderArea">{{ gender }}</td>
             </tr>
             <tr>
                 <th>誕生日</th>
@@ -34,10 +35,31 @@
             </tr>
             <tr>
                 <th>パスワード</th>
-                <td>{{ password }}</td>
+                <td id="pwArea"></td>
+                <!-- <td>{{ password }}</td> -->
             </tr>
         </tbody>
     </table>
+    <button type="button" onclick=history.back()>戻る</button>
     <a class="btn rounded-pill" href="" ontouchstart="">登録</a>
 </div>
+{% endblock %}
+
+{% block extrajs %}
+<script>
+    'use strict';
+
+    //性別を名前表示
+    const genderArea = document.getElementById('genderArea');
+    if ( '{{ gender }}' == 1 ) {
+        genderArea.textContent = '女性';
+    } else if ( '{{ gender }}' == 2 ) {
+        genderArea.textContent = '男性';
+    }
+
+    //パスワードをマスク表示
+    const pwArea = document.getElementById('pwArea');
+    pwArea.textContent = '*'.repeat('{{ password }}'.length);
+
+</script>
 {% endblock %}

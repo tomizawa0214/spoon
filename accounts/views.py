@@ -6,23 +6,26 @@ from django.shortcuts import render, redirect
 from allauth.account import views
 
 
-class SignupConfirmView(views):
+class SignupConfirmView(View):
     def post(self, request, *args, **kwargs):
         form = SignupUserForm(request.POST or None)
 
         if form.is_valid():
             name = form.cleaned_data['name']
             furigana = form.cleaned_data['furigana']
+            email = form.cleaned_data['email']
             tel = form.cleaned_data['tel']
             gender = form.cleaned_data['gender']
             birthday = form.cleaned_data['birthday']
-            # return redirect('account_signup_confirm')
+            password = form.cleaned_data['password1']
             return render(request, 'accounts/signup_confirm.html', {
                 'name': name,
                 'furigana': furigana,
+                'email': email,
                 'tel': tel,
                 'gender': gender,
                 'birthday': birthday,
+                'password': password,
             })
 
         return render(request, 'accounts/signup.html', {
@@ -33,28 +36,6 @@ class SignupConfirmView(views):
 class SignupView(views.SignupView):
     template_name = 'accounts/signup.html'
     form_class = SignupUserForm
-
-    # def post(self, request, *args, **kwargs):
-    #     form = SignupUserForm(request.POST or None)
-
-    #     if form.is_valid():
-    #         name = form.cleaned_data['name']
-    #         # furigana = form.cleaned_data['furigana']
-    #         # tel = form.cleaned_data['tel']
-    #         # gender = form.cleaned_data['gender']
-    #         # birthday = form.cleaned_data['birthday']
-    #         # return redirect('account_signup_confirm')
-    #         return render(request, 'accounts/signup_confirm.html', {
-    #             'name': name,
-    #             # 'furigana': furigana,
-    #             # 'tel': tel,
-    #             # 'gender': gender,
-    #             # 'birthday': birthday,
-    #         })
-
-    #     return render(request, 'accounts/signup.html', {
-    #         'form': form,
-    #     })
 
 
 class LogoutView(views.LogoutView):
