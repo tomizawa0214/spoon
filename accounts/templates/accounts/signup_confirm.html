@@ -27,11 +27,19 @@
             </tr>
             <tr>
                 <th>性別</th>
-                <td id="genderArea">{{ gender }}</td>
+                {% if gender == None %}
+                    <td></td>
+                {% else %}
+                    <td id="genderArea">{{ gender }}</td>
+                {% endif %}
             </tr>
             <tr>
                 <th>誕生日</th>
-                <td>{{ birthday }}</td>
+                {% if birthday == None %}
+                    <td></td>
+                {% else %}
+                    <td>{{ birthday }}</td>
+                {% endif %}
             </tr>
             <tr>
                 <th>パスワード</th>

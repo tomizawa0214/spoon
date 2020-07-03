@@ -58,8 +58,8 @@
                 <td class="text-right pr-3 pb-4">
                     <label>誕生日</label>
                 </td>
-                <td class="pb-4">
-                    {% render_field form.birthday class="form-control" %}
+                <td class="pb-4 d-flex">
+                        {% render_field form.birthday class="form-control" %}
                 </td>
             </tr>
             <tr>
@@ -109,6 +109,20 @@
     // スマホ用として電話番号の入力に数字キーボードを開く
     let tel = document.getElementById('tel').children;
     tel[0].setAttribute('type', 'tel');
+
+    // 誕生日に年月日追加
+    const year = document.getElementById('id_birthday_year');
+    const element = Object.assign(document.createElement('span'),{textContent: '年'});
+    year.parentNode.insertBefore(element, year.nextSibling);
+
+    const month = document.getElementById('id_birthday_month');
+    const element2 = Object.assign(document.createElement('span'),{textContent: '月'});
+    month.parentNode.insertBefore(element2, month.nextSibling);
+
+    const day = document.getElementById('id_birthday_day');
+    const element3 = Object.assign(document.createElement('span'),{textContent: '日'});
+    day.parentNode.insertBefore(element3, day.nextSibling);
+
     
     // パスワードのバリデーションを設定
     // let password = document.getElementById('password').children;

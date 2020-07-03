@@ -2,17 +2,28 @@ from django import forms
 from allauth.account.forms import SignupForm
 
 
-GENDER_CHOICES = (
-    ('1', '女性'),
-    ('2', '男性'),
-)
 class SignupUserForm(SignupForm):
     name = forms.CharField(max_length=30, label='お名前')
     furigana = forms.CharField(max_length=30, label='フリガナ')
     tel = forms.CharField(min_length=10, max_length=13, label='電話番号')
-    gender = forms.ChoiceField(widget=forms.RadioSelect, choices=GENDER_CHOICES, required=False, label='性別')
-    birthday = forms.DateField(input_formats=['%Y/%m/%d'], required=False, label='誕生日')
-
+    gender = forms.ChoiceField(
+        widget=forms.RadioSelect,
+        choices=(
+            ('1', '女性'),
+            ('2', '男性'),
+        ),
+        required=False,
+        label='性別'
+    )
+    # birthday = forms.DateField(input_formats=['%Y/%m/%d'], required=False, label='誕生日')
+    birthday = forms.DateField(
+        widget=forms.SelectDateWidget(
+            years=[y for y in range(1900, 2020)],
+            months={1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8, 9: 9, 10: 10, 11: 11, 12: 12},
+        ),
+        required=False,
+        label='誕生日'
+    )
     # def save(self, request):
     #     user = super(SignupUserForm, self).save(request)
     #     user.name = self.cleaned_data['name']
