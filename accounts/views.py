@@ -1,12 +1,73 @@
 from django.views import View
-from django.contrib.auth.mixins import LoginRequiredMixin
-from accounts.models import CustomUser
+# from accounts.models import CustomUser
 from accounts.forms import ProfileForm, SignupUserForm
 from django.shortcuts import render, redirect
 from allauth.account import views
 
+from django.conf import settings
+from django.contrib.auth import get_user_model
+from django.contrib.auth.mixins import LoginRequiredMixin
+# from django.contrib.auth.views import (
+#     LoginView, LogoutView
+# )
+from django.contrib.sites.shortcuts import get_current_site
+from django.core.signing import BadSignature, SignatureExpired, loads, dumps
+from django.http import Http404, HttpResponseBadRequest
+from django.template.loader import render_to_string
+# from django.views import generic
+
+
+User = get_user_model()
+
+
+class SignupCompleteView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'accounts/signup_complete.html')
+
+
+class SignupDoneView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'accounts/signup_done.html')
+
 
 class SignupConfirmView(View):
+    def post(self, request, *args, **kwargs):
+        user = User()
+        user.name = request.POST.get('name')
+        user.furigana = request.POST.get('furigana')
+        user.email = request.POST.get('email')
+        user.tel = request.POST.get('tel')
+        user.gender = request.POST.get('gender')
+
+        if request.POST.get('birthday') == 'None':
+            user.birthday = None
+        else:
+            user.birthday = request.POST.get('birthday')
+            
+        user.password = request.POST.get('password')
+        user.is_active = False
+        user.save()
+        
+        current_site = get_current_site(self.request)
+        domain = current_site.domain
+        context = {
+            'protocol': self.request.scheme,
+            'domain': domain,
+            'token': dumps(user.pk),
+            'user': user,
+        }
+
+        subject = render_to_string('accounts/mail_template/create_subject.txt', context)
+        message = render_to_string('accounts/mail_template/create_message.txt', context)
+
+        user.email_user(subject, message)
+        return redirect('account_signup_done')
+
+
+class SignupView(views.SignupView):
+    template_name = 'accounts/signup.html'
+    form_class = SignupUserForm
+
     def post(self, request, *args, **kwargs):
         form = SignupUserForm(request.POST or None)
 
@@ -18,6 +79,7 @@ class SignupConfirmView(View):
             gender = form.cleaned_data['gender']
             birthday = form.cleaned_data['birthday']
             password = form.cleaned_data['password1']
+
             return render(request, 'accounts/signup_confirm.html', {
                 'name': name,
                 'furigana': furigana,
@@ -31,11 +93,6 @@ class SignupConfirmView(View):
         return render(request, 'accounts/signup.html', {
             'form': form,
         })
-
-
-class SignupView(views.SignupView):
-    template_name = 'accounts/signup.html'
-    form_class = SignupUserForm
 
 
 class LogoutView(views.LogoutView):

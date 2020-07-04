@@ -1,7 +1,9 @@
 from django import forms
 from allauth.account.forms import SignupForm
 from .models import GENDER_CHOICES
+from django.contrib.auth import get_user_model
 import datetime
+User = get_user_model()
 
 class SignupUserForm(SignupForm):
     name = forms.CharField(max_length=30, label='お名前')
@@ -21,15 +23,12 @@ class SignupUserForm(SignupForm):
         required=False,
         label='誕生日'
     )
-    # def save(self, request):
-    #     user = super(SignupUserForm, self).save(request)
-    #     user.name = self.cleaned_data['name']
-    #     user.furigana = self.cleaned_data['furigana']
-    #     user.tel = self.cleaned_data['tel']
-    #     user.gender = self.cleaned_data['gender']
-    #     user.birthday = self.cleaned_data['birthday']
-    #     user.save()
-    #     return user
+
+    # 同じメールアドレスで仮登録段階のアカウントは削除（本登録忘れや入力間違いに対応）
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        User.objects.filter(email=email, is_active=False).delete()
+        return email
 
 
 class ProfileForm(forms.Form):

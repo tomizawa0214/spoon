@@ -44,11 +44,11 @@
         </tbody>
     </table>
     <button type="button" onclick=history.back()>戻る</button>
-    <a class="btn rounded-pill" href="{% url 'account_signup_done' %}">登録</a>
-    <!-- <form method="GET" action="{% url 'account_signup_done' %}">
+    <!-- <a id="signup_done" class="btn rounded-pill" href="{% url 'account_signup_done' %}">登録</a> -->
+    <form id="signup_done" action="{% url 'account_signup_done' %}">
         {% csrf_token %}
         <button type="submit" class="btn rounded-pill" ontouchstart="">登録</button>
-    </form> -->
+    </form>
 </div>
 {% endblock %}
 
@@ -64,5 +64,44 @@
         genderArea.textContent = '男性';
     }
 
+    // CSRF対策
+    const getCookie = name => {
+        if (document.cookie && document.cookie !== '') {
+            for (const cookie of document.cookie.split(';')) {
+                const [key, value] = cookie.trim().split('=');
+                if (key === name) {
+                    return decodeURIComponent(value);
+                }
+            }
+        }
+    };
+    const csrftoken = getCookie('csrftoken');
+
+    // 登録ボタンクリックで発動
+    document.getElementById('signup_done').addEventListener('submit', () => {
+        const url = '{% url "account_signup_confirm" %}';
+
+        // 誕生日をYYYY-MM-DD形式に変更
+        let birthday = '{{ birthday }}'.replace( /年/g, '-').replace( /月/g, '-').replace( /日/g, '');
+
+        // URLのクエリパラメータを管理
+        const body = new URLSearchParams();
+        body.append('name', '{{ name }}');
+        body.append('furigana', '{{ furigana }}');
+        body.append('email', '{{ email }}');
+        body.append('tel', '{{ tel }}');
+        body.append('gender', '{{ gender }}');
+        body.append('birthday', birthday);
+        body.append('password', '{{ password }}');
+
+        fetch(url, {
+            method: 'POST',
+            body: body,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
+                'X-CSRFToken': csrftoken,
+            }
+        })
+    });
 </script>
 {% endblock %}
