@@ -48,9 +48,7 @@
                     <label>性別</label>
                 </td>
                 <td class="pb-4">
-                    {% for gender_value in form.gender %}
-                        {{ gender_value }}
-                    {% endfor %}
+                    {% render_field form.gender class="form-control" %}
                 </td>
             </tr>
             <tr>
@@ -81,6 +79,13 @@
                 </td>
             </tr>
         </table>
+        {% if form.errors %}
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
         <p>以下の内容をご確認の上、ご同意いただける場合「規約に同意する」にチェックを入れてください</p>
         <div class="terms mx-auto text-left">
             <strong>第1条（本規約の適用範囲および変更）</strong><br>

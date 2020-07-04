@@ -1,5 +1,6 @@
 from django import forms
 from allauth.account.forms import SignupForm
+from .models import GENDER_CHOICES
 import datetime
 
 class SignupUserForm(SignupForm):
@@ -7,11 +8,8 @@ class SignupUserForm(SignupForm):
     furigana = forms.CharField(max_length=30, label='フリガナ')
     tel = forms.CharField(min_length=10, max_length=13, label='電話番号')
     gender = forms.ChoiceField(
-        widget=forms.RadioSelect,
-        choices=(
-            ('1', '女性'),
-            ('2', '男性'),
-        ),
+        widget=forms.Select,
+        choices=GENDER_CHOICES + (('', '---'),),
         required=False,
         label='性別'
     )
