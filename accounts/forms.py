@@ -1,6 +1,6 @@
 from django import forms
 from allauth.account.forms import SignupForm
-
+import datetime
 
 class SignupUserForm(SignupForm):
     name = forms.CharField(max_length=30, label='お名前')
@@ -15,10 +15,9 @@ class SignupUserForm(SignupForm):
         required=False,
         label='性別'
     )
-    # birthday = forms.DateField(input_formats=['%Y/%m/%d'], required=False, label='誕生日')
     birthday = forms.DateField(
         widget=forms.SelectDateWidget(
-            years=[y for y in range(1900, 2020)],
+            years=[y for y in range(datetime.datetime.now().year - 100, datetime.datetime.now().year)],
             months={1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8, 9: 9, 10: 10, 11: 11, 12: 12},
         ),
         required=False,
