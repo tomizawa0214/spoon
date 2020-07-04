@@ -51,7 +51,6 @@
                     {% for gender_value in form.gender %}
                         {{ gender_value }}
                     {% endfor %}
-                    <!-- {% render_field form.gender class="form-control" %} -->
                 </td>
             </tr>
             <tr>
@@ -69,7 +68,7 @@
                 <td class="pb-4">
                     {% render_field form.password1 class="form-control" placeholder="パスワード" %}
                     <!-- <span id="password">{% render_field form.password1 class="form-control" placeholder="パスワード" %}</span> -->
-                    <span>※6文字以上の半角英数字でご入力ください</span>
+                    <span>※10文字以上の半角英数字でご入力ください</span>
                 </td>
             </tr>
             <tr>
