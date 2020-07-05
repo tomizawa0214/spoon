@@ -1,27 +1,47 @@
 from django.views import View
-# from accounts.models import CustomUser
 from accounts.forms import ProfileForm, SignupUserForm
 from django.shortcuts import render, redirect
 from allauth.account import views
-
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
-# from django.contrib.auth.views import (
-#     LoginView, LogoutView
-# )
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.signing import BadSignature, SignatureExpired, loads, dumps
 from django.http import Http404, HttpResponseBadRequest
 from django.template.loader import render_to_string
-# from django.views import generic
-
-
 User = get_user_model()
 
 
 class SignupCompleteView(View):
     def get(self, request, *args, **kwargs):
+        # メール内URLアクセス後のユーザー本登録 60*60*24=1分×60×24=一日
+        timeout_seconds = getattr(settings, 'ACTIVATION_TIMEOUT_SECONDS', 60*60*24)
+        # tokenが正しければ本登録
+        token = kwargs.get('token')
+        try:
+            user_pk = loads(token, max_age=timeout_seconds)
+
+        # 期限切れの場合
+        except SignatureExpired:
+            return HttpResponseBadRequest()
+
+        # tokenが間違っている場合
+        except BadSignature:
+            return HttpResponseBadRequest()
+
+        # tokenは問題ない場合
+        else:
+            try:
+                user = User.objects.get(pk=user_pk)
+            # ユーザーが存在しない場合
+            except User.DoesNotExist:
+                return HttpResponseBadRequest()
+            else:
+                if not user.is_active:
+                    # 問題なければ本登録
+                    user.is_active = True
+                    user.save()
+        
         return render(request, 'accounts/signup_complete.html')
 
 
@@ -43,13 +63,14 @@ class SignupConfirmView(View):
             user.birthday = None
         else:
             user.birthday = request.POST.get('birthday')
-            
+
         user.password = request.POST.get('password')
         user.is_active = False
         user.save()
         
         current_site = get_current_site(self.request)
-        domain = current_site.domain
+        # domain = current_site.domain
+        domain = '127.0.0.1:8000'
         context = {
             'protocol': self.request.scheme,
             'domain': domain,
