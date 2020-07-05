@@ -1,6 +1,7 @@
 from django.views import View
 from accounts.forms import ProfileForm, SignupUserForm
 from django.shortcuts import render, redirect
+from accounts.models import CustomUser
 from allauth.account import views
 from django.conf import settings
 from django.contrib.auth import get_user_model
@@ -64,7 +65,7 @@ class SignupConfirmView(View):
         else:
             user.birthday = request.POST.get('birthday')
 
-        user.password = request.POST.get('password')
+        user.set_password(request.POST.get('password'))
         user.is_active = False
         user.save()
         
@@ -88,6 +89,9 @@ class SignupConfirmView(View):
 class SignupView(views.SignupView):
     template_name = 'accounts/signup.html'
     form_class = SignupUserForm
+
+    # def post(self, *args, **kwargs):
+    #     return redirect('account_signup_confirm')
 
     def post(self, request, *args, **kwargs):
         form = SignupUserForm(request.POST or None)
