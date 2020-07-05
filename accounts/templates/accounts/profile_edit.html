@@ -41,7 +41,7 @@
                 </tr>
                 <tr>
                     <th>誕生日</th>
-                    <td>{{ user_data.birthday }}</td>
+                    <td id="birthday">{{ user_data.birthday }}</td>
                 </tr>
             </tbody>
         </table>
@@ -51,4 +51,16 @@
         </button>
     </form>
 </div>
+{% endblock %}
+
+{% block extrajs %}
+<script>
+    'use strict';
+
+    // 誕生日がNoneの場合は空白表示
+    const birthday = document.getElementById('birthday');
+    if ( birthday.textContent == 'None') {
+        birthday.textContent = '';
+    }
+</script>
 {% endblock %}
