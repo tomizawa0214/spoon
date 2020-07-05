@@ -24,12 +24,6 @@ class SignupUserForm(SignupForm):
         label='誕生日'
     )
 
-    # 同じメールアドレスで仮登録段階のアカウントは削除（本登録忘れや入力間違いに対応）
-    def clean_email(self):
-        email = self.cleaned_data['email']
-        User.objects.filter(email=email, is_active=False).delete()
-        return email
-
 
 class ProfileForm(forms.Form):
     name = forms.CharField(max_length=30, label='お名前')

@@ -92,10 +92,13 @@ class SignupView(views.SignupView):
     def post(self, request, *args, **kwargs):
         form = SignupUserForm(request.POST or None)
 
+        # 同じメールアドレスで仮登録段階のアカウントは削除（本登録忘れや入力間違いに対応）
+        email = form.data['email']
+        User.objects.filter(email=email, is_active=False).delete()
+
         if form.is_valid():
             name = form.cleaned_data['name']
             furigana = form.cleaned_data['furigana']
-            email = form.cleaned_data['email']
             tel = form.cleaned_data['tel']
             gender = form.cleaned_data['gender']
             birthday = form.cleaned_data['birthday']
