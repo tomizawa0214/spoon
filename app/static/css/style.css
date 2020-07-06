@@ -1364,7 +1364,7 @@ label img {
   padding: 16px 24px;
 }
 
-.profile a, .profile button {
+.profile button {
   position: relative;
   width: 200px;
   margin-top: 20px;
@@ -1378,18 +1378,18 @@ label img {
   transition: .3s;
 }
 
-.profile a:hover, .profile button:hover {
+.profile button:hover {
   color: #fff;
   opacity: .7;
 }
 
-.profile a:active, .profile button:active {
+.profile button:active {
   top: 3px;
   -webkit-box-shadow: none;
           box-shadow: none;
 }
 
-.profile a i, .profile button i {
+.profile button i {
   margin: 0 8px 0 0;
 }
 

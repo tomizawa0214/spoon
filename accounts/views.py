@@ -5,13 +5,25 @@ from accounts.models import CustomUser
 from allauth.account import views
 from django.conf import settings
 from django.contrib.auth import get_user_model
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.views import PasswordChangeView, PasswordChangeDoneView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.signing import BadSignature, SignatureExpired, loads, dumps
 from django.http import Http404, HttpResponseBadRequest
 from django.template.loader import render_to_string
+from django.urls import reverse_lazy
 User = get_user_model()
 
+
+class PasswordChangeView(LoginRequiredMixin, PasswordChangeView):
+    template_name = 'accounts/password_change.html'
+    form_class = PasswordChangeForm
+    success_url = reverse_lazy('password_change_done')
+
+
+class PasswordChangeDoneView(LoginRequiredMixin, PasswordChangeDoneView):
+    template_name = 'accounts/password_change_done.html'
 
 class SignupCompleteView(View):
     def get(self, request, *args, **kwargs):
@@ -89,9 +101,6 @@ class SignupConfirmView(View):
 class SignupView(views.SignupView):
     template_name = 'accounts/signup.html'
     form_class = SignupUserForm
-
-    # def post(self, *args, **kwargs):
-    #     return redirect('account_signup_confirm')
 
     def post(self, request, *args, **kwargs):
         form = SignupUserForm(request.POST or None)

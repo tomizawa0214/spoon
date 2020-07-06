@@ -7,7 +7,7 @@
 </div>
 
 <div class="login col-12">
-    <p>アカウントをお持ちでない場合は、<span>こちら</span>から会員登録をお願いします</p>
+    <p>アカウントをお持ちでない場合は、<a href="{% url 'account_signup' %}">こちら</a>から会員登録をお願いします</p>
     <form method="POST" class="login__form">
         {% csrf_token %}
         <div class="login__form--item form-label-group">

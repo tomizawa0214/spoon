@@ -34,8 +34,8 @@
             </tr>
         </tbody>
     </table>
-    <p class="text-left">パスワードの変更手続きはこちら</p>
-    <p class="text-left">会員サービスの退会手続きはこちら</p>
+    <a class="text-left" href="{% url 'password_change' %}">パスワードの変更手続きはこちら</a><br>
+    <a class="text-left" href="">会員サービスの退会手続きはこちら</a><br>
     <a class="btn rounded-pill" href="{% url 'profile_edit' %}" ontouchstart="">
         <i class="fas fa-user-edit fa-fw" aria-hidden="true"></i>編集
     </a>
