@@ -2,8 +2,11 @@ from django.urls import path
 from accounts import views
 
 urlpatterns = [
+    path('email_change/', views.EmailChangeView.as_view(), name='email_change'),
+    path('email_change/done/', views.EmailChangeDoneView.as_view(), name='email_change_done'),
+    path('email_change/complete/<str:token>/', views.EmailChangeCompleteView.as_view(), name='email_change_complete'),
     path('password_reset/', views.PasswordResetView.as_view(), name='password_reset'),
-    path('password_reset/done', views.PasswordResetDoneView.as_view(), name='password_reset_done'),
+    path('password_reset/done/', views.PasswordResetDoneView.as_view(), name='password_reset_done'),
     path('password_reset/confirm/<uidb64>/<token>/', views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
     path('password_reset/complete/', views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
     path('password_change/', views.PasswordChangeView.as_view(), name='password_change'),

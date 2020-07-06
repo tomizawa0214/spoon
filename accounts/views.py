@@ -1,5 +1,5 @@
 from django.views import View
-from accounts.forms import ProfileForm, SignupUserForm
+from accounts.forms import ProfileForm, SignupUserForm, EmailChangeForm
 from django.shortcuts import render, redirect
 from accounts.models import CustomUser
 from allauth.account import views
@@ -9,12 +9,80 @@ from django.contrib.auth.forms import PasswordChangeForm, PasswordResetForm, Set
 from django.contrib.auth.views import PasswordChangeView, PasswordChangeDoneView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.sites.shortcuts import get_current_site
+from django.core.mail import send_mail
 from django.core.signing import BadSignature, SignatureExpired, loads, dumps
 from django.http import Http404, HttpResponseBadRequest
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy
 User = get_user_model()
 
+
+class EmailChangeView(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+        form = EmailChangeForm(request.POST or None)
+
+        return render(request, 'accounts/email_change.html', {
+            'form': form,
+        })
+
+    def post(self, request, *args, **kwargs):
+        form = EmailChangeForm(request.POST or None)
+
+        if form.is_valid():
+            user = self.request.user
+            new_email = form.cleaned_data['email']
+            # user.name = User.objects.filter(name=request.user.name)
+            
+            current_site = get_current_site(self.request)
+            # domain = current_site.domain
+            domain = '127.0.0.1:8000'
+            context = {
+                'protocol': 'https' if self.request.is_secure() else 'http',
+                'domain': domain,
+                'token': dumps(new_email),
+                'user': user,
+            }
+
+            subject = render_to_string('accounts/mail_template/email_change_subject.txt', context)
+            message = render_to_string('accounts/mail_template/email_change_message.txt', context)
+
+            send_mail(subject, message, None, [new_email])
+            return redirect('email_change_done')
+        
+        return render(request, 'accounts/email_change.html', {
+            'form': form,
+        })
+
+
+class EmailChangeDoneView(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'accounts/email_change_done.html')
+
+
+class EmailChangeCompleteView(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+        # メール内URLアクセス後のユーザー本登録 60*60*24=1分×60×24=一日
+        timeout_seconds = getattr(settings, 'ACTIVATION_TIMEOUT_SECONDS', 60*60*24)
+        # tokenが正しければ本登録
+        token = kwargs.get('token')
+        try:
+            new_email = loads(token, max_age=timeout_seconds)
+
+        # 期限切れの場合
+        except SignatureExpired:
+            return HttpResponseBadRequest()
+
+        # tokenが間違っている場合
+        except BadSignature:
+            return HttpResponseBadRequest()
+
+        # tokenは問題ない場合
+        else:
+            User.objects.filter(email=new_email, is_active=False).delete()
+            request.user.email = new_email
+            request.user.save()
+        
+        return render(request, 'accounts/email_change_complete.html')
 
 class PasswordResetView(PasswordResetView):
     subject_template_name = 'accounts/mail_template/password_reset_subject.txt'
@@ -46,6 +114,7 @@ class PasswordChangeView(LoginRequiredMixin, PasswordChangeView):
 
 class PasswordChangeDoneView(LoginRequiredMixin, PasswordChangeDoneView):
     template_name = 'accounts/password_change_done.html'
+
 
 class SignupCompleteView(View):
     def get(self, request, *args, **kwargs):

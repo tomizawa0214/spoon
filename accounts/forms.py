@@ -6,6 +6,16 @@ import datetime
 User = get_user_model()
 
 
+class EmailChangeForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('email',)
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        User.objects.filter(email=email, is_active=False).delete()
+        return email
+
 class SignupUserForm(SignupForm):
     name = forms.CharField(max_length=30, label='お名前')
     furigana = forms.CharField(max_length=30, label='フリガナ')

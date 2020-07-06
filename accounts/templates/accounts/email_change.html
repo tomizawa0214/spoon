@@ -3,18 +3,17 @@
 
 {% block content %}
 <div class="signup-title">
-    <span>PASSWORD RESET</span>
+    <span>EMAIL CHANGE</span>
 </div>
 
 <div class="login col-12">
-    <p class="text-center">メールを送信してパスワードの変更手続きを行います。<br>会員登録時のメールアドレスを入力して送信ボタンを押してください。</p>
-    <span>※メールが届かない場合は入力情報、メール設定をご確認ください。</span>
+    <p class="text-center">メールを送信してメールアドレスの変更手続きを行います。<br>下記にご希望の新しいメールアドレスをご入力ください。<br><span>※メールが届かない場合は入力情報、メール設定をご確認ください。</span></p>
     <form method="POST" class="login__form">
         {% csrf_token %}
         <table class="mx-auto">
             <tr>
                 <td class="pb-4">
-                    {% render_field form.email class="form-control" placeholder="会員登録時のメールアドレス" %}
+                    {% render_field form.email class="form-control" placeholder="新しいメールアドレス" %}
                 </td>
             </tr>
         </table>
