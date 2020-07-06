@@ -5,6 +5,7 @@ from django.contrib.auth import get_user_model
 import datetime
 User = get_user_model()
 
+
 class SignupUserForm(SignupForm):
     name = forms.CharField(max_length=30, label='お名前')
     furigana = forms.CharField(max_length=30, label='フリガナ')

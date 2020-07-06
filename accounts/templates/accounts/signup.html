@@ -8,7 +8,6 @@
 
 <div class="signup col-12">
     <p class="text-center">会員情報の登録を行います。<span>【必須】</span>の箇所は、必ず入力してください</p>
-    <!-- <form method="POST" class="login__form" action="{% url 'account_signup_confirm' %}"> -->
     <form method="POST" class="login__form">
         {% csrf_token %}
         <table class="mx-auto">
