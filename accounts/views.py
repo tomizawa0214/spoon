@@ -17,6 +17,26 @@ from django.urls import reverse_lazy
 User = get_user_model()
 
 
+class DeleteCompleteView(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+        user = self.request.user
+        subject = render_to_string('accounts/mail_template/delete_subject.txt', {'user': user})
+        message = render_to_string('accounts/mail_template/delete_message.txt', {'user': user})
+
+        send_mail(subject, message, None, [user.email])
+
+        # ログインしている現在のユーザーを削除
+        user = self.request.user
+        user.delete()
+
+        return render(request, 'accounts/delete_complete.html')
+
+
+class DeleteConfirmView(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'accounts/delete_confirm.html')
+
+
 class EmailChangeView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         form = EmailChangeForm(request.POST or None)
@@ -31,7 +51,6 @@ class EmailChangeView(LoginRequiredMixin, View):
         if form.is_valid():
             user = self.request.user
             new_email = form.cleaned_data['email']
-            # user.name = User.objects.filter(name=request.user.name)
             
             current_site = get_current_site(self.request)
             # domain = current_site.domain

@@ -2,6 +2,8 @@ from django.urls import path
 from accounts import views
 
 urlpatterns = [
+    path('delete/confirm', views.DeleteConfirmView.as_view(), name='delete_confirm'),
+    path('delete/complete', views.DeleteCompleteView.as_view(), name='delete_complete'),
     path('email_change/', views.EmailChangeView.as_view(), name='email_change'),
     path('email_change/done/', views.EmailChangeDoneView.as_view(), name='email_change_done'),
     path('email_change/complete/<str:token>/', views.EmailChangeCompleteView.as_view(), name='email_change_complete'),

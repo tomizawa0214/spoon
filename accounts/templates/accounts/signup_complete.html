@@ -5,7 +5,11 @@
     <span>SIGN UP</span>
 </div>
 
-<strong>本登録が完了しました</strong>
-<p>登録されたメールアドレスとパスワードでログインしてください。</p>
-<a class="btn rounded-pill" href="{% url 'account_login' %}">ログイン画面へ</a>
+<div class="text-center">
+    <strong class="text-center">本登録が完了しました</strong>
+    <p class="text-center">登録されたメールアドレスとパスワードでログインしてください。</p>
+</div>
+<div class="text-center">
+    <a class="btn rounded-pill" href="{% url 'account_login' %}">ログイン画面へ</a>
+</div>
 {% endblock %}

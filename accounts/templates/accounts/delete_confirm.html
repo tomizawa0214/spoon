@@ -1,0 +1,16 @@
+{% extends "app/base.html" %}
+
+{% block content %}
+<div class="signup-title">
+    <span>退会</span>
+</div>
+
+<div class="text-center">
+    <strong class="text-danger">退会手続きを実行します</strong>
+    <p class="text-center">退会されると会員情報は元に戻せません。本当によろしいですか？</p>
+</div>
+<div class="text-center">
+    <a href="{% url 'delete_complete' %}">はい、退会します</a><br>
+    <button type="button" onclick=history.back()>いいえ、退会しません</button>
+</div>
+{% endblock %}
