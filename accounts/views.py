@@ -5,8 +5,8 @@ from accounts.models import CustomUser
 from allauth.account import views
 from django.conf import settings
 from django.contrib.auth import get_user_model
-from django.contrib.auth.forms import PasswordChangeForm
-from django.contrib.auth.views import PasswordChangeView, PasswordChangeDoneView
+from django.contrib.auth.forms import PasswordChangeForm, PasswordResetForm, SetPasswordForm
+from django.contrib.auth.views import PasswordChangeView, PasswordChangeDoneView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.signing import BadSignature, SignatureExpired, loads, dumps
@@ -14,6 +14,28 @@ from django.http import Http404, HttpResponseBadRequest
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy
 User = get_user_model()
+
+
+class PasswordResetView(PasswordResetView):
+    subject_template_name = 'accounts/mail_template/password_reset_subject.txt'
+    email_template_name = 'accounts/mail_template/password_reset_message.txt'
+    template_name = 'accounts/password_reset_form.html'
+    form_class = PasswordResetForm
+    success_url = reverse_lazy('password_reset_done')
+
+
+class PasswordResetDoneView(PasswordResetDoneView):
+    template_name = 'accounts/password_reset_done.html'
+
+
+class PasswordResetConfirmView(PasswordResetConfirmView):
+    template_name = 'accounts/password_reset_confirm.html'
+    form_class = SetPasswordForm
+    success_url = reverse_lazy('password_reset_complete')
+
+
+class PasswordResetCompleteView(PasswordResetCompleteView):
+    template_name = 'accounts/password_reset_complete.html'
 
 
 class PasswordChangeView(LoginRequiredMixin, PasswordChangeView):
@@ -91,8 +113,8 @@ class SignupConfirmView(View):
             'user': user,
         }
 
-        subject = render_to_string('accounts/mail_template/create_subject.txt', context)
-        message = render_to_string('accounts/mail_template/create_message.txt', context)
+        subject = render_to_string('accounts/mail_template/signup_subject.txt', context)
+        message = render_to_string('accounts/mail_template/signup_message.txt', context)
 
         user.email_user(subject, message)
         return redirect('account_signup_done')

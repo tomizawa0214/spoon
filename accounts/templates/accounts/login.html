@@ -16,7 +16,9 @@
         <div class="login__form--item form-label-group">
             {% render_field form.password class="form-control" placeholder="パスワード" %}
         </div>
-        <p class="text-right">パスワードをお忘れの場合</p>
+        <div class="text-right">
+            <a href="{% url 'password_reset' %}">パスワードをお忘れの場合</a>
+        </div>
         <button type="submit" class="btn rounded-pill" ontouchstart="">
             <i class="fas fa-sign-in-alt fa-fw" aria-hidden="true"></i>ログイン
         </button>
