@@ -1,15 +1,14 @@
 from django.db import models
 
 
-# class OrderUser(models.Model):
-#     name = models.CharField('お名前', max_length=30)
-#     email = models.EmailField('メールアドレス', min_length=7, max_length=256)
-#     phone = models.CharField('電話番号', min_length=10, max_length=11)
-#     receipt = models.DateTimeField('受取希望日時', default=timezone.now)
+class OrderUser(models.Model):
+    name = models.CharField('お名前', max_length=30)
+    email = models.EmailField('メールアドレス', max_length=256, unique=True)
+    tel = models.CharField('電話番号', max_length=13)
+    receipt = models.DateTimeField('受取日時')
 
-#     def __str__(self):
-#         receipt = timezone.localtime(self.receipt).strftime('%Y/%m/%d %H:%M')
-#         return f'{self.name}{receipt}'
+    def __str__(self):
+        return self.name
 
 
 class Cart(models.Model):

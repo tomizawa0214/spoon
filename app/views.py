@@ -1,12 +1,54 @@
 from django.views.generic import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
-from .forms import OrderUserForm
+from .forms import ReceiptForm
 from .models import Cart, Size, Flavor, Option, Item
+from accounts.models import CustomUser
+from accounts.forms import ProfileForm
 # from django.conf import settings
 # from django.core.mail import BadHeaderError, EmailMessage
 from django.http import JsonResponse, HttpResponse
+import datetime
 # import textwrap
+
+
+class OrderUserView(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+        # ログインユーザーと紐づける
+        user_data = CustomUser.objects.get(id=request.user.id)
+        profile_form = ProfileForm(
+            request.POST or None,
+            initial={
+                'name': user_data.name,
+                'email': user_data.email,
+                'tel': user_data.tel
+            }
+        )
+
+        receipt_form = ReceiptForm(request.POST or None)
+
+        return render(request, 'app/order_user.html', {
+            'profile_form': profile_form,
+            'receipt_form': receipt_form,
+        })
+
+    def post(self, request, *args, **kwargs):
+        form = ProfileForm(request.POST or None)
+        receipt_form = ReceiptForm(request.POST or None)
+
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            tel = form.cleaned_data['tel']
+            if receipt_form.is_valid():
+                date = form.cleaned_data['date']
+
+                return redirect('order_confirm')
+
+        return render(request, 'app/order_user.html', {
+            'profile_form': profile_form,
+            'receipt_form': receipt_form,
+        })
 
 
 class OrderView(LoginRequiredMixin, View):
@@ -26,6 +68,7 @@ class OrderView(LoginRequiredMixin, View):
             'get_total_price': get_total_price,
             'cart_id': cart_id,
         })
+
 
 class AddOrderView(LoginRequiredMixin, View):
     def post(self, request, *args, **kwargs):
@@ -112,30 +155,6 @@ class DeleteOrderView(LoginRequiredMixin, View):
             'get_total_price': get_total_price,
         }
         return JsonResponse(data)
-
-
-class OrderUserView(LoginRequiredMixin, View):
-    def get(self, request, *args, **kwargs):
-        form = OrderUserForm(request.POST or None)
-
-        return render(request, 'app/order_user.html', {
-            'form': form
-        })
-
-    def post(self, request, *args, **kwargs):
-        form = OrderUserForm(request.POST or None)
-
-        if form.is_valid():
-            name = form.cleaned_data['name']
-            email = form.cleaned_data['email']
-            phone = form.cleaned_data['phone']
-            receipt = form.cleaned_data['datetime']
-
-            return redirect('order_confirm')
-
-        return render(request, 'app/order_user.html', {
-            'form': form
-        })
 
 
 # class OrderView(View):
