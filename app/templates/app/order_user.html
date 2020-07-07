@@ -46,10 +46,11 @@
                 </td>
                 <td class="d-flex">
                     {% render_field receipt_form.date class="form-control" %}
+                    {% render_field receipt_form.time class="form-control" %}
                 </td>
             </tr>
         </table>
-        <p>※営業時間外（18:00以降）にご注文の場合は翌日12:00以降のお受け取りとなります</p>
+        <p>※当日のご注文は17:29までとさせていただきます。17:30以降にご注文の場合は翌日12:00以降のお受け取りとなります</p>
         <div class="mt-5">
             <a class="btn btn-primary" href="{% url 'order' %}">戻る</a>
             <button class="btn btn-danger" type="submit">注文確認画面へ</button>
