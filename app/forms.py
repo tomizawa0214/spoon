@@ -66,19 +66,21 @@ if hour <  17 or ( hour == 17 and minute < 30 ):
     # 30分後の分単位が30より大きい場合
     if today_30.minute > 29:
         for j in range(today_30.hour, 19):
-            TIME_CHOICES.append(
-                (str(j) + ":" + "00",str(j) + ":" + "00")
-            )
+            if j != today_30.hour:
+                TIME_CHOICES.append(
+                    (str(j) + ":" + "00",str(j) + ":" + "00")
+                )
             if j < 18:
                 TIME_CHOICES.append(
                     (str(j) + ":" + "30",str(j) + ":" + "30")
                 )
 # 現在時刻が17:30以降の場合
 elif hour > 17 or ( hour == 17 and minute > 29 ):
-    for j in range(12, 19):
-        TIME_CHOICES.append(
-            (str(j) + ":" + "00",str(j) + ":" + "00")
-        )
+    for j in range(11, 19):
+        if j != 11:
+            TIME_CHOICES.append(
+                (str(j) + ":" + "00",str(j) + ":" + "00")
+            )
         if j < 18:
             TIME_CHOICES.append(
                 (str(j) + ":" + "30",str(j) + ":" + "30")
