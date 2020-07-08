@@ -1,11 +1,14 @@
 from django.db import models
+from django.utils import timezone
 
 
-class OrderUser(models.Model):
+class Order(models.Model):
     name = models.CharField('お名前', max_length=30)
+    furigana = models.CharField('フリガナ', max_length=30)
     email = models.EmailField('メールアドレス', max_length=256, unique=True)
     tel = models.CharField('電話番号', max_length=13)
     receipt = models.DateTimeField('受取日時')
+    created = models.DateTimeField('注文受付日', default=timezone.now)
 
     def __str__(self):
         return self.name
