@@ -22,13 +22,13 @@ def get_weeks(start_day):
     for i in range(7):
         if i == 0:
             DATE_CHOICES.append(
-                (str(days[i].month) + "月" + str(days[i].day) + "日" + (str(flag[days[i].weekday()])) + start_day,
-                str(days[i].month) + "月" + str(days[i].day) + "日" + (str(flag[days[i].weekday()])) + start_day)
+                (str(days[i].month) + "月" + str(days[i].day) + "日" + "(" + str(flag[days[i].weekday()]) + ")" + start_day,
+                str(days[i].month) + "月" + str(days[i].day) + "日" + "(" + str(flag[days[i].weekday()]) + ")" + start_day)
             )
         else:
             DATE_CHOICES.append(
-                (str(days[i].month) + "月" + str(days[i].day) + "日" + (str(flag[days[i].weekday()])),
-                str(days[i].month) + "月" + str(days[i].day) + "日" + (str(flag[days[i].weekday()])))
+                (str(days[i].month) + "月" + str(days[i].day) + "日" + "(" + str(flag[days[i].weekday()]) + ")",
+                str(days[i].month) + "月" + str(days[i].day) + "日" + "(" + str(flag[days[i].weekday()]) + ")" )
             )
 
 # 現在時刻が00:00～17:29
@@ -56,7 +56,7 @@ def get_times(start_time):
             )
 
 # 現在時刻が11:00～17:29
-if 11 < hour <  17 or ( hour == 17 and minute < 30 ):
+if 11 <= hour <  17 or ( hour == 17 and minute < 30 ):
     # 現在時刻から30分後
     today_30 = datetime.datetime.now() + datetime.timedelta(minutes=30)
     # 30分後の分単位が30より小さい場合

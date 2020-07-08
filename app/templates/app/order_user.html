@@ -13,7 +13,7 @@
 
 <div class="text-center">
     <p class="order-text">ご注文様の情報とお受け取り日時をご入力ください。</p>
-    <form id="order_next" method="POST" url="{% url 'order_confirm' %}">
+    <form method="POST">
         {% csrf_token %}
         <table class="mx-auto">
             <tr>
@@ -22,6 +22,14 @@
                 </td>
                 <td class="pb-4">
                     {% render_field profile_form.name class="form-control" %}
+                </td>
+            </tr>
+            <tr>
+                <td class="text-left pb-4">
+                    <label for="id_name">フリガナ</label>
+                </td>
+                <td class="pb-4">
+                    {% render_field profile_form.furigana class="form-control" %}
                 </td>
             </tr>
             <tr>
@@ -56,6 +64,13 @@
             <button class="btn btn-danger" type="submit">注文確認画面へ</button>
         </div>
     </form>
+    {% if form.errors %}
+        {% for field in form %}
+            {% for error in field.errors %}
+                <p>{{ error }}</p>
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
 </div>
 {% endblock %}
 

@@ -44,7 +44,6 @@
         </tbody>
     </table>
     <button type="button" onclick=history.back()>戻る</button>
-    <!-- <a id="signup_done" class="btn rounded-pill" href="{% url 'account_signup_done' %}">登録</a> -->
     <form id="signup_done" action="{% url 'account_signup_done' %}">
         {% csrf_token %}
         <button type="submit" class="btn rounded-pill" ontouchstart="">登録</button>

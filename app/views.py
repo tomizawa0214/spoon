@@ -8,7 +8,6 @@ from accounts.forms import ProfileForm
 # from django.conf import settings
 # from django.core.mail import BadHeaderError, EmailMessage
 from django.http import JsonResponse, HttpResponse
-import datetime
 # import textwrap
 
 
@@ -20,6 +19,7 @@ class OrderUserView(LoginRequiredMixin, View):
             request.POST or None,
             initial={
                 'name': user_data.name,
+                'furigana': user_data.furigana,
                 'email': user_data.email,
                 'tel': user_data.tel
             }
@@ -33,17 +33,25 @@ class OrderUserView(LoginRequiredMixin, View):
         })
 
     def post(self, request, *args, **kwargs):
-        form = ProfileForm(request.POST or None)
+        profile_form = ProfileForm(request.POST or None)
         receipt_form = ReceiptForm(request.POST or None)
 
-        if form.is_valid():
-            name = form.cleaned_data['name']
-            email = form.cleaned_data['email']
-            tel = form.cleaned_data['tel']
-            if receipt_form.is_valid():
-                date = form.cleaned_data['date']
+        if profile_form.is_valid() and receipt_form.is_valid():
+            name = profile_form.cleaned_data['name']
+            furigana = profile_form.cleaned_data['furigana']
+            email = profile_form.cleaned_data['email']
+            tel = profile_form.cleaned_data['tel']
+            date = receipt_form.cleaned_data['date']
+            time = receipt_form.cleaned_data['time']
 
-                return redirect('order_confirm')
+            return render(request, 'app/order_confirm.html', {
+                'name': name,
+                'furigana': furigana,
+                'email': email,
+                'tel': tel,
+                'date': date,
+                'time': time,
+            })
 
         return render(request, 'app/order_user.html', {
             'profile_form': profile_form,
