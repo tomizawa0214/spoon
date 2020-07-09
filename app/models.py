@@ -2,18 +2,6 @@ from django.db import models
 from django.utils import timezone
 
 
-class Order(models.Model):
-    name = models.CharField('お名前', max_length=30)
-    furigana = models.CharField('フリガナ', max_length=30)
-    email = models.EmailField('メールアドレス', max_length=256, unique=True)
-    tel = models.CharField('電話番号', max_length=13)
-    receipt = models.DateTimeField('受取日時')
-    created = models.DateTimeField('注文受付日', default=timezone.now)
-
-    def __str__(self):
-        return self.name
-
-
 class Cart(models.Model):
     size_title = models.CharField('サイズ', max_length=100)
     size_price = models.CharField('サイズ価格', max_length=100)
@@ -27,6 +15,19 @@ class Cart(models.Model):
 
     def __str__(self):
         return self.size_title
+
+
+class Order(models.Model):
+    cart = models.ForeignKey(Cart, verbose_name='予約注文商品', on_delete=models.DO_NOTHING)
+    name = models.CharField('お名前', max_length=30)
+    furigana = models.CharField('フリガナ', max_length=30)
+    email = models.EmailField('メールアドレス', max_length=256)
+    tel = models.CharField('電話番号', max_length=13)
+    receipt = models.CharField('受取日時', max_length=30)
+    created = models.DateTimeField('注文受付日', default=timezone.now)
+
+    def __str__(self):
+        return f'{self.name} {self.created}'
 
 
 class Size(models.Model):
