@@ -63,7 +63,7 @@ if 11 <= hour <  17 or ( hour == 17 and minute < 30 ):
     if today_30.minute < 30:
         get_times(today_30.hour)
     # 30分後の分単位が30より大きい場合
-    if today_30.minute >= 30:
+    elif today_30.minute >= 30:
         for j in range(today_30.hour+1, 19):
             TIME_CHOICES.append(
                 (str(j) + ":" + "00",str(j) + ":" + "00")
@@ -74,7 +74,7 @@ if 11 <= hour <  17 or ( hour == 17 and minute < 30 ):
                 )
         
 # 現在時刻が17:30～翌10:59
-elif ( hour == 17 and minute >= 30 ) or ( 18 < hour <= 24 ) or ( hour < 11 ):
+elif ( hour == 17 and minute >= 30 ) or ( hour >= 18 ) or ( hour < 11 ):
     get_times(11)
 
 

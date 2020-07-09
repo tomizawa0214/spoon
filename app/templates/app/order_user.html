@@ -13,7 +13,7 @@
 
 <div class="text-center">
     <p class="order-text">ご注文様の情報とお受け取り日時をご入力ください。</p>
-    <form method="POST">
+    <form method="POST" action="{% url 'order_confirm' %}">
         {% csrf_token %}
         <table class="mx-auto">
             <tr>
