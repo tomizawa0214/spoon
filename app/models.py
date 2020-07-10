@@ -4,7 +4,7 @@ from django.utils import timezone
 
 
 class SizeItem(models.Model):
-    title = models.CharField('サイズ', max_length=100)
+    title = models.CharField('名称', max_length=100)
     price = models.IntegerField('価格')
     image = models.ImageField('画像', upload_to='images')
 
@@ -13,7 +13,8 @@ class SizeItem(models.Model):
 
 
 class FlavorItem(models.Model):
-    title = models.CharField('フレーバー', max_length=100)
+    entitle = models.CharField('英語名称', max_length=100)
+    title = models.CharField('日本語名称', max_length=100)
     price = models.IntegerField('価格', default=0)
     image = models.ImageField('画像', upload_to='images')
     is_active = models.BooleanField(
@@ -30,7 +31,7 @@ class FlavorItem(models.Model):
 
 
 class OptionItem(models.Model):
-    title = models.CharField('オプション', max_length=100)
+    title = models.CharField('名称', max_length=100)
     price = models.IntegerField('価格', default=0)
     image = models.ImageField('画像', upload_to='images')
 
@@ -40,8 +41,6 @@ class OptionItem(models.Model):
 
 class Cart(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    ordered = models.BooleanField('注文完了',default=False)
-    start_date = models.DateTimeField('注文時刻', auto_now_add=True)
     size_title = models.CharField('サイズ', max_length=100)
     size_price = models.IntegerField('サイズ価格')
     flavor_title = models.CharField('フレーバー', max_length=100)
@@ -55,6 +54,8 @@ class Cart(models.Model):
     option3_title = models.CharField('オプション3', max_length=100, blank=True, null=True)
     option3_price = models.IntegerField('オプション3価格', default=0)
     total_price = models.IntegerField('合計')
+    start_date = models.DateTimeField('注文時刻', auto_now_add=True)
+    ordered = models.BooleanField('注文完了',default=False)
 
     def __str__(self):
         return f'{self.user.name}　{self.size_title}'
