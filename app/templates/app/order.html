@@ -16,6 +16,7 @@
     <div class="row">
         <div class="col-9">
             <p class="text-center">STEP1.　ジェラートのサイズをお選びください。</p>
+            <p id="size_error" class="d-none text-center"></p>
             <div class="row">
                 {% for size in size_item %}
                 <div class="col-3 selection-group">
@@ -29,12 +30,14 @@
                 {% endfor %}
             </div>
             <p class="text-center">STEP2.　ジェラートのフレーバーをお選びください。</p>
+            <p id="flavor_error" class="d-none text-center"></p>
             <div class="row">
                 {% for flavor in flavor_item %}
                 <div class="col-3 selection-group">
                     <input id="flavor_{{ flavor.id }}" type="checkbox" name="flavor" value="{{ flavor.title }} {{ flavor.price }}" onclick="to_check()">
                     <label for="flavor_{{ flavor.id }}">
                         <img src="{{ flavor.image.url }}">
+                        <p class="m-0">{{ flavor.entitle }}</p>
                         <p class="m-0">{{ flavor.title }}</p>
                         <p class="m-0">+￥{{ flavor.price }}</p>
                     </label>
@@ -45,7 +48,7 @@
             <div class="row">
                 {% for option in option_item %}
                 <div class="col-3 selection-group">
-                    <input id="option_{{ option.id }}" type="checkbox" name="option">
+                    <input id="option_{{ option.id }}" type="checkbox" name="option" value="{{ option.title }} {{ option.price }}" onclick="to_check()">
                     <label for="option_{{ option.id }}">
                         <img src="{{ option.image.url }}">
                         <p class="m-0">{{ option.title }}</p>
@@ -56,12 +59,54 @@
             </div>
             <div class="my-5 text-center">
                 <a id="order_plus" class="btn btn-primary">追加注文する</a>
-                <a id="order_next" class="btn btn-danger" href="/">ご注文手続きへ</a>
+                <a id="order_next" class="btn btn-danger" href="{% url 'order_user' %}">ご注文手続きへ</a>
             </div>
         </div>
         <div class="col-3">
             <div class="card">
                 <p class="text-center">ご注文内容</p>
+                <div id="posts">
+                    {% for cart in cart_data %}
+                        <div id="order{{ cart.id }}">
+                            <div class="d-flex justify-content-between">
+                                <span>{{ cart.size_title }}</span>
+                                <div>
+                                    <span class="mr-2">￥{{ cart.size_price }}</span>
+                                    <span id="{{ cart.id }}" onclick="delOrder(this);">✕</span>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <span>{{ cart.flavor_title }}</span>
+                                <span class="mr-4">￥{{ cart.flavor_price }}</span>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <span>{{ cart.flavor2_title }}</span>
+                                {% if cart.flavor2_title != "" %}
+                                <span class="mr-4">￥{{ cart.flavor2_price }}</span>
+                                {% endif %}
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <span>{{ cart.option_title }}</span>
+                                {% if cart.option_title != "" %}
+                                <span class="mr-4">￥{{ cart.option_price }}</span>
+                                {% endif %}
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <span>{{ cart.option2_title }}</span>
+                                {% if cart.option2_title != "" %}
+                                <span class="mr-4">￥{{ cart.option2_price }}</span>
+                                {% endif %}
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <span>{{ cart.option3_title }}</span>
+                                {% if cart.option3_title != "" %}
+                                    <span class="mr-4">￥{{ cart.option3_price }}</span>
+                                {% endif %}
+                            </div>
+                            <hr>
+                        </div>
+                    {% endfor %}
+                </div>
                 <div class="d-flex justify-content-between">
                     <span id="size_title"></span>
                     <span id="size_price"></span>
@@ -90,7 +135,7 @@
                     <span id="total" class="d-none">0</span>
                     <span id="total_price">{{ get_total_price|intcomma }}</span>
                 </p>
-                <a id="order_next_2" class="btn btn-danger" href="/">ご注文手続きへ</a>
+                <a id="order_next_2" class="btn btn-danger" href="{% url 'order_user' %}">ご注文手続きへ</a>
             </div>
         </div>
     </div>
@@ -121,6 +166,11 @@
     const option3_price = document.getElementById('option3_price');
     const total = document.getElementById('total');
     const total_price = document.getElementById('total_price');
+    // // エラーフィールドを取得
+    const size_error = document.getElementById('size_error');
+    const flavor_error = document.getElementById('flavor_error');
+    // // 登録フィールドを取得
+    const postArea = document.getElementById('posts')
 
     // フレーバーとオプションの選択を無効化
     const invalid = (type) => {
@@ -160,6 +210,11 @@
 
     // サイズ・フレーバー・オプションのいずれかを選択すると発動
     const to_check = () => {
+        // サイズ・オプションの取得金額にデフォルト値を設定
+        let size_total = 0;
+        let flavor_total = 0;
+        let option_total = 0;
+
         // サイズの選択に合わせてフレーバーの選択を制限
         const chk = (num) => {
             var flag = new Array();
@@ -188,6 +243,8 @@
         size_price.textContent = '';
         for ( let k = 0; k < size.length; k++ ) {
             if ( size[k].checked ) {
+                // サイズが選択されたらエラーメッセージを非表示
+                size_error.className = 'd-none';
                 // サイズが選択されたらフレーバーの選択を有効化
                 for ( let l = 0; l < flavor.length; l++ ) {
                     flavor[l].disabled = false;
@@ -196,7 +253,7 @@
                 let size_value = size[k].value.split(' ');
                 size_title.textContent = size_value[0];
                 size_price.textContent = '￥' + size_value[1];
-                let size_total = size_value[1];
+                size_total = Number(size_value[1]);
                 if ( k < 2 ) {
                     chk(1);
                 } else if ( k == 2 ) {
@@ -204,6 +261,295 @@
                 }
             }
         }
+
+        // フレーバー選択時の挙動
+        flavor_title.textContent = '';
+        flavor2_title.textContent = '';
+        flavor_price.textContent = '';
+        flavor2_price.textContent = '';
+        for ( let m = 0; m < flavor.length; m++ ) {
+            if ( flavor[m].checked ) {
+                // フレーバーが選択されたらエラーメッセージを非表示
+                flavor_error.className = 'd-none';
+                // フレーバーが選択されたらオプションの選択を有効化
+                for ( let n = 0; n < option.length; n++ ) {
+                    option[n].disabled = false;
+                }
+                let flavor_value = flavor[m].value.split(' ');
+                if ( flavor_title.textContent == '' && flavor2_title.textContent == '' ) {
+                    flavor_title.textContent = flavor_value[0];
+                    flavor_price.textContent = '￥' + flavor_value[1];
+                } else if ( flavor2_title.textContent == '' ) {
+                    flavor2_title.textContent = flavor_value[0];
+                    flavor2_price.textContent = '￥' + flavor_value[1];
+                }
+                flavor_total += Number(flavor_value[1]);
+            }
+        }
+
+        // オプション選択時の挙動
+        option_title.textContent = '';
+        option_price.textContent = '';
+        option2_title.textContent = '';
+        option2_price.textContent = '';
+        option3_title.textContent = '';
+        option3_price.textContent = '';
+        for ( let o = 0; o < option.length; o++ ) {
+            if ( option[o].checked ) {
+                let option_value = option[o].value.split(' ');
+                if ( o == 0 ) {
+                    option_title.textContent = option_value[0];
+                    option_price.textContent = '￥' + option_value[1];
+                } else if ( o == 1 ) {
+                    option2_title.textContent = option_value[0];
+                    option2_price.textContent = '￥' + option_value[1];
+                } else if ( o == 2 ) {
+                    option3_title.textContent = option_value[0];
+                    option3_price.textContent = '￥' + option_value[1];
+                }
+                option_total += Number(option_value[1]);
+            }
+        }
+        // 非同期通信状態かリロードされたかを判定
+        if ( total.textContent == 0 && postArea.children.length == 0 ) {
+            total_price.textContent = size_total + flavor_total + option_total;
+        } else if ( total.textContent == 0 && '{{ get_total_price }}' > 0 ) {
+            // データベースから最新の合計値を取得して足す
+            let total_fee = Number('{{ get_total_price }}') + size_total + flavor_total + option_total;
+            total_price.textContent = total_fee.toLocaleString();
+        } else {
+            // カンマを除いて整数値へ変換後、非同期通信で合計値を足す
+            let total_flag = total.textContent.replace( /,/g, '');
+            let total_fee = Number(total_flag) + size_total + flavor_total + option_total;
+            total_price.textContent = total_fee.toLocaleString();
+        }
+    }
+
+    // CSRF対策
+    const getCookie = name => {
+        if (document.cookie && document.cookie !== '') {
+            for (const cookie of document.cookie.split(';')) {
+                const [key, value] = cookie.trim().split('=');
+                if (key === name) {
+                    return decodeURIComponent(value);
+                }
+            }
+        }
+    };
+    const csrftoken = getCookie('csrftoken');
+
+
+    // データベースにカートを登録
+    const cartRegi = () => {
+        const url = '{% url "add_order" %}';
+        // URLのクエリパラメータを管理
+        const body = new URLSearchParams();
+        body.append('size_title', size_title.textContent);
+        body.append('size_price', Number(size_price.textContent.slice(1)));
+        body.append('flavor_title', flavor_title.textContent);
+        body.append('flavor_price', Number(flavor_price.textContent.slice(1)));
+        body.append('flavor2_title', flavor2_title.textContent);
+        body.append('flavor2_price', Number(flavor2_price.textContent.slice(1)))
+        body.append('option_title', option_title.textContent);
+        body.append('option_price', Number(option_price.textContent.slice(1)))
+        body.append('option2_title', option2_title.textContent);
+        body.append('option2_price', Number(option2_price.textContent.slice(1)))
+        body.append('option3_title', option3_title.textContent);
+        body.append('option3_price', Number(option3_price.textContent.slice(1)))
+        body.append('total_price', total_price.textContent);
+
+        fetch(url, {
+            method: 'POST',
+            body: body,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
+                'X-CSRFToken': csrftoken,
+            }
+        }).then(response => {
+            // JSON形式に変換
+            return response.json();
+        }).then(response => {
+            // 選択を初期化
+            for ( let i = 0; i < size.length; i++ ) {
+                size[i].checked = false;
+            }
+            for ( let j = 0; j < flavor.length; j++ ) {
+                flavor[j].checked = false;
+            }
+            for ( let k = 0; k < option.length; k++ ) {
+                option[k].checked = false;
+            }
+            // 選択したカート情報を初期化
+            size_title.textContent = '';
+            size_price.textContent = '';
+            flavor_title.textContent = '';
+            flavor_price.textContent = '';
+            flavor2_title.textContent = '';
+            flavor2_price.textContent = '';
+            option_title.textContent = '';
+            option_price.textContent = '';
+            option2_title.textContent = '';
+            option2_price.textContent = '';
+            option3_title.textContent = '';
+            option3_price.textContent = '';
+            total_price.textContent = response.get_total_price.toLocaleString();
+            // 仮の合計金額を初期化
+            total.textContent = '';
+            // 追加するエレメント
+            const element  = Object.assign(document.createElement('div'), { className: 'd-flex justify-content-between'});
+            const element2  = Object.assign(document.createElement('span'), { textContent: response.size_title });
+            const element3  = Object.assign(document.createElement('div'));
+            const element4  = Object.assign(document.createElement('span'), { className: 'mr-2', textContent: '￥' + response.size_price });
+            const element5  = Object.assign(document.createElement('span'), { id: response.cart_id, textContent: '✕' });
+            const element6  = Object.assign(document.createElement('div'), { className: 'd-flex justify-content-between'});
+            const element7  = Object.assign(document.createElement('span'), { textContent: response.flavor_title });
+            const element8  = Object.assign(document.createElement('span'), { className: 'mr-4', textContent: '+￥' + response.flavor_price });
+            const element9  = Object.assign(document.createElement('div'), { className: 'd-flex justify-content-between'});
+            const element10  = Object.assign(document.createElement('span'), { textContent: response.flavor2_title });
+            if ( response.flavor2_title == '' ) {
+                var element11  = Object.assign(document.createElement('span'));
+            } else {
+                var element11  = Object.assign(document.createElement('span'), { className: 'mr-4', textContent: '+￥' + response.flavor2_price });
+            }
+            const element12  = Object.assign(document.createElement('div'), { className: 'd-flex justify-content-between'});
+            const element13  = Object.assign(document.createElement('span'), { textContent: response.option_title });
+            if ( response.option_title == '' ) {
+                var element14  = Object.assign(document.createElement('span'));
+            } else {
+                var element14  = Object.assign(document.createElement('span'), { className: 'mr-4', textContent: '+￥' + response.option_price });
+            }
+            const element15  = Object.assign(document.createElement('div'), { className: 'd-flex justify-content-between'});
+            const element16  = Object.assign(document.createElement('span'), { textContent: response.option2_title });
+            if ( response.option2_title == '' ) {
+                var element17  = Object.assign(document.createElement('span'));
+            } else {
+                var element17  = Object.assign(document.createElement('span'), { className: 'mr-4', textContent: '+￥' + response.option2_price });
+            }
+            const element18  = Object.assign(document.createElement('div'), { className: 'd-flex justify-content-between'});
+            const element19  = Object.assign(document.createElement('span'), { textContent: response.option3_title });
+            if ( response.option3_title == '' ) {
+                var element20  = Object.assign(document.createElement('span'));
+            } else {
+                var element20  = Object.assign(document.createElement('span'), { className: 'mr-4', textContent: '+￥' + response.option3_price });
+            }
+            const element21  = Object.assign(document.createElement('hr'));
+            const element22  = Object.assign(document.createElement('div'), { id: 'order' + response.cart_id });
+            // 階層に合わせて要素をまとめる
+            element.appendChild(element2);
+            element3.appendChild(element4);
+            element3.appendChild(element5);
+            element.appendChild(element3);
+            element6.appendChild(element7);
+            element6.appendChild(element8);
+            element9.appendChild(element10);
+            element9.appendChild(element11);
+            element12.appendChild(element13);
+            element12.appendChild(element14);
+            element15.appendChild(element16);
+            element15.appendChild(element17);
+            element18.appendChild(element19);
+            element18.appendChild(element20);
+            element22.appendChild(element);
+            element22.appendChild(element6);
+            element22.appendChild(element9);
+            element22.appendChild(element12);
+            element22.appendChild(element15);
+            element22.appendChild(element18);
+            element22.appendChild(element21);
+            // 最後に追加
+            postArea.insertBefore(element22, postArea.lastChild.nextSibling);
+            
+            // 仮の合計値も変更
+            total.textContent = response.get_total_price;
+
+            // 削除ボタンにonclickを付与
+            let id = document.getElementById(response.cart_id);
+            id.setAttribute('onclick', 'delOrder(this);');
+        }).catch(error => {
+            console.log(error);
+        });
+    }
+
+
+    // 次ページに遷移する前にエラーチェック
+    const nextOrder = document.getElementById('order_next');
+    const nextOrder_2 = document.getElementById('order_next_2');
+
+    const next = (next) => {
+        next.addEventListener('click', e => {
+            // サイズが選択されてない場合のエラーを出力
+            if ( size_title.textContent == '' && postArea.children.length == 0 ) {
+                e.preventDefault(); // ページ遷移をキャンセル
+                size_error.className = 'd-block text-center';
+                size_error.style.color = 'red';
+                size_error.textContent = '※サイズを選択してください';
+            // フレーバーが選択されてない場合のエラーを出力
+            } else if ( flavor_title.textContent == '' && size_title.textContent != '' ) {
+                e.preventDefault(); // ページ遷移をキャンセル
+                flavor_error.className = 'd-block text-center';
+                flavor_error.style.color = 'red';
+                flavor_error.innerHTML = '※ミニサイズ・シングルサイズの場合はフレーバーを1つ選択してください<br>※ダブルサイズの場合はフレーバーを2つ選択してください';
+            } else if ( size_title.textContent != '' && flavor_title.textContent != '' ) {
+                cartRegi();
+            }
+        });
+    }
+    next(nextOrder);
+    next(nextOrder_2);
+
+    // 追加注文をクリックで発動
+    const addOrder = document.getElementById('order_plus')
+    addOrder.addEventListener('click', e => {
+        e.preventDefault(); // ページ遷移をキャンセル
+
+        // サイズが選択されてない場合のエラーを出力
+        if ( size_title.textContent == '' ) {
+            size_error.className = 'd-block text-center';
+            size_error.style.color = 'red';
+            size_error.textContent = '※サイズを選択してください';
+        // フレーバーが選択されてない場合のエラーを出力
+        } else if ( flavor_title.textContent == '' ) {
+            flavor_error.className = 'd-block text-center';
+            flavor_error.style.color = 'red';
+            flavor_error.innerHTML = '※ミニサイズ・シングルサイズの場合はフレーバーを1つ選択してください<br>※ダブルサイズの場合はフレーバーを2つ選択してください';
+        // サイズもフレーバーも選択されていれば発動
+        } else {
+            cartRegi();
+        }
+    });
+
+
+    // カート注文の削除をクリックで発動
+    const delOrder = (ele) => {
+        let id_value = ele.id;
+        const url = '{% url "delete_order" %}';
+        // URLのクエリパラメータを管理
+        const body = new URLSearchParams();
+        body.append('id_value', id_value);
+
+        fetch(url, {
+            method: 'POST',
+            body: body,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
+                'X-CSRFToken': csrftoken,
+            }
+        }).then(response => {
+            // JSON形式に変換
+            return response.json();
+        }).then(response => {
+            // 合計値を削除後の金額に変更
+            total_price.textContent = response.get_total_price.toLocaleString();
+
+            // 仮の合計値も削除後の金額に変更
+            total.textContent = response.get_total_price;
+
+            // HTMLからクリックされた注文アイテムを削除
+            let cart = document.getElementById('order' + id_value);
+            cart.remove();
+        }).catch(error => {
+            console.log(error);
+        });
     }
 </script>
 {% endblock %}
