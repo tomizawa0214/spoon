@@ -54,8 +54,8 @@ class Cart(models.Model):
     option3_title = models.CharField('オプション3', max_length=100, blank=True, null=True)
     option3_price = models.IntegerField('オプション3価格', default=0)
     total_price = models.IntegerField('合計')
-    start_date = models.DateTimeField('注文時刻', auto_now_add=True)
-    ordered = models.BooleanField('注文完了',default=False)
+    timestamp = models.DateTimeField('注文時刻', default=timezone.now)
+    ordered = models.BooleanField('注文完了', default=False)
 
     def __str__(self):
         return f'{self.user.name}　{self.size_title}'

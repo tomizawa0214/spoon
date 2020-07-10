@@ -5,10 +5,8 @@ from .forms import ReceiptForm
 from .models import Order, Cart, SizeItem, FlavorItem, OptionItem
 from accounts.models import CustomUser
 from accounts.forms import ProfileForm
-# from django.conf import settings
-# from django.core.mail import BadHeaderError, EmailMessage
 from django.http import JsonResponse, HttpResponse
-# import textwrap
+import datetime
 
 
 class OrderThanksView(LoginRequiredMixin, View):
@@ -16,22 +14,8 @@ class OrderThanksView(LoginRequiredMixin, View):
         return render(request, 'app/order_thanks.html')
 
     def post(self, request, *args, **kwargs):
-        # OrderHistoryへ注文履歴として保管
-        for cart in Cart.objects.all():
-            order_history = OrderHistory(
-                size_title=cart.size_title,
-                size_price=cart.size_price,
-                flavor_title=cart.flavor_title,
-                flavor_title_2=cart.flavor_title_2,
-                option_title=cart.option_title,
-                option_price=cart.option_price,
-                option_title_2=cart.option_title_2,
-                option_price_2=cart.option_price_2,
-                total_price=cart.total_price
-            )
-            order_history.save()
-        
-        order = Order()
+        # 注文者情報を登録
+        order = Order(user=request.user)
         order.name = request.POST.get('name')
         order.furigana = request.POST.get('furigana')
         order.email = request.POST.get('email')
@@ -39,19 +23,22 @@ class OrderThanksView(LoginRequiredMixin, View):
         order.receipt = request.POST.get('receipt')
         order.save()
 
-        # ログインユーザーのカートを削除
-        cart = Cart.objects.get(user=request.user)
-        cart.delete()
+        # ログインユーザーの注文未完了レコードをすべて取得
+        cart = Cart.objects.filter(user=request.user, ordered=False)
+        for cart_data in cart:
+            cart_data.ordered = True
+            cart_data.timestamp = datetime.datetime.now()
+            cart_data.save()
 
         return redirect('order_thanks')
 
 
 class OrderConfirmView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
-        # ログインユーザーの注文内容をすべて取得
-        cart_data = Cart.objects.get(user=request.user)
+        # ログインユーザーの注文未完了レコードをすべて取得
+        cart_data = Cart.objects.filter(user=request.user, ordered=False)
         # 注文合計金額を取得
-        get_total_price = Cart.objects.order_by("id").last().total_price
+        get_total_price = cart_data.order_by("id").last().total_price
 
         return render(request, 'app/order_confirm.html', {
             'cart_data': cart_data,
@@ -70,10 +57,10 @@ class OrderConfirmView(LoginRequiredMixin, View):
             date = receipt_form.cleaned_data['date']
             time = receipt_form.cleaned_data['time']
 
-            # 注文内容をすべて取得
-            cart_data = Cart.objects.all()
+            # ログインユーザーの注文未完了レコードをすべて取得
+            cart_data = Cart.objects.filter(user=request.user, ordered=False)
             # 注文合計金額を取得
-            get_total_price = Cart.objects.order_by("id").last().total_price
+            get_total_price = cart_data.order_by("id").last().total_price
 
             return render(request, 'app/order_confirm.html', {
                 'name': name,
