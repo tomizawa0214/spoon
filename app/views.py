@@ -119,15 +119,17 @@ class OrderView(LoginRequiredMixin, View):
         flavor_item = FlavorItem.objects.filter(is_active=True)
         option_item = OptionItem.objects.all()
 
+        # ログインユーザーの注文未完了レコードをすべて取得
         cart_data = Cart.objects.filter(user=request.user, ordered=False)
+
         # 最新の合計金額を取得。初期値は0
         if cart_data.exists():
-            get_total_price = Cart.objects.order_by("id").last().total_price
+            get_total_price = cart_data.order_by('id').last().total_price
         else:
             get_total_price = 0
         
         # 最新レコードのidを取得
-        cart_id = Cart.objects.values_list('id', flat=True).last()
+        cart_id = cart_data.values_list('id', flat=True).last()
 
         return render(request, 'app/order.html', {
             'size_item': size_item,
@@ -175,10 +177,12 @@ class AddOrderView(LoginRequiredMixin, View):
         cart.total_price = total_price
         cart.save()
 
+        # ログインユーザーの注文未完了レコードをすべて取得
+        cart_data = Cart.objects.filter(user=request.user, ordered=False)
         # 最新の合計金額を取得
-        get_total_price = Cart.objects.order_by('id').last().total_price
+        get_total_price = cart_data.order_by('id').last().total_price
         # 最新レコードのidを取得
-        cart_id = Cart.objects.values_list('id', flat=True).last()
+        cart_id = cart_data.values_list('id', flat=True).last()
 
         data = {
             'size_title': size_title,
@@ -204,27 +208,21 @@ class DeleteOrderView(LoginRequiredMixin, View):
     def post(self, request, *args, **kwargs):
         id_value = request.POST.get('id_value')
 
-        del_record = Cart.objects.filter(pk=id_value) # 削除するレコードを取得
+        del_record = Cart.objects.filter(user=request.user, pk=id_value) # 削除するレコードを取得
         size_price = del_record.values_list('size_price', flat=True)[0] # 削除するレコードのサイズ金額を取得
+        flavor_price = del_record.values_list('flavor_price', flat=True)[0] # 削除するレコードのフレーバー金額を取得
+        flavor2_price = del_record.values_list('flavor2_price', flat=True)[0] # 削除するレコードのフレーバー金額を取得
         option_price = del_record.values_list('option_price', flat=True)[0]  # 削除するレコードのオプション金額を取得
         option2_price = del_record.values_list('option2_price', flat=True)[0] # 削除するレコードのオプション金額を取得
-        
-        # 削除分の取得金額を整数値に変換。オプション指定が無い場合は0を設定
-        size_price = int(size_price[1:])
-        if option_price == '':
-            option_price = 0
-        else:
-            option_price = int(option_price[1:])
-        if option2_price == '':
-            option2_price = 0
-        else:
-            option2_price = int(option_price_2[1:])
+        option3_price = del_record.values_list('option3_price', flat=True)[0] # 削除するレコードのオプション金額を取得
 
-
+        # ログインユーザーの注文未完了レコードをすべて取得
+        cart_data = Cart.objects.filter(user=request.user, ordered=False)
         # 最新レコードの合計値から削除分の金額を引いて更新
-        cart_latest = Cart.objects.order_by("id").last()
-        get_total_price = cart_latest.total_price
-        cart_latest.total_price = cart_latest.total_price - ( size_price + option_price + option2_price )
+        cart_latest = cart_data.order_by('id').last()
+        cart_latest.total_price = cart_latest.total_price - (
+                size_price + flavor_price + flavor2_price + option_price + option2_price + option3_price
+            )
         cart_latest.save()
 
         # 指定レコードを削除
