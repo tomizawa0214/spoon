@@ -109,7 +109,7 @@
             const url = '{% url "order_thanks" %}';
 
             // 日付から【本日】or【翌日】を削除
-            let date = '{{ date }}'.replace( /【本日】/g, '').replace( /【翌日】/g, '');
+            let date = '{{ date }}'.replace( /【本日】/g, '').replace( /【明日】/g, '');
             // 12月で1月の日付を選択したら翌年を追加
             if ( new Date().getMonth() + 1 == 12 && '{{ date }}'.slice(0, 1) == 1 ) {
                 var year = new Date().getFullYear() + 1;

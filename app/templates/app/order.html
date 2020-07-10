@@ -12,124 +12,85 @@
     <span>ORDER</span>
 </div>
 
-<div class="text-center mx-auto rounded">
+<div class="mx-auto">
     <div class="row">
         <div class="col-9">
-            <p>STEP1.　ジェラートのサイズをお選びください。</p>
-            <p id="size_error" class="d-none"></p>
-            <div class="selection-group">
-                <input id="mini_size" type="radio" name="size" value="ミニサイズ ￥280" onclick="total_fee();" onchange="initialization();">
-                <label for="mini_size">
-                    <img src="{% static 'img/size_ダミー.png' %}">
-                    <p>ミニサイズ</p>
-                    <p>￥280</p>
-                </label>
-                <input id="single_size" type="radio" name="size" value="シングルサイズ ￥330" onclick="total_fee();" onchange="initialization();">
-                <label for="single_size">
-                    <img src="{% static 'img/size_ダミー.png' %}">
-                    <p>シングルサイズ</p>
-                    <p>￥330</p>
-                </label>
-                <input id="double_size" type="radio" name="size" value="ダブルサイズ ￥440" onclick="total_fee();" onchange="initialization();">
-                <label for="double_size">
-                    <img src="{% static 'img/size_ダミー.png' %}">
-                    <p>ダブルサイズ</p>
-                    <p>￥440</p>
-                </label>
+            <p class="text-center">STEP1.　ジェラートのサイズをお選びください。</p>
+            <div class="row">
+                {% for size in size_item %}
+                <div class="col-3 selection-group">
+                    <input id="size_{{ size.id }}" type="checkbox" name="size" value="{{ size.title }} {{ size.price }}">
+                    <label for="size_{{ size.id }}">
+                        <img src="{{ size.image.url }}">
+                        <p class="m-0">{{ size.title }}</p>
+                        <p class="m-0">￥{{ size.price }}</p>
+                    </label>
+                </div>
+                {% endfor %}
             </div>
-            <p class="order-text">STEP2.　ジェラートのフレーバーをお選びください。</p>
-            <p id="flavor_error" class="d-none"></p>
-            <div class="selection-group">
-                <input id="vanilla" type="checkbox" name="flavor" value="バニラ" onclick="total_fee();">
-                <label for="vanilla">
-                    <img src="{% static 'img/flavor_ダミー.png' %}">
-                    <p>バニラ</p>
-                </label>
-                <input id="orange" type="checkbox" name="flavor" value="オレンジ" onclick="total_fee();">
-                <label for="orange">
-                    <img src="{% static 'img/flavor_ダミー.png' %}">
-                    <p>オレンジ</p>
-                </label>
-                <input id="mango" type="checkbox" name="flavor" value="マンゴー" onclick="total_fee();">
-                <label for="mango">
-                    <img src="{% static 'img/flavor_ダミー.png' %}">
-                    <p>マンゴー</p>
-                </label>
+            <p class="text-center">STEP2.　ジェラートのフレーバーをお選びください。</p>
+            <div class="row">
+                {% for flavor in flavor_item %}
+                <div class="col-3 selection-group">
+                    <input id="flavor_{{ flavor.id }}" type="checkbox" name="flavor" value="{{ flavor.title }} {{ flavor.price }}" onclick="to_check()">
+                    <label for="flavor_{{ flavor.id }}">
+                        <img src="{{ flavor.image.url }}">
+                        <p class="m-0">{{ flavor.title }}</p>
+                        <p class="m-0">+￥{{ flavor.price }}</p>
+                    </label>
+                </div>
+                {% endfor %}
             </div>
-            <p class="order-text">STEP3.　オプションをお選びください。　※任意</p>
-            <div class="selection-group">
-                <input id="corn" type="checkbox" name="option" value="コーン ￥50" onclick="total_fee();">
-                <label for="corn">
-                    <img src="{% static 'img/コーン_ダミー.png' %}">
-                    <p>コーン</p>
-                    <p>￥50</p>
-                </label>
-                <input id="dryice" type="checkbox" name="option" value="ドライアイス ￥50" onclick="total_fee();">
-                <label for="dryice">
-                    <img src="{% static 'img/ドライアイス_ダミー.png' %}">
-                    <p>ドライアイス</p>
-                    <p>￥50</p>
-                </label>
+            <p class="text-center">STEP3.　オプションをお選びください。　※任意</p>
+            <div class="row">
+                {% for option in option_item %}
+                <div class="col-3 selection-group">
+                    <input id="option_{{ option.id }}" type="checkbox" name="option">
+                    <label for="option_{{ option.id }}">
+                        <img src="{{ option.image.url }}">
+                        <p class="m-0">{{ option.title }}</p>
+                        <p class="m-0">+￥{{ option.price }}</p>
+                    </label>
+                </div>
+                {% endfor %}
             </div>
-            <div class="mb-3">
+            <div class="my-5 text-center">
                 <a id="order_plus" class="btn btn-primary">追加注文する</a>
-                <a id="order_next" class="btn btn-danger" href="{% url 'order_user' %}">ご注文手続きへ</a>
+                <a id="order_next" class="btn btn-danger" href="/">ご注文手続きへ</a>
             </div>
         </div>
         <div class="col-3">
             <div class="card">
-                <p>ご注文内容</p>
-                <div id="posts">
-                    {% for cart in cart_data %}
-                        <div id="order{{ cart.id }}">
-                            <div class="d-flex justify-content-between">
-                                <span>{{ cart.size_title }}</span>
-                                <div>
-                                    <span class="mr-2">{{ cart.size_price }}</span>
-                                    <span id="{{ cart.id }}" onclick="delOrder(this);">✕</span>
-                                </div>
-                            </div>
-                            <div class="text-left">
-                                <span>{{ cart.flavor_title }}</span>
-                            </div>
-                            <div class="text-left">
-                                <span>{{ cart.flavor_title_2 }}</span>
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <span>{{ cart.option_title }}</span>
-                                <span class="mr-4">{{ cart.option_price }}</span>
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <span>{{ cart.option_title_2 }}</span>
-                                <span class="mr-4">{{ cart.option_price_2 }}</span>
-                            </div>
-                            <hr>
-                        </div>
-                    {% endfor %}
-                </div>
+                <p class="text-center">ご注文内容</p>
                 <div class="d-flex justify-content-between">
                     <span id="size_title"></span>
                     <span id="size_price"></span>
                 </div>
-                <div class="text-left">
+                <div class="d-flex justify-content-between">
                     <span id="flavor_title"></span>
+                    <span id="flavor_price"></span>
                 </div>
-                <div class="text-left">
-                    <span id="flavor_title_2"></span>
+                <div class="d-flex justify-content-between">
+                    <span id="flavor2_title"></span>
+                    <span id="flavor2_price"></span>
                 </div>
                 <div class="d-flex justify-content-between">
                     <span id="option_title"></span>
                     <span id="option_price"></span>
                 </div>
                 <div class="d-flex justify-content-between">
-                    <span id="option_title_2"></span>
-                    <span id="option_price_2"></span>
+                    <span id="option2_title"></span>
+                    <span id="option2_price"></span>
                 </div>
-                <p>合計：￥
+                <div class="d-flex justify-content-between">
+                    <span id="option3_title"></span>
+                    <span id="option3_price"></span>
+                </div>
+                <p class="text-center">合計：￥
                     <span id="total" class="d-none">0</span>
                     <span id="total_price">{{ get_total_price|intcomma }}</span>
                 </p>
-                <a id="order_next_2" class="btn btn-danger" href="{% url 'order_user' %}">ご注文手続きへ</a>
+                <a id="order_next_2" class="btn btn-danger" href="/">ご注文手続きへ</a>
             </div>
         </div>
     </div>
@@ -141,82 +102,101 @@
 <script>
     'use strict';
 
-    //各サイズと各オプションの金額を設定
-    const size = [280, 330, 440];
-    const option = [50, 50];
-    // サイズ・フレーバー・オプションを配列で取得
-    const sizeform = document.getElementsByName('size')
-    const flavorform = document.getElementsByName('flavor')
-    const optionform = document.getElementsByName('option')
-    // カート内のフレーバーフィールドを取得
+    // サイズ・フレーバー・オプションを取得
+    let size = document.getElementsByName('size')
+    let flavor = document.getElementsByName('flavor')
+    let option = document.getElementsByName('option')
+    // // カート内のフレーバーフィールドを取得
     const size_title = document.getElementById('size_title');
     const size_price = document.getElementById('size_price');
     const flavor_title = document.getElementById('flavor_title');
-    const flavor_title_2 = document.getElementById('flavor_title_2');
+    const flavor_price = document.getElementById('flavor_price');
+    const flavor2_title = document.getElementById('flavor2_title');
+    const flavor2_price = document.getElementById('flavor2_price');
     const option_title = document.getElementById('option_title');
     const option_price = document.getElementById('option_price');
-    const option_title_2 = document.getElementById('option_title_2');
-    const option_price_2 = document.getElementById('option_price_2');
+    const option2_title = document.getElementById('option2_title');
+    const option2_price = document.getElementById('option2_price');
+    const option3_title = document.getElementById('option3_title');
+    const option3_price = document.getElementById('option3_price');
     const total = document.getElementById('total');
     const total_price = document.getElementById('total_price');
-    // エラーフィールドを取得
-    const size_error = document.getElementById('size_error');
-    const flavor_error = document.getElementById('flavor_error');
-    // 登録フィールドを取得
-    const postArea = document.getElementById('posts')
 
-
-    // フレーバー選択とオプション選択を無効化しておく
-    const format = (form) => {
-        for ( let i = 0; i < form.length; i++ ) {
-            form[i].disabled = true;
+    // フレーバーとオプションの選択を無効化
+    const invalid = (type) => {
+        for ( let i = 0; i < type.length; i++ ) {
+            type[i].disabled = true;
+            flavor[i].checked = false;
         }
-    } 
-    format(flavorform);
-    format(optionform);
+    }
+    invalid(flavor);
+    invalid(option);
 
+    // サイズの選択を択一に設定
+    const ckbox1 = () => {
+        size[1].checked=false;
+        size[2].checked=false;
+        invalid(flavor);
+        invalid(option);
+        to_check()
+    }
+    const ckbox2 = () => {
+        size[0].checked=false;
+        size[2].checked=false;
+        invalid(flavor);
+        invalid(option);
+        to_check()
+    }
+    const ckbox3 = () => {
+        size[0].checked=false;
+        size[1].checked=false;
+        invalid(flavor);
+        invalid(option);
+        to_check()
+    }
+    size[0].onclick = ckbox1;
+    size[1].onclick = ckbox2;
+    size[2].onclick = ckbox3;
 
     // サイズ・フレーバー・オプションのいずれかを選択すると発動
-    const total_fee = () => {
-        // サイズ・オプションの取得金額にデフォルト値を設定
-        let size_total = 0;
-        let option_total = 0;
-
-        // サイズの選択に合わせたチェックの制限数を設定
+    const to_check = () => {
+        // サイズの選択に合わせてフレーバーの選択を制限
         const chk = (num) => {
-            let flag = new Array();
+            var flag = new Array();
             let count = 0;
             // フレーバーが選択される毎にflagへ値を追加してカウントを1上げる
-            for ( let i = 0; i < flavorform.length; i++ ) {
-                if ( flavorform[i].checked ) {
+            for ( let i = 0; i < flavor.length; i++ ) {
+                if ( flavor[i].checked ) {
                     flag[i] = 'chk'; count++;
                 }
             }
             // カウントがnumになったら発動
             // フレーバーの選択とflagの値を判定
-            if ( count >= num ) {
-                for ( let j = 0; j < flavorform.length; j++ ) {
+            if ( count == num ) {
+                for ( let j = 0; j < flavor.length; j++ ) {
                     if ( flag[j] == 'chk' ) {
-                        flavorform[j].disabled = false;
+                        flavor[j].disabled = false;
                     } else {
-                        flavorform[j].disabled = true;
+                        flavor[j].disabled = true;
                     }
                 }
             }
         }
 
+        // サイズ選択時の挙動
+        size_title.textContent = '';
+        size_price.textContent = '';
         for ( let k = 0; k < size.length; k++ ) {
-            if ( sizeform[k].checked ) {
-                // サイズが選択されたらエラーメッセージを非表示
-                size_error.className = 'd-none';
+            if ( size[k].checked ) {
                 // サイズが選択されたらフレーバーの選択を有効化
-                for ( let l = 0; l < flavorform.length; l++ ) {
-                    flavorform[l].disabled = false;
+                for ( let l = 0; l < flavor.length; l++ ) {
+                    flavor[l].disabled = false;
                 }
-                let size_value = sizeform[k].value.split(' ');
+                // サイズフォームのバリュー値を取得
+                let size_value = size[k].value.split(' ');
                 size_title.textContent = size_value[0];
-                size_price.textContent = size_value[1];
-                size_total = size[k];
+                size_price.textContent = '￥' + size_value[1];
+                let size_total = size_value[1];
                 if ( k < 2 ) {
                     chk(1);
                 } else if ( k == 2 ) {
@@ -224,261 +204,6 @@
                 }
             }
         }
-
-        flavor_title.textContent = '';
-        flavor_title_2.textContent = '';
-        for ( let m = 0; m < flavorform.length; m++ ) {
-            if ( flavorform[m].checked ) {
-                // フレーバーが選択されたらエラーメッセージを非表示
-                flavor_error.className = 'd-none';
-                // フレーバーが選択されたらオプションの選択を有効化
-                for ( let n = 0; n < optionform.length; n++ ) {
-                    optionform[n].disabled = false;
-                }
-                let flavor_value = flavorform[m].value;
-                if ( flavor_title.textContent == '' && flavor_title_2.textContent == '' ) {
-                    flavor_title.textContent = flavor_value;
-                } else if ( flavor_title_2.textContent == '' ) {
-                    flavor_title_2.textContent = flavor_value;
-                }
-            }
-        }
-
-        option_title.textContent = '';
-        option_price.textContent = '';
-        option_title_2.textContent = '';
-        option_price_2.textContent = '';
-        for ( let o = 0; o < option.length; o++ ) {
-            if ( optionform[o].checked ) {
-                const option_value = optionform[o].value.split(' ');
-                if ( o == 0 ) {
-                    option_title.textContent = option_value[0];
-                    option_price.textContent = option_value[1];
-                } 
-                if ( o == 1 ) {
-                    option_title_2.textContent = option_value[0];
-                    option_price_2.textContent = option_value[1];
-                }
-                option_total += option[o];
-            }
-        }
-        // 非同期通信状態かリロードされたかを判定
-        if ( total.textContent == 0 && postArea.children.length == 0 ) {
-            total_price.textContent = size_total + option_total;
-        } else if ( total.textContent == 0 && '{{ get_total_price }}' > 0 ) {
-            // データベースから最新の合計値を取得して足す
-            let total_fee = Number('{{ get_total_price }}') + size_total + option_total;
-            total_price.textContent = total_fee.toLocaleString();
-        } else {
-            // カンマを除いて整数値へ変換後、非同期通信で合計値を足す
-            let total_flag = total.textContent.replace( /,/g, '');
-            let total_fee = Number(total_flag) + size_total + option_total;
-            total_price.textContent = total_fee.toLocaleString();
-        }
-    }
-
-
-    // サイズをクリックで発動。フレーバーの選択を初期化
-    const initialization = () => {
-        for ( let i = 0; i < flavorform.length; i++ ) {
-            flavorform[i].checked = false;
-            flavor_title.textContent = '';
-            flavor_title_2.textContent = '';
-        }
-    }
-
-
-    // CSRF対策
-    const getCookie = name => {
-        if (document.cookie && document.cookie !== '') {
-            for (const cookie of document.cookie.split(';')) {
-                const [key, value] = cookie.trim().split('=');
-                if (key === name) {
-                    return decodeURIComponent(value);
-                }
-            }
-        }
-    };
-    const csrftoken = getCookie('csrftoken');
-
-
-    // データベースにカートを登録
-    const cartRegi = () => {
-        const url = '{% url "add_order" %}';
-        // URLのクエリパラメータを管理
-        const body = new URLSearchParams();
-        body.append('size_title', size_title.textContent);
-        body.append('size_price', size_price.textContent);
-        body.append('flavor_title', flavor_title.textContent);
-        body.append('flavor_title_2', flavor_title_2.textContent);
-        body.append('option_title', option_title.textContent);
-        body.append('option_price', option_price.textContent);
-        body.append('option_title_2', option_title_2.textContent);
-        body.append('option_price_2', option_price_2.textContent);
-        body.append('total_price', total_price.textContent);
-
-        fetch(url, {
-            method: 'POST',
-            body: body,
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
-                'X-CSRFToken': csrftoken,
-            }
-        }).then(response => {
-            // JSON形式に変換
-            return response.json();
-        }).then(response => {
-            // 選択を初期化
-            for ( let i = 0; i < sizeform.length; i++ ) {
-                sizeform[i].checked = false;
-            }
-            for ( let j = 0; j < flavorform.length; j++ ) {
-                flavorform[j].checked = false;
-            }
-            for ( let k = 0; k < optionform.length; k++ ) {
-                optionform[k].checked = false;
-            }
-            // 選択したカート情報を初期化
-            size_title.textContent = '';
-            size_price.textContent = '';
-            flavor_title.textContent = '';
-            flavor_title_2.textContent = '';
-            option_title.textContent = '';
-            option_price.textContent = '';
-            option_title_2.textContent = '';
-            option_price_2.textContent = '';
-            total_price.textContent = response.get_total_price.toLocaleString();
-            // 仮の合計金額を初期化
-            total.textContent = '';
-            // 追加するエレメント
-            const element  = Object.assign(document.createElement('div'), { className: 'd-flex justify-content-between'});
-            const element2  = Object.assign(document.createElement('span'), { textContent: response.size_title });
-            const element3  = Object.assign(document.createElement('div'));
-            const element4  = Object.assign(document.createElement('span'), { className: 'mr-2', textContent: response.size_price });
-            const element5  = Object.assign(document.createElement('span'), { id: response.cart_id, textContent: '✕' });
-            const element6  = Object.assign(document.createElement('div'), { className: 'text-left'});
-            const element7  = Object.assign(document.createElement('span'), { textContent: response.flavor_title });
-            const element8  = Object.assign(document.createElement('div'), { className: 'text-left'});
-            const element9  = Object.assign(document.createElement('span'), { textContent: response.flavor_title_2 });
-            const element10  = Object.assign(document.createElement('div'), { className: 'd-flex justify-content-between'});
-            const element11  = Object.assign(document.createElement('span'), { textContent: response.option_title });
-            const element12  = Object.assign(document.createElement('span'), { className: 'mr-4', textContent: response.option_price });
-            const element13  = Object.assign(document.createElement('div'), { className: 'd-flex justify-content-between'});
-            const element14  = Object.assign(document.createElement('span'), { textContent: response.option_title_2 });
-            const element15  = Object.assign(document.createElement('span'), { className: 'mr-4', textContent: response.option_price_2 });
-            const element16  = Object.assign(document.createElement('hr'));
-            const element17  = Object.assign(document.createElement('div'), { id: 'order' + response.cart_id });
-            // 階層に合わせて要素をまとめる
-            element.appendChild(element2);
-            element3.appendChild(element4);
-            element3.appendChild(element5);
-            element.appendChild(element3);
-            element6.appendChild(element7);
-            element8.appendChild(element9);
-            element10.appendChild(element11);
-            element10.appendChild(element12);
-            element13.appendChild(element14);
-            element13.appendChild(element15);
-            element17.appendChild(element);
-            element17.appendChild(element6);
-            element17.appendChild(element8);
-            element17.appendChild(element10);
-            element17.appendChild(element13);
-            element17.appendChild(element16);
-            // 最後に追加
-            postArea.insertBefore(element17, postArea.lastChild.nextSibling);
-            
-            // 仮の合計値も変更
-            total.textContent = response.get_total_price;
-
-            // 削除ボタンにonclickを付与
-            let id = document.getElementById(response.cart_id);
-            id.setAttribute('onclick', 'delOrder(this);');
-        }).catch(error => {
-            console.log(error);
-        });
-    }
-
-
-    // 次ページに遷移する前にエラーチェック
-    const nextOrder = document.getElementById('order_next');
-    const nextOrder_2 = document.getElementById('order_next_2');
-
-    const next = (next) => {
-        next.addEventListener('click', e => {
-            // サイズが選択されてない場合のエラーを出力
-            if ( size_title.textContent == '' && postArea.children.length == 0 ) {
-                e.preventDefault(); // ページ遷移をキャンセル
-                size_error.className = 'd-block';
-                size_error.style.color = 'red';
-                size_error.textContent = '※サイズを選択してください';
-            // フレーバーが選択されてない場合のエラーを出力
-            } else if ( flavor_title.textContent == '' && size_title.textContent != '' ) {
-                e.preventDefault(); // ページ遷移をキャンセル
-                flavor_error.className = 'd-block';
-                flavor_error.style.color = 'red';
-                flavor_error.innerHTML = '※ミニサイズ・シングルサイズの場合はフレーバーを1つ選択してください<br>※ダブルサイズの場合はフレーバーを2つ選択してください';
-            } else if ( size_title.textContent != '' && flavor_title.textContent != '' ) {
-                cartRegi();
-            }
-        });
-    }
-    next(nextOrder);
-    next(nextOrder_2);
-
-    // 追加注文をクリックで発動
-    const addOrder = document.getElementById('order_plus')
-    addOrder.addEventListener('click', e => {
-        e.preventDefault(); // ページ遷移をキャンセル
-
-        // サイズが選択されてない場合のエラーを出力
-        if ( size_title.textContent == '' ) {
-            size_error.className = 'd-block';
-            size_error.style.color = 'red';
-            size_error.textContent = '※サイズを選択してください';
-        // フレーバーが選択されてない場合のエラーを出力
-        } else if ( flavor_title.textContent == '' ) {
-            flavor_error.className = 'd-block';
-            flavor_error.style.color = 'red';
-            flavor_error.innerHTML = '※ミニサイズ・シングルサイズの場合はフレーバーを1つ選択してください<br>※ダブルサイズの場合はフレーバーを2つ選択してください';
-        // サイズもフレーバーも選択されていれば発動
-        } else {
-            cartRegi();
-        }
-    });
-
-
-    // カート注文の削除をクリックで発動
-    const delOrder = (ele) => {
-        let id_value = ele.id;
-        const url = '{% url "delete_order" %}';
-        // URLのクエリパラメータを管理
-        const body = new URLSearchParams();
-        body.append('id_value', id_value);
-
-        fetch(url, {
-            method: 'POST',
-            body: body,
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
-                'X-CSRFToken': csrftoken,
-            }
-        }).then(response => {
-            // JSON形式に変換
-            return response.json();
-        }).then(response => {
-            // 合計値を削除後の金額に変更
-            total_price.textContent = response.get_total_price.toLocaleString();
-
-            // 仮の合計値も削除後の金額に変更
-            total.textContent = response.get_total_price;
-
-            // HTMLからクリックされた注文アイテムを削除
-            let cart = document.getElementById('order' + id_value);
-            cart.remove();
-        }).catch(error => {
-            console.log(error);
-        });
     }
 </script>
 {% endblock %}

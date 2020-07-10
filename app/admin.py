@@ -1,9 +1,8 @@
 from django.contrib import admin
-from .models import Order, Cart, Size, Flavor, Option, Item
+from .models import OrderItem, Order, SizeItem, FlavorItem, OptionItem
 
+admin.site.register(OrderItem)
 admin.site.register(Order)
-admin.site.register(Cart)
-admin.site.register(Size)
-admin.site.register(Flavor)
-admin.site.register(Option)
-admin.site.register(Item)
+admin.site.register(SizeItem)
+admin.site.register(FlavorItem)
+admin.site.register(OptionItem)
