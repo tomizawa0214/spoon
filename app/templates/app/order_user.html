@@ -52,9 +52,10 @@
                 <td class="text-left">
                     <label for="">受取日時</label>
                 </td>
-                <td class="d-flex">
-                    {% render_field receipt_form.date class="form-control" %}
-                    {% render_field receipt_form.time class="form-control" %}
+                <td id="receipt" class="d-flex">
+                    <span>{% render_field receipt_form.date class="form-control" %}</span>
+                    <span id="specified_time">{% render_field receipt_form.time class="form-control" %}</span>
+                    <span id="full_time"" class="d-none">{% render_field receipt_form.fulltime class="form-control" %}</span>
                 </td>
             </tr>
         </table>
@@ -78,5 +79,21 @@
 {% block extrajs %}
 <script>
     'use strict';
+
+    // 本日選択時のみ指定時間に変更
+    let date = document.getElementById('id_date');
+    let specified_time = document.getElementById('specified_time');
+    let full_time = document.getElementById('full_time');
+    date.setAttribute('onchange', 'timeChange();');
+
+    const timeChange = () => {
+        if ( date.value.match(/本日/)) {
+            specified_time.className = 'd-block';
+            full_time.className = 'd-none';
+        } else {
+            specified_time.className = 'd-none';
+            full_time.className = 'd-block';
+        }
+    } 
 </script>
 {% endblock %}

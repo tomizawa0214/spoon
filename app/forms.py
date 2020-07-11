@@ -44,14 +44,14 @@ elif hour > 17 or ( hour == 17 and minute > 29 ):
 
 
 TIME_CHOICES = []
-def get_times(start_time):
+def get_times(start_time, box):
     for j in range(start_time, 19):
         if j != start_time:
-            TIME_CHOICES.append(
+            box.append(
                 (str(j) + ":" + "00",str(j) + ":" + "00")
             )
         if j < 18:
-            TIME_CHOICES.append(
+            box.append(
                 (str(j) + ":" + "30",str(j) + ":" + "30")
             )
 
@@ -61,7 +61,7 @@ if 11 <= hour <  17 or ( hour == 17 and minute < 30 ):
     today_30 = datetime.datetime.now() + datetime.timedelta(minutes=30)
     # 30分後の分単位が30より小さい場合
     if today_30.minute < 30:
-        get_times(today_30.hour)
+        get_times(today_30.hour, TIME_CHOICES)
     # 30分後の分単位が30より大きい場合
     elif today_30.minute >= 30:
         for j in range(today_30.hour+1, 19):
@@ -75,9 +75,13 @@ if 11 <= hour <  17 or ( hour == 17 and minute < 30 ):
         
 # 現在時刻が17:30～翌10:59
 elif ( hour == 17 and minute >= 30 ) or ( hour >= 18 ) or ( hour < 11 ):
-    get_times(11)
+    get_times(11, TIME_CHOICES)
+
+FULLTIME_CHOICES = []
+get_times(11, FULLTIME_CHOICES)
 
 
 class ReceiptForm(forms.Form):
     date = forms.ChoiceField(widget=forms.Select, choices=DATE_CHOICES)
     time = forms.ChoiceField(widget=forms.Select, choices=TIME_CHOICES)
+    fulltime = forms.ChoiceField(widget=forms.Select, choices=FULLTIME_CHOICES)
