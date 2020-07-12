@@ -100,11 +100,11 @@
             {% endfor %}
                 <tr>
                     <th>合計金額</th>
-                    <td>￥{{ order.cart.all.last.total_price|intcomma }}</td>
+                    <td>￥{{ order.get_total|intcomma }}</td>
                 </tr>
         </table>
+        <a id="{{ order.id }}" href="{% url 'order_user' %}" onclick="sameOrder(this);">再度注文</a>
     </div>
-    
     {% endfor %}
 </div>
 
@@ -119,5 +119,37 @@
     if ( birthday.textContent == 'None') {
         birthday.textContent = '';
     }
+
+    // CSRF対策
+    const getCookie = name => {
+        if (document.cookie && document.cookie !== '') {
+            for (const cookie of document.cookie.split(';')) {
+                const [key, value] = cookie.trim().split('=');
+                if (key === name) {
+                    return decodeURIComponent(value);
+                }
+            }
+        }
+    };
+    const csrftoken = getCookie('csrftoken');
+
+    // カート注文の削除をクリックで発動
+    const sameOrder = (ele) => {
+        let id_value = ele.id;
+        const url = '{% url "profile" %}';
+        // URLのクエリパラメータを管理
+        const body = new URLSearchParams();
+        body.append('id_value', id_value);
+
+        fetch(url, {
+            method: 'POST',
+            body: body,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
+                'X-CSRFToken': csrftoken,
+            }
+        })
+    }
+
 </script>
 {% endblock %}

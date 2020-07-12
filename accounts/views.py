@@ -295,9 +295,34 @@ class ProfileView(LoginRequiredMixin, View):
         user_data = CustomUser.objects.get(id=request.user.id)
         order_data = Order.objects.filter(user=request.user)
 
-        
-
         return render(request, 'accounts/profile.html', {
             'user_data': user_data,
             'order_data': order_data,
         })
+
+    def post(self, request, *args, **kwargs):
+        id_value = request.POST.get('id_value')
+
+        # 再注文のオーダーを取得
+        same_order = Order.objects.filter(user=request.user, pk=id_value)
+
+        # 再注文のオーダーからカートを登録
+        for order in same_order:
+            for same_cart in order.cart.all():
+                cart = Cart()
+                cart.user = request.user
+                cart.size_title = same_cart.size_title
+                cart.size_price = same_cart.size_price
+                cart.flavor_title = same_cart.flavor_title
+                cart.flavor_price = same_cart.flavor_price
+                cart.flavor2_title = same_cart.flavor2_title
+                cart.flavor2_price = same_cart.flavor2_price
+                cart.option_title = same_cart.option_title
+                cart.option_price = same_cart.option_price
+                cart.option2_title = same_cart.option2_title
+                cart.option2_price = same_cart.option2_price
+                cart.option3_title = same_cart.option3_title
+                cart.option3_price = same_cart.option3_price
+                cart.save()
+
+        return redirect('order_user')

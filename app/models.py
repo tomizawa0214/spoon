@@ -72,5 +72,11 @@ class Order(models.Model):
     receipt = models.CharField('受取日時', max_length=30)
     created = models.DateTimeField('注文日時', default=timezone.now)
 
+    def get_total(self):
+        total = 0
+        for cart in self.cart.all():
+            total += cart.get_total_item_price()
+        return total
+
     def __str__(self):
         return f'{self.name}　{self.receipt}'
