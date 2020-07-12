@@ -53,8 +53,10 @@ class Cart(models.Model):
     option2_price = models.IntegerField('オプション2価格', default=0)
     option3_title = models.CharField('オプション3', max_length=100, blank=True, null=True)
     option3_price = models.IntegerField('オプション3価格', default=0)
-    total_price = models.IntegerField('合計')
     ordered = models.BooleanField('注文完了', default=False)
+
+    def get_total_item_price(self):
+        return self.size_price + self.flavor_price + self.flavor2_price + self.option_price + self.option2_price + self.option3_price
 
     def __str__(self):
         return f'{self.user.name}　{self.size_title}'

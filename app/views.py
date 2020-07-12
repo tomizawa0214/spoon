@@ -38,9 +38,11 @@ class OrderThanksView(LoginRequiredMixin, View):
 class OrderConfirmView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         # ログインユーザーの注文未完了レコードをすべて取得
-        cart_data = Cart.objects.filter(user=request.user, ordered=False)
-        # 注文合計金額を取得
-        get_total_price = cart_data.order_by('id').last().total_price
+        cart_data = Cart.objects.filter(user=request.user, ordered=False).order_by('id')
+        # 上記レコードの各合計値をリストで取得
+        total_price = [i.get_total_item_price() for i in cart_data]
+        # 総合計値を取得
+        get_total_price = sum(total_price)
 
         return render(request, 'app/order_confirm.html', {
             'cart_data': cart_data,
@@ -60,9 +62,11 @@ class OrderConfirmView(LoginRequiredMixin, View):
             time = receipt_form.cleaned_data['time']
 
             # ログインユーザーの注文未完了レコードをすべて取得
-            cart_data = Cart.objects.filter(user=request.user, ordered=False)
-            # 注文合計金額を取得
-            get_total_price = cart_data.order_by('id').last().total_price
+            cart_data = Cart.objects.filter(user=request.user, ordered=False).order_by('id')
+            # 上記レコードの各合計値をリストで取得
+            total_price = [i.get_total_item_price() for i in cart_data]
+            # 総合計値を取得
+            get_total_price = sum(total_price)
 
             return render(request, 'app/order_confirm.html', {
                 'name': name,
@@ -109,16 +113,11 @@ class OrderView(LoginRequiredMixin, View):
         option_item = OptionItem.objects.all()
 
         # ログインユーザーの注文未完了レコードをすべて取得
-        cart_data = Cart.objects.filter(user=request.user, ordered=False)
-
-        # 最新の合計金額を取得。初期値は0
-        if cart_data.exists():
-            get_total_price = cart_data.order_by('id').last().total_price
-        else:
-            get_total_price = 0
-        
-        # 最新レコードのidを取得
-        cart_id = cart_data.values_list('id', flat=True).last()
+        cart_data = Cart.objects.filter(user=request.user, ordered=False).order_by('id')
+        # 上記レコードの各合計値をリストで取得
+        total_price = [i.get_total_item_price() for i in cart_data]
+        # 総合計値を取得
+        get_total_price = sum(total_price)
 
         return render(request, 'app/order.html', {
             'size_item': size_item,
@@ -126,7 +125,6 @@ class OrderView(LoginRequiredMixin, View):
             'option_item': option_item,
             'cart_data': cart_data,
             'get_total_price': get_total_price,
-            'cart_id': cart_id,
         })
 
 
@@ -144,10 +142,6 @@ class AddOrderView(LoginRequiredMixin, View):
         option2_price = request.POST.get('option2_price')
         option3_title = request.POST.get('option3_title')
         option3_price = request.POST.get('option3_price')
-        total_price = request.POST.get('total_price')
-
-        # 合計値のカンマを除いて整数値に変換
-        total_price = int(total_price.replace(',', ''))
 
         cart = Cart()
         cart.user = request.user
@@ -163,15 +157,16 @@ class AddOrderView(LoginRequiredMixin, View):
         cart.option2_price = option2_price
         cart.option3_title = option3_title
         cart.option3_price = option3_price
-        cart.total_price = total_price
         cart.save()
 
         # ログインユーザーの注文未完了レコードをすべて取得
-        cart_data = Cart.objects.filter(user=request.user, ordered=False)
-        # 最新の合計金額を取得
-        get_total_price = cart_data.order_by('id').last().total_price
+        cart_data = Cart.objects.filter(user=request.user, ordered=False).order_by('id')
+        # 上記レコードの各合計値をリストで取得
+        total_price = [i.get_total_item_price() for i in cart_data]
+        # 総合計値を取得
+        get_total_price = sum(total_price)
         # 最新レコードのidを取得
-        cart_id = cart_data.values_list('id', flat=True).last()
+        cart_id = cart_data.last().id
 
         data = {
             'size_title': size_title,
@@ -186,7 +181,6 @@ class AddOrderView(LoginRequiredMixin, View):
             'option2_price': option2_price,
             'option3_title': option3_title,
             'option3_price': option3_price,
-            'total_price': total_price,
             'get_total_price': get_total_price,
             'cart_id': cart_id,
         }
@@ -197,28 +191,16 @@ class DeleteOrderView(LoginRequiredMixin, View):
     def post(self, request, *args, **kwargs):
         id_value = request.POST.get('id_value')
 
-        del_record = Cart.objects.filter(user=request.user, pk=id_value) # 削除するレコードを取得
-        size_price = del_record.values_list('size_price', flat=True)[0] # 削除するレコードのサイズ金額を取得
-        flavor_price = del_record.values_list('flavor_price', flat=True)[0] # 削除するレコードのフレーバー金額を取得
-        flavor2_price = del_record.values_list('flavor2_price', flat=True)[0] # 削除するレコードのフレーバー金額を取得
-        option_price = del_record.values_list('option_price', flat=True)[0]  # 削除するレコードのオプション金額を取得
-        option2_price = del_record.values_list('option2_price', flat=True)[0] # 削除するレコードのオプション金額を取得
-        option3_price = del_record.values_list('option3_price', flat=True)[0] # 削除するレコードのオプション金額を取得
-
-        # ログインユーザーの注文未完了レコードをすべて取得
-        cart_data = Cart.objects.filter(user=request.user, ordered=False)
-        # 最新レコードの合計値から削除分の金額を引いて更新
-        cart_latest = cart_data.order_by('id').last()
-        cart_latest.total_price = cart_latest.total_price - (
-                size_price + flavor_price + flavor2_price + option_price + option2_price + option3_price
-            )
-        cart_latest.save()
-
-        # 指定レコードを削除
+        # 該当レコードを削除
+        del_record = Cart.objects.filter(user=request.user, pk=id_value)
         del_record.delete()
 
-        # 最新レコードの合計値を取得
-        get_total_price = cart_latest.total_price
+        # ログインユーザーの注文未完了レコードをすべて取得
+        cart_data = Cart.objects.filter(user=request.user, ordered=False).order_by('id')
+        # 上記レコードの各合計値をリストで取得
+        total_price = [i.get_total_item_price() for i in cart_data]
+        # 総合計値を取得
+        get_total_price = sum(total_price)
 
         data = {
             'get_total_price': get_total_price,

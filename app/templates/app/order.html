@@ -356,7 +356,6 @@
         body.append('option2_price', Number(option2_price.textContent.slice(1)))
         body.append('option3_title', option3_title.textContent);
         body.append('option3_price', Number(option3_price.textContent.slice(1)))
-        body.append('total_price', total_price.textContent);
 
         fetch(url, {
             method: 'POST',
