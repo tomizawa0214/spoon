@@ -51,13 +51,13 @@
     <span>ORDER HISTORY</span>
 </div>
 
-<div class="row">
+<div class="row justify-content-center">
     {% for order in order_data %}
     <div class="col-4">
         <table>
             <tr>
                 <th class="text-left pr-4 border-bottom">注文日時</th>
-                <td class="border-bottom">{{ order.created }}</td>
+                <td class="border-bottom">{{ order.created | date:"Y年n月j日(l) G:i" | cut:"曜日" }}</td>
             </tr>
             <tr>
                 <th class="text-left border-bottom">受取日時</th>
@@ -71,40 +71,42 @@
                 </tr>
                 <tr>
                     <td>{{ cart.flavor_title }}</td>
-                    <td>￥{{ cart.flavor_price }}</td>
+                    <td>+￥{{ cart.flavor_price }}</td>
                 </tr>
                 <tr>
                     <td>{{ cart.flavor2_title }}</td>
                     {% if cart.flavor2_title != "" %}
-                        <td>￥{{ cart.flavor2_price }}</td>
+                        <td>+￥{{ cart.flavor2_price }}</td>
                     {% endif %}
                 </tr>
                 <tr>
                     <td>{{ cart.option_title }}</td>
                     {% if cart.option_title != "" %}
-                        <td>￥{{ cart.option_price }}</td>
+                        <td>+￥{{ cart.option_price }}</td>
                     {% endif %}
                 </tr>
                 <tr>
                     <td>{{ cart.option2_title }}</td>
                     {% if cart.option2_title != "" %}
-                        <td>￥{{ cart.option2_price }}</td>
+                        <td>+￥{{ cart.option2_price }}</td>
                     {% endif %}
                 </tr>
                 <tr>
                     <td>{{ cart.option3_title }}</td>
                     {% if cart.option3_title != "" %}
-                        <td>￥{{ cart.option3_price }}</td>
+                        <td>+￥{{ cart.option3_price }}</td>
                     {% endif %}
                 </tr>
             {% endfor %}
                 <tr>
                     <th>合計金額</th>
-                    <td>￥{{ order.get_total|intcomma }}</td>
+                    <td>￥{{ order.get_total | intcomma }}</td>
                 </tr>
         </table>
         <a id="{{ order.id }}" href="{% url 'order_user' %}" onclick="sameOrder(this);">再度注文</a>
     </div>
+    {% empty %}
+            <p class="text-center">現在ご注文履歴はありません。<br>ぜひお買い物をお楽しみください。</p>
     {% endfor %}
 </div>
 
@@ -133,7 +135,7 @@
     };
     const csrftoken = getCookie('csrftoken');
 
-    // カート注文の削除をクリックで発動
+    // 再注文処理
     const sameOrder = (ele) => {
         let id_value = ele.id;
         const url = '{% url "profile" %}';
@@ -150,6 +152,5 @@
             }
         })
     }
-
 </script>
 {% endblock %}

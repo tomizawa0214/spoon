@@ -5,8 +5,10 @@ from .forms import ReceiptForm
 from .models import Order, Cart, SizeItem, FlavorItem, OptionItem
 from accounts.models import CustomUser
 from accounts.forms import ProfileForm
+from django.conf import settings
+from django.core.mail import BadHeaderError, EmailMessage
 from django.http import JsonResponse, HttpResponse
-import datetime
+from django.template.loader import render_to_string
 
 
 class OrderThanksView(LoginRequiredMixin, View):
@@ -23,7 +25,7 @@ class OrderThanksView(LoginRequiredMixin, View):
         order.receipt = request.POST.get('receipt')
         order.save()
 
-        # ログインユーザーの注文未完了カートを登録
+        # ログインユーザーの注文未完了カートをオーダーに登録
         cart_data = Cart.objects.filter(user=request.user, ordered=False)
         order.cart.set(cart_data)
 
@@ -31,6 +33,25 @@ class OrderThanksView(LoginRequiredMixin, View):
         for cart in cart_data:
             cart.ordered = True
             cart.save()
+
+        order_latest = Order.objects.filter(user=request.user).last()
+        order_id = Order.objects.order_by('id').last()
+
+        context = {
+            'order_latest': order_latest,
+            'order_id': order_id,
+        }
+
+        subject = render_to_string('app/mail_template/order_subject.txt', context)
+        message = render_to_string('app/mail_template/order_message.txt', context)
+        to_list = [order.email]
+        bcc_list = [settings.EMAIL_HOST_USER]
+
+        try:
+            message = EmailMessage(subject=subject, body=message, to=to_list, bcc=bcc_list)
+            message.send()
+        except BadHeaderError:
+            return HttpResponse("無効なヘッダが検出されました。")
 
         return redirect('order_thanks')
 

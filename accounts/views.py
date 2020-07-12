@@ -10,9 +10,9 @@ from django.contrib.auth.forms import PasswordChangeForm, PasswordResetForm, Set
 from django.contrib.auth.views import PasswordChangeView, PasswordChangeDoneView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.sites.shortcuts import get_current_site
-from django.core.mail import send_mail
+from django.core.mail import BadHeaderError, send_mail, EmailMessage
 from django.core.signing import BadSignature, SignatureExpired, loads, dumps
-from django.http import Http404, HttpResponseBadRequest
+from django.http import Http404, HttpResponseBadRequest, HttpResponse
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy
 User = get_user_model()
@@ -24,10 +24,12 @@ class DeleteCompleteView(LoginRequiredMixin, View):
         subject = render_to_string('accounts/mail_template/delete_subject.txt', {'user': user})
         message = render_to_string('accounts/mail_template/delete_message.txt', {'user': user})
 
-        send_mail(subject, message, None, [user.email])
+        try:
+            send_mail(subject, message, None, [user.email])
+        except BadHeaderError:
+            return HttpResponse("無効なヘッダが検出されました。")
 
         # ログインしている現在のユーザーを削除
-        user = self.request.user
         user.delete()
 
         return render(request, 'accounts/delete_complete.html')
@@ -53,7 +55,7 @@ class EmailChangeView(LoginRequiredMixin, View):
             user = self.request.user
             new_email = form.cleaned_data['email']
             
-            current_site = get_current_site(self.request)
+            # current_site = get_current_site(self.request)
             # domain = current_site.domain
             domain = '127.0.0.1:8000'
             context = {
@@ -66,7 +68,11 @@ class EmailChangeView(LoginRequiredMixin, View):
             subject = render_to_string('accounts/mail_template/email_change_subject.txt', context)
             message = render_to_string('accounts/mail_template/email_change_message.txt', context)
 
-            send_mail(subject, message, None, [new_email])
+            try:
+                send_mail(subject, message, None, [new_email])
+            except BadHeaderError:
+                return HttpResponse("無効なヘッダが検出されました。")
+            
             return redirect('email_change_done')
         
         return render(request, 'accounts/email_change.html', {
@@ -192,7 +198,7 @@ class SignupConfirmView(View):
         user.is_active = False
         user.save()
         
-        current_site = get_current_site(self.request)
+        # current_site = get_current_site(self.request)
         # domain = current_site.domain
         domain = '127.0.0.1:8000'
         context = {
@@ -205,7 +211,11 @@ class SignupConfirmView(View):
         subject = render_to_string('accounts/mail_template/signup_subject.txt', context)
         message = render_to_string('accounts/mail_template/signup_message.txt', context)
 
-        user.email_user(subject, message)
+        try:
+            user.email_user(subject, message)
+        except BadHeaderError:
+            return HttpResponse("無効なヘッダが検出されました。")
+
         return redirect('account_signup_done')
 
 
