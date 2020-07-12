@@ -1,4 +1,5 @@
 {% extends "app/base.html" %}
+{% load humanize %}
 
 {% block content %}
 <div class="profile-title">
@@ -45,6 +46,68 @@
         </a>
     </div>
 </div>
+
+<div class="profile-title">
+    <span>ORDER HISTORY</span>
+</div>
+
+<div class="row">
+    {% for order in order_data %}
+    <div class="col-4">
+        <table>
+            <tr>
+                <th class="text-left pr-4 border-bottom">注文日時</th>
+                <td class="border-bottom">{{ order.created }}</td>
+            </tr>
+            <tr>
+                <th class="text-left border-bottom">受取日時</th>
+                <td class="border-bottom">{{ order.receipt }}</td>
+            </tr>
+            {% for cart in order.cart.all %}
+                <tr>
+                    <th class="text-left border-bottom" rowspan="6">注文商品</th>
+                    <td>{{ cart.size_title }}</td>
+                    <td>￥{{ cart.size_price }}</td>
+                </tr>
+                <tr>
+                    <td>{{ cart.flavor_title }}</td>
+                    <td>￥{{ cart.flavor_price }}</td>
+                </tr>
+                <tr>
+                    <td>{{ cart.flavor2_title }}</td>
+                    {% if cart.flavor2_title != "" %}
+                        <td>￥{{ cart.flavor2_price }}</td>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <td>{{ cart.option_title }}</td>
+                    {% if cart.option_title != "" %}
+                        <td>￥{{ cart.option_price }}</td>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <td>{{ cart.option2_title }}</td>
+                    {% if cart.option2_title != "" %}
+                        <td>￥{{ cart.option2_price }}</td>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <td>{{ cart.option3_title }}</td>
+                    {% if cart.option3_title != "" %}
+                        <td>￥{{ cart.option3_price }}</td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+                <tr>
+                    <th>合計金額</th>
+                    <td>￥{{ order.cart.all.last.total_price|intcomma }}</td>
+                </tr>
+        </table>
+    </div>
+    
+    {% endfor %}
+</div>
+
 {% endblock %}
 
 {% block extrajs %}

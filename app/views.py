@@ -23,12 +23,14 @@ class OrderThanksView(LoginRequiredMixin, View):
         order.receipt = request.POST.get('receipt')
         order.save()
 
-        # ログインユーザーの注文未完了レコードをすべて取得
-        cart = Cart.objects.filter(user=request.user, ordered=False)
-        for cart_data in cart:
-            cart_data.ordered = True
-            cart_data.timestamp = datetime.datetime.now()
-            cart_data.save()
+        # ログインユーザーの注文未完了カートを登録
+        cart_data = Cart.objects.filter(user=request.user, ordered=False)
+        order.cart.set(cart_data)
+
+        # ログインユーザーの注文未完了レコードをすべて完了にする
+        for cart in cart_data:
+            cart.ordered = True
+            cart.save()
 
         return redirect('order_thanks')
 
@@ -38,7 +40,7 @@ class OrderConfirmView(LoginRequiredMixin, View):
         # ログインユーザーの注文未完了レコードをすべて取得
         cart_data = Cart.objects.filter(user=request.user, ordered=False)
         # 注文合計金額を取得
-        get_total_price = cart_data.order_by("id").last().total_price
+        get_total_price = cart_data.order_by('id').last().total_price
 
         return render(request, 'app/order_confirm.html', {
             'cart_data': cart_data,
@@ -60,7 +62,7 @@ class OrderConfirmView(LoginRequiredMixin, View):
             # ログインユーザーの注文未完了レコードをすべて取得
             cart_data = Cart.objects.filter(user=request.user, ordered=False)
             # 注文合計金額を取得
-            get_total_price = cart_data.order_by("id").last().total_price
+            get_total_price = cart_data.order_by('id').last().total_price
 
             return render(request, 'app/order_confirm.html', {
                 'name': name,

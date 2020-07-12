@@ -2,6 +2,7 @@ from django.views import View
 from accounts.forms import ProfileForm, SignupUserForm, EmailChangeForm
 from django.shortcuts import render, redirect
 from accounts.models import CustomUser
+from app.models import Cart, Order
 from allauth.account import views
 from django.conf import settings
 from django.contrib.auth import get_user_model
@@ -292,7 +293,11 @@ class ProfileEditView(LoginRequiredMixin, View):
 class ProfileView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         user_data = CustomUser.objects.get(id=request.user.id)
+        order_data = Order.objects.filter(user=request.user)
+
+        
 
         return render(request, 'accounts/profile.html', {
             'user_data': user_data,
+            'order_data': order_data,
         })

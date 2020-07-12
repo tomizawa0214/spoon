@@ -54,7 +54,6 @@ class Cart(models.Model):
     option3_title = models.CharField('オプション3', max_length=100, blank=True, null=True)
     option3_price = models.IntegerField('オプション3価格', default=0)
     total_price = models.IntegerField('合計')
-    timestamp = models.DateTimeField('注文時刻', default=timezone.now)
     ordered = models.BooleanField('注文完了', default=False)
 
     def __str__(self):
@@ -63,12 +62,13 @@ class Cart(models.Model):
 
 class Order(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    cart = models.ManyToManyField(Cart, verbose_name='カート')
     name = models.CharField('お名前', max_length=30)
     furigana = models.CharField('フリガナ', max_length=30)
     email = models.EmailField('メールアドレス', max_length=256)
     tel = models.CharField('電話番号', max_length=13)
     receipt = models.CharField('受取日時', max_length=30)
-    created = models.DateTimeField('注文受付日', default=timezone.now)
+    created = models.DateTimeField('注文日時', default=timezone.now)
 
     def __str__(self):
-        return f'{self.name}　{self.created}'
+        return f'{self.name}　{self.receipt}'
