@@ -343,6 +343,9 @@ class ProfileView(LoginRequiredMixin, View):
                     flavoritem = FlavorItem.objects.get(title=same_cart.flavor2_title)
                     cart.flavor2_title = flavoritem.title
                     cart.flavor2_price = flavoritem.price
+                elif same_cart.flavor2_title == '':
+                    cart.flavor2_title = ''
+                    cart.flavor2_price = 0
                 else:
                     return JsonResponse({'jump': 'cart_none'})
 
@@ -351,6 +354,9 @@ class ProfileView(LoginRequiredMixin, View):
                     optionitem = OptionItem.objects.get(title=same_cart.option_title)
                     cart.option_title = optionitem.title
                     cart.option_price = optionitem.price
+                elif same_cart.option_title == '':
+                    cart.option_title = ''
+                    cart.option_price = 0
                 else:
                     return JsonResponse({'jump': 'cart_none'})
 
@@ -359,6 +365,9 @@ class ProfileView(LoginRequiredMixin, View):
                     optionitem = OptionItem.objects.get(title=same_cart.option2_title)
                     cart.option2_title = optionitem.title
                     cart.option2_price = optionitem.price
+                elif same_cart.option2_title == '':
+                    cart.option2_title = ''
+                    cart.option2_price = 0
                 else:
                     return JsonResponse({'jump': 'cart_none'})
 
@@ -367,6 +376,9 @@ class ProfileView(LoginRequiredMixin, View):
                     optionitem = OptionItem.objects.get(title=same_cart.option3_title)
                     cart.option3_title = optionitem.title
                     cart.option3_price = optionitem.price
+                elif same_cart.option3_title == '':
+                    cart.option3_title = ''
+                    cart.option3_price = 0
                 else:
                     return JsonResponse({'jump': 'cart_none'})
                 
