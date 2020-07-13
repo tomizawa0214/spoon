@@ -20,7 +20,7 @@
             <div class="row">
                 {% for size in size_item %}
                 <div class="col-3 selection-group">
-                    <input id="size_{{ size.id }}" type="checkbox" name="size" value="{{ size.title }} {{ size.price }}">
+                    <input id="size_{{ size.id }}" type="checkbox" name="size" value="{{ size.title }} {{ size.price }}" onclick="sizeChk(this);">
                     <label for="size_{{ size.id }}">
                         <img src="{{ size.image.url }}">
                         <p class="m-0">{{ size.title }}</p>
@@ -34,7 +34,7 @@
             <div class="row">
                 {% for flavor in flavor_item %}
                 <div class="col-3 selection-group">
-                    <input id="flavor_{{ flavor.id }}" type="checkbox" name="flavor" value="{{ flavor.title }} {{ flavor.price }}" onclick="to_check()">
+                    <input id="flavor_{{ flavor.id }}" type="checkbox" name="flavor" value="{{ flavor.title }} {{ flavor.price }}" onclick="flavorChk(this);">
                     <label for="flavor_{{ flavor.id }}">
                         <img src="{{ flavor.image.url }}">
                         <p class="m-0">{{ flavor.entitle }}</p>
@@ -172,41 +172,64 @@
     // // 登録フィールドを取得
     const postArea = document.getElementById('posts')
 
-    // フレーバーとオプションの選択を無効化
+    // 選択解除
     const invalid = (type) => {
         for ( let i = 0; i < type.length; i++ ) {
-            type[i].disabled = true;
-            flavor[i].checked = false;
+            type[i].checked = false;
         }
     }
-    invalid(flavor);
-    invalid(option);
 
-    // サイズの選択を択一に設定
-    const ckbox1 = () => {
-        size[1].checked=false;
-        size[2].checked=false;
-        invalid(flavor);
-        invalid(option);
+    // サイズをクリックで発動
+    const sizeChk = (ele) => {
+        // 選択されたサイズのidを取得
+        var size_chk = document.getElementById(ele.id);
+        // サイズが選択されていると発動
+        if ( size_chk.checked ) {
+            // すべてのチェックを一旦外す
+            invalid(size);
+            invalid(flavor);
+            invalid(option);
+            // 該当だけチェックを付け直す
+            size_chk.checked = true;
+        }
         to_check()
     }
-    const ckbox2 = () => {
-        size[0].checked=false;
-        size[2].checked=false;
-        invalid(flavor);
-        invalid(option);
+
+    // フレーバーをクリックで発動
+    const flavorChk = (ele) => {
+        // 選択されたフレーバーのidを取得
+        let flavor_chk = document.getElementById(ele.id);
+        // ダブルサイズが選択されている場合の処理
+        if ( size[2].checked ) {
+            // 2個までは選択可
+            let count = 0;
+            for ( let i = 0; i < flavor.length; i++ ) {
+                if ( flavor[i].checked ) {
+                    count++;
+                }
+            }
+            // 既に2個選択されている場合
+            if ( count == 3 ) {
+                // すべてのチェックを一旦外す
+                invalid(flavor);
+                // 該当だけチェックを付け直す
+                flavor_chk.checked = true;
+            }
+        } else {
+            // 選択可に変更
+            for ( let j = 0; j < flavor.length; j++ ) {
+                flavor[j].disabled = false;
+            }
+            // フレーバーが選択されていると発動
+            if ( flavor_chk.checked ) {
+                // すべてのチェックを一旦外す
+                invalid(flavor);
+                // 該当だけチェックを付け直す
+                flavor_chk.checked = true;
+            }
+        }
         to_check()
     }
-    const ckbox3 = () => {
-        size[0].checked=false;
-        size[1].checked=false;
-        invalid(flavor);
-        invalid(option);
-        to_check()
-    }
-    size[0].onclick = ckbox1;
-    size[1].onclick = ckbox2;
-    size[2].onclick = ckbox3;
 
     // サイズ・フレーバー・オプションのいずれかを選択すると発動
     const to_check = () => {
@@ -215,67 +238,34 @@
         let flavor_total = 0;
         let option_total = 0;
 
-        // サイズの選択に合わせてフレーバーの選択を制限
-        const chk = (num) => {
-            var flag = new Array();
-            let count = 0;
-            // フレーバーが選択される毎にflagへ値を追加してカウントを1上げる
-            for ( let i = 0; i < flavor.length; i++ ) {
-                if ( flavor[i].checked ) {
-                    flag[i] = 'chk'; count++;
-                }
-            }
-            // カウントがnumになったら発動
-            // フレーバーの選択とflagの値を判定
-            if ( count == num ) {
-                for ( let j = 0; j < flavor.length; j++ ) {
-                    if ( flag[j] == 'chk' ) {
-                        flavor[j].disabled = false;
-                    } else {
-                        flavor[j].disabled = true;
-                    }
-                }
-            }
-        }
-
-        // サイズ選択時の挙動
+        // カートのサイズ項目を初期化
         size_title.textContent = '';
         size_price.textContent = '';
-        for ( let k = 0; k < size.length; k++ ) {
-            if ( size[k].checked ) {
-                // サイズが選択されたらエラーメッセージを非表示
+        // サイズ選択時の挙動
+        for ( let i = 0; i < size.length; i++ ) {
+            if ( size[i].checked ) {
+                // エラーメッセージを非表示
                 size_error.className = 'd-none';
-                // サイズが選択されたらフレーバーの選択を有効化
-                for ( let l = 0; l < flavor.length; l++ ) {
-                    flavor[l].disabled = false;
-                }
-                // サイズフォームのバリュー値を取得
-                let size_value = size[k].value.split(' ');
+                // バリュー値を取得してカートに表示
+                let size_value = size[i].value.split(' ');
                 size_title.textContent = size_value[0];
                 size_price.textContent = '￥' + size_value[1];
                 size_total = Number(size_value[1]);
-                if ( k < 2 ) {
-                    chk(1);
-                } else if ( k == 2 ) {
-                    chk(2);
-                }
             }
         }
 
-        // フレーバー選択時の挙動
+        // カートのフレーバー項目を初期化
         flavor_title.textContent = '';
         flavor2_title.textContent = '';
         flavor_price.textContent = '';
         flavor2_price.textContent = '';
-        for ( let m = 0; m < flavor.length; m++ ) {
-            if ( flavor[m].checked ) {
-                // フレーバーが選択されたらエラーメッセージを非表示
+        // フレーバー選択時の挙動
+        for ( let j = 0; j < flavor.length; j++ ) {
+            if ( flavor[j].checked ) {
+                // エラーメッセージを非表示
                 flavor_error.className = 'd-none';
-                // フレーバーが選択されたらオプションの選択を有効化
-                for ( let n = 0; n < option.length; n++ ) {
-                    option[n].disabled = false;
-                }
-                let flavor_value = flavor[m].value.split(' ');
+                // バリュー値を取得してカートに表示
+                let flavor_value = flavor[j].value.split(' ');
                 if ( flavor_title.textContent == '' && flavor2_title.textContent == '' ) {
                     flavor_title.textContent = flavor_value[0];
                     flavor_price.textContent = '￥' + flavor_value[1];
@@ -294,16 +284,16 @@
         option2_price.textContent = '';
         option3_title.textContent = '';
         option3_price.textContent = '';
-        for ( let o = 0; o < option.length; o++ ) {
-            if ( option[o].checked ) {
-                let option_value = option[o].value.split(' ');
-                if ( o == 0 ) {
+        for ( let k = 0; k < option.length; k++ ) {
+            if ( option[k].checked ) {
+                let option_value = option[k].value.split(' ');
+                if ( k == 0 ) {
                     option_title.textContent = option_value[0];
                     option_price.textContent = '￥' + option_value[1];
-                } else if ( o == 1 ) {
+                } else if ( k == 1 ) {
                     option2_title.textContent = option_value[0];
                     option2_price.textContent = '￥' + option_value[1];
-                } else if ( o == 2 ) {
+                } else if ( k == 2 ) {
                     option3_title.textContent = option_value[0];
                     option3_price.textContent = '￥' + option_value[1];
                 }
