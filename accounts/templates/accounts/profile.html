@@ -51,6 +51,8 @@
     <span>ORDER HISTORY</span>
 </div>
 
+<p>{{ error }}</p>
+
 <div class="row justify-content-center">
     {% for order in order_data %}
     <div class="col-4">
@@ -103,12 +105,15 @@
                     <td>￥{{ order.get_total | intcomma }}</td>
                 </tr>
         </table>
-        <a id="{{ order.id }}" href="{% url 'order_user' %}" onclick="sameOrder(this);">再度注文</a>
+        <button type="button" id="{{ order.id }}" onclick="sameOrder(this);">再度注文</button>
+        <!-- <a id="{{ order.id }}" href="{% url 'order_user' %}" onclick="sameOrder(this);">再度注文</a> -->
+        <!-- <a id="{{ order.id }}" href="javascript:void(0);" onclick="sameOrder(this);">再度注文</a> -->
     </div>
     {% empty %}
             <p class="text-center">現在ご注文履歴はありません。<br>ぜひお買い物をお楽しみください。</p>
     {% endfor %}
 </div>
+<p class="text-center">※現在価格はご注文当時から変更となっている場合がございます。<br>※現在お取り扱いの無い商品が含まれる場合には再注文いたしかねます。ご了承ください。</p>
 
 {% endblock %}
 
@@ -138,6 +143,8 @@
     // 再注文処理
     const sameOrder = (ele) => {
         let id_value = ele.id;
+        var element = document.getElementById(id_value);
+
         const url = '{% url "profile" %}';
         // URLのクエリパラメータを管理
         const body = new URLSearchParams();
@@ -149,6 +156,17 @@
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
                 'X-CSRFToken': csrftoken,
+            }
+        }).then(response => {
+            // JSON形式に変換
+            return response.json();
+        }).then(response => {
+            // 再注文OKならばオーダー画面へ
+            if ( response.jump == 'complete' ) {
+                window.location.href = '{% url "order" %}';
+            // 再注文NGならば案内画面へ
+            } else {
+                window.location.href = response.jump;
             }
         })
     }

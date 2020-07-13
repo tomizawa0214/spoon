@@ -1,0 +1,8 @@
+{% extends "app/base.html" %}
+
+{% block content %}
+<div class="text-center">
+    <p>現在お取り扱いの無い商品が含まれているため、再注文がキャンセルされました。<br>大変恐れ入りますが、オーダー画面よりご注文をお願いします。</p>
+    <a href="{% url 'order' %}">オーダー画面へ</a>
+</div>
+{% endblock %}

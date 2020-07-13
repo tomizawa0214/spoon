@@ -2,7 +2,7 @@ from django.views import View
 from accounts.forms import ProfileForm, SignupUserForm, EmailChangeForm
 from django.shortcuts import render, redirect
 from accounts.models import CustomUser
-from app.models import Cart, Order
+from app.models import SizeItem, FlavorItem, OptionItem, Cart, Order
 from allauth.account import views
 from django.conf import settings
 from django.contrib.auth import get_user_model
@@ -12,9 +12,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import BadHeaderError, send_mail, EmailMessage
 from django.core.signing import BadSignature, SignatureExpired, loads, dumps
-from django.http import Http404, HttpResponseBadRequest, HttpResponse
+from django.http import Http404, HttpResponseBadRequest, HttpResponse, JsonResponse
 from django.template.loader import render_to_string
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 User = get_user_model()
 
 
@@ -321,18 +321,60 @@ class ProfileView(LoginRequiredMixin, View):
             for same_cart in order.cart.all():
                 cart = Cart()
                 cart.user = request.user
-                cart.size_title = same_cart.size_title
-                cart.size_price = same_cart.size_price
-                cart.flavor_title = same_cart.flavor_title
-                cart.flavor_price = same_cart.flavor_price
-                cart.flavor2_title = same_cart.flavor2_title
-                cart.flavor2_price = same_cart.flavor2_price
-                cart.option_title = same_cart.option_title
-                cart.option_price = same_cart.option_price
-                cart.option2_title = same_cart.option2_title
-                cart.option2_price = same_cart.option2_price
-                cart.option3_title = same_cart.option3_title
-                cart.option3_price = same_cart.option3_price
-                cart.save()
 
-        return redirect('order_user')
+                # データベースの存在を確認（サイズ）
+                if SizeItem.objects.filter(title=same_cart.size_title).exists():
+                    sizeitem = SizeItem.objects.get(title=same_cart.size_title)
+                    cart.size_title = sizeitem.title 
+                    cart.size_price = sizeitem.price
+                else:
+                    return JsonResponse({'jump': 'cart_none'})
+
+                # データベースの存在を確認（フレーバー）
+                if FlavorItem.objects.filter(title=same_cart.flavor_title, is_active=True).exists():
+                    flavoritem = FlavorItem.objects.get(title=same_cart.flavor_title)
+                    cart.flavor_title = flavoritem.title
+                    cart.flavor_price = flavoritem.price
+                else:
+                    return JsonResponse({'jump': 'cart_none'})
+
+                # データベースの存在を確認（フレーバー2）
+                if FlavorItem.objects.filter(title=same_cart.flavor2_title, is_active=True).exists():
+                    flavoritem = FlavorItem.objects.get(title=same_cart.flavor2_title)
+                    cart.flavor2_title = flavoritem.title
+                    cart.flavor2_price = flavoritem.price
+                else:
+                    return JsonResponse({'jump': 'cart_none'})
+
+                # データベースの存在を確認（オプション）
+                if OptionItem.objects.filter(title=same_cart.option_title).exists():
+                    optionitem = OptionItem.objects.get(title=same_cart.option_title)
+                    cart.option_title = optionitem.title
+                    cart.option_price = optionitem.price
+                else:
+                    return JsonResponse({'jump': 'cart_none'})
+
+                # データベースの存在を確認（オプション2）
+                if OptionItem.objects.filter(title=same_cart.option2_title).exists():
+                    optionitem = OptionItem.objects.get(title=same_cart.option2_title)
+                    cart.option2_title = optionitem.title
+                    cart.option2_price = optionitem.price
+                else:
+                    return JsonResponse({'jump': 'cart_none'})
+
+                # データベースの存在を確認（オプション3）
+                if OptionItem.objects.filter(title=same_cart.option3_title).exists():
+                    optionitem = OptionItem.objects.get(title=same_cart.option3_title)
+                    cart.option3_title = optionitem.title
+                    cart.option3_price = optionitem.price
+                else:
+                    return JsonResponse({'jump': 'cart_none'})
+                
+                cart.save()
+                
+        return JsonResponse({'jump': 'complete'})
+
+
+class CartNoneView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'accounts/cart_none.html')

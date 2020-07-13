@@ -2,6 +2,7 @@ from django.urls import path
 from accounts import views
 
 urlpatterns = [
+    path('profile/cart_none', views.CartNoneView.as_view(), name='cart_none'),
     path('delete/confirm', views.DeleteConfirmView.as_view(), name='delete_confirm'),
     path('delete/complete', views.DeleteCompleteView.as_view(), name='delete_complete'),
     path('email_change/', views.EmailChangeView.as_view(), name='email_change'),
