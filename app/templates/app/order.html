@@ -495,7 +495,7 @@
                 e.preventDefault(); // ページ遷移をキャンセル
                 flavor_error.className = 'd-block text-center';
                 flavor_error.style.color = 'red';
-                flavor_error.innerHTML = '※ミニサイズ・シングルサイズの場合はフレーバーを1つ選択してください<br>※ダブルサイズの場合はフレーバーを2つ選択してください';
+                flavor_error.innerHTML = '※フレーバーを選択してください<br>※ダブルサイズの場合は2つ選択できます';
             } else if ( size_title.textContent != '' && flavor_title.textContent != '' ) {
                 cartRegi();
             }
@@ -518,7 +518,7 @@
         } else if ( flavor_title.textContent == '' ) {
             flavor_error.className = 'd-block text-center';
             flavor_error.style.color = 'red';
-            flavor_error.innerHTML = '※ミニサイズ・シングルサイズの場合はフレーバーを1つ選択してください<br>※ダブルサイズの場合はフレーバーを2つ選択してください';
+            flavor_error.innerHTML = '※フレーバーを選択してください<br>※ダブルサイズの場合は2つ選択できます';
         // サイズもフレーバーも選択されていれば発動
         } else {
             cartRegi();
