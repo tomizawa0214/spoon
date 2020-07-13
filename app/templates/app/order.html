@@ -216,10 +216,6 @@
                 flavor_chk.checked = true;
             }
         } else {
-            // 選択可に変更
-            for ( let j = 0; j < flavor.length; j++ ) {
-                flavor[j].disabled = false;
-            }
             // フレーバーが選択されていると発動
             if ( flavor_chk.checked ) {
                 // すべてのチェックを一旦外す
@@ -266,14 +262,36 @@
                 flavor_error.className = 'd-none';
                 // バリュー値を取得してカートに表示
                 let flavor_value = flavor[j].value.split(' ');
+
+                // フレーバー未選択の場合
                 if ( flavor_title.textContent == '' && flavor2_title.textContent == '' ) {
-                    flavor_title.textContent = flavor_value[0];
-                    flavor_price.textContent = '￥' + flavor_value[1];
-                } else if ( flavor2_title.textContent == '' ) {
+                    // ダブルサイズ選択の場合
+                    if ( size[2].checked ) {
+                        flavor_title.textContent = flavor_value[0];
+                        flavor_price.textContent = '￥' + flavor_value[1];
+                        flavor2_title.textContent = flavor_value[0];
+                        flavor2_price.textContent = '￥' + flavor_value[1];
+                    } else {
+                        flavor_title.textContent = flavor_value[0];
+                        flavor_price.textContent = '￥' + flavor_value[1];
+                    }
+                // フレーバーが1つ選択されている場合
+                } else if ( flavor_title.textContent != '' ) {
                     flavor2_title.textContent = flavor_value[0];
                     flavor2_price.textContent = '￥' + flavor_value[1];
                 }
-                flavor_total += Number(flavor_value[1]);
+
+                // ダブルでフレーバーが1つ選択されている場合の合計値
+                if ( size[2].checked && flavor_title.textContent == flavor2_title.textContent ) {
+                    flavor_total = Number(flavor_value[1])*2;
+                // ダブルで2つ目のフレーバーを選択する場合の合計値
+                } else if ( size[2].checked ) {
+                    flavor_total /= 2
+                    flavor_total += Number(flavor_value[1]);
+                // ミニorシングルでの合計値
+                } else {
+                    flavor_total += Number(flavor_value[1]);
+                }
             }
         }
 
