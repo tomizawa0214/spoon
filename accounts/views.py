@@ -389,8 +389,3 @@ class ProfileView(LoginRequiredMixin, View):
                             error.append(flag)
 
         return JsonResponse({'error': error})
-
-
-class CartNoneView(View):
-    def get(self, request, *args, **kwargs):
-        return render(request, 'accounts/cart_none.html')

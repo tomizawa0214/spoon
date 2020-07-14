@@ -1,33 +1,61 @@
 .top {
-  &__item {
-    &--image1 {
-      @include slideImage;
-      background-image: url("/static/img/slide_1.png");
+    &__item {
+        &--image1 {
+            @include slideImage;
+            background-image: url("/static/img/slide_1.png");
+        }
+        &--image2 {
+            @include slideImage;
+            background-image: url("/static/img/slide_2.png");
+        }
+        &--image3 {
+            @include slideImage;
+            background-image: url("/static/img/slide_3.png");
+        }
     }
-    &--image2 {
-      @include slideImage;
-      background-image: url("/static/img/slide_2.png");
-    }
-    &--image3 {
-      @include slideImage;
-      background-image: url("/static/img/slide_3.png");
-    }
-  }
+}
+
+.store-img {
+    width: 100%;
+}
+
+.store-name {
+    margin-top: 5px;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: .5px;
+}
+
+.store-info {
+    @include Japanese-font;
+    margin-top: 5px;
+    letter-spacing: 1.2px;
+    line-height: 26px;
+}
+
+// .snapwidget-widget {
+//     margin-top: 30px;
+// }
+
+.iswd-base {
+    margin-top: 30px;
+    border: none !important;
+    background: #FCE8EB !important;
 }
 
 // -----xs(Extra Small)-----
 @media screen and (max-width: 576px) {
-  .top {
-    &__item {
-      &--image1 {
-        height: 400px;
-      }
-      &--image2 {
-        height: 400px;
-      }
-      &--image3 {
-        height: 400px;
-      }
+    .top {
+        &__item {
+            &--image1 {
+                height: 400px;
+            }
+            &--image2 {
+                height: 400px;
+            }
+            &--image3 {
+                height: 400px;
+            }
+        }
     }
-  }
 }

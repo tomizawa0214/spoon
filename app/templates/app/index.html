@@ -1,92 +1,82 @@
 {% extends "app/base.html" %}
+{% load static %}
 
 {% block title %}
-<title>spoon | </title>
+<title>spoon | ジェラート＆焼き菓子</title>
 {% endblock %}
 
 {% block slider %}
 <div id= "slides" class="top carousel slide carousel-fade" data-ride="carousel" data-interval="3000">
-  <ul class="carousel-indicators">
-    <li data-target="#slides" data-slide-to="0" class="active"></li>
-    <li data-target="#slides" data-slide-to="1"></li>
-    <li data-target="#slides" data-slide-to="2"></li>
-  </ul>
-  <div class="top__item carousel-inner">
-    <div class="top__item--image1 carousel-item active"></div>
-    <div class="top__item--image2 carousel-item"></div>
-    <div class="top__item--image3 carousel-item"></div>
-  </div>
+    <ul class="carousel-indicators">
+        <li data-target="#slides" data-slide-to="0" class="active"></li>
+        <li data-target="#slides" data-slide-to="1"></li>
+        <li data-target="#slides" data-slide-to="2"></li>
+    </ul>
+    <div class="top__item carousel-inner">
+        <div class="top__item--image1 carousel-item active"></div>
+        <div class="top__item--image2 carousel-item"></div>
+        <div class="top__item--image3 carousel-item"></div>
+    </div>
 </div>
 {% endblock %}
 
 {% block nav %}
 <nav class="nav navbar navbar-expand">
-  <div class="nav__wrap container-fluid">
-    <ul class="navbar-nav">
-      <li>
-        <a class="nav-link" href="/">
-          PRODUCTS<br class="d-none d-sm-block">
-          <span>-商品のご案内-</span>
-        </a>
-      </li>
-      <hr>
-      <li>
-        <a class="nav-link" href="/">
-          ABOUT<br class="d-none d-sm-block">
-          <span>-当店について-</span>
-        </a>
-      </li>
-      <hr>
-      <li>
-        <a class="nav-link" href="{% url 'order' %}">
-          ORDER<br class="d-none d-sm-block">
-          <span>-ご予約注文-</span>
-        </a>
-      </li>
-      <hr>
-      <li>
-        <a class="nav-link" href="/">
-          GUIDE<br class="d-none d-sm-block">
-          <span>-ご利用方法-</span>
-        </a>
-      </li>
-      <hr>
-      <li>
-        <a class="nav-link" href="/">
-          ACCESS<br class="d-none d-sm-block">
-          <span>-店舗のご案内-</span>
-        </a>
-      </li>
-      <hr>
-      <li>
-        <a class="nav-link" href="/">
-          CONTACT<br class="d-none d-sm-block">
-          <span>-お問い合わせ-</span>
-        </a>
-      </li>
-    </ul>
-  </div>
+    <div class="nav__wrap container-fluid">
+        <ul class="navbar-nav">
+            <li>
+                <a class="nav-link" href="/">
+                    MENU<br class="d-none d-sm-block">
+                    <span>-商品のご案内-</span>
+                </a>
+            </li>
+            <hr>
+            <li>
+                <a class="nav-link" href="/">
+                    ABOUT<br class="d-none d-sm-block">
+                    <span>-お店について-</span>
+                </a>
+            </li>
+            <hr>
+            <li>
+                <a class="nav-link" href="{% url 'order' %}">
+                    ORDER<br class="d-none d-sm-block">
+                    <span>-ご予約注文-</span>
+                </a>
+            </li>
+            <hr>
+            <li>
+                <a class="nav-link" href="/">
+                    ACCESS<br class="d-none d-sm-block">
+                    <span>-お店のご案内-</span>
+                </a>
+            </li>
+            <hr>
+            <li>
+                <a class="nav-link" href="/">
+                    CONTACT<br class="d-none d-sm-block">
+                    <span>-お問い合わせ-</span>
+                </a>
+            </li>
+        </ul>
+    </div>
 </nav>
 {% endblock %}
 
 {% block content %}
-<div class="title">
-  <span>ALL CATEGORY</span>
-</div>
-<p class="title-text">各種フルーツやミルク、チョコ、ナッツなど、素材の味を生かして手作りされた16種類以上のジェラートをご用意しています。</p>
-<div class="product">
-  {% for item in object_list %}
-  <div class="product__item">
-    <div class="product__item--image">
-      <a href="/">
-        <img src="{{ item.image.url }}">
-        <p class="product__item--image--mask"></p>
-        <p class="product__item--image--caption">READ MORE</p>
-      </a>
+<div class="row">
+    <div class="col-9 pl-0">
+        <div class="title">
+            <span>WHAT'S NEW</span>
+        </div>
     </div>
-    <h4>{{ item.title }}</h4>
-    <h3>{{ item.price }}<span>円(税別)</span></h3>
-  </div>
-  {% endfor %}
+    <div class="col-3 pr-0">
+        <img class="store-img" src="{% static 'img/spoon店舗外観_ダミー.png' %}" alt="spoonお店外観">
+        <p class="store-name mb-0">spoon ジェラート＆焼き菓子</p>
+        <p class="store-info">営業時間 11:00～18:00 / 不定休<br>027-310-0112<br>群馬県高崎市菅谷町1243-10</p>
+        <!-- Instaglam -->
+        <!-- <iframe src="https://snapwidget.com/embed/850405" class="snapwidget-widget" allowtransparency="true" frameborder="0" scrolling="no" style="border:none; overflow:hidden;  width:100%; "></iframe> -->
+        <div id="insta-window" class="iswd-base" data-username="spoon_gelato" data-display-image-count="9" data-wrapper-width></div>
+    </div>
 </div>
 {% endblock %}

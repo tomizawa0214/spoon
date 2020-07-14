@@ -2,6 +2,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
 
+// $textColor: #3d4451;
+
+@mixin Japanese-font {
+  font-family: '游ゴシック', 'Yu Gothic', YuGothic, HiraKakuProN-W3, 'メイリオ', Meiryo, sans-serif;
+}
+
 @mixin slideImage {
   left: 50%;
   transform: translateX(-50%) !important;
@@ -70,6 +76,10 @@ body {
 
 main {
   margin: 50px 0 80px;
+}
+
+.title {
+  @include sectionTitle;
 }
 
 .container-fluid {
