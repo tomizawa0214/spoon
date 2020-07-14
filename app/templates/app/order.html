@@ -12,6 +12,8 @@
     <span>ORDER</span>
 </div>
 
+<p id="error" class="text-center text-danger"></p>
+
 <div class="mx-auto">
     <div class="row">
         <div class="col-9">
@@ -171,6 +173,8 @@
     const flavor_error = document.getElementById('flavor_error');
     // // 登録フィールドを取得
     const postArea = document.getElementById('posts')
+    // 再注文を受けてデータベース登録が無い場合
+    let r_order_error = document.getElementById('error');
 
     // 選択解除
     const invalid = (type) => {
@@ -242,6 +246,7 @@
             if ( size[i].checked ) {
                 // エラーメッセージを非表示
                 size_error.className = 'd-none';
+                r_order_error.className = 'd-none';
                 // バリュー値を取得してカートに表示
                 let size_value = size[i].value.split(' ');
                 size_title.textContent = size_value[0];
@@ -260,6 +265,7 @@
             if ( flavor[j].checked ) {
                 // エラーメッセージを非表示
                 flavor_error.className = 'd-none';
+                r_order_error.className = 'd-none';
                 // バリュー値を取得してカートに表示
                 let flavor_value = flavor[j].value.split(' ');
 
@@ -304,6 +310,8 @@
         option3_price.textContent = '';
         for ( let k = 0; k < option.length; k++ ) {
             if ( option[k].checked ) {
+                // エラーメッセージを非表示
+                r_order_error.className = 'd-none';
                 let option_value = option[k].value.split(' ');
                 if ( k == 0 ) {
                     option_title.textContent = option_value[0];
@@ -528,6 +536,9 @@
 
     // カート注文の削除をクリックで発動
     const delOrder = (ele) => {
+        // エラーメッセージを非表示
+        r_order_error.className = 'd-none';
+        
         let id_value = ele.id;
         const url = '{% url "delete_order" %}';
         // URLのクエリパラメータを管理
@@ -557,6 +568,10 @@
         }).catch(error => {
             console.log(error);
         });
+    }
+
+    if ( '{{ msg }}' != '' ) {
+        r_order_error.innerText = '※現在' + '{{ msg }}' + 'のお取り扱いがありません。\n' + '{{ msg }}' + 'を含む再注文のみキャンセルされました。'
     }
 </script>
 {% endblock %}

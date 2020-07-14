@@ -317,10 +317,12 @@ class ProfileView(LoginRequiredMixin, View):
         same_order = Order.objects.filter(user=request.user, pk=id_value)
 
         # 再注文のオーダーからカートを登録
+        error = []
         for order in same_order:
             for same_cart in order.cart.all():
                 cart = Cart()
                 cart.user = request.user
+                error_flag = []
 
                 # データベースの存在を確認（サイズ）
                 if SizeItem.objects.filter(title=same_cart.size_title).exists():
@@ -328,7 +330,7 @@ class ProfileView(LoginRequiredMixin, View):
                     cart.size_title = sizeitem.title 
                     cart.size_price = sizeitem.price
                 else:
-                    return JsonResponse({'jump': 'cart_none'})
+                    error_flag.append(same_cart.size_title)
 
                 # データベースの存在を確認（フレーバー）
                 if FlavorItem.objects.filter(title=same_cart.flavor_title, is_active=True).exists():
@@ -336,7 +338,7 @@ class ProfileView(LoginRequiredMixin, View):
                     cart.flavor_title = flavoritem.title
                     cart.flavor_price = flavoritem.price
                 else:
-                    return JsonResponse({'jump': 'cart_none'})
+                    error_flag.append(same_cart.flavor_title)
 
                 # データベースの存在を確認（フレーバー2）
                 if FlavorItem.objects.filter(title=same_cart.flavor2_title, is_active=True).exists():
@@ -345,9 +347,8 @@ class ProfileView(LoginRequiredMixin, View):
                     cart.flavor2_price = flavoritem.price
                 elif same_cart.flavor2_title == '':
                     cart.flavor2_title = ''
-                    cart.flavor2_price = 0
                 else:
-                    return JsonResponse({'jump': 'cart_none'})
+                    error_flag.append(same_cart.flavor2_title)
 
                 # データベースの存在を確認（オプション）
                 if OptionItem.objects.filter(title=same_cart.option_title).exists():
@@ -356,9 +357,8 @@ class ProfileView(LoginRequiredMixin, View):
                     cart.option_price = optionitem.price
                 elif same_cart.option_title == '':
                     cart.option_title = ''
-                    cart.option_price = 0
                 else:
-                    return JsonResponse({'jump': 'cart_none'})
+                    error_flag.append(same_cart.option_title)
 
                 # データベースの存在を確認（オプション2）
                 if OptionItem.objects.filter(title=same_cart.option2_title).exists():
@@ -367,9 +367,8 @@ class ProfileView(LoginRequiredMixin, View):
                     cart.option2_price = optionitem.price
                 elif same_cart.option2_title == '':
                     cart.option2_title = ''
-                    cart.option2_price = 0
                 else:
-                    return JsonResponse({'jump': 'cart_none'})
+                    error_flag.append(same_cart.option2_title)
 
                 # データベースの存在を確認（オプション3）
                 if OptionItem.objects.filter(title=same_cart.option3_title).exists():
@@ -378,13 +377,18 @@ class ProfileView(LoginRequiredMixin, View):
                     cart.option3_price = optionitem.price
                 elif same_cart.option3_title == '':
                     cart.option3_title = ''
-                    cart.option3_price = 0
                 else:
-                    return JsonResponse({'jump': 'cart_none'})
+                    error_flag.append(same_cart.option3_title)
                 
-                cart.save()
-                
-        return JsonResponse({'jump': 'complete'})
+                # データベースにすべてあればカートに登録
+                if len(error_flag) == 0:
+                    cart.save()
+                else:
+                    for flag in error_flag:
+                        if not flag in error:
+                            error.append(flag)
+
+        return JsonResponse({'error': error})
 
 
 class CartNoneView(View):

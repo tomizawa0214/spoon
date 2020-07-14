@@ -133,6 +133,11 @@ class OrderView(LoginRequiredMixin, View):
         flavor_item = FlavorItem.objects.filter(is_active=True)
         option_item = OptionItem.objects.all()
 
+        # 再注文を受けてデータベース登録が無い場合の処理
+        msg = ''
+        if 'msg' in request.GET:
+            msg = request.GET['msg']
+
         # ログインユーザーの注文未完了レコードをすべて取得
         cart_data = Cart.objects.filter(user=request.user, ordered=False).order_by('id')
         # 上記レコードの各合計値をリストで取得
@@ -146,6 +151,7 @@ class OrderView(LoginRequiredMixin, View):
             'option_item': option_item,
             'cart_data': cart_data,
             'get_total_price': get_total_price,
+            'msg': msg,
         })
 
 

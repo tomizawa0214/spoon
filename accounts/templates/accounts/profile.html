@@ -51,8 +51,6 @@
     <span>ORDER HISTORY</span>
 </div>
 
-<p>{{ error }}</p>
-
 <div class="row justify-content-center">
     {% for order in order_data %}
     <div class="col-4">
@@ -106,8 +104,6 @@
                 </tr>
         </table>
         <button type="button" id="{{ order.id }}" onclick="sameOrder(this);">再度注文</button>
-        <!-- <a id="{{ order.id }}" href="{% url 'order_user' %}" onclick="sameOrder(this);">再度注文</a> -->
-        <!-- <a id="{{ order.id }}" href="javascript:void(0);" onclick="sameOrder(this);">再度注文</a> -->
     </div>
     {% empty %}
             <p class="text-center">現在ご注文履歴はありません。<br>ぜひお買い物をお楽しみください。</p>
@@ -162,11 +158,12 @@
             return response.json();
         }).then(response => {
             // 再注文OKならばオーダー画面へ
-            if ( response.jump == 'complete' ) {
+            if ( response.error.length == 0 ) {
                 window.location.href = '{% url "order" %}';
             // 再注文NGならば案内画面へ
             } else {
-                window.location.href = response.jump;
+                let none_item = response.error.join('・');
+                window.location.href = '{% url "order" %}?msg=' + none_item
             }
         })
     }
