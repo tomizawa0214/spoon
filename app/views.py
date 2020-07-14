@@ -235,6 +235,11 @@ class DeleteOrderView(LoginRequiredMixin, View):
         return JsonResponse(data)
 
 
+class AccessView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'app/access.html')
+
+
 class IndexView(View):
     def get(self, request, *args, **kwargs):
         return render(request, 'app/index.html')

@@ -4,6 +4,7 @@ from app import views
 
 urlpatterns = [
     path('', views.IndexView.as_view(), name='index'),
+    path('access/', views.AccessView.as_view(), name='access'),
     path('order/', views.OrderView.as_view(), name='order'),
     path('addorder/', views.AddOrderView.as_view(), name='add_order'),
     path('deleteorder/', views.DeleteOrderView.as_view(), name='delete_order'),
