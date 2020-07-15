@@ -105,11 +105,11 @@
         </table>
         <button type="button" id="{{ order.id }}" onclick="sameOrder(this);">再度注文</button>
     </div>
+    <p class="text-center">※現在価格はご注文当時から変更となっている場合がございます。<br>※現在お取り扱いの無い商品が含まれる場合には再注文いたしかねます。ご了承ください。</p>
     {% empty %}
             <p class="text-center">現在ご注文履歴はありません。<br>ぜひお買い物をお楽しみください。</p>
     {% endfor %}
 </div>
-<p class="text-center">※現在価格はご注文当時から変更となっている場合がございます。<br>※現在お取り扱いの無い商品が含まれる場合には再注文いたしかねます。ご了承ください。</p>
 
 {% endblock %}
 

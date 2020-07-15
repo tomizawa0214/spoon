@@ -52,14 +52,19 @@
                 <td class="text-left">
                     <label for="">受取日時</label>
                 </td>
-                <td id="receipt" class="d-flex">
-                    <span>{% render_field receipt_form.date class="form-control" %}</span>
-                    <span id="specified_time">{% render_field receipt_form.time class="form-control" %}</span>
-                    <span id="full_time"" class="d-none">{% render_field receipt_form.fulltime class="form-control" %}</span>
+                <td class="d-flex">
+                    {% if today_order %}
+                        <span>{% render_field receipt_form.date class="form-control" %}</span>
+                        <span id="specified_time">{% render_field receipt_form.time class="form-control" %}</span>
+                        <span id="full_time"" class="d-none">{% render_field receipt_form.fulltime class="form-control" %}</span>
+                    {% else %}
+                        <span>{% render_field receipt_form.no_today class="form-control" %}</span>
+                        <span>{% render_field receipt_form.fulltime class="form-control" %}</span>
+                    {% endif %}
                 </td>
             </tr>
         </table>
-        <p>※当日のご注文は17:29までとさせていただきます。17:30以降にご注文の場合は翌日11:30以降のお受け取りとなります</p>
+        <p>※当日のご注文受付は16:29までとさせていただきます。また店舗の状況によりお受けいたしかねる場合がございます。<br>※16:30以降にご注文の場合は翌日11:30以降のお受け取りとなります。</p>
         <div class="mt-5">
             <a class="btn btn-primary" href="{% url 'order' %}">戻る</a>
             <button class="btn btn-danger" type="submit">注文確認画面へ</button>

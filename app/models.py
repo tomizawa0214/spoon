@@ -80,3 +80,18 @@ class Order(models.Model):
 
     def __str__(self):
         return f'{self.name}　{self.receipt}'
+
+
+class TodayOrder(models.Model):
+    name = models.CharField(max_length=30)
+    is_active = models.BooleanField(
+            ('当日注文'),
+            default=True,
+            help_text=(
+                '当日注文に対応するかを指定します。 '
+                '選択を解除すると翌日以降の注文になります。'
+            ),
+        )
+    
+    def __str__(self):
+        return self.name

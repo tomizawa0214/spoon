@@ -2,9 +2,12 @@
 
 <div class="col-3 pr-0">
     <img class="store-img" src="{% static 'img/spoon店舗外観_ダミー.png' %}" alt="spoonお店外観">
-    <p class="store-name mb-0">spoon ジェラート＆焼き菓子</p>
+    <p class="store-name mb-0">spoon ジェラート＆焼菓子</p>
     <p class="store-info">営業時間 11:00～18:00 / 不定休<br>027-310-0112<br>群馬県高崎市菅谷町1243-10</p>
     <!-- Instaglam -->
-    <!-- <iframe src="https://snapwidget.com/embed/850405" class="snapwidget-widget" allowtransparency="true" frameborder="0" scrolling="no" style="border:none; overflow:hidden;  width:100%; "></iframe> -->
     <div id="insta-window" class="iswd-base" data-username="spoon_gelato" data-display-image-count="9" data-wrapper-width></div>
 </div>
+
+{% block extrajs %}
+    <script src="https://insta-window-tool.web.app/v2/insta-window.js"></script>
+{% endblock %}

@@ -595,7 +595,7 @@ label img {
           justify-content: center;
 }
 
-.footer__copy p {
+.footer__copy small {
   margin: 24px 0;
   text-align: center;
   color: #fff;

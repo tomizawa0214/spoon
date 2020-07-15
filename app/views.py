@@ -2,7 +2,7 @@ from django.views.generic import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from .forms import ReceiptForm
-from .models import Order, Cart, SizeItem, FlavorItem, OptionItem
+from .models import TodayOrder, Order, Cart, SizeItem, FlavorItem, OptionItem
 from accounts.models import CustomUser
 from accounts.forms import ProfileForm
 from django.conf import settings
@@ -121,9 +121,17 @@ class OrderUserView(LoginRequiredMixin, View):
         )
         receipt_form = ReceiptForm(request.POST or None)
 
+        # 当日受付の有無
+        if TodayOrder.objects.filter(is_active=True).exists():
+            today_order = True
+        else:
+            today_order = False
+
+
         return render(request, 'app/order_user.html', {
             'profile_form': profile_form,
             'receipt_form': receipt_form,
+            'today_order': today_order,
         })
 
 
