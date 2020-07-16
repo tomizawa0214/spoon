@@ -79,8 +79,15 @@ class OrderConfirmView(LoginRequiredMixin, View):
             furigana = profile_form.cleaned_data['furigana']
             email = profile_form.cleaned_data['email']
             tel = profile_form.cleaned_data['tel']
-            date = receipt_form.cleaned_data['date']
-            time = receipt_form.cleaned_data['time']
+
+            if receipt_form.cleaned_data['date'] != '':
+                date = receipt_form.cleaned_data['date']
+            else:
+                date = receipt_form.cleaned_data['no_today']
+            if '本日' in date:
+                time = receipt_form.cleaned_data['time']
+            else:
+                time = receipt_form.cleaned_data['fulltime']
 
             # ログインユーザーの注文未完了レコードをすべて取得
             cart_data = Cart.objects.filter(user=request.user, ordered=False).order_by('id')
@@ -100,9 +107,16 @@ class OrderConfirmView(LoginRequiredMixin, View):
                 'get_total_price': get_total_price,
             })
 
+        # 当日受付の有無
+        if TodayOrder.objects.filter(is_active=True).exists():
+            today_order = True
+        else:
+            today_order = False
+
         return render(request, 'app/order_user.html', {
             'profile_form': profile_form,
             'receipt_form': receipt_form,
+            'today_order': today_order,
         })
 
 

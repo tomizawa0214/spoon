@@ -85,20 +85,22 @@
 <script>
     'use strict';
 
-    // 本日選択時のみ指定時間に変更
-    let date = document.getElementById('id_date');
-    let specified_time = document.getElementById('specified_time');
-    let full_time = document.getElementById('full_time');
-    date.setAttribute('onchange', 'timeChange();');
+    // 当日注文可で本日選択時のみ指定時間に変更
+    if ( '{{ today_order }}' ) {
+        let date = document.getElementById('id_date');
+        let specified_time = document.getElementById('specified_time');
+        let full_time = document.getElementById('full_time');
+        date.setAttribute('onchange', 'timeChange();');
 
-    const timeChange = () => {
-        if ( date.value.match(/本日/)) {
-            specified_time.className = 'd-block';
-            full_time.className = 'd-none';
-        } else {
-            specified_time.className = 'd-none';
-            full_time.className = 'd-block';
-        }
-    } 
+        var timeChange = () => {
+            if ( date.value.match(/本日/)) {
+                specified_time.className = 'd-block';
+                full_time.className = 'd-none';
+            } else {
+                specified_time.className = 'd-none';
+                full_time.className = 'd-block';
+            }
+        } 
+    }
 </script>
 {% endblock %}

@@ -4,8 +4,8 @@ import datetime
 import locale
 
 # 現在日時を取得
-# dt = datetime.datetime.now()
-dt = datetime.datetime(year=2020, month=7, day=15, hour=12, minute=00)
+dt = datetime.datetime.now()
+# dt = datetime.datetime(year=2020, month=7, day=15, hour=12, minute=00)
 # 日本語表記の曜日名・月名
 locale.setlocale(locale.LC_TIME, 'ja_JP.UTF-8')
 
@@ -77,7 +77,7 @@ get_times(11, FULLTIME_CHOICES)
 
 
 class ReceiptForm(forms.Form):
-    date = forms.ChoiceField(widget=forms.Select, choices=DATE_CHOICES)
-    no_today = forms.ChoiceField(widget=forms.Select, choices=NO_TODAY_CHOICES)
-    time = forms.ChoiceField(widget=forms.Select, choices=TIME_CHOICES)
-    fulltime = forms.ChoiceField(widget=forms.Select, choices=FULLTIME_CHOICES)
+    date = forms.ChoiceField(widget=forms.Select, choices=DATE_CHOICES, required=False)
+    no_today = forms.ChoiceField(widget=forms.Select, choices=NO_TODAY_CHOICES, required=False)
+    time = forms.ChoiceField(widget=forms.Select, choices=TIME_CHOICES, required=False)
+    fulltime = forms.ChoiceField(widget=forms.Select, choices=FULLTIME_CHOICES, required=False)
