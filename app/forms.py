@@ -5,7 +5,7 @@ import locale
 
 # 現在日時を取得
 dt = datetime.datetime.now()
-# dt = datetime.datetime(year=2020, month=7, day=15, hour=12, minute=00)
+# dt = datetime.datetime(year=2020, month=12, day=28, hour=12, minute=00)
 # 日本語表記の曜日名・月名
 locale.setlocale(locale.LC_TIME, 'ja_JP.UTF-8')
 
@@ -14,27 +14,27 @@ def get_weeks(start_day, box):
     for i in range(7):
         if i == 0:
             box.append(
-                (days[i].strftime("%B%#d日(%a)") + start_day, days[i].strftime("%B%#d日(%a)") + start_day)
+                (days[i].strftime("%B%-d日(%a)") + start_day, days[i].strftime("%B%-d日(%a)") + start_day)
             )
         else:
             box.append(
-                (days[i].strftime("%B%#d日(%a)"), days[i].strftime("%B%#d日(%a)"))
+                (days[i].strftime("%B%-d日(%a)"), days[i].strftime("%B%-d日(%a)"))
             )
 
 # 現在時刻が00:00～16:29
 if dt.hour <  16 or ( dt.hour == 16 and dt.minute < 30 ):
     # 本日から1週間分を取得
-    days = [date.today() + timedelta(days=day) for day in range(7)]
+    days = [dt + timedelta(days=day) for day in range(7)]
     get_weeks("【本日】", DATE_CHOICES)
 # 現在時刻が16:30以降
 elif dt.hour > 16 or ( dt.hour == 16 and dt.minute > 29 ):
     # 翌日から1週間分を取得
-    days = [date.today() + timedelta(days=day+1) for day in range(7)]
+    days = [dt + timedelta(days=day+1) for day in range(7)]
     get_weeks("【明日】", DATE_CHOICES)
 
 # 当日注文不可指定の場合
 NO_TODAY_CHOICES = []
-days = [date.today() + timedelta(days=day+1) for day in range(7)]
+days = [dt + timedelta(days=day+1) for day in range(7)]
 get_weeks("【明日】", NO_TODAY_CHOICES)
 
 

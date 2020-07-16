@@ -9,7 +9,8 @@ from django.conf import settings
 from django.core.mail import BadHeaderError, EmailMessage
 from django.http import JsonResponse, HttpResponse
 from django.template.loader import render_to_string
-
+import datetime
+from datetime import timedelta
 
 class OrderThanksView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
@@ -22,8 +23,32 @@ class OrderThanksView(LoginRequiredMixin, View):
         order.furigana = request.POST.get('furigana')
         order.email = request.POST.get('email')
         order.tel = request.POST.get('tel')
-        order.receipt = request.POST.get('receipt')
+        receipt = request.POST.get('receipt')
+        order.receipt = receipt
+
+        # 注文日を登録
+        if receipt[-12] == '月':
+            order_day = int(receipt[-11])
+        else:
+            order_day = int(receipt[-12:-10])
+        order.order_day = order_day
+
+        # 注文番号を登録
+        x = 0
+        while Order.objects.filter(order_day=order_day, count=x, flag=False).exists():
+            x += 1
+        order.count = x
         order.save()
+
+        # 前日日付分の注文フラグを完了にする
+        yesterday = datetime.datetime.now() - timedelta(days=1)
+        if Order.objects.filter(order_day=yesterday.day, flag=False).exists():
+            order_yesterday = Order.objects.filter(order_day=yesterday.day, flag=False)
+            for order in order_yesterday:
+                order.flag = True
+                order.save()
+        else:
+            pass
 
         # ログインユーザーの注文未完了カートをオーダーに登録
         cart_data = Cart.objects.filter(user=request.user, ordered=False)
@@ -34,24 +59,24 @@ class OrderThanksView(LoginRequiredMixin, View):
             cart.ordered = True
             cart.save()
 
-        order_latest = Order.objects.filter(user=request.user).last()
-        order_id = Order.objects.order_by('id').last()
+        # order_latest = Order.objects.filter(user=request.user).last()
+        # order_id = Order.objects.order_by('id').last()
 
-        context = {
-            'order_latest': order_latest,
-            'order_id': order_id,
-        }
+        # context = {
+        #     'order_latest': order_latest,
+        #     'order_id': order_id,
+        # }
 
-        subject = render_to_string('app/mail_template/order_subject.txt', context)
-        message = render_to_string('app/mail_template/order_message.txt', context)
-        to_list = [order.email]
-        bcc_list = [settings.EMAIL_HOST_USER]
+        # subject = render_to_string('app/mail_template/order_subject.txt', context)
+        # message = render_to_string('app/mail_template/order_message.txt', context)
+        # to_list = [order.email]
+        # bcc_list = [settings.EMAIL_HOST_USER]
 
-        try:
-            message = EmailMessage(subject=subject, body=message, to=to_list, bcc=bcc_list)
-            message.send()
-        except BadHeaderError:
-            return HttpResponse("無効なヘッダが検出されました。")
+        # try:
+        #     message = EmailMessage(subject=subject, body=message, to=to_list, bcc=bcc_list)
+        #     message.send()
+        # except BadHeaderError:
+        #     return HttpResponse("無効なヘッダが検出されました。")
 
         return JsonResponse({'data': 'data'})
 
@@ -88,6 +113,7 @@ class OrderConfirmView(LoginRequiredMixin, View):
                 time = receipt_form.cleaned_data['time']
             else:
                 time = receipt_form.cleaned_data['fulltime']
+                print(time)
 
             # ログインユーザーの注文未完了レコードをすべて取得
             cart_data = Cart.objects.filter(user=request.user, ordered=False).order_by('id')

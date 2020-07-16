@@ -71,6 +71,9 @@ class Order(models.Model):
     tel = models.CharField('電話番号', max_length=13)
     receipt = models.CharField('受取日時', max_length=30)
     created = models.DateTimeField('注文日時', default=timezone.now)
+    order_day = models.IntegerField('注文受取日')
+    count = models.IntegerField('注文番号', default=0)
+    flag = models.BooleanField(default=False)
 
     def get_total(self):
         total = 0
