@@ -53,7 +53,7 @@ class OrderThanksView(LoginRequiredMixin, View):
         except BadHeaderError:
             return HttpResponse("無効なヘッダが検出されました。")
 
-        return redirect('order_thanks')
+        return JsonResponse({'data': 'data'})
 
 
 class OrderConfirmView(LoginRequiredMixin, View):

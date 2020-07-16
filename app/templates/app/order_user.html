@@ -86,7 +86,7 @@
     'use strict';
 
     // 当日注文可で本日選択時のみ指定時間に変更
-    if ( '{{ today_order }}' ) {
+    if ( '{{ today_order }}' == 'True' ) {
         let date = document.getElementById('id_date');
         let specified_time = document.getElementById('specified_time');
         let full_time = document.getElementById('full_time');

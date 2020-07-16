@@ -148,6 +148,8 @@
                     'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
                     'X-CSRFToken': csrftoken,
                 }
+            }).then(response => {
+                window.location.href = '{% url "order_thanks" %}';
             })
         }
     });
