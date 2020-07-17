@@ -1,7 +1,7 @@
 from django.views.generic import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
-from .forms import ReceiptForm
+from .forms import ReceiptForm, ContactForm
 from .models import TodayOrder, Order, Cart, SizeItem, FlavorItem, OptionItem
 from accounts.models import CustomUser
 from accounts.forms import ProfileForm
@@ -160,7 +160,6 @@ class OrderUserView(LoginRequiredMixin, View):
         else:
             today_order = False
 
-
         return render(request, 'app/order_user.html', {
             'profile_form': profile_form,
             'receipt_form': receipt_form,
@@ -279,6 +278,51 @@ class DeleteOrderView(LoginRequiredMixin, View):
 class AccessView(View):
     def get(self, request, *args, **kwargs):
         return render(request, 'app/access.html')
+
+
+class ContactView(View):
+    def get(self, request, *args, **kwargs):
+        form = ContactForm(request.POST or None)
+
+        return render(request, 'app/contact.html', {
+            'form': form
+        })
+
+    def post(self, request, *args, **kwargs):
+        form = ContactForm(request.POST or None)
+
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            message = form.cleaned_data['message']
+
+            context = {
+                'name': name,
+                'email': email,
+                'message': message,
+            }
+
+            subject = render_to_string('app/mail_template/contact_subject.txt', context)
+            body = render_to_string('app/mail_template/contact_message.txt', context)
+            to_list = [email]
+            bcc_list = [settings.EMAIL_HOST_USER]
+
+            try:
+                message = EmailMessage(subject=subject, body=body, to=to_list, bcc=bcc_list)
+                message.send()
+            except BadHeaderError:
+                return HttpResponse("無効なヘッダが検出されました。")
+
+            return redirect('contact_thanks')
+
+        return render(request, 'app/contact.html', {
+            'form': form
+        })
+
+
+class ContactThanksView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'app/contact_thanks.html')
 
 
 class IndexView(View):

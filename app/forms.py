@@ -81,3 +81,9 @@ class ReceiptForm(forms.Form):
     no_today = forms.ChoiceField(widget=forms.Select, choices=NO_TODAY_CHOICES, required=False)
     time = forms.ChoiceField(widget=forms.Select, choices=TIME_CHOICES, required=False)
     fulltime = forms.ChoiceField(widget=forms.Select, choices=FULLTIME_CHOICES, required=False)
+
+
+class ContactForm(forms.Form):
+    name = forms.CharField(max_length=30, label='お名前')
+    email = forms.EmailField(min_length=7, max_length=256, label='メールアドレス')
+    message = forms.CharField(label='メッセージ', widget=forms.Textarea())

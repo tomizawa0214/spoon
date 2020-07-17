@@ -2,97 +2,136 @@
 
 <!DOCTYPE html>
 <html lang="ja">
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    {% block title %}
-    {% endblock %}
-  </head>
-
-  <body>
-    <!-- header -->
-    <header class="header navbar">
-      <div class="header__wrap container-fluid">
-        <a href="/">
-          <img src="{% static 'img/logo.png' %}">
-        </a>
-        <ul class="navbar-nav">
-          <li>
-            <a class="nav-link" href="/">
-              <i class="fas fa-home fa-fw" aria-hidden="true"></i>HOME
-              <span>-トップページ-</span>
-            </a>
-          </li>
-          {% if user.is_authenticated %}
-          <li>
-            <a class="nav-link" href="{% url 'profile' %}">
-              <i class="fas fa-user fa-fw" aria-hidden="true"></i>MY PAGE
-              <span>-マイページ-</span>
-            </a>
-          </li>
-          <li>
-            <a class="nav-link" href="{% url 'account_logout' %}">
-              <i class="fas fa-sign-out-alt fa-fw" aria-hidden="true"></i>LOGOUT
-              <span>-ログアウト-</span>
-            </a>
-          </li>
-          {% else %}
-          <li>
-            <a class="nav-link" href="{% url 'account_signup' %}">
-              <i class="fas fa-user-plus fa-fw" aria-hidden="true"></i>SIGN UP
-              <span>-会員登録-</span>
-            </a>
-          </li>
-          <li>
-            <a class="nav-link" href="{% url 'account_login' %}">
-              <i class="fas fa-sign-in-alt fa-fw" aria-hidden="true"></i>LOGIN
-              <span>-ログイン-</span>
-            </a>
-          </li>
-          {% endif %}
-        </ul>
-      </div>
-    </header>
-
-    <!-- Image Slider -->
-    {% block slider %}
-    {% endblock %}
-
-    <!-- Navigation-->
-    {% include 'app/nav.html' %}
-    
-    <main>
-      <div class="container-fluid">
-        {% block content %}
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        {% block title %}
         {% endblock %}
-      </div>
-    </main>
+    </head>
 
-    <footer class="footer">
-      <ul class="footer__link">
-        <li class="footer__link--item">
-          <a href="/">特定商取引法に基づく表記</a>
-        </li>
-        <li class="footer__link--item">
-          <a href="/">プライバシーポリシー</a>
-        </li>
-        <li class="footer__link--item">
-          <a href="/">会社概要</a>
-        </li>
-      </ul>
-      <div class="footer__copy">
-        <small>&copy; Praline 2020</small>
-      </div>
-    </footer>
+    <body>
+        <!-- header -->
+        <header class="header navbar">
+            <div class="header__wrap container-fluid">
+                <a href="/">
+                    <img src="{% static 'img/logo.png' %}">
+                </a>
+                <ul class="navbar-nav">
+                    <li>
+                        <a class="nav-link" href="/">
+                        <i class="fas fa-home fa-fw" aria-hidden="true"></i>HOME
+                        <span>-トップページ-</span>
+                        </a>
+                    </li>
+                    {% if user.is_authenticated %}
+                        <li>
+                            <a class="nav-link" href="{% url 'profile' %}">
+                            <i class="fas fa-user fa-fw" aria-hidden="true"></i>MY PAGE
+                            <span>-マイページ-</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="{% url 'account_logout' %}">
+                            <i class="fas fa-sign-out-alt fa-fw" aria-hidden="true"></i>LOGOUT
+                            <span>-ログアウト-</span>
+                            </a>
+                        </li>
+                    {% else %}
+                        <li>
+                            <a class="nav-link" href="{% url 'account_signup' %}">
+                            <i class="fas fa-user-plus fa-fw" aria-hidden="true"></i>SIGN UP
+                            <span>-会員登録-</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="{% url 'account_login' %}">
+                            <i class="fas fa-sign-in-alt fa-fw" aria-hidden="true"></i>LOGIN
+                            <span>-ログイン-</span>
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </header>
 
-    <script src="https://kit.fontawesome.com/a29680248f.js" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-    {% block extrajs %}
-    {% endblock %}
-  </body>
+        <!-- Image Slider -->
+        {% block slider %}
+        {% endblock %}
+
+        <!-- Navigation-->
+        <nav class="nav navbar navbar-expand">
+        <div class="nav__wrap container-fluid">
+            <ul class="navbar-nav">
+                <li>
+                    <a class="nav-link" href="/">
+                        ABOUT<br class="d-none d-sm-block">
+                        <span>-お店について-</span>
+                    </a>
+                </li>
+                <hr>
+                <li>
+                    <a class="nav-link" href="/">
+                        GUIDE<br class="d-none d-sm-block">
+                        <span>-ご利用方法-</span>
+                    </a>
+                </li>
+                <hr>
+                <li>
+                    <a class="nav-link" href="{% url 'order' %}">
+                        ORDER<br class="d-none d-sm-block">
+                        <span>-ご予約注文-</span>
+                    </a>
+                </li>
+                <hr>
+                <li>
+                    <a class="nav-link" href="{% url 'access' %}">
+                        ACCESS<br class="d-none d-sm-block">
+                        <span>-お店のご案内-</span>
+                    </a>
+                </li>
+                <hr>
+                <li>
+                    <a class="nav-link" href="{% url 'contact' %}">
+                        CONTACT<br class="d-none d-sm-block">
+                        <span>-お問い合わせ-</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+        
+        <main>
+            <div class="container-fluid">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </main>
+
+        <footer class="footer">
+            <ul class="footer__link">
+                <li class="footer__link--item">
+                    <a href="/">特定商取引法に基づく表記</a>
+                </li>
+                <li class="footer__link--item">
+                    <a href="/">プライバシーポリシー</a>
+                </li>
+                <li class="footer__link--item">
+                    <a href="/">会社概要</a>
+                </li>
+            </ul>
+            <div class="footer__copy">
+                <small>&copy; Praline 2020</small>
+            </div>
+        </footer>
+
+        <script src="https://kit.fontawesome.com/a29680248f.js" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+        {% block extrajs %}
+        {% endblock %}
+    </body>
 </html>
