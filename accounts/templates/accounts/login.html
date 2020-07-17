@@ -16,6 +16,10 @@
         <div class="login__form--item form-label-group">
             {% render_field form.password class="form-control" placeholder="パスワード" %}
         </div>
+        <p class="text-left">
+            <input type="checkbox" name="remember" id="id_remember">
+            <label for="id_remember">ログイン状態を維持する</label>
+        </p>
         <div class="text-right">
             <a href="{% url 'password_reset' %}">パスワードをお忘れの場合</a>
         </div>
