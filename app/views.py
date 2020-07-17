@@ -17,68 +17,62 @@ class OrderThanksView(LoginRequiredMixin, View):
         return render(request, 'app/order_thanks.html')
 
     def post(self, request, *args, **kwargs):
-        # 注文者情報を登録
-        order = Order(user=request.user)
-        order.name = request.POST.get('name')
-        order.furigana = request.POST.get('furigana')
-        order.email = request.POST.get('email')
-        order.tel = request.POST.get('tel')
-        receipt = request.POST.get('receipt')
-        order.receipt = receipt
-
-        # 注文日を登録
-        if receipt[-12] == '月':
-            order_day = int(receipt[-11])
-        else:
-            order_day = int(receipt[-12:-10])
-        order.order_day = order_day
-
-        # 注文番号を登録
-        x = 1
-        while Order.objects.filter(order_day=order_day, count=x, flag=False).exists():
-            x += 1
-        order.count = x
-        order.save()
-
-        # 前日日付分の注文フラグを完了にする
-        yesterday = datetime.datetime.now() - timedelta(days=1)
-        if Order.objects.filter(order_day=yesterday.day, flag=False).exists():
-            order_yesterday = Order.objects.filter(order_day=yesterday.day, flag=False)
-            for order in order_yesterday:
-                order.flag = True
-                order.save()
-        else:
-            pass
-
-        # ログインユーザーの注文未完了カートをオーダーに登録
+        # ログインユーザーの注文未完了カートをオーダーに登録。カートが無い間違い注文は除外
         cart_data = Cart.objects.filter(user=request.user, ordered=False)
-        order.cart.set(cart_data)
+        if cart_data.exists():
+            # ログインユーザーの注文未完了レコードをすべて完了にする
+            for cart in cart_data:
+                cart.ordered = True
+                cart.save()
 
-        # ログインユーザーの注文未完了レコードをすべて完了にする
-        for cart in cart_data:
-            cart.ordered = True
-            cart.save()
+            # 注文者情報を登録
+            order = Order(user=request.user)
+            order.name = request.POST.get('name')
+            order.furigana = request.POST.get('furigana')
+            order.email = request.POST.get('email')
+            order.tel = request.POST.get('tel')
+            receipt = request.POST.get('receipt')
+            order.receipt = receipt
 
-        order_latest = Order.objects.filter(user=request.user).last()
-        order_id = str(order_latest.order_day) + str(order_latest.count)
+            # 注文日を登録
+            if receipt[-12] == '月':
+                order_day = int(receipt[-11])
+            else:
+                order_day = int(receipt[-12:-10])
+            order.order_day = order_day
 
-        context = {
-            'order_latest': order_latest,
-            'order_id': order_id,
-        }
+            # 注文番号を登録
+            x = 1
+            while Order.objects.filter(order_day=order_day, count=x, flag=False).exists():
+                x += 1
+            order.count = x
+            order.save()
 
-        subject = render_to_string('app/mail_template/order_subject.txt', context)
-        message = render_to_string('app/mail_template/order_message.txt', context)
-        to_list = [order.email]
-        bcc_list = [settings.EMAIL_HOST_USER]
+            # カートを登録
+            order.cart.set(cart_data)
 
-        try:
-            message = EmailMessage(subject=subject, body=message, to=to_list, bcc=bcc_list)
-            message.send()
-        except BadHeaderError:
-            return HttpResponse("無効なヘッダが検出されました。")
+            # ログインユーザーの最新の注文を取得
+            order_latest = Order.objects.filter(user=request.user).last()
+            # 注文番号を作成
+            order_id = str(order_latest.order_day) + str(order_latest.count)
 
-        return JsonResponse({'data': 'data'})
+            context = {
+                'order_latest': order_latest,
+                'order_id': order_id,
+            }
+
+            subject = render_to_string('app/mail_template/order_subject.txt', context)
+            message = render_to_string('app/mail_template/order_message.txt', context)
+            to_list = [order.email]
+            bcc_list = [settings.EMAIL_HOST_USER]
+
+            try:
+                message = EmailMessage(subject=subject, body=message, to=to_list, bcc=bcc_list)
+                message.send()
+            except BadHeaderError:
+                return HttpResponse("無効なヘッダが検出されました。")
+
+        return redirect('order_thanks')
 
 
 class OrderConfirmView(LoginRequiredMixin, View):
@@ -289,4 +283,14 @@ class AccessView(View):
 
 class IndexView(View):
     def get(self, request, *args, **kwargs):
+        # 前日日付分の注文フラグを完了にする
+        yesterday = datetime.datetime.now() - timedelta(days=1)
+        if Order.objects.filter(order_day=yesterday.day, flag=False).exists():
+            order_yesterday = Order.objects.filter(order_day=yesterday.day, flag=False)
+            for order in order_yesterday:
+                order.flag = True
+                order.save()
+        else:
+            pass
+
         return render(request, 'app/index.html')
