@@ -34,7 +34,7 @@ class OrderThanksView(LoginRequiredMixin, View):
         order.order_day = order_day
 
         # 注文番号を登録
-        x = 0
+        x = 1
         while Order.objects.filter(order_day=order_day, count=x, flag=False).exists():
             x += 1
         order.count = x
@@ -59,24 +59,24 @@ class OrderThanksView(LoginRequiredMixin, View):
             cart.ordered = True
             cart.save()
 
-        # order_latest = Order.objects.filter(user=request.user).last()
-        # order_id = Order.objects.order_by('id').last()
+        order_latest = Order.objects.filter(user=request.user).last()
+        order_id = str(order_latest.order_day) + str(order_latest.count)
 
-        # context = {
-        #     'order_latest': order_latest,
-        #     'order_id': order_id,
-        # }
+        context = {
+            'order_latest': order_latest,
+            'order_id': order_id,
+        }
 
-        # subject = render_to_string('app/mail_template/order_subject.txt', context)
-        # message = render_to_string('app/mail_template/order_message.txt', context)
-        # to_list = [order.email]
-        # bcc_list = [settings.EMAIL_HOST_USER]
+        subject = render_to_string('app/mail_template/order_subject.txt', context)
+        message = render_to_string('app/mail_template/order_message.txt', context)
+        to_list = [order.email]
+        bcc_list = [settings.EMAIL_HOST_USER]
 
-        # try:
-        #     message = EmailMessage(subject=subject, body=message, to=to_list, bcc=bcc_list)
-        #     message.send()
-        # except BadHeaderError:
-        #     return HttpResponse("無効なヘッダが検出されました。")
+        try:
+            message = EmailMessage(subject=subject, body=message, to=to_list, bcc=bcc_list)
+            message.send()
+        except BadHeaderError:
+            return HttpResponse("無効なヘッダが検出されました。")
 
         return JsonResponse({'data': 'data'})
 
@@ -113,7 +113,6 @@ class OrderConfirmView(LoginRequiredMixin, View):
                 time = receipt_form.cleaned_data['time']
             else:
                 time = receipt_form.cleaned_data['fulltime']
-                print(time)
 
             # ログインユーザーの注文未完了レコードをすべて取得
             cart_data = Cart.objects.filter(user=request.user, ordered=False).order_by('id')

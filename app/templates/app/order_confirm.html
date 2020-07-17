@@ -85,7 +85,8 @@
 </div>
 
 <div class="mt-5 text-center">
-    <button type="button" onclick="history.back()">戻る</button>
+    <!-- <button type="button" onclick="history.back()">戻る</button> -->
+    <a class="btn btn-primary" href="{% url 'order_user' %}">戻る</a>
     <button id="order_done"  class="btn rounded-pill" type="button" ontouchstart="">注文を確定</button>
     <!-- <a id="order_done" class="btn rounded-pill" href="{% url 'order_thanks' %}" ontouchstart=''">注文を確定</a> -->
 </div>

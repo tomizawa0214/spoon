@@ -5,7 +5,7 @@ import locale
 
 # 現在日時を取得
 dt = datetime.datetime.now()
-# dt = datetime.datetime(year=2020, month=12, day=28, hour=12, minute=00)
+# dt = datetime.datetime(year=2020, month=7, day=17, hour=18, minute=00)
 # 日本語表記の曜日名・月名
 locale.setlocale(locale.LC_TIME, 'ja_JP.UTF-8')
 

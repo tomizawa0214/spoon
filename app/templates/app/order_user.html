@@ -56,7 +56,7 @@
                     {% if today_order %}
                         <span>{% render_field receipt_form.date class="form-control" %}</span>
                         <span id="specified_time">{% render_field receipt_form.time class="form-control" %}</span>
-                        <span id="full_time"" class="d-none">{% render_field receipt_form.fulltime class="form-control" %}</span>
+                        <span id="full_time">{% render_field receipt_form.fulltime class="form-control" %}</span>
                     {% else %}
                         <span>{% render_field receipt_form.no_today class="form-control" %}</span>
                         <span>{% render_field receipt_form.fulltime class="form-control" %}</span>
@@ -100,7 +100,13 @@
                 specified_time.className = 'd-none';
                 full_time.className = 'd-block';
             }
-        } 
+        }
+
+        // DOMツリーの構築後実行
+        window.addEventListener('DOMContentLoaded', () => {
+            timeChange();
+        })
+
     }
 </script>
 {% endblock %}
