@@ -9,8 +9,9 @@ from django.conf import settings
 from django.core.mail import BadHeaderError, EmailMessage
 from django.http import JsonResponse, HttpResponse
 from django.template.loader import render_to_string
-import datetime
 from datetime import timedelta
+import datetime
+import re
 
 class OrderThanksView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
@@ -308,8 +309,12 @@ class ContactView(View):
             bcc_list = [settings.EMAIL_HOST_USER]
 
             try:
-                message = EmailMessage(subject=subject, body=body, to=to_list, bcc=bcc_list)
-                message.send()
+                # ひらがなを含む場合のみメール送信
+                if re.search('[ぁ-ん]', message) != None:
+                    message = EmailMessage(subject=subject, body=body, to=to_list, bcc=bcc_list)
+                    message.send()
+                else:
+                    return redirect('index')
             except BadHeaderError:
                 return HttpResponse("無効なヘッダが検出されました。")
 
