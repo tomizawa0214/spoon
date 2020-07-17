@@ -98,3 +98,36 @@ class TodayOrder(models.Model):
     
     def __str__(self):
         return self.name
+
+
+class WhatsNew(models.Model):
+    date = models.DateField('日付')
+    comment = models.TextField(
+        ('コメント'),
+        max_length=45,
+        help_text=(
+            '※45文字以内で入力してください。'
+        ),
+    )
+
+    def __str__(self):
+        return self.comment
+
+
+class PickUp(models.Model):
+    e_name = models.CharField('英語名', max_length=100)
+    j_name = models.CharField('日本語名', max_length=100)
+    m_price = models.IntegerField('ミニ価格')
+    s_price = models.IntegerField('シングル価格')
+    w_price = models.IntegerField('ダブル価格')
+    comment = models.TextField(
+        ('コメント'),
+        max_length=100,
+        help_text=(
+            '※100文字以内で入力してください。'
+        ),
+    )
+    image = models.ImageField('画像', upload_to='images')
+
+    def __str__(self):
+        return self.j_name

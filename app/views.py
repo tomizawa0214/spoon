@@ -2,7 +2,7 @@ from django.views.generic import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from .forms import ReceiptForm, ContactForm
-from .models import TodayOrder, Order, Cart, SizeItem, FlavorItem, OptionItem
+from .models import PickUp, WhatsNew, TodayOrder, Order, Cart, SizeItem, FlavorItem, OptionItem
 from accounts.models import CustomUser
 from accounts.forms import ProfileForm
 from django.conf import settings
@@ -342,4 +342,12 @@ class IndexView(View):
         else:
             pass
 
-        return render(request, 'app/index.html')
+        # 最新7件を取得
+        news_data = WhatsNew.objects.all().order_by('-id')[0:7]
+        # 最新2件を取得
+        pick_data = PickUp.objects.all().order_by('-id')[0:2]
+
+        return render(request, 'app/index.html', {
+            'news_data': news_data,
+            'pick_data': pick_data,
+        })

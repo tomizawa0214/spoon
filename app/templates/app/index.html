@@ -20,14 +20,50 @@
 </div>
 {% endblock %}
 
-{% include 'app/nav.html' %}
-
 {% block content %}
 <div class="row">
-    <div class="col-9 pl-0">
+    <div class="col-9 p-0">
         <div class="title">
             <span>WHAT'S NEW</span>
         </div>
+        
+        {% for news in news_data %}
+            <p class="top__news">
+                <span class="top__news--date">{{ news.date | date:"Y/m/d" }}</span>
+                <span class="top__news--comment">{{ news.comment }}</span>
+            </p>
+        {% endfor %}
+
+        <div class="top__title">
+            <span>PICK UP</span>
+        </div>
+
+        {% for pick in pick_data %}
+            <div class="top__pick">
+                <img class="top__pick--img" src="{{ pick.image.url }}">
+                <div class="top__pick--text">
+                    <p>
+                        <span class="top__pick--text--ename">{{ pick.e_name }}</span>
+                        <span class="top__pick--text--jname">{{ pick.j_name }}</span>
+                    </p>
+                    <p class="top__pick--text--comment">{{ pick.comment | linebreaksbr }}</p>
+                    <div class="top__pick--text--price">
+                        <p>
+                            <span class="top__pick--text--price--size">M:ミニ</span>
+                            <span class="top__pick--text--price--price">\{{ pick.m_price }}</span>
+                        </p>
+                        <p>
+                            <span class="top__pick--text--price--size">S:シングル</span>
+                            <span class="top__pick--text--price--price">\{{ pick.s_price }}</span>
+                        </p>
+                        <p>
+                            <span class="top__pick--text--price--size">W:ダブル</span>
+                            <span class="top__pick--text--price--price">\{{ pick.w_price }}</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
     </div>
     {% include 'app/sidebar.html' %}
 </div>

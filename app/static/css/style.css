@@ -1,6 +1,7 @@
 @charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap");
 body {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -20,7 +21,7 @@ main {
 
 .title {
   position: relative;
-  margin: 0 0 30px;
+  margin: 0 0 40px;
   text-align: center;
   letter-spacing: 3px;
   font-size: 20px;
@@ -151,6 +152,99 @@ main {
   background-image: url("/static/img/slide_3.png");
 }
 
+.top__news {
+  font-family: '游ゴシック', 'Yu Gothic', YuGothic, HiraKakuProN-W3, 'メイリオ', Meiryo, sans-serif;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+}
+
+.top__news--date {
+  color: #E8435F;
+}
+
+.top__news--comment {
+  margin-left: 16px;
+}
+
+.top__title {
+  position: relative;
+  margin: 0 0 40px;
+  text-align: center;
+  letter-spacing: 3px;
+  font-size: 20px;
+  margin-top: 50px;
+}
+
+.top__title span {
+  position: relative;
+  display: inline-block;
+  z-index: 1;
+  padding: 0 15px;
+  background: #fff;
+}
+
+.top__title:after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  display: block;
+  width: 100%;
+  height: 1px;
+  content: '';
+  background: #333;
+}
+
+.top__pick {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 50px;
+}
+
+.top__pick--text {
+  margin-left: 40px;
+}
+
+.top__pick--text--ename {
+  font-size: 25px;
+  font-family: 'Dancing Script', cursive;
+  letter-spacing: 1px;
+}
+
+.top__pick--text--jname {
+  font-family: '游ゴシック', 'Yu Gothic', YuGothic, HiraKakuProN-W3, 'メイリオ', Meiryo, sans-serif;
+  margin-left: 10px;
+}
+
+.top__pick--text--comment {
+  margin-bottom: 20px;
+  font-family: '游ゴシック', 'Yu Gothic', YuGothic, HiraKakuProN-W3, 'メイリオ', Meiryo, sans-serif;
+  letter-spacing: 1px;
+}
+
+.top__pick--text--price {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 150px 170px 170px;
+      grid-template-columns: 150px 170px 170px;
+  grid-column-gap: 30px;
+}
+
+.top__pick--text--price--size {
+  margin-right: 8px;
+  font-family: '游ゴシック', 'Yu Gothic', YuGothic, HiraKakuProN-W3, 'メイリオ', Meiryo, sans-serif;
+  letter-spacing: 1px;
+}
+
+.top__pick--text--price--price {
+  color: #E8435F;
+  font-size: 30px;
+  font-weight: 600;
+  font-family: '游ゴシック', 'Yu Gothic', YuGothic, HiraKakuProN-W3, 'メイリオ', Meiryo, sans-serif;
+}
+
 .store-img {
   width: 100%;
 }
@@ -253,7 +347,7 @@ main {
 
 .order-title {
   position: relative;
-  margin: 0 0 30px;
+  margin: 0 0 40px;
   text-align: center;
   letter-spacing: 3px;
   font-size: 20px;
@@ -643,7 +737,7 @@ label img {
 
 .login-title {
   position: relative;
-  margin: 0 0 30px;
+  margin: 0 0 40px;
   text-align: center;
   letter-spacing: 3px;
   font-size: 20px;
@@ -722,7 +816,7 @@ label img {
 
 .logout-title {
   position: relative;
-  margin: 0 0 30px;
+  margin: 0 0 40px;
   text-align: center;
   letter-spacing: 3px;
   font-size: 20px;
@@ -796,7 +890,7 @@ label img {
 
 .signup-title {
   position: relative;
-  margin: 0 0 30px;
+  margin: 0 0 40px;
   text-align: center;
   letter-spacing: 3px;
   font-size: 20px;
@@ -890,7 +984,7 @@ label img {
 
 .profile-title {
   position: relative;
-  margin: 0 0 30px;
+  margin: 0 0 40px;
   text-align: center;
   letter-spacing: 3px;
   font-size: 20px;

@@ -13,6 +13,58 @@
             background-image: url("/static/img/slide_3.png");
         }
     }
+    &__news {
+        @include Japanese-font;
+        letter-spacing: 1px;
+        margin-bottom: 20px;
+        &--date {
+            color: #E8435F;
+        }
+        &--comment {
+            margin-left: 16px;
+        }
+    }
+    &__title {
+        @include sectionTitle;
+        margin-top: 50px;
+    }
+    &__pick {
+        display: flex;
+        margin-bottom: 50px;
+        &--text {
+            margin-left: 40px;
+            &--ename {
+                font-size: 25px;
+                font-family: 'Dancing Script', cursive;
+                letter-spacing: 1px;
+            }
+            &--jname {
+                @include Japanese-font;
+                margin-left: 10px;
+            }
+            &--comment {
+                margin-bottom: 20px;
+                @include Japanese-font;
+                letter-spacing: 1px;
+            }
+            &--price {
+                display: grid;
+                grid-template-columns: 150px 170px 170px;
+                grid-column-gap: 30px;
+                &--size {
+                    margin-right: 8px;
+                    @include Japanese-font;
+                    letter-spacing: 1px;
+                }
+                &--price {
+                    color: #E8435F;
+                    font-size: 30px;
+                    font-weight: 600;
+                    @include Japanese-font;
+                }
+            }
+        }
+    }
 }
 
 .store-img {
@@ -32,10 +84,6 @@
     letter-spacing: 1.2px;
     line-height: 26px;
 }
-
-// .snapwidget-widget {
-//     margin-top: 30px;
-// }
 
 .iswd-base {
     margin-top: 30px;
