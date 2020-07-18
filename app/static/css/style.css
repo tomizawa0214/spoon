@@ -203,6 +203,10 @@ main {
   margin-bottom: 50px;
 }
 
+.top__pick--img {
+  width: 200px;
+}
+
 .top__pick--text {
   margin-left: 40px;
 }
