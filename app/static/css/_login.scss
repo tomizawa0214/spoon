@@ -20,4 +20,11 @@
       @include button;
     }
   }
+  // パスワードリセット
+  &__text-help {
+    @include Japanese-font;
+    font-size: 14px;
+    letter-spacing: .5px;
+    margin-bottom: 30px;
+  }
 }

@@ -152,6 +152,8 @@ main {
 
 .top__news {
   font-family: '游ゴシック', 'Yu Gothic', YuGothic, HiraKakuProN-W3, 'メイリオ', Meiryo, sans-serif;
+  letter-spacing: .8px;
+  line-height: 25px;
   letter-spacing: 1px;
   margin-bottom: 20px;
 }
@@ -217,12 +219,16 @@ main {
 
 .top__pick--text--jname {
   font-family: '游ゴシック', 'Yu Gothic', YuGothic, HiraKakuProN-W3, 'メイリオ', Meiryo, sans-serif;
+  letter-spacing: .8px;
+  line-height: 25px;
   margin-left: 10px;
 }
 
 .top__pick--text--comment {
   margin-bottom: 20px;
   font-family: '游ゴシック', 'Yu Gothic', YuGothic, HiraKakuProN-W3, 'メイリオ', Meiryo, sans-serif;
+  letter-spacing: .8px;
+  line-height: 25px;
   letter-spacing: 1px;
 }
 
@@ -237,6 +243,8 @@ main {
 .top__pick--text--price--size {
   margin-right: 8px;
   font-family: '游ゴシック', 'Yu Gothic', YuGothic, HiraKakuProN-W3, 'メイリオ', Meiryo, sans-serif;
+  letter-spacing: .8px;
+  line-height: 25px;
   letter-spacing: 1px;
 }
 
@@ -245,6 +253,8 @@ main {
   font-size: 30px;
   font-weight: 600;
   font-family: '游ゴシック', 'Yu Gothic', YuGothic, HiraKakuProN-W3, 'メイリオ', Meiryo, sans-serif;
+  letter-spacing: .8px;
+  line-height: 25px;
 }
 
 .store-img {
@@ -260,6 +270,8 @@ main {
 
 .store-info {
   font-family: '游ゴシック', 'Yu Gothic', YuGothic, HiraKakuProN-W3, 'メイリオ', Meiryo, sans-serif;
+  letter-spacing: .8px;
+  line-height: 25px;
   margin-top: 5px;
   letter-spacing: 1.2px;
   line-height: 26px;
@@ -743,16 +755,22 @@ label img {
 
 .login__text {
   font-family: '游ゴシック', 'Yu Gothic', YuGothic, HiraKakuProN-W3, 'メイリオ', Meiryo, sans-serif;
+  letter-spacing: .8px;
+  line-height: 25px;
   margin-bottom: 30px;
 }
 
 .login__error {
   font-family: '游ゴシック', 'Yu Gothic', YuGothic, HiraKakuProN-W3, 'メイリオ', Meiryo, sans-serif;
+  letter-spacing: .8px;
+  line-height: 25px;
   color: #ff0000;
 }
 
 .login__form {
   font-family: '游ゴシック', 'Yu Gothic', YuGothic, HiraKakuProN-W3, 'メイリオ', Meiryo, sans-serif;
+  letter-spacing: .8px;
+  line-height: 25px;
   max-width: 400px;
   margin: 0px auto 80px;
   text-align: center;
@@ -760,6 +778,8 @@ label img {
 
 .login__form--stay {
   font-family: '游ゴシック', 'Yu Gothic', YuGothic, HiraKakuProN-W3, 'メイリオ', Meiryo, sans-serif;
+  letter-spacing: .8px;
+  line-height: 25px;
 }
 
 .login__form--btn {
@@ -791,6 +811,15 @@ label img {
   margin: 0 5px 0 0;
 }
 
+.login__text-help {
+  font-family: '游ゴシック', 'Yu Gothic', YuGothic, HiraKakuProN-W3, 'メイリオ', Meiryo, sans-serif;
+  letter-spacing: .8px;
+  line-height: 25px;
+  font-size: 14px;
+  letter-spacing: .5px;
+  margin-bottom: 30px;
+}
+
 .logout {
   max-width: 500px;
   margin: 0 auto;
@@ -798,6 +827,8 @@ label img {
 
 .logout__msg {
   font-family: '游ゴシック', 'Yu Gothic', YuGothic, HiraKakuProN-W3, 'メイリオ', Meiryo, sans-serif;
+  letter-spacing: .8px;
+  line-height: 25px;
   margin: 0 auto;
   text-align: center;
 }

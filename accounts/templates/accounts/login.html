@@ -8,8 +8,17 @@
 
 <div class="login">
     <p class="login__text text-center">アカウントをお持ちでない場合は、<a href="{% url 'account_signup' %}">こちら</a>から会員登録をお願いします。</p>
+    {% for field in form %}
+        <p class="login__error text-center">
+            {% for error in field.errors %}
+                ※{{ error }}<br>
+            {% endfor %}
+        </p>
+    {% endfor %}
     {% for error in form.non_field_errors %}
-        <p class="login__error text-center">※{{ error }}</p>
+        <p class="login__error text-center">
+            ※{{ error }}
+        </p>
     {% endfor %}
     <form method="POST" class="login__form">
         {% csrf_token %}
