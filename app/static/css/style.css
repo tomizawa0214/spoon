@@ -55,7 +55,7 @@ main {
 .header {
   width: 100%;
   max-width: 1200px;
-  margin: 10px auto;
+  margin: 20px auto;
   padding: 0;
 }
 
@@ -68,37 +68,35 @@ main {
   opacity: .5;
 }
 
-.header ul {
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
+.header a {
+  text-decoration: none;
+  color: #000;
 }
 
-.header ul li a {
-  padding: 4px;
-  color: #000;
-  letter-spacing: 3px;
+.header__link {
   -webkit-transition: .3s;
   transition: .3s;
 }
 
-.header ul li a:hover {
+.header__link:hover {
   opacity: .5;
 }
 
-.header ul li a i {
-  margin-right: 8px;
+.header__link--icon {
+  width: 40px;
 }
 
-.header ul li a span {
-  vertical-align: 2px;
+.header__link--text {
   font-size: 12px;
-  font-weight: 600;
   letter-spacing: 1px;
 }
 
-.header ul li:not(:nth-child(3)) span {
-  margin-left: 8px;
+.header__link--badge {
+  padding: 3px 8px;
+  font-size: 12px;
+  vertical-align: 3px;
+  color: #fff;
+  background: #e8435f;
 }
 
 @media screen and (max-width: 576px) {

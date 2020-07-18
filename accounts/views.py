@@ -279,9 +279,13 @@ class ProfileEditView(LoginRequiredMixin, View):
             }
         )
 
+        # 未注文のカート件数を取得
+        count = Cart.objects.filter(user=request.user, ordered=False).count()
+
         return render(request, 'accounts/profile_edit.html', {
             'user_data': user_data,
             'form': form,
+            'count': count
         })
 
     def post(self, request, *args, **kwargs):
@@ -305,9 +309,13 @@ class ProfileView(LoginRequiredMixin, View):
         user_data = CustomUser.objects.get(id=request.user.id)
         order_data = Order.objects.filter(user=request.user)
 
+        # 未注文のカート件数を取得
+        count = Cart.objects.filter(user=request.user, ordered=False).count()
+
         return render(request, 'accounts/profile.html', {
             'user_data': user_data,
             'order_data': order_data,
+            'count': count
         })
 
     def post(self, request, *args, **kwargs):

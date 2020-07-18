@@ -15,7 +15,12 @@ import re
 
 class OrderThanksView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
-        return render(request, 'app/order_thanks.html')
+        # 未注文のカート件数を取得
+        count = Cart.objects.filter(user=request.user, ordered=False).count()
+
+        return render(request, 'app/order_thanks.html', {
+            'count': count
+        })
 
     def post(self, request, *args, **kwargs):
         # ログインユーザーの注文未完了カートをオーダーに登録。カートが無い間違い注文は除外
@@ -85,9 +90,13 @@ class OrderConfirmView(LoginRequiredMixin, View):
         # 総合計値を取得
         get_total_price = sum(total_price)
 
+        # 未注文のカート件数を取得
+        count = Cart.objects.filter(user=request.user, ordered=False).count()
+
         return render(request, 'app/order_confirm.html', {
             'cart_data': cart_data,
             'get_total_price': get_total_price,
+            'count': count
         })
 
     def post(self, request, *args, **kwargs):
@@ -161,10 +170,14 @@ class OrderUserView(LoginRequiredMixin, View):
         else:
             today_order = False
 
+        # 未注文のカート件数を取得
+        count = Cart.objects.filter(user=request.user, ordered=False).count()
+
         return render(request, 'app/order_user.html', {
             'profile_form': profile_form,
             'receipt_form': receipt_form,
             'today_order': today_order,
+            'count': count
         })
 
 
@@ -278,15 +291,24 @@ class DeleteOrderView(LoginRequiredMixin, View):
 
 class AccessView(View):
     def get(self, request, *args, **kwargs):
-        return render(request, 'app/access.html')
+        # 未注文のカート件数を取得
+        count = Cart.objects.filter(user=request.user, ordered=False).count()
+
+        return render(request, 'app/access.html', {
+            'count': count
+        })
 
 
 class ContactView(View):
     def get(self, request, *args, **kwargs):
         form = ContactForm(request.POST or None)
 
+        # 未注文のカート件数を取得
+        count = Cart.objects.filter(user=request.user, ordered=False).count()
+
         return render(request, 'app/contact.html', {
-            'form': form
+            'form': form,
+            'count': count
         })
 
     def post(self, request, *args, **kwargs):
@@ -327,7 +349,12 @@ class ContactView(View):
 
 class ContactThanksView(View):
     def get(self, request, *args, **kwargs):
-        return render(request, 'app/contact_thanks.html')
+        # 未注文のカート件数を取得
+        count = Cart.objects.filter(user=request.user, ordered=False).count()
+
+        return render(request, 'app/contact_thanks.html', {
+            'count': count
+        })
 
 
 class IndexView(View):
@@ -346,8 +373,11 @@ class IndexView(View):
         news_data = WhatsNew.objects.all().order_by('-id')[0:7]
         # 最新2件を取得
         pick_data = PickUp.objects.all().order_by('-id')[0:2]
+        # 未注文のカート件数を取得
+        count = Cart.objects.filter(user=request.user, ordered=False).count()
 
         return render(request, 'app/index.html', {
             'news_data': news_data,
             'pick_data': pick_data,
+            'count': count
         })
