@@ -1,23 +1,22 @@
-.login-title {
-  @include sectionTitle;
-  margin: 0 15px 30px;
-}
-
 .login {
-  max-width: 500px;
   margin: 0 auto;
-  padding: 0;
-  h5 {
-    margin: 10px auto 30px;
-    text-align: center;
+  &__text {
+    @include Japanese-font;
+    margin-bottom: 30px;
+  }
+  &__error {
+    @include Japanese-font;
+    color: #ff0000;
   }
   &__form {
-    text-align: center;
+    @include Japanese-font;
+    max-width: 400px;
     margin: 0px auto 80px;
-    &--item {
-      margin-bottom: 15px;
+    text-align: center;
+    &--stay {
+      @include Japanese-font;
     }
-    button {
+    &--btn {
       @include button;
     }
   }

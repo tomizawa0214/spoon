@@ -2,35 +2,33 @@
 {% load widget_tweaks %}
 
 {% block content %}
-<div class="login-title">
+<div class="title">
     <span>LOGIN</span>
 </div>
 
-<div class="login col-12">
-    <p>アカウントをお持ちでない場合は、<a href="{% url 'account_signup' %}">こちら</a>から会員登録をお願いします</p>
+<div class="login">
+    <p class="login__text text-center">アカウントをお持ちでない場合は、<a href="{% url 'account_signup' %}">こちら</a>から会員登録をお願いします。</p>
+    {% for error in form.non_field_errors %}
+        <p class="login__error text-center">※{{ error }}</p>
+    {% endfor %}
     <form method="POST" class="login__form">
         {% csrf_token %}
-        <div class="login__form--item form-label-group">
+        <div class="mb-3">
             {% render_field form.login class="form-control" placeholder="メールアドレス" %}
         </div>
-        <div class="login__form--item form-label-group">
+        <div class="mb-1">
             {% render_field form.password class="form-control" placeholder="パスワード" %}
         </div>
-        <p class="text-left">
-            <input type="checkbox" name="remember" id="id_remember">
-            <label for="id_remember">ログイン状態を維持する</label>
-        </p>
         <div class="text-right">
             <a href="{% url 'password_reset' %}">パスワードをお忘れの場合</a>
         </div>
-        <button type="submit" class="btn rounded-pill" ontouchstart="">
+        <p class="login__form--stay mt-4 mb-0">
+            <input type="checkbox" name="remember" id="id_remember">
+            <label for="id_remember">ログイン状態を保存する</label>
+        </p>
+        <button type="submit" class="login__form--btn btn rounded-pill" ontouchstart="">
             <i class="fas fa-sign-in-alt fa-fw" aria-hidden="true"></i>ログイン
         </button>
     </form>
-    {% if form.errors %}
-        {% for error in form.non_field_errors %}
-            <p>{{ error }}</p>
-        {% endfor %}
-    {% endif %}
 </div>
 {% endblock %}

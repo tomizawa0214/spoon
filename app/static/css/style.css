@@ -738,26 +738,31 @@ label img {
 }
 
 .login {
-  max-width: 500px;
   margin: 0 auto;
-  padding: 0;
 }
 
-.login h5 {
-  margin: 10px auto 30px;
-  text-align: center;
+.login__text {
+  font-family: '游ゴシック', 'Yu Gothic', YuGothic, HiraKakuProN-W3, 'メイリオ', Meiryo, sans-serif;
+  margin-bottom: 30px;
+}
+
+.login__error {
+  font-family: '游ゴシック', 'Yu Gothic', YuGothic, HiraKakuProN-W3, 'メイリオ', Meiryo, sans-serif;
+  color: #ff0000;
 }
 
 .login__form {
-  text-align: center;
+  font-family: '游ゴシック', 'Yu Gothic', YuGothic, HiraKakuProN-W3, 'メイリオ', Meiryo, sans-serif;
+  max-width: 400px;
   margin: 0px auto 80px;
+  text-align: center;
 }
 
-.login__form--item {
-  margin-bottom: 15px;
+.login__form--stay {
+  font-family: '游ゴシック', 'Yu Gothic', YuGothic, HiraKakuProN-W3, 'メイリオ', Meiryo, sans-serif;
 }
 
-.login__form button {
+.login__form--btn {
   position: relative;
   width: 200px;
   margin-top: 50px;
@@ -771,18 +776,18 @@ label img {
   transition: .3s;
 }
 
-.login__form button:hover {
+.login__form--btn:hover {
   color: #fff;
   opacity: .7;
 }
 
-.login__form button:active {
+.login__form--btn:active {
   top: 3px;
   -webkit-box-shadow: none;
           box-shadow: none;
 }
 
-.login__form button i {
+.login__form--btn i {
   margin: 0 5px 0 0;
 }
 
