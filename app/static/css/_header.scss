@@ -22,10 +22,12 @@
       width: 40px;
     }
     &--text {
+      @include E-font;
       font-size: 12px;
       letter-spacing: 1px;
     }
     &--badge {
+      @include E-font;
       padding: 3px 8px;
       font-size: 12px;
       vertical-align: 3px;

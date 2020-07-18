@@ -12,7 +12,7 @@
         <li data-target="#slides" data-slide-to="1"></li>
         <li data-target="#slides" data-slide-to="2"></li>
     </ul>
-    <div class="top__item carousel-inner">
+    <div class="carousel-inner">
         <div class="top__item--image1 carousel-item active"></div>
         <div class="top__item--image2 carousel-item"></div>
         <div class="top__item--image3 carousel-item"></div>
@@ -28,7 +28,7 @@
         </div>
         
         {% for news in news_data %}
-            <p class="top__news">
+            <p class="top__news mb-3">
                 <span class="top__news--date">{{ news.date | date:"Y/m/d" }}</span>
                 <span class="ml-3">{{ news.comment }}</span>
             </p>
@@ -40,19 +40,19 @@
 
         {% for pick in pick_data %}
             <div class="d-flex mb-5">
-                <img class="top__pick--img" src="{{ pick.image.url }}">
+                <img class="top__pick" src="{{ pick.image.url }}">
                 <div class="ml-4">
                     <p>
-                        <span class="top__pick--text--ename">{{ pick.e_name }}</span>
-                        <span class="top__pick--text--jname ml-2">{{ pick.j_name }}</span>
+                        <span class="top__pick--ename">{{ pick.e_name }}</span>
+                        <span class="ml-2">{{ pick.j_name }}</span>
                     </p>
-                    <p class="top__pick--text--comment mb-4">{{ pick.comment | linebreaksbr }}</p>
-                    <span class="top__pick--text--price--size mr-1">M:ミニ</span>
-                    <span class="top__pick--text--price--price mr-4">\{{ pick.m_price }}</span>
-                    <span class="top__pick--text--price--size mr-1">S:シングル</span>
-                    <span class="top__pick--text--price--price mr-4">\{{ pick.s_price }}</span>
-                    <span class="top__pick--text--price--size mr-1">W:ダブル</span>
-                    <span class="top__pick--text--price--price">\{{ pick.w_price }}</span>
+                    <p class="mb-5">{{ pick.comment | linebreaksbr }}</p>
+                    <span class="mr-1">M:ミニ</span>
+                    <span class="top__pick--price mr-4">\{{ pick.m_price }}</span>
+                    <span class="mr-1">S:シングル</span>
+                    <span class="top__pick--price mr-4">\{{ pick.s_price }}</span>
+                    <span class="mr-1">W:ダブル</span>
+                    <span class="top__pick--price">\{{ pick.w_price }}</span>
                 </div>
             </div>
         {% endfor %}

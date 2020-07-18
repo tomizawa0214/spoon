@@ -14,42 +14,22 @@
         }
     }
     &__news {
-        @include Japanese-font;
-        letter-spacing: 1px;
-        margin-bottom: 20px;
         &--date {
             color: #e8435f;
         }
     }
     &__pick {
-        &--img {
-            width: 200px;
+        width: 200px;
+        &--ename {
+            font-size: 25px;
+            font-family: 'Dancing Script', cursive;
+            letter-spacing: 1px;
         }
-        &--text {
-            &--ename {
-                font-size: 25px;
-                font-family: 'Dancing Script', cursive;
-                letter-spacing: 1px;
-            }
-            &--jname {
-                @include Japanese-font;
-            }
-            &--comment {
-                @include Japanese-font;
-                letter-spacing: 1px;
-            }
-            &--price {
-                &--size {
-                    @include Japanese-font;
-                    letter-spacing: 1px;
-                }
-                &--price {
-                    color: #e8435f;
-                    font-size: 30px;
-                    font-weight: 600;
-                    @include Japanese-font;
-                }
-            }
+        &--price {
+            color: #e8435f;
+            font-size: 30px;
+            font-weight: 600;
+            letter-spacing: 0;
         }
     }
 }
@@ -59,21 +39,12 @@
 }
 
 .store-name {
-    margin-top: 5px;
     font-size: 18px;
     font-weight: 600;
     letter-spacing: .5px;
 }
 
-.store-info {
-    @include Japanese-font;
-    margin-top: 5px;
-    letter-spacing: 1.2px;
-    line-height: 26px;
-}
-
 .iswd-base {
-    margin-top: 30px;
     border: none !important;
     background: #FCE8EB !important;
 }

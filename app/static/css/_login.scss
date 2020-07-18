@@ -1,20 +1,12 @@
 .login {
-  margin: 0 auto;
-  &__text {
-    @include Japanese-font;
-    margin-bottom: 30px;
-  }
   &__error {
-    @include Japanese-font;
     color: #ff0000;
   }
   &__form {
-    @include Japanese-font;
     max-width: 400px;
     margin: 0px auto 80px;
-    text-align: center;
-    &--stay {
-      @include Japanese-font;
+    &--save {
+      letter-spacing: 0;
     }
     &--btn {
       @include button;
@@ -22,9 +14,7 @@
   }
   // パスワードリセット
   &__text-help {
-    @include Japanese-font;
     font-size: 14px;
     letter-spacing: .5px;
-    margin-bottom: 30px;
   }
 }

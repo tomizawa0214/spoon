@@ -6,8 +6,8 @@
     <span>LOGIN</span>
 </div>
 
-<div class="login">
-    <p class="login__text text-center">アカウントをお持ちでない場合は、<a href="{% url 'account_signup' %}">こちら</a>から会員登録をお願いします。</p>
+<div class="login m-auto">
+    <p class="text-center mb-4">アカウントをお持ちでない場合は、<a href="{% url 'account_signup' %}">こちら</a>から会員登録をお願いします。</p>
     {% for field in form %}
         <p class="login__error text-center">
             {% for error in field.errors %}
@@ -20,7 +20,7 @@
             ※{{ error }}
         </p>
     {% endfor %}
-    <form method="POST" class="login__form">
+    <form method="POST" class="login__form text-center">
         {% csrf_token %}
         <div class="mb-3">
             {% render_field form.login class="form-control" placeholder="メールアドレス" %}
@@ -31,7 +31,7 @@
         <div class="text-right">
             <a href="{% url 'password_reset' %}">パスワードをお忘れの場合</a>
         </div>
-        <p class="login__form--stay mt-4 mb-0">
+        <p class="login__form--save mt-4 mb-0">
             <input type="checkbox" name="remember" id="id_remember">
             <label for="id_remember">ログイン状態を保存する</label>
         </p>

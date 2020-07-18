@@ -12,7 +12,9 @@ body {
           flex-direction: column;
   width: 100%;
   min-height: 100vh;
-  font-family: "Montserrat", "Roboto", "游ゴシック体", "Yu Gothic", YuGothic, "游ゴシック", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", MeiryoKe_PGothic, "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+  font-family: '游ゴシック', 'Yu Gothic', YuGothic, HiraKakuProN-W3, 'メイリオ', Meiryo, sans-serif;
+  letter-spacing: .8px;
+  line-height: 25px;
 }
 
 main {
@@ -20,6 +22,7 @@ main {
 }
 
 .title {
+  font-family: "Montserrat", "Roboto", "游ゴシック体", "Yu Gothic", YuGothic, "游ゴシック", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", MeiryoKe_PGothic, "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
   position: relative;
   margin: 0 0 40px;
   text-align: center;
@@ -87,11 +90,13 @@ main {
 }
 
 .header__link--text {
+  font-family: "Montserrat", "Roboto", "游ゴシック体", "Yu Gothic", YuGothic, "游ゴシック", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", MeiryoKe_PGothic, "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
   font-size: 12px;
   letter-spacing: 1px;
 }
 
 .header__link--badge {
+  font-family: "Montserrat", "Roboto", "游ゴシック体", "Yu Gothic", YuGothic, "游ゴシック", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", MeiryoKe_PGothic, "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
   padding: 3px 8px;
   font-size: 12px;
   vertical-align: 3px;
@@ -150,55 +155,25 @@ main {
   background-image: url("/static/img/slide_3.png");
 }
 
-.top__news {
-  font-family: '游ゴシック', 'Yu Gothic', YuGothic, HiraKakuProN-W3, 'メイリオ', Meiryo, sans-serif;
-  letter-spacing: .8px;
-  line-height: 25px;
-  letter-spacing: 1px;
-  margin-bottom: 20px;
-}
-
 .top__news--date {
   color: #e8435f;
 }
 
-.top__pick--img {
+.top__pick {
   width: 200px;
 }
 
-.top__pick--text--ename {
+.top__pick--ename {
   font-size: 25px;
   font-family: 'Dancing Script', cursive;
   letter-spacing: 1px;
 }
 
-.top__pick--text--jname {
-  font-family: '游ゴシック', 'Yu Gothic', YuGothic, HiraKakuProN-W3, 'メイリオ', Meiryo, sans-serif;
-  letter-spacing: .8px;
-  line-height: 25px;
-}
-
-.top__pick--text--comment {
-  font-family: '游ゴシック', 'Yu Gothic', YuGothic, HiraKakuProN-W3, 'メイリオ', Meiryo, sans-serif;
-  letter-spacing: .8px;
-  line-height: 25px;
-  letter-spacing: 1px;
-}
-
-.top__pick--text--price--size {
-  font-family: '游ゴシック', 'Yu Gothic', YuGothic, HiraKakuProN-W3, 'メイリオ', Meiryo, sans-serif;
-  letter-spacing: .8px;
-  line-height: 25px;
-  letter-spacing: 1px;
-}
-
-.top__pick--text--price--price {
+.top__pick--price {
   color: #e8435f;
   font-size: 30px;
   font-weight: 600;
-  font-family: '游ゴシック', 'Yu Gothic', YuGothic, HiraKakuProN-W3, 'メイリオ', Meiryo, sans-serif;
-  letter-spacing: .8px;
-  line-height: 25px;
+  letter-spacing: 0;
 }
 
 .store-img {
@@ -206,23 +181,12 @@ main {
 }
 
 .store-name {
-  margin-top: 5px;
   font-size: 18px;
   font-weight: 600;
   letter-spacing: .5px;
 }
 
-.store-info {
-  font-family: '游ゴシック', 'Yu Gothic', YuGothic, HiraKakuProN-W3, 'メイリオ', Meiryo, sans-serif;
-  letter-spacing: .8px;
-  line-height: 25px;
-  margin-top: 5px;
-  letter-spacing: 1.2px;
-  line-height: 26px;
-}
-
 .iswd-base {
-  margin-top: 30px;
   border: none !important;
   background: #FCE8EB !important;
 }
@@ -239,23 +203,16 @@ main {
   }
 }
 
-.nav {
-  padding: 20px 15px;
-}
-
 .nav__wrap {
   max-width: 1000px;
-  margin: 0 auto;
 }
 
 .nav__wrap ul {
   width: 100%;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
 }
 
 .nav__wrap ul li a {
+  font-family: "Montserrat", "Roboto", "游ゴシック体", "Yu Gothic", YuGothic, "游ゴシック", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", MeiryoKe_PGothic, "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
   text-align: center;
   letter-spacing: 3px;
   color: #000;
@@ -304,6 +261,7 @@ main {
 }
 
 .order-title {
+  font-family: "Montserrat", "Roboto", "游ゴシック体", "Yu Gothic", YuGothic, "游ゴシック", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", MeiryoKe_PGothic, "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
   position: relative;
   margin: 0 0 40px;
   text-align: center;
@@ -693,37 +651,17 @@ label img {
   }
 }
 
-.login {
-  margin: 0 auto;
-}
-
-.login__text {
-  font-family: '游ゴシック', 'Yu Gothic', YuGothic, HiraKakuProN-W3, 'メイリオ', Meiryo, sans-serif;
-  letter-spacing: .8px;
-  line-height: 25px;
-  margin-bottom: 30px;
-}
-
 .login__error {
-  font-family: '游ゴシック', 'Yu Gothic', YuGothic, HiraKakuProN-W3, 'メイリオ', Meiryo, sans-serif;
-  letter-spacing: .8px;
-  line-height: 25px;
   color: #ff0000;
 }
 
 .login__form {
-  font-family: '游ゴシック', 'Yu Gothic', YuGothic, HiraKakuProN-W3, 'メイリオ', Meiryo, sans-serif;
-  letter-spacing: .8px;
-  line-height: 25px;
   max-width: 400px;
   margin: 0px auto 80px;
-  text-align: center;
 }
 
-.login__form--stay {
-  font-family: '游ゴシック', 'Yu Gothic', YuGothic, HiraKakuProN-W3, 'メイリオ', Meiryo, sans-serif;
-  letter-spacing: .8px;
-  line-height: 25px;
+.login__form--save {
+  letter-spacing: 0;
 }
 
 .login__form--btn {
@@ -756,29 +694,15 @@ label img {
 }
 
 .login__text-help {
-  font-family: '游ゴシック', 'Yu Gothic', YuGothic, HiraKakuProN-W3, 'メイリオ', Meiryo, sans-serif;
-  letter-spacing: .8px;
-  line-height: 25px;
   font-size: 14px;
   letter-spacing: .5px;
-  margin-bottom: 30px;
 }
 
 .logout {
   max-width: 500px;
-  margin: 0 auto;
-}
-
-.logout__msg {
-  font-family: '游ゴシック', 'Yu Gothic', YuGothic, HiraKakuProN-W3, 'メイリオ', Meiryo, sans-serif;
-  letter-spacing: .8px;
-  line-height: 25px;
-  margin: 0 auto;
-  text-align: center;
 }
 
 .logout__form {
-  text-align: center;
   margin: 0px auto 80px;
 }
 
@@ -812,6 +736,7 @@ label img {
 }
 
 .signup-title {
+  font-family: "Montserrat", "Roboto", "游ゴシック体", "Yu Gothic", YuGothic, "游ゴシック", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", MeiryoKe_PGothic, "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
   position: relative;
   margin: 0 0 40px;
   text-align: center;
@@ -906,6 +831,7 @@ label img {
 }
 
 .profile-title {
+  font-family: "Montserrat", "Roboto", "游ゴシック体", "Yu Gothic", YuGothic, "游ゴシック", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", MeiryoKe_PGothic, "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
   position: relative;
   margin: 0 0 40px;
   text-align: center;

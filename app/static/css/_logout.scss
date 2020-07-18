@@ -1,13 +1,6 @@
 .logout {
   max-width: 500px;
-  margin: 0 auto;
-  &__msg {
-    @include Japanese-font;
-    margin: 0 auto;
-    text-align: center;
-  }
   &__form {
-    text-align: center;
     margin: 0px auto 80px;
     &--btn {
       @include button;
