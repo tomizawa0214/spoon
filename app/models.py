@@ -1,6 +1,8 @@
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
+from imagekit.models import ProcessedImageField
+from imagekit.processors import ResizeToFill
 
 
 class SizeItem(models.Model):
@@ -127,7 +129,12 @@ class PickUp(models.Model):
             '※100文字以内で入力してください。'
         ),
     )
-    image = models.ImageField('画像', upload_to='images')
+    image = ProcessedImageField(
+        verbose_name='画像',
+        upload_to='images',
+        processors=[ResizeToFill(200, 200)],
+        options={'quality': 60}
+    )
 
     def __str__(self):
         return self.j_name
