@@ -30,37 +30,29 @@
         {% for news in news_data %}
             <p class="top__news">
                 <span class="top__news--date">{{ news.date | date:"Y/m/d" }}</span>
-                <span class="top__news--comment">{{ news.comment }}</span>
+                <span class="ml-3">{{ news.comment }}</span>
             </p>
         {% endfor %}
 
-        <div class="top__title">
+        <div class="title mt-5">
             <span>PICK UP</span>
         </div>
 
         {% for pick in pick_data %}
-            <div class="top__pick">
+            <div class="d-flex mb-5">
                 <img class="top__pick--img" src="{{ pick.image.url }}">
-                <div class="top__pick--text">
+                <div class="ml-4">
                     <p>
                         <span class="top__pick--text--ename">{{ pick.e_name }}</span>
-                        <span class="top__pick--text--jname">{{ pick.j_name }}</span>
+                        <span class="top__pick--text--jname ml-2">{{ pick.j_name }}</span>
                     </p>
-                    <p class="top__pick--text--comment">{{ pick.comment | linebreaksbr }}</p>
-                    <div class="top__pick--text--price">
-                        <p>
-                            <span class="top__pick--text--price--size">M:ミニ</span>
-                            <span class="top__pick--text--price--price">\{{ pick.m_price }}</span>
-                        </p>
-                        <p>
-                            <span class="top__pick--text--price--size">S:シングル</span>
-                            <span class="top__pick--text--price--price">\{{ pick.s_price }}</span>
-                        </p>
-                        <p>
-                            <span class="top__pick--text--price--size">W:ダブル</span>
-                            <span class="top__pick--text--price--price">\{{ pick.w_price }}</span>
-                        </p>
-                    </div>
+                    <p class="top__pick--text--comment mb-4">{{ pick.comment | linebreaksbr }}</p>
+                    <span class="top__pick--text--price--size mr-1">M:ミニ</span>
+                    <span class="top__pick--text--price--price mr-4">\{{ pick.m_price }}</span>
+                    <span class="top__pick--text--price--size mr-1">S:シングル</span>
+                    <span class="top__pick--text--price--price mr-4">\{{ pick.s_price }}</span>
+                    <span class="top__pick--text--price--size mr-1">W:ダブル</span>
+                    <span class="top__pick--text--price--price">\{{ pick.w_price }}</span>
                 </div>
             </div>
         {% endfor %}

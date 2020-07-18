@@ -159,56 +159,11 @@ main {
 }
 
 .top__news--date {
-  color: #E8435F;
-}
-
-.top__news--comment {
-  margin-left: 16px;
-}
-
-.top__title {
-  position: relative;
-  margin: 0 0 40px;
-  text-align: center;
-  letter-spacing: 3px;
-  font-size: 20px;
-  margin-top: 50px;
-}
-
-.top__title span {
-  position: relative;
-  display: inline-block;
-  z-index: 1;
-  padding: 0 15px;
-  background: #fff;
-}
-
-.top__title:after {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
-  display: block;
-  width: 100%;
-  height: 1px;
-  content: '';
-  background: #333;
-}
-
-.top__pick {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  margin-bottom: 50px;
+  color: #e8435f;
 }
 
 .top__pick--img {
   width: 200px;
-}
-
-.top__pick--text {
-  margin-left: 40px;
 }
 
 .top__pick--text--ename {
@@ -221,27 +176,16 @@ main {
   font-family: '游ゴシック', 'Yu Gothic', YuGothic, HiraKakuProN-W3, 'メイリオ', Meiryo, sans-serif;
   letter-spacing: .8px;
   line-height: 25px;
-  margin-left: 10px;
 }
 
 .top__pick--text--comment {
-  margin-bottom: 20px;
   font-family: '游ゴシック', 'Yu Gothic', YuGothic, HiraKakuProN-W3, 'メイリオ', Meiryo, sans-serif;
   letter-spacing: .8px;
   line-height: 25px;
   letter-spacing: 1px;
 }
 
-.top__pick--text--price {
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: 150px 170px 170px;
-      grid-template-columns: 150px 170px 170px;
-  grid-column-gap: 30px;
-}
-
 .top__pick--text--price--size {
-  margin-right: 8px;
   font-family: '游ゴシック', 'Yu Gothic', YuGothic, HiraKakuProN-W3, 'メイリオ', Meiryo, sans-serif;
   letter-spacing: .8px;
   line-height: 25px;
@@ -249,7 +193,7 @@ main {
 }
 
 .top__pick--text--price--price {
-  color: #E8435F;
+  color: #e8435f;
   font-size: 30px;
   font-weight: 600;
   font-family: '游ゴシック', 'Yu Gothic', YuGothic, HiraKakuProN-W3, 'メイリオ', Meiryo, sans-serif;
