@@ -47,7 +47,7 @@
 @mixin button {
   position: relative;
   width: 200px;
-  margin-top: 20px;
+  margin-top: 50px;
   color: #fff;
   background: #e8435f;
   box-shadow: 0 3px 0 #AC1531;
@@ -63,7 +63,7 @@
     box-shadow: none;
   }
   i {
-    margin: 0 8px 0 0;
+    margin: 0 5px 0 0;
   }
 }
 

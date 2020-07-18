@@ -1,19 +1,15 @@
-.logout-title {
-  @include sectionTitle;
-  margin: 0 15px 30px;
-}
-
 .logout {
   max-width: 500px;
   margin: 0 auto;
-  p {
-    margin: 10px auto 20px;
+  &__msg {
+    @include Japanese-font;
+    margin: 0 auto;
     text-align: center;
   }
-  form {
+  &__form {
     text-align: center;
     margin: 0px auto 80px;
-    button {
+    &--btn {
       @include button;
     }
   }

@@ -484,7 +484,7 @@ label img {
 .order__wrap--register {
   position: relative;
   width: 200px;
-  margin-top: 20px;
+  margin-top: 50px;
   color: #fff;
   background: #e8435f;
   -webkit-box-shadow: 0 3px 0 #AC1531;
@@ -508,13 +508,13 @@ label img {
 }
 
 .order__wrap--register i {
-  margin: 0 8px 0 0;
+  margin: 0 5px 0 0;
 }
 
 .order__wrap--shopping {
   position: relative;
   width: 200px;
-  margin-top: 20px;
+  margin-top: 50px;
   color: #fff;
   background: #e8435f;
   -webkit-box-shadow: 0 3px 0 #AC1531;
@@ -541,7 +541,7 @@ label img {
 }
 
 .order__wrap--shopping i {
-  margin: 0 8px 0 0;
+  margin: 0 5px 0 0;
 }
 
 @media screen and (max-width: 576px) {
@@ -613,7 +613,7 @@ label img {
 .thanks a {
   position: relative;
   width: 200px;
-  margin-top: 20px;
+  margin-top: 50px;
   color: #fff;
   background: #e8435f;
   -webkit-box-shadow: 0 3px 0 #AC1531;
@@ -639,7 +639,7 @@ label img {
 }
 
 .thanks a i {
-  margin: 0 8px 0 0;
+  margin: 0 5px 0 0;
 }
 
 .footer {
@@ -737,36 +737,6 @@ label img {
   }
 }
 
-.login-title {
-  position: relative;
-  margin: 0 0 40px;
-  text-align: center;
-  letter-spacing: 3px;
-  font-size: 20px;
-  margin: 0 15px 30px;
-}
-
-.login-title span {
-  position: relative;
-  display: inline-block;
-  z-index: 1;
-  padding: 0 15px;
-  background: #fff;
-}
-
-.login-title:after {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
-  display: block;
-  width: 100%;
-  height: 1px;
-  content: '';
-  background: #333;
-}
-
 .login {
   max-width: 500px;
   margin: 0 auto;
@@ -790,7 +760,7 @@ label img {
 .login__form button {
   position: relative;
   width: 200px;
-  margin-top: 20px;
+  margin-top: 50px;
   color: #fff;
   background: #e8435f;
   -webkit-box-shadow: 0 3px 0 #AC1531;
@@ -813,37 +783,7 @@ label img {
 }
 
 .login__form button i {
-  margin: 0 8px 0 0;
-}
-
-.logout-title {
-  position: relative;
-  margin: 0 0 40px;
-  text-align: center;
-  letter-spacing: 3px;
-  font-size: 20px;
-  margin: 0 15px 30px;
-}
-
-.logout-title span {
-  position: relative;
-  display: inline-block;
-  z-index: 1;
-  padding: 0 15px;
-  background: #fff;
-}
-
-.logout-title:after {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
-  display: block;
-  width: 100%;
-  height: 1px;
-  content: '';
-  background: #333;
+  margin: 0 5px 0 0;
 }
 
 .logout {
@@ -851,20 +791,21 @@ label img {
   margin: 0 auto;
 }
 
-.logout p {
-  margin: 10px auto 20px;
+.logout__msg {
+  font-family: '游ゴシック', 'Yu Gothic', YuGothic, HiraKakuProN-W3, 'メイリオ', Meiryo, sans-serif;
+  margin: 0 auto;
   text-align: center;
 }
 
-.logout form {
+.logout__form {
   text-align: center;
   margin: 0px auto 80px;
 }
 
-.logout form button {
+.logout__form--btn {
   position: relative;
   width: 200px;
-  margin-top: 20px;
+  margin-top: 50px;
   color: #fff;
   background: #e8435f;
   -webkit-box-shadow: 0 3px 0 #AC1531;
@@ -875,19 +816,19 @@ label img {
   transition: .3s;
 }
 
-.logout form button:hover {
+.logout__form--btn:hover {
   color: #fff;
   opacity: .7;
 }
 
-.logout form button:active {
+.logout__form--btn:active {
   top: 3px;
   -webkit-box-shadow: none;
           box-shadow: none;
 }
 
-.logout form button i {
-  margin: 0 8px 0 0;
+.logout__form--btn i {
+  margin: 0 5px 0 0;
 }
 
 .signup-title {
@@ -951,7 +892,7 @@ label img {
 .signup__form button {
   position: relative;
   width: 200px;
-  margin-top: 20px;
+  margin-top: 50px;
   color: #fff;
   background: #e8435f;
   -webkit-box-shadow: 0 3px 0 #AC1531;
@@ -974,7 +915,7 @@ label img {
 }
 
 .signup__form button i {
-  margin: 0 8px 0 0;
+  margin: 0 5px 0 0;
 }
 
 .terms {
@@ -1068,7 +1009,7 @@ label img {
 .profile button {
   position: relative;
   width: 200px;
-  margin-top: 20px;
+  margin-top: 50px;
   color: #fff;
   background: #e8435f;
   -webkit-box-shadow: 0 3px 0 #AC1531;
@@ -1091,7 +1032,7 @@ label img {
 }
 
 .profile button i {
-  margin: 0 8px 0 0;
+  margin: 0 5px 0 0;
 }
 
 @media screen and (max-width: 576px) {
