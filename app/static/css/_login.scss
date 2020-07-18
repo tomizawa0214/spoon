@@ -3,10 +3,15 @@
     color: #ff0000;
   }
   &__form {
-    max-width: 400px;
     margin: 0px auto 80px;
+    &--field {
+      max-width: 400px;
+    }
     &--save {
       letter-spacing: 0;
+    }
+    &--error {
+      color: #ff0000;
     }
     &--btn {
       @include button;

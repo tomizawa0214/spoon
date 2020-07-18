@@ -51,6 +51,15 @@ main {
   background: #333;
 }
 
+.done-check {
+  width: 100px;
+}
+
+.done-text {
+  font-size: 20px;
+  font-weight: 600;
+}
+
 .container-fluid {
   max-width: 1200px;
 }
@@ -656,12 +665,19 @@ label img {
 }
 
 .login__form {
-  max-width: 400px;
   margin: 0px auto 80px;
+}
+
+.login__form--field {
+  max-width: 400px;
 }
 
 .login__form--save {
   letter-spacing: 0;
+}
+
+.login__form--error {
+  color: #ff0000;
 }
 
 .login__form--btn {

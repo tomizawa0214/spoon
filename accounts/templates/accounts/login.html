@@ -1,6 +1,10 @@
 {% extends "app/base.html" %}
 {% load widget_tweaks %}
 
+{% block title %}
+<title>ログイン | spoon</title>
+{% endblock %}
+
 {% block content %}
 <div class="title">
     <span>LOGIN</span>
@@ -22,14 +26,14 @@
     {% endfor %}
     <form method="POST" class="login__form text-center">
         {% csrf_token %}
-        <div class="mb-3">
+        <div class="login__form--field mx-auto mb-3">
             {% render_field form.login class="form-control" placeholder="メールアドレス" %}
         </div>
-        <div class="mb-1">
+        <div class="login__form--field mx-auto mb-1">
             {% render_field form.password class="form-control" placeholder="パスワード" %}
-        </div>
-        <div class="text-right">
-            <a href="{% url 'password_reset' %}">パスワードをお忘れの場合</a>
+            <div class="mt-1 text-right">
+                <a href="{% url 'password_reset' %}">パスワードをお忘れの場合</a>
+            </div>
         </div>
         <p class="login__form--save mt-4 mb-0">
             <input type="checkbox" name="remember" id="id_remember">
