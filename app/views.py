@@ -228,16 +228,26 @@ class AddOrderView(LoginRequiredMixin, View):
         cart.user = request.user
         cart.size_title = size_title
         cart.size_price = size_price
+        cart.size_image = SizeItem.objects.get(title=size_title).image
         cart.flavor_title = flavor_title
         cart.flavor_price = flavor_price
+        cart.flavor_image = FlavorItem.objects.get(title=flavor_title).image
         cart.flavor2_title = flavor2_title
         cart.flavor2_price = flavor2_price
+        if flavor2_title != '':
+            cart.flavor2_image = FlavorItem.objects.get(title=flavor2_title).image
         cart.option_title = option_title
+        if option_title != '':
+            cart.option_image = OptionItem.objects.get(title=option_title).image
         cart.option_price = option_price
         cart.option2_title = option2_title
         cart.option2_price = option2_price
+        if option2_title != '':
+            cart.option2_image = OptionItem.objects.get(title=option2_title).image
         cart.option3_title = option3_title
         cart.option3_price = option3_price
+        if option3_title != '':
+            cart.option3_image = OptionItem.objects.get(title=option3_title).image
         cart.save()
 
         # ログインユーザーの注文未完了レコードをすべて取得

@@ -307,7 +307,7 @@ class ProfileEditView(LoginRequiredMixin, View):
 class ProfileView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         user_data = CustomUser.objects.get(id=request.user.id)
-        order_data = Order.objects.filter(user=request.user)
+        order_data = Order.objects.filter(user=request.user).order_by('-id')
 
         # 未注文のカート件数を取得
         count = Cart.objects.filter(user=request.user, ordered=False).count()

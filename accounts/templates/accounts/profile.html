@@ -1,12 +1,16 @@
 {% extends "app/base.html" %}
 {% load humanize %}
 
+{% block title %}
+<title>マイページ | spoon</title>
+{% endblock %}
+
 {% block content %}
-<div class="profile-title">
+<div class="title">
     <span>PROFILE</span>
 </div>
 
-<div class="profile">
+<div class="profile mx-auto">
     <table class="profile__table">
         <tbody>
             <tr>
@@ -41,76 +45,77 @@
         <a href="{% url 'delete_confirm' %}">会員サービスの退会手続きはこちら</a>
     </div>
     <div class="text-center">
-        <a class="btn rounded-pill" href="{% url 'profile_edit' %}" ontouchstart="">
-            <i class="fas fa-user-edit fa-fw" aria-hidden="true"></i>編集
+        <a class="profile__btn btn rounded-pill" href="{% url 'profile_edit' %}" ontouchstart="">
+            <i class="fas fa-edit fa-fw" aria-hidden="true"></i>編集
         </a>
     </div>
 </div>
 
-<div class="profile-title">
+<div class="title mt-5">
     <span>ORDER HISTORY</span>
 </div>
 
-<div class="row justify-content-center">
-    {% for order in order_data %}
-    <div class="col-4">
-        <table>
-            <tr>
-                <th class="text-left pr-4 border-bottom">注文日時</th>
-                <td class="border-bottom">{{ order.created | date:"Y年n月j日(l) G:i" | cut:"曜日" }}</td>
-            </tr>
-            <tr>
-                <th class="text-left border-bottom">受取日時</th>
-                <td class="border-bottom">{{ order.receipt }}</td>
-            </tr>
-            {% for cart in order.cart.all %}
-                <tr>
-                    <th class="text-left border-bottom" rowspan="6">注文商品</th>
-                    <td>{{ cart.size_title }}</td>
-                    <td>￥{{ cart.size_price }}</td>
-                </tr>
-                <tr>
-                    <td>{{ cart.flavor_title }}</td>
-                    <td>+￥{{ cart.flavor_price }}</td>
-                </tr>
-                <tr>
-                    <td>{{ cart.flavor2_title }}</td>
-                    {% if cart.flavor2_title != "" %}
-                        <td>+￥{{ cart.flavor2_price }}</td>
-                    {% endif %}
-                </tr>
-                <tr>
-                    <td>{{ cart.option_title }}</td>
-                    {% if cart.option_title != "" %}
-                        <td>+￥{{ cart.option_price }}</td>
-                    {% endif %}
-                </tr>
-                <tr>
-                    <td>{{ cart.option2_title }}</td>
-                    {% if cart.option2_title != "" %}
-                        <td>+￥{{ cart.option2_price }}</td>
-                    {% endif %}
-                </tr>
-                <tr>
-                    <td>{{ cart.option3_title }}</td>
-                    {% if cart.option3_title != "" %}
-                        <td>+￥{{ cart.option3_price }}</td>
-                    {% endif %}
-                </tr>
-            {% endfor %}
-                <tr>
-                    <th>合計金額</th>
-                    <td>￥{{ order.get_total | intcomma }}</td>
-                </tr>
-        </table>
-        <button type="button" id="{{ order.id }}" onclick="sameOrder(this);">再度注文</button>
+{% for order in order_data %}
+<div class="card mb-4">
+    <div class="history__header card-header p-0">
+        <div class="d-flex">
+            <div class="d-flex">
+                <p class="history__header--orderday p-3 m-0">注文日時</p>
+                <p class="p-3 m-0">{{ order.created | date:"Y年n月j日(l) G:i" | cut:"曜日" }}</p>
+            </div>
+            <div class="d-flex ml-4">
+                <p class="history__header--orderday p-3 m-0">受取日時</p>
+                <p class="p-3 m-0">{{ order.receipt }}</p>
+            </div>
+        </div>
     </div>
-    {% empty %}
-    <p class="text-center">現在ご注文履歴はありません。<br>ぜひお買い物をお楽しみください。</p>
-    {% endfor %}
+        {% for cart in order.cart.all %}
+            <div class="d-flex">
+                <div class="mt-4 mx-4">
+                    <img src="{{ cart.size_image.url }}">
+                    <span>+</span><br>
+                    <span>{{ cart.size_title }}</span>
+                </div>
+                <div class="mt-4 mx-4">
+                    <img src="{{ cart.flavor_image.url }}"><br>
+                    <span>{{ cart.flavor_title }}</span>
+                </div>
+                {% if cart.flavor2_title != '' %}
+                    <div class="mt-4 mx-4">
+                        <img src="{{ cart.flavor2_image.url }}"><br>
+                        <span>{{ cart.flavor2_title }}</span>
+                    </div>
+                {% endif %}
+                {% if cart.option_title != '' %}
+                    <div class="mt-4 mx-4">
+                        <img src="{{ cart.option_image.url }}"><br>
+                        <span>{{ cart.option_title }}</span>
+                    </div>
+                {% endif %}
+                {% if cart.option2_title != '' %}
+                    <div class="mt-4 mx-4">
+                        <img src="{{ cart.option2_image.url }}"><br>
+                        <span>{{ cart.option2_title }}</span>
+                    </div>
+                {% endif %}
+                {% if cart.option3_title != '' %}
+                    <div class="mt-4 mx-4">
+                        <img src="{{ cart.option3_image.url }}"><br>
+                        <span>{{ cart.option3_title }}</span>
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+            <tr>
+                <th>合計金額</th>
+                <td>￥{{ order.get_total | intcomma }}</td>
+            </tr>
+    <button type="button" id="{{ order.id }}" onclick="sameOrder(this);">再度注文</button>
 </div>
+{% empty %}
+<p class="text-center">現在ご注文履歴はありません。<br>ぜひお買い物をお楽しみください。</p>
+{% endfor %}
 <p class="text-center">※現在価格はご注文当時から変更となっている場合がございます。<br>※現在お取り扱いの無い商品が含まれる場合には再注文いたしかねます。ご了承ください。</p>
-
 {% endblock %}
 
 {% block extrajs %}

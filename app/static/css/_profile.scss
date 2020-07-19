@@ -1,53 +1,41 @@
-.profile-title {
-  @include sectionTitle;
-  margin: 0 0 30px;
-  &:after {
-    max-width: 500px;
-  }
-}
-
 .profile {
-  max-width: 500px;
-  margin: 0 auto;
-  text-align: center;
-  h5 {
-    margin: 10px auto 30px;
-  }
+  max-width: 600px;
   &__table {
-    margin: 0 auto;
     width: 100%;
-    border: 1px solid #d1dbeb;
+    border: 1px solid rgba(0, 0, 0, .125);
     border-radius: 8px;
     border-collapse: separate;
+    border-spacing: 0;
     overflow: hidden;
-    &--name {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 15px;
-    }
     tr:not(:last-of-type) {
-      th {
-        span {
-          font-size: 12px;
-        }
-      }
-      td {
-        border-bottom: 1px solid #d1dbeb;
+      th, td {
+        border-bottom: 1px solid rgba(0, 0, 0, .125);
       }
     }
     th {
       width: 180px;
       text-align: left;
       padding: 16px 24px;
-      background: #f1f5fa;
+      background: #fdf5f7;
+      border-right: 1px solid rgba(0, 0, 0, .125);
     }
     td {
       text-align: left;
       padding: 16px 24px;
     }
   }
-  button {
+  &__btn {
     @include button;
+  }
+}
+
+.history {
+  &__header {
+    background: #fdf5f7;
+    &--orderday {
+      background: #f5b1be;
+      font-weight: 700;
+    }
   }
 }
 

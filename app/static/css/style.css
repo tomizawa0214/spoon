@@ -846,81 +846,29 @@ label img {
   border: 1px solid #ccc;
 }
 
-.profile-title {
-  font-family: "Montserrat", "Roboto", "游ゴシック体", "Yu Gothic", YuGothic, "游ゴシック", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", MeiryoKe_PGothic, "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
-  position: relative;
-  margin: 0 0 40px;
-  text-align: center;
-  letter-spacing: 3px;
-  font-size: 20px;
-  margin: 0 0 30px;
-}
-
-.profile-title span {
-  position: relative;
-  display: inline-block;
-  z-index: 1;
-  padding: 0 15px;
-  background: #fff;
-}
-
-.profile-title:after {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
-  display: block;
-  width: 100%;
-  height: 1px;
-  content: '';
-  background: #333;
-}
-
-.profile-title:after {
-  max-width: 500px;
-}
-
 .profile {
-  max-width: 500px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.profile h5 {
-  margin: 10px auto 30px;
+  max-width: 600px;
 }
 
 .profile__table {
-  margin: 0 auto;
   width: 100%;
-  border: 1px solid #d1dbeb;
+  border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 8px;
   border-collapse: separate;
+  border-spacing: 0;
   overflow: hidden;
 }
 
-.profile__table--name {
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: 1fr 1fr;
-      grid-template-columns: 1fr 1fr;
-  gap: 15px;
-}
-
-.profile__table tr:not(:last-of-type) th span {
-  font-size: 12px;
-}
-
-.profile__table tr:not(:last-of-type) td {
-  border-bottom: 1px solid #d1dbeb;
+.profile__table tr:not(:last-of-type) th, .profile__table tr:not(:last-of-type) td {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
 }
 
 .profile__table th {
   width: 180px;
   text-align: left;
   padding: 16px 24px;
-  background: #f1f5fa;
+  background: #fdf5f7;
+  border-right: 1px solid rgba(0, 0, 0, 0.125);
 }
 
 .profile__table td {
@@ -928,7 +876,7 @@ label img {
   padding: 16px 24px;
 }
 
-.profile button {
+.profile__btn {
   position: relative;
   width: 200px;
   margin-top: 50px;
@@ -942,19 +890,28 @@ label img {
   transition: .3s;
 }
 
-.profile button:hover {
+.profile__btn:hover {
   color: #fff;
   opacity: .7;
 }
 
-.profile button:active {
+.profile__btn:active {
   top: 3px;
   -webkit-box-shadow: none;
           box-shadow: none;
 }
 
-.profile button i {
+.profile__btn i {
   margin: 0 5px 0 0;
+}
+
+.history__header {
+  background: #fdf5f7;
+}
+
+.history__header--orderday {
+  background: #f5b1be;
+  font-weight: 700;
 }
 
 @media screen and (max-width: 576px) {
