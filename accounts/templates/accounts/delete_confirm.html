@@ -1,16 +1,22 @@
 {% extends "app/base.html" %}
+{% load static %}
+
+{% block title %}
+<title>退会確認 | spoon</title>
+{% endblock %}
 
 {% block content %}
-<div class="signup-title">
+<div class="title">
     <span>退会</span>
 </div>
 
-<div class="text-center">
-    <strong class="text-danger">退会手続きを実行します</strong>
-    <p class="text-center">退会されると会員情報は元に戻せません。本当によろしいですか？</p>
+<div class="text-center mb-4">
+    <img class="done-check" src="{% static 'img/delete.svg' %}">
 </div>
+<p class="delete__text text-center mb-5">退会手続きを実行します。</p>
+<p class="text-center">下記ボタンを押すと退会手続きを実行します。<br>オーダーサービスのご利用はできなくなり、お客様の情報はすべて削除されます。<br>会員情報は元に戻せません。本当によろしいですか？</p>
 <div class="text-center">
-    <a href="{% url 'delete_complete' %}">はい、退会します</a><br>
-    <button type="button" onclick=history.back()>いいえ、退会しません</button>
+    <a class="profile__btn btn rounded-pill" href="{% url 'delete_complete' %}">はい、退会します</a><br>
+    <button type="button" class="deleteno__btn btn rounded-pill mt-4" onclick=history.back()>いいえ、退会しません</button>
 </div>
 {% endblock %}

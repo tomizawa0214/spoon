@@ -144,10 +144,12 @@
         {% endif %}
     {% endfor %}
 </div>
+{% if forloop.last %}
+    <p class="history__comment mx-auto mt-2">※現在価格はご注文当時から変更となっている場合がございます。<br>※現在お取り扱いの無い商品が含まれる場合には再注文いたしかねます。ご了承ください。</p>
+{% endif %}
 {% empty %}
     <p class="text-center">現在ご注文履歴はありません。<br>ぜひお買い物をお楽しみください。</p>
 {% endfor %}
-    <p class="history__comment mx-auto mt-2">※現在価格はご注文当時から変更となっている場合がございます。<br>※現在お取り扱いの無い商品が含まれる場合には再注文いたしかねます。ご了承ください。</p>
 {% endblock %}
 
 {% block extrajs %}

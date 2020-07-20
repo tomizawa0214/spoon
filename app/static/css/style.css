@@ -867,7 +867,7 @@ label img {
   width: 180px;
   text-align: left;
   padding: 16px 24px;
-  background: #fdf5f7;
+  background: #FDF5F7;
   border-right: 1px solid rgba(0, 0, 0, 0.125);
 }
 
@@ -910,7 +910,7 @@ label img {
 }
 
 .history__header {
-  background: #fdf5f7;
+  background: #FDF5F7;
 }
 
 .history__header--orderday {
@@ -966,6 +966,49 @@ label img {
 
 .history__comment {
   max-width: 850px;
+}
+
+.delete__text {
+  font-size: 20px;
+  font-weight: 600;
+  color: #FF0000;
+}
+
+.deleteno__btn {
+  position: relative;
+  width: 200px;
+  margin-top: 50px;
+  color: #fff;
+  background: #e8435f;
+  -webkit-box-shadow: 0 3px 0 #AC1531;
+          box-shadow: 0 3px 0 #AC1531;
+  border: 0;
+  font-weight: bold;
+  -webkit-transition: .3s;
+  transition: .3s;
+  color: #000;
+  background: #CED4DA;
+  -webkit-box-shadow: 0 3px 0 #94A0AC;
+          box-shadow: 0 3px 0 #94A0AC;
+}
+
+.deleteno__btn:hover {
+  color: #fff;
+  opacity: .7;
+}
+
+.deleteno__btn:active {
+  top: 3px;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.deleteno__btn i {
+  margin: 0 5px 0 0;
+}
+
+.deleteno__btn:hover {
+  color: #000;
 }
 
 @media screen and (max-width: 576px) {

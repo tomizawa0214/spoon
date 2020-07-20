@@ -1,15 +1,21 @@
 {% extends "app/base.html" %}
+{% load static %}
+
+{% block title %}
+<title>退会完了 | spoon</title>
+{% endblock %}
 
 {% block content %}
-<div class="signup-title">
+<div class="title">
     <span>退会</span>
 </div>
 
-<div class="text-center">
-    <strong class="text-center">退会手続きを完了しました</strong>
-    <p class="text-center">退会手続き完了のメールをお送りさせていただきましたので、内容をご確認ください。<br>ご利用ありがとうございました。<br>またの機会のご利用、心よりお待ちしております。</p>
+<div class="text-center mb-4">
+    <img class="done-check" src="{% static 'img/check.svg' %}">
 </div>
+<p class="done-text text-center mb-5">退会手続きを完了しました。</p>
+<p class="text-center">退会手続き完了のメールをお送りさせていただきましたので、内容をご確認ください。<br>ご利用ありがとうございました。<br>またの機会のご利用、心よりお待ちしております。</p>
 <div class="text-center">
-    <a href="/">トップページに戻る</a>
+    <a class="profile__btn btn rounded-pill" href="/">トップページに戻る</a>
 </div>
 {% endblock %}

@@ -16,7 +16,7 @@
       width: 180px;
       text-align: left;
       padding: 16px 24px;
-      background: #fdf5f7;
+      background: #FDF5F7;
       border-right: 1px solid rgba(0, 0, 0, .125);
     }
     td {
@@ -32,7 +32,7 @@
 .history {
   max-width: 850px;
   &__header {
-    background: #fdf5f7;
+    background: #FDF5F7;
     &--orderday {
       font-weight: 700;
     }
@@ -56,6 +56,22 @@
   }
   &__comment {
     max-width: 850px;
+  }
+}
+
+.delete__text {
+  font-size: 20px;
+  font-weight: 600;
+  color: #FF0000;
+}
+
+.deleteno__btn {
+  @include button;
+  color: #000;
+  background: #CED4DA;
+  box-shadow: 0 3px 0 #94A0AC;
+  &:hover {
+    color: #000;
   }
 }
 
