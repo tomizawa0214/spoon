@@ -30,12 +30,32 @@
 }
 
 .history {
+  max-width: 850px;
   &__header {
     background: #fdf5f7;
     &--orderday {
-      background: #f5b1be;
       font-weight: 700;
     }
+    &--btn {
+      @include button;
+      width: 130px;
+    }
+  }
+  &__content {
+    width: 450px;
+  }
+  &__img {
+    width: 100px;
+  }
+  &__icon {
+    font-size: 30px;
+    color: rgba(0, 0, 0, .125);
+  }
+  &__option-img {
+    width: 60px;
+  }
+  &__comment {
+    max-width: 850px;
   }
 }
 

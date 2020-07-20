@@ -45,7 +45,7 @@
         <a href="{% url 'delete_confirm' %}">会員サービスの退会手続きはこちら</a>
     </div>
     <div class="text-center">
-        <a class="profile__btn btn rounded-pill" href="{% url 'profile_edit' %}" ontouchstart="">
+        <a class="profile__btn btn rounded-pill mb-5" href="{% url 'profile_edit' %}" ontouchstart="">
             <i class="fas fa-edit fa-fw" aria-hidden="true"></i>編集
         </a>
     </div>
@@ -56,66 +56,98 @@
 </div>
 
 {% for order in order_data %}
-<div class="card mb-4">
+{% if forloop.last %}
+<div class="history card mx-auto">
+{% else %}
+<div class="history card mx-auto mb-5">
+{% endif %}
     <div class="history__header card-header p-0">
-        <div class="d-flex">
-            <div class="d-flex">
-                <p class="history__header--orderday p-3 m-0">注文日時</p>
-                <p class="p-3 m-0">{{ order.created | date:"Y年n月j日(l) G:i" | cut:"曜日" }}</p>
+        <div class="d-flex justify-content-between">
+            <div class="p-3 m-0">
+                <span class="history__header--orderday">注文日時</span><br>
+                <span>{{ order.created | date:"Y年n月j日(l) G:i" | cut:"曜日" }}</span>
             </div>
-            <div class="d-flex ml-4">
-                <p class="history__header--orderday p-3 m-0">受取日時</p>
-                <p class="p-3 m-0">{{ order.receipt }}</p>
+            <div class="p-3 m-0">
+                <span class="history__header--orderday">受取日時</span><br>
+                <span>{{ order.receipt }}</span>
             </div>
+            <div class="p-3 m-0">
+                <span class="history__header--orderday">合計</span><br>
+                <span>￥{{ order.get_total | intcomma }}</span>
+            </div>
+            <button type="button" id="{{ order.id }}" class="history__header--btn m-3 btn" onclick="sameOrder(this);" ontouchstart="">再度注文</button>
         </div>
     </div>
-        {% for cart in order.cart.all %}
-            <div class="d-flex">
-                <div class="mt-4 mx-4">
-                    <img src="{{ cart.size_image.url }}">
-                    <span>+</span><br>
-                    <span>{{ cart.size_title }}</span>
+    {% for cart in order.cart.all %}
+        <div class="d-flex m-4">
+            <div>
+                <div class="d-flex history__content">
+                    <div class="d-flex align-items-center">
+                        <img class="history__img" src="{{ cart.size_image.url }}">
+                        <i class="history__icon mx-1 fas fa-plus-circle fa-fw" aria-hidden="true"></i>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <img class="history__img" src="{{ cart.flavor_image.url }}">
+                        {% if cart.flavor2_title != '' %}
+                            <i class="history__icon mx-1 fas fa-plus-circle fa-fw" aria-hidden="true"></i>
+                        {% endif %}
+                    </div>
+                    {% if cart.flavor2_title != '' %}
+                        <img class="history__img" src="{{ cart.flavor2_image.url }}">
+                    {% endif %}
                 </div>
-                <div class="mt-4 mx-4">
-                    <img src="{{ cart.flavor_image.url }}"><br>
-                    <span>{{ cart.flavor_title }}</span>
+                <div class="d-flex mt-3">
+                    {% if cart.option_title != '' %}
+                        <img class="history__option-img" src="{{ cart.option_image.url }}">
+                    {% endif %}
+                    {% if cart.option2_title != '' %}
+                        <img class="history__option-img" src="{{ cart.option2_image.url }}">
+                    {% endif %}
+                    {% if cart.option3_title != '' %}
+                        <img class="history__option-img" src="{{ cart.option3_image.url }}">
+                    {% endif %}
                 </div>
-                {% if cart.flavor2_title != '' %}
-                    <div class="mt-4 mx-4">
-                        <img src="{{ cart.flavor2_image.url }}"><br>
-                        <span>{{ cart.flavor2_title }}</span>
-                    </div>
-                {% endif %}
-                {% if cart.option_title != '' %}
-                    <div class="mt-4 mx-4">
-                        <img src="{{ cart.option_image.url }}"><br>
-                        <span>{{ cart.option_title }}</span>
-                    </div>
-                {% endif %}
-                {% if cart.option2_title != '' %}
-                    <div class="mt-4 mx-4">
-                        <img src="{{ cart.option2_image.url }}"><br>
-                        <span>{{ cart.option2_title }}</span>
-                    </div>
-                {% endif %}
-                {% if cart.option3_title != '' %}
-                    <div class="mt-4 mx-4">
-                        <img src="{{ cart.option3_image.url }}"><br>
-                        <span>{{ cart.option3_title }}</span>
-                    </div>
-                {% endif %}
             </div>
-        {% endfor %}
-            <tr>
-                <th>合計金額</th>
-                <td>￥{{ order.get_total | intcomma }}</td>
-            </tr>
-    <button type="button" id="{{ order.id }}" onclick="sameOrder(this);">再度注文</button>
+            <table>
+                <tr>
+                    <th>【サイズ】</th>
+                    <td>{{ cart.size_title }}</td>
+                </tr>
+                <tr>
+                    <th class="align-top">【フレーバー】</th>
+                    <td>{{ cart.flavor_title }}<br>{{ cart.flavor2_title }}</td>
+                </tr>
+                <tr>
+                    <th class="align-top">【オプション】</th>
+                    {% if cart.option_title == "" and cart.option2_title == "" and cart.option3_title == ""  %}
+                        <td>なし</td>
+                    {% elif cart.option_title != "" and cart.option2_title == "" and cart.option3_title == ""  %}
+                        <td>{{ cart.option_title }}</td>
+                    {% elif cart.option_title == "" and cart.option2_title != "" and cart.option3_title == ""  %}
+                        <td>{{ cart.option2_title }}</td>
+                    {% elif cart.option_title == "" and cart.option2_title == "" and cart.option3_title != ""  %}
+                        <td>{{ cart.option3_title }}</td>
+                    {% elif cart.option_title != "" and cart.option2_title != "" and cart.option3_title == ""  %}
+                        <td>{{ cart.option_title }}<br>{{ cart.option2_title }}</td>
+                    {% elif cart.option_title != "" and cart.option2_title == "" and cart.option3_title != ""  %}
+                        <td>{{ cart.option_title }}<br>{{ cart.option3_title }}</td>
+                    {% elif cart.option_title == "" and cart.option2_title != "" and cart.option3_title != ""  %}
+                        <td>{{ cart.option2_title }}<br>{{ cart.option3_title }}</td>
+                    {% elif cart.option_title != "" and cart.option2_title != "" and cart.option3_title != ""  %}
+                        <td>{{ cart.option_title }}<br>{{ cart.option2_title }}<br>{{ cart.option3_title }}</td>
+                    {% endif %}
+                </tr>
+            </table>
+        </div>
+        {% if not forloop.last %}
+            <hr class="history__border mx-4 my-0">
+        {% endif %}
+    {% endfor %}
 </div>
 {% empty %}
-<p class="text-center">現在ご注文履歴はありません。<br>ぜひお買い物をお楽しみください。</p>
+    <p class="text-center">現在ご注文履歴はありません。<br>ぜひお買い物をお楽しみください。</p>
 {% endfor %}
-<p class="text-center">※現在価格はご注文当時から変更となっている場合がございます。<br>※現在お取り扱いの無い商品が含まれる場合には再注文いたしかねます。ご了承ください。</p>
+    <p class="history__comment mx-auto mt-2">※現在価格はご注文当時から変更となっている場合がございます。<br>※現在お取り扱いの無い商品が含まれる場合には再注文いたしかねます。ご了承ください。</p>
 {% endblock %}
 
 {% block extrajs %}

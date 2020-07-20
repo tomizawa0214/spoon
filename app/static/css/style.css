@@ -905,13 +905,67 @@ label img {
   margin: 0 5px 0 0;
 }
 
+.history {
+  max-width: 850px;
+}
+
 .history__header {
   background: #fdf5f7;
 }
 
 .history__header--orderday {
-  background: #f5b1be;
   font-weight: 700;
+}
+
+.history__header--btn {
+  position: relative;
+  width: 200px;
+  margin-top: 50px;
+  color: #fff;
+  background: #e8435f;
+  -webkit-box-shadow: 0 3px 0 #AC1531;
+          box-shadow: 0 3px 0 #AC1531;
+  border: 0;
+  font-weight: bold;
+  -webkit-transition: .3s;
+  transition: .3s;
+  width: 130px;
+}
+
+.history__header--btn:hover {
+  color: #fff;
+  opacity: .7;
+}
+
+.history__header--btn:active {
+  top: 3px;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.history__header--btn i {
+  margin: 0 5px 0 0;
+}
+
+.history__content {
+  width: 450px;
+}
+
+.history__img {
+  width: 100px;
+}
+
+.history__icon {
+  font-size: 30px;
+  color: rgba(0, 0, 0, 0.125);
+}
+
+.history__option-img {
+  width: 60px;
+}
+
+.history__comment {
+  max-width: 850px;
 }
 
 @media screen and (max-width: 576px) {
