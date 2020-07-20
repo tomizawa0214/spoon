@@ -60,6 +60,46 @@ main {
   font-weight: 600;
 }
 
+.back-btn {
+  position: relative;
+  width: 200px;
+  margin-top: 50px;
+  color: #fff;
+  background: #e8435f;
+  -webkit-box-shadow: 0 3px 0 #AC1531;
+          box-shadow: 0 3px 0 #AC1531;
+  border: 0;
+  font-weight: bold;
+  -webkit-transition: .3s;
+  transition: .3s;
+  position: absolute;
+  left: 0;
+  width: 70px;
+  color: #000;
+  background: #CED4DA;
+  -webkit-box-shadow: 0 3px 0 #94A0AC;
+          box-shadow: 0 3px 0 #94A0AC;
+}
+
+.back-btn:hover {
+  color: #fff;
+  opacity: .7;
+}
+
+.back-btn:active {
+  top: 3px;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.back-btn i {
+  margin: 0 5px 0 0;
+}
+
+.back-btn:hover {
+  color: #000;
+}
+
 .container-fluid {
   max-width: 1200px;
 }

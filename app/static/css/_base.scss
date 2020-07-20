@@ -95,6 +95,19 @@ main {
   font-weight: 600;
 }
 
+.back-btn {
+  @include button;
+  position: absolute;
+  left: 0;
+  width: 70px;
+  color: #000;
+  background: #CED4DA;
+  box-shadow: 0 3px 0 #94A0AC;
+  &:hover {
+    color: #000;
+  }
+}
+
 .container-fluid {
   max-width: 1200px;
 }

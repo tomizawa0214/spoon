@@ -188,11 +188,7 @@ class SignupConfirmView(View):
         user.email = request.POST.get('email')
         user.tel = request.POST.get('tel')
         user.gender = request.POST.get('gender')
-
-        if request.POST.get('birthday') == 'None':
-            user.birthday = None
-        else:
-            user.birthday = request.POST.get('birthday')
+        user.birthday = request.POST.get('birthday')
 
         user.set_password(request.POST.get('password'))
         user.is_active = False
@@ -275,7 +271,8 @@ class ProfileEditView(LoginRequiredMixin, View):
                 'name': user_data.name,
                 'furigana': user_data.furigana,
                 'email': user_data.email,
-                'tel': user_data.tel
+                'tel': user_data.tel,
+                'gender': 1
             }
         )
 
@@ -290,12 +287,14 @@ class ProfileEditView(LoginRequiredMixin, View):
 
     def post(self, request, *args, **kwargs):
         form = ProfileForm(request.POST or None)
+
         if form.is_valid():
             user_data = CustomUser.objects.get(id=request.user.id)
             user_data.name = form.cleaned_data['name']
             user_data.furigana = form.cleaned_data['furigana']
-            user_data.email = form.cleaned_data['email']
             user_data.tel = form.cleaned_data['tel']
+            user_data.gender = form.cleaned_data['gender']
+            user_data.birthday = form.cleaned_data['birthday']
             user_data.save()
             return redirect('profile')
 

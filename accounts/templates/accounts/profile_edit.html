@@ -1,27 +1,27 @@
 {% extends "app/base.html" %}
 {% load widget_tweaks %}
 
+{% block title %}
+<title>プロフィール編集 | spoon</title>
+{% endblock %}
+
 {% block content %}
-<div class="profile-title">
+<div class="title">
     <span>PROFILE</span>
 </div>
 
-<div class="profile">
-    <form method="POST">
+<div class="profile mx-auto">
+    <form method="POST" class="text-center">
         {% csrf_token %}
         <table class="profile__table">
             <tbody>
                 <tr>
                     <th>お名前</th>
-                    <td>
-                        {% render_field form.name class="form-control"%}
-                    </td>
+                    <td>{% render_field form.name class="form-control"%}</td>
                 </tr>
                 <tr>
                     <th>フリガナ</th>
-                    <td>
-                        {% render_field form.furigana class="form-control"%}
-                    </td>
+                    <td>{% render_field form.furigana class="form-control"%}</td>
                 </tr>
                 <tr>
                     <th>メールアドレス</th>
@@ -29,25 +29,33 @@
                 </tr>
                 <tr>
                     <th>電話番号</th>
-                    <td>
-                        {% render_field form.tel class="form-control"%}
-                    </td>
+                    <td>{% render_field form.tel class="form-control"%}</td>
                 </tr>
                 <tr>
                     <th>性別</th>
-                    <td>{{ user_data.get_gender_display }}</td>
+                    {% if user_data.get_gender_display == '' %}
+                        <td>{% render_field form.gender class="form-control w-25" %}</td>
+                    {% else %}
+                        <td>{{ user_data.get_gender_display }}</td>
+                    {% endif %}
                 </tr>
                 <tr>
                     <th>誕生日</th>
-                    <!-- <td id="birthday">{{ user_data.birthday }}</td> -->
-                    <td>{{ user_data.birthday|default_if_none:'' }}</td>
+                    {% if user_data.birthday == None %}
+                        <td class="d-flex align-items-center">{% render_field form.birthday class="form-control" %}</td>
+                    {% else %}
+                        <td>{{ user_data.birthday }}</td>
+                    {% endif %}
                 </tr>
             </tbody>
         </table>
-        <p class="text-left">※性別・誕生日は変更できません。</p>
-        <button class="btn rounded-pill" type="submit" ontouchstart="">
-            <i class="fas fa-user-plus fa-fw" aria-hidden="true"></i>登録
-        </button>
+        <p class="text-left m-0">※性別・誕生日は初回登録以降変更できません。</p>
+        <div class="position-relative">
+            <button type="button" class="back-btn btn rounded-pill" onclick="history.back()">戻る</button>
+            <button class="profile__btn btn rounded-pill" type="submit" ontouchstart="">
+                <i class="fas fa-user-plus fa-fw" aria-hidden="true"></i>登録
+            </button>
+        </div>
     </form>
 </div>
 {% endblock %}
@@ -56,10 +64,23 @@
 <script>
     'use strict';
 
-    // 誕生日がNoneの場合は空白表示
-    // const birthday = document.getElementById('birthday');
-    // if ( birthday.textContent == 'None') {
-    //     birthday.textContent = '';
-    // }
+    // スマホ用として電話番号の入力に数字キーボードを開く
+    let tel = document.getElementById('id_tel');
+    tel.setAttribute('type', 'tel');
+
+    // 誕生日に年月日追加
+    if ( '{{ user_data.birthday }}' == 'None' ) {
+        const year = document.getElementById('id_birthday_year');
+        const element = Object.assign(document.createElement('span'),{ className: 'mx-2', textContent: '年'});
+        year.parentNode.insertBefore(element, year.nextSibling);
+
+        const month = document.getElementById('id_birthday_month');
+        const element2 = Object.assign(document.createElement('span'),{ className: 'mx-2', textContent: '月'});
+        month.parentNode.insertBefore(element2, month.nextSibling);
+
+        const day = document.getElementById('id_birthday_day');
+        const element3 = Object.assign(document.createElement('span'),{ className: 'mx-2', textContent: '日'});
+        day.parentNode.insertBefore(element3, day.nextSibling);
+    }
 </script>
 {% endblock %}
