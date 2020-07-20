@@ -271,8 +271,7 @@ class ProfileEditView(LoginRequiredMixin, View):
                 'name': user_data.name,
                 'furigana': user_data.furigana,
                 'email': user_data.email,
-                'tel': user_data.tel,
-                'gender': 1
+                'tel': user_data.tel
             }
         )
 

@@ -28,7 +28,7 @@ class SignupUserForm(SignupForm):
     )
     birthday = forms.DateField(
         widget=forms.SelectDateWidget(
-            years=[y for y in range(datetime.datetime.now().year - 100, datetime.datetime.now().year)],
+            years=list(reversed([y for y in range(datetime.datetime.now().year - 100, datetime.datetime.now().year)])),
             months={1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8, 9: 9, 10: 10, 11: 11, 12: 12},
         ),
         required=False,

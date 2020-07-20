@@ -1,36 +1,31 @@
-.signup-title {
-  @include sectionTitle;
-  margin: 0 15px 30px;
-}
-
 .signup {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 0;
-  h5 {
-    margin: 10px auto 30px;
-    text-align: center;
+  &__error {
+    color: #ff0000;
+  }
+  &__required {
+    color: #FF0000;
+    font-weight: 700;
   }
   &__form {
-    text-align: center;
     margin: 0px auto 80px;
-    &--item {
-      margin-bottom: 15px;
-      &--name {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 15px;
+    &--table {
+      max-width: 650px;
+      th {
+        width: 260px;
+      }
+      td {
+        width: 390px;
       }
     }
-    button {
+    &--btn {
       @include button;
     }
   }
 }
 
 .terms {
-  width: 500px;
-  height: 200px;
+  width: 650px;
+  height: 300px;
   overflow-y: scroll;
   border: 1px solid #ccc;
 }

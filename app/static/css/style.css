@@ -791,66 +791,32 @@ label img {
   margin: 0 5px 0 0;
 }
 
-.signup-title {
-  font-family: "Montserrat", "Roboto", "游ゴシック体", "Yu Gothic", YuGothic, "游ゴシック", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", MeiryoKe_PGothic, "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
-  position: relative;
-  margin: 0 0 40px;
-  text-align: center;
-  letter-spacing: 3px;
-  font-size: 20px;
-  margin: 0 15px 30px;
+.signup__error {
+  color: #ff0000;
 }
 
-.signup-title span {
-  position: relative;
-  display: inline-block;
-  z-index: 1;
-  padding: 0 15px;
-  background: #fff;
-}
-
-.signup-title:after {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
-  display: block;
-  width: 100%;
-  height: 1px;
-  content: '';
-  background: #333;
-}
-
-.signup {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 0;
-}
-
-.signup h5 {
-  margin: 10px auto 30px;
-  text-align: center;
+.signup__required {
+  color: #FF0000;
+  font-weight: 700;
 }
 
 .signup__form {
-  text-align: center;
   margin: 0px auto 80px;
 }
 
-.signup__form--item {
-  margin-bottom: 15px;
+.signup__form--table {
+  max-width: 650px;
 }
 
-.signup__form--item--name {
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: 1fr 1fr;
-      grid-template-columns: 1fr 1fr;
-  gap: 15px;
+.signup__form--table th {
+  width: 260px;
 }
 
-.signup__form button {
+.signup__form--table td {
+  width: 390px;
+}
+
+.signup__form--btn {
   position: relative;
   width: 200px;
   margin-top: 50px;
@@ -864,24 +830,24 @@ label img {
   transition: .3s;
 }
 
-.signup__form button:hover {
+.signup__form--btn:hover {
   color: #fff;
   opacity: .7;
 }
 
-.signup__form button:active {
+.signup__form--btn:active {
   top: 3px;
   -webkit-box-shadow: none;
           box-shadow: none;
 }
 
-.signup__form button i {
+.signup__form--btn i {
   margin: 0 5px 0 0;
 }
 
 .terms {
-  width: 500px;
-  height: 200px;
+  width: 650px;
+  height: 300px;
   overflow-y: scroll;
   border: 1px solid #ccc;
 }
