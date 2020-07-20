@@ -1,11 +1,16 @@
 {% extends "app/base.html" %}
 
+{% block title %}
+<title>メールアドレス変更確認 | spoon</title>
+{% endblock %}
+
 {% block content %}
-<div class="signup-title">
+<div class="title">
     <span>EMAIL CHANGE</span>
 </div>
 
 <div class="text-center">
-    <p class="text-center">新しいメールアドレスに確認用メールを送信しました。まだ変更手続きは完了していません。<br>メール本文に記載のURLにアクセスして手続きを完了してください。</p>
+    <p class="text-center m-0">新しいメールアドレスに確認用メールを送信しました。まだ変更手続きは完了していません。<br>メール本文に記載のURLにアクセスして手続きを完了してください。</p>
+    <p class="login__text-help">※当店からのメールが届かない場合は入力情報、メール設定をご確認ください。</p>
 </div>
 {% endblock %}

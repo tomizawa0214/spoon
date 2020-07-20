@@ -1,26 +1,37 @@
 {% extends "app/base.html" %}
 {% load widget_tweaks %}
 
+{% block title %}
+<title>メールアドレス変更 | spoon</title>
+{% endblock %}
+
 {% block content %}
-<div class="signup-title">
+<div class="title">
     <span>EMAIL CHANGE</span>
 </div>
 
-<div class="login col-12">
-    <p class="text-center">メールを送信してメールアドレスの変更手続きを行います。<br>下記にご希望の新しいメールアドレスをご入力ください。<br><span>※メールが届かない場合は入力情報、メール設定をご確認ください。</span></p>
+<div class="login text-center">
+    <p class="text-center mb-4">メールを送信してメールアドレスの変更手続きを行います。<br>下記にご希望の新しいメールアドレスをご入力ください。<br></p>
     <form method="POST" class="login__form">
         {% csrf_token %}
-        <table class="mx-auto">
-            <tr>
-                <td class="pb-4">
-                    {% render_field form.email class="form-control" placeholder="新しいメールアドレス" %}
-                </td>
-            </tr>
-        </table>
+        <div class="login__form--field mx-auto">
+            {% render_field form.email class="form-control" placeholder="新しいメールアドレス" %}
+        </div>
         {% for field in form %}
-            {{ field.errors }}
+            <p class="login__form--error text-center">
+                {% for error in field.errors %}
+                    ※{{ error }}<br>
+                {% endfor %}
+            </p>
         {% endfor %}
-        <button type="submit" class="btn rounded-pill" ontouchstart="">送信</button>
+        {% for error in form.non_field_errors %}
+            <p class="login__form--error text-center">
+                ※{{ error }}
+            </p>
+        {% endfor %}
+        <button type="submit" class="login__form--btn btn rounded-pill" ontouchstart="">
+            <i class="fas fa-paper-plane fa-fw" aria-hidden="true"></i>送信
+        </button>
     </form>
 </div>
 {% endblock %}
