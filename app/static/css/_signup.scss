@@ -6,19 +6,12 @@
   &__form {
     margin: 0px auto 80px;
     &--table {
-      max-width: 650px;
-      th {
-        width: 260px;
-      }
-      td {
-        width: 390px;
-      }
+      width: 400px;
     }
     &--terms {
-      width: 650px;
+      max-width: 650px;
       height: 300px;
       overflow-y: scroll;
-      border: 1px solid #ccc;
     }
     &--btn {
       @include button;

@@ -806,22 +806,13 @@ label img {
 }
 
 .signup__form--table {
-  max-width: 650px;
-}
-
-.signup__form--table th {
-  width: 260px;
-}
-
-.signup__form--table td {
-  width: 390px;
+  width: 400px;
 }
 
 .signup__form--terms {
-  width: 650px;
+  max-width: 650px;
   height: 300px;
   overflow-y: scroll;
-  border: 1px solid #ccc;
 }
 
 .signup__form--btn {
