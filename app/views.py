@@ -223,6 +223,8 @@ class AddOrderView(LoginRequiredMixin, View):
         option2_price = request.POST.get('option2_price')
         option3_title = request.POST.get('option3_title')
         option3_price = request.POST.get('option3_price')
+        option4_title = request.POST.get('option4_title')
+        option4_price = request.POST.get('option4_price')
 
         cart = Cart()
         cart.user = request.user
@@ -248,6 +250,10 @@ class AddOrderView(LoginRequiredMixin, View):
         cart.option3_price = option3_price
         if option3_title != '':
             cart.option3_image = OptionItem.objects.get(title=option3_title).image
+        cart.option4_title = option4_title
+        cart.option4_price = option4_price
+        if option4_title != '':
+            cart.option4_image = OptionItem.objects.get(title=option4_title).image
         cart.save()
 
         # ログインユーザーの注文未完了レコードをすべて取得
@@ -272,6 +278,8 @@ class AddOrderView(LoginRequiredMixin, View):
             'option2_price': option2_price,
             'option3_title': option3_title,
             'option3_price': option3_price,
+            'option4_title': option4_title,
+            'option4_price': option4_price,
             'get_total_price': get_total_price,
             'cart_id': cart_id,
         }

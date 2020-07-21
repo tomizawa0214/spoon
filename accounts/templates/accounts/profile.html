@@ -71,7 +71,7 @@
             </div>
             <div class="p-3 m-0">
                 <span class="history__header--orderday">合計</span><br>
-                <span>￥{{ order.get_total | intcomma }}</span>
+                <span>\{{ order.get_total | intcomma }}</span>
             </div>
             <button type="button" id="{{ order.id }}" class="history__header--btn m-3 btn" onclick="sameOrder(this);" ontouchstart="">再度注文</button>
         </div>

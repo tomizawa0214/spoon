@@ -65,7 +65,7 @@ main {
   width: 200px;
   margin-top: 50px;
   color: #fff;
-  background: #e8435f;
+  background: #E8435F;
   -webkit-box-shadow: 0 3px 0 #AC1531;
           box-shadow: 0 3px 0 #AC1531;
   border: 0;
@@ -228,7 +228,7 @@ main {
 }
 
 .top__pick--price {
-  color: #e8435f;
+  color: #E8435F;
   font-size: 30px;
   font-weight: 600;
   letter-spacing: 0;
@@ -318,36 +318,6 @@ main {
   }
 }
 
-.order-title {
-  font-family: "Montserrat", "Roboto", "游ゴシック体", "Yu Gothic", YuGothic, "游ゴシック", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", MeiryoKe_PGothic, "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
-  position: relative;
-  margin: 0 0 40px;
-  text-align: center;
-  letter-spacing: 3px;
-  font-size: 20px;
-}
-
-.order-title span {
-  position: relative;
-  display: inline-block;
-  z-index: 1;
-  padding: 0 15px;
-  background: #fff;
-}
-
-.order-title:after {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
-  display: block;
-  width: 100%;
-  height: 1px;
-  content: '';
-  background: #333;
-}
-
 /* ラジオボタンとチェックボックスを非表示 */
 .selection-group input[type="radio"],
 .selection-group input[type="checkbox"] {
@@ -360,160 +330,42 @@ label img {
   padding: 8px;
 }
 
-/* 選択された画像の背景をスカイブルーに変える */
+/* 選択された画像の背景を変える */
 .selection-group input[type="radio"]:checked + label img,
 .selection-group input[type="checkbox"]:checked + label img {
-  background: skyblue;
+  background: #ED6D85;
+  border-radius: 10%;
 }
 
-.order {
-  margin: 50px 0 0;
+.order__step {
+  background: #FDF5F7;
+  background: #F8DDE3;
 }
 
-.order__wrap:first-child {
-  padding-left: 0;
+.order__img {
+  width: 100%;
 }
 
-.order__wrap:last-child {
-  padding-right: 0;
+.order__price {
+  color: #E8435F;
+  font-size: 30px;
+  font-weight: 600;
+  letter-spacing: 0;
 }
 
-.order__wrap--item {
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-rows: auto auto 1fr;
-      grid-template-rows: auto auto 1fr;
+.order__price--icon {
+  font-size: 25px;
+  color: rgba(0, 0, 0, 0.125);
 }
 
-.order__wrap--item h5 {
-  margin: 0;
-  font-size: 18px;
-  font-weight: bold;
+.order__ename {
+  font-size: 22px;
+  font-family: 'Dancing Script', cursive;
   letter-spacing: 1px;
 }
 
-.order__wrap--item p {
-  margin: 0;
-}
-
-.order__wrap--item p a:first-child {
-  margin-right: 3px;
-}
-
-.order__wrap--item p a:last-child {
-  margin-left: 3px;
-}
-
-.order__wrap--item p a span {
-  line-height: 1.3;
-  vertical-align: 2px;
-}
-
-.order__wrap--item--cancel {
-  -ms-flex-item-align: end;
-      align-self: flex-end;
-}
-
-.order__wrap--item--cancel span {
-  line-height: 1.3;
-}
-
-.order__wrap--subprice {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
-}
-
-.order__wrap--subprice--chara {
-  font-family: 'Roboto', 'Montserrat', sans-serif;
-}
-
-.order__wrap--subprice--chara--num {
-  font-size: 20px;
-  font-weight: bold;
-  color: #e8435f;
-}
-
-.order__wrap--empty {
-  margin: 6px 0;
-}
-
-.order__wrap--total {
-  margin: 0 0 20px;
-  text-align: center;
-  font-family: 'Roboto', 'Montserrat', sans-serif;
-}
-
-.order__wrap--total--num {
-  font-size: 20px;
-  font-weight: bold;
-  color: #e8435f;
-}
-
-.order__wrap--register {
-  position: relative;
-  width: 200px;
-  margin-top: 50px;
-  color: #fff;
-  background: #e8435f;
-  -webkit-box-shadow: 0 3px 0 #AC1531;
-          box-shadow: 0 3px 0 #AC1531;
-  border: 0;
-  font-weight: bold;
-  -webkit-transition: .3s;
-  transition: .3s;
-  margin: 0 0 20px;
-}
-
-.order__wrap--register:hover {
-  color: #fff;
-  opacity: .7;
-}
-
-.order__wrap--register:active {
-  top: 3px;
-  -webkit-box-shadow: none;
-          box-shadow: none;
-}
-
-.order__wrap--register i {
-  margin: 0 5px 0 0;
-}
-
-.order__wrap--shopping {
-  position: relative;
-  width: 200px;
-  margin-top: 50px;
-  color: #fff;
-  background: #e8435f;
-  -webkit-box-shadow: 0 3px 0 #AC1531;
-          box-shadow: 0 3px 0 #AC1531;
-  border: 0;
-  font-weight: bold;
-  -webkit-transition: .3s;
-  transition: .3s;
-  margin: 0 0 20px;
-  background: #a85413;
-  -webkit-box-shadow: 0 3px 0 #492408;
-          box-shadow: 0 3px 0 #492408;
-}
-
-.order__wrap--shopping:hover {
-  color: #fff;
-  opacity: .7;
-}
-
-.order__wrap--shopping:active {
-  top: 3px;
-  -webkit-box-shadow: none;
-          box-shadow: none;
-}
-
-.order__wrap--shopping i {
-  margin: 0 5px 0 0;
+.order__name {
+  line-height: 20px;
 }
 
 @media screen and (max-width: 576px) {
@@ -587,7 +439,7 @@ label img {
   width: 200px;
   margin-top: 50px;
   color: #fff;
-  background: #e8435f;
+  background: #E8435F;
   -webkit-box-shadow: 0 3px 0 #AC1531;
           box-shadow: 0 3px 0 #AC1531;
   border: 0;
@@ -730,7 +582,7 @@ label img {
   width: 200px;
   margin-top: 50px;
   color: #fff;
-  background: #e8435f;
+  background: #E8435F;
   -webkit-box-shadow: 0 3px 0 #AC1531;
           box-shadow: 0 3px 0 #AC1531;
   border: 0;
@@ -772,7 +624,7 @@ label img {
   width: 200px;
   margin-top: 50px;
   color: #fff;
-  background: #e8435f;
+  background: #E8435F;
   -webkit-box-shadow: 0 3px 0 #AC1531;
           box-shadow: 0 3px 0 #AC1531;
   border: 0;
@@ -820,7 +672,7 @@ label img {
   width: 200px;
   margin-top: 50px;
   color: #fff;
-  background: #e8435f;
+  background: #E8435F;
   -webkit-box-shadow: 0 3px 0 #AC1531;
           box-shadow: 0 3px 0 #AC1531;
   border: 0;
@@ -879,7 +731,7 @@ label img {
   width: 200px;
   margin-top: 50px;
   color: #fff;
-  background: #e8435f;
+  background: #E8435F;
   -webkit-box-shadow: 0 3px 0 #AC1531;
           box-shadow: 0 3px 0 #AC1531;
   border: 0;
@@ -920,7 +772,7 @@ label img {
   width: 200px;
   margin-top: 50px;
   color: #fff;
-  background: #e8435f;
+  background: #E8435F;
   -webkit-box-shadow: 0 3px 0 #AC1531;
           box-shadow: 0 3px 0 #AC1531;
   border: 0;
@@ -977,7 +829,7 @@ label img {
   width: 200px;
   margin-top: 50px;
   color: #fff;
-  background: #e8435f;
+  background: #E8435F;
   -webkit-box-shadow: 0 3px 0 #AC1531;
           box-shadow: 0 3px 0 #AC1531;
   border: 0;
@@ -1047,7 +899,7 @@ label img {
   width: 200px;
   margin-top: 50px;
   color: #fff;
-  background: #e8435f;
+  background: #E8435F;
   -webkit-box-shadow: 0 3px 0 #AC1531;
           box-shadow: 0 3px 0 #AC1531;
   border: 0;
