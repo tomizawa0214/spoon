@@ -1,15 +1,21 @@
 {% extends "app/base.html" %}
+{% load static %}
+
+{% block title %}
+<title>登録完了 | spoon</title>
+{% endblock %}
 
 {% block content %}
-<div class="signup-title">
+<div class="title">
     <span>SIGN UP</span>
 </div>
 
-<div class="text-center">
-    <strong class="text-center">本登録が完了しました</strong>
-    <p class="text-center">登録されたメールアドレスとパスワードでログインしてください。</p>
+<div class="text-center mb-4">
+    <img class="done-check" src="{% static 'img/check.svg' %}">
 </div>
+<p class="done-text text-center mb-5">本登録が完了しました。</p>
+<p class="text-center">登録されたメールアドレスとパスワードでログインしてください。</p>
 <div class="text-center">
-    <a class="btn rounded-pill" href="{% url 'account_login' %}">ログイン画面へ</a>
+    <a class="signup__form--btn btn rounded-pill" href="{% url 'account_login' %}">ログイン画面へ</a>
 </div>
 {% endblock %}

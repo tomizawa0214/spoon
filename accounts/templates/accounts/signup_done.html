@@ -1,11 +1,16 @@
 {% extends "app/base.html" %}
 
+{% block title %}
+<title>仮登録 | spoon</title>
+{% endblock %}
+
 {% block content %}
-<div class="signup-title">
+<div class="title">
     <span>SIGN UP</span>
 </div>
 
 <div class="text-center">
-    <p class="text-center">会員登録用の確認メールを送信しました。まだ会員登録は完了していません。<br>メール本文に記載されているURLから本登録をお願いします。</p>
+    <p class="text-center m-0">会員登録用の確認メールを送信しました。まだ会員登録は完了していません。<br>メール本文に記載されているURLから本登録をお願いします。</p>
+    <p class="login__text-help">※当店からのメールが届かない場合は入力情報、メール設定をご確認ください。</p>
 </div>
 {% endblock %}

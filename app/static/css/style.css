@@ -821,6 +821,13 @@ label img {
   width: 390px;
 }
 
+.signup__form--terms {
+  width: 650px;
+  height: 300px;
+  overflow-y: scroll;
+  border: 1px solid #ccc;
+}
+
 .signup__form--btn {
   position: relative;
   width: 200px;
@@ -848,13 +855,6 @@ label img {
 
 .signup__form--btn i {
   margin: 0 5px 0 0;
-}
-
-.terms {
-  width: 650px;
-  height: 300px;
-  overflow-y: scroll;
-  border: 1px solid #ccc;
 }
 
 .profile {

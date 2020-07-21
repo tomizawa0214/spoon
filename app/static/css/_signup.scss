@@ -17,15 +17,14 @@
         width: 390px;
       }
     }
+    &--terms {
+      width: 650px;
+      height: 300px;
+      overflow-y: scroll;
+      border: 1px solid #ccc;
+    }
     &--btn {
       @include button;
     }
   }
-}
-
-.terms {
-  width: 650px;
-  height: 300px;
-  overflow-y: scroll;
-  border: 1px solid #ccc;
 }

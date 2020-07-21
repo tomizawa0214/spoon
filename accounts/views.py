@@ -179,8 +179,6 @@ class SignupDoneView(View):
     def get(self, request, *args, **kwargs):
         return render(request, 'accounts/signup_done.html')
 
-
-class SignupConfirmView(View):
     def post(self, request, *args, **kwargs):
         user = User()
         user.name = request.POST.get('name')
@@ -188,7 +186,11 @@ class SignupConfirmView(View):
         user.email = request.POST.get('email')
         user.tel = request.POST.get('tel')
         user.gender = request.POST.get('gender')
-        user.birthday = request.POST.get('birthday')
+
+        if request.POST.get('birthday') == 'None':
+            user.birthday = None
+        else:
+            user.birthday = request.POST.get('birthday')
 
         user.set_password(request.POST.get('password'))
         user.is_active = False
@@ -215,10 +217,7 @@ class SignupConfirmView(View):
         return redirect('account_signup_done')
 
 
-class SignupView(views.SignupView):
-    template_name = 'accounts/signup.html'
-    form_class = SignupUserForm
-
+class SignupConfirmView(View):
     def post(self, request, *args, **kwargs):
         form = SignupUserForm(request.POST or None)
 
@@ -247,6 +246,11 @@ class SignupView(views.SignupView):
         return render(request, 'accounts/signup.html', {
             'form': form,
         })
+
+
+class SignupView(views.SignupView):
+    template_name = 'accounts/signup.html'
+    form_class = SignupUserForm
 
 
 class LogoutView(views.LogoutView):
