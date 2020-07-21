@@ -13,14 +13,14 @@
 <div class="login mx-auto">
     <p class="text-center mb-4">アカウントをお持ちでない場合は、<a href="{% url 'account_signup' %}">こちら</a>から会員登録をお願いします。</p>
     {% for field in form %}
-        <p class="login__error text-center">
+        <p class="error-msg text-center m-0">
             {% for error in field.errors %}
                 ※{{ error }}<br>
             {% endfor %}
         </p>
     {% endfor %}
     {% for error in form.non_field_errors %}
-        <p class="login__error text-center">
+        <p class="error-msg text-center m-0">
             ※{{ error }}
         </p>
     {% endfor %}

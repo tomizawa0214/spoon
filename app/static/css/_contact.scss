@@ -1,0 +1,11 @@
+.contact {
+    &__form {
+        margin: 0px auto 80px;
+        &--table {
+            max-width: 500px;
+        }
+        &--btn {
+            @include button;
+        }
+    }
+}

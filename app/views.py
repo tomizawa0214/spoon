@@ -350,7 +350,7 @@ class ContactView(View):
                     message = EmailMessage(subject=subject, body=body, to=to_list, bcc=bcc_list)
                     message.send()
                 else:
-                    return redirect('index')
+                    return HttpResponse("メッセージ内容に問題が発生したため、送信がキャンセルされました。")
             except BadHeaderError:
                 return HttpResponse("無効なヘッダが検出されました。")
 

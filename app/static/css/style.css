@@ -100,6 +100,10 @@ main {
   color: #000;
 }
 
+.error-msg {
+  color: #FF0000;
+}
+
 .form-error {
   border: 2px solid #FF0000;
   background: #FDF5F7;
@@ -705,10 +709,6 @@ label img {
   }
 }
 
-.login__error {
-  color: #ff0000;
-}
-
 .login__form {
   margin: 0px auto 80px;
 }
@@ -794,10 +794,6 @@ label img {
 
 .logout__form--btn i {
   margin: 0 5px 0 0;
-}
-
-.signup__error {
-  color: #ff0000;
 }
 
 .signup__required {
@@ -1045,4 +1041,41 @@ label img {
     padding: 16px 14px;
     border: 0;
   }
+}
+
+.contact__form {
+  margin: 0px auto 80px;
+}
+
+.contact__form--table {
+  max-width: 500px;
+}
+
+.contact__form--btn {
+  position: relative;
+  width: 200px;
+  margin-top: 50px;
+  color: #fff;
+  background: #e8435f;
+  -webkit-box-shadow: 0 3px 0 #AC1531;
+          box-shadow: 0 3px 0 #AC1531;
+  border: 0;
+  font-weight: bold;
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+
+.contact__form--btn:hover {
+  color: #fff;
+  opacity: .7;
+}
+
+.contact__form--btn:active {
+  top: 3px;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.contact__form--btn i {
+  margin: 0 5px 0 0;
 }

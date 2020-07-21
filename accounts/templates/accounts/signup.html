@@ -11,7 +11,7 @@
 </div>
 
 <div class="signup mx-auto">
-    <p class="text-center mb-4">会員情報の登録を行います。<span class="signup__required">【必須】</span>の箇所は、必ずご入力ください。</p>
+    <p class="text-center mb-5">会員情報の登録を行います。<span class="signup__required">【必須】</span>の箇所は、必ずご入力ください。</p>
     <form method="POST" class="signup__form text-center" action="{% url 'account_signup_confirm' %}">
         {% csrf_token %}
         <table class="signup__form--table mx-auto">
@@ -44,14 +44,14 @@
                 <td class="pb-4 text-left">
                     {% render_field form.email class="form-control" placeholder="例：takasaki.hanako@example.com" %}
                     {% for field in form %}
-                        <p class="signup__error email_error d-none m-0">
+                        <p class="error-msg email_error d-none m-0">
                             {% for error in field.errors %}
                                 ※{{ error }}<br>
                             {% endfor %}
                         </p>
                     {% endfor %}
                     {% for error in form.non_field_errors %}
-                        <p class="signup__error email_error d-none m-0">
+                        <p class="error-msg email_error d-none m-0">
                             ※{{ error }}
                         </p>
                     {% endfor %}
@@ -84,14 +84,14 @@
                         {% render_field form.birthday class="form-control" %}
                     </div>
                     {% for field in form %}
-                        <p class="signup__error birthday_error d-none m-0">
+                        <p class="error-msg birthday_error d-none m-0">
                             {% for error in field.errors %}
                                 ※{{ error }}<br>
                             {% endfor %}
                         </p>
                     {% endfor %}
                     {% for error in form.non_field_errors %}
-                        <p class="signup__error birthday_error d-none m-0">
+                        <p class="error-msg birthday_error d-none m-0">
                             ※{{ error }}
                         </p>
                     {% endfor %}
@@ -106,14 +106,14 @@
                 <td class="pb-4 text-left">
                     {% render_field form.password1 class="form-control w-50" placeholder="パスワード" %}
                     {% for field in form %}
-                        <p class="signup__error pw_error d-none m-0">
+                        <p class="error-msg pw_error d-none m-0">
                             {% for error in field.errors %}
                                 ※{{ error }}<br>
                             {% endfor %}
                         </p>
                     {% endfor %}
                     {% for error in form.non_field_errors %}
-                        <p class="signup__error pw_error d-none m-0">
+                        <p class="error-msg pw_error d-none m-0">
                             ※{{ error }}
                         </p>
                     {% endfor %}
@@ -210,11 +210,11 @@
     const email = document.getElementById('id_email');
     for ( let i = 0; i < email_error.length; i++ ) {
         if ( email_error[i].textContent.match(/メール/) ) {
-            email_error[i].className = 'signup__error m-0 d-block';
+            email_error[i].className = 'error-msg m-0 d-block';
             email.className = 'form-control form-error';
         }
         email.addEventListener('click', () => {
-            email_error[i].className = 'signup__error email_error d-none m-0'
+            email_error[i].className = 'error-msg email_error d-none m-0'
             email.className = 'form-control'
         })
     }
@@ -224,11 +224,11 @@
     const birthday_day = document.getElementById('id_birthday_day');
     for ( let j = 0; j < birthday_error.length; j++ ) {
         if ( birthday_error[j].textContent.match(/日付/) ) {
-            birthday_error[j].className = 'signup__error m-0 d-block';
+            birthday_error[j].className = 'error-msg m-0 d-block';
             birthday_day.className = 'form-control form-error';
         }
         birthday_day.addEventListener('click', () => {
-            birthday_error[j].className = 'signup__error birthday_error d-none m-0'
+            birthday_error[j].className = 'error-msg birthday_error d-none m-0'
             birthday_day.className = 'form-control'
         })
     }
@@ -238,11 +238,11 @@
     const pw_1 = document.getElementById('id_password1');
     for ( let k = 0; k < pw_error.length; k++ ) {
         if ( pw_error[k].textContent.match(/パスワード/) ) {
-            pw_error[k].className = 'signup__error m-0 d-block';
+            pw_error[k].className = 'error-msg m-0 d-block';
             pw_1.className = 'form-control w-50 form-error';
         }
         pw_1.addEventListener('click', () => {
-            pw_error[k].className = 'signup__error pw_error d-none m-0'
+            pw_error[k].className = 'error-msg pw_error d-none m-0'
             pw_1.className = 'form-control w-50'
         })
     }
