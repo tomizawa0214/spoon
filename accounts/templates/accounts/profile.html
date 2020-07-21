@@ -12,32 +12,30 @@
 
 <div class="profile mx-auto">
     <table class="profile__table">
-        <tbody>
-            <tr>
-                <th>お名前</th>
-                <td>{{ user_data.name }}</td>
-            </tr>
-            <tr>
-                <th>フリガナ</th>
-                <td>{{ user_data.furigana }}</td>
-            </tr>
-            <tr>
-                <th>メールアドレス</th>
-                <td>{{ user_data.email }}</td>
-            </tr>
-            <tr>
-                <th>電話番号</th>
-                <td>{{ user_data.tel }}</td>
-            </tr>
-            <tr>
-                <th>性別</th>
-                <td>{{ user_data.get_gender_display }}</td>
-            </tr>
-            <tr>
-                <th>誕生日</th>
-                <td id="birthday">{{ user_data.birthday }}</td>
-            </tr>
-        </tbody>
+        <tr>
+            <th>お名前</th>
+            <td>{{ user_data.name }}</td>
+        </tr>
+        <tr>
+            <th>フリガナ</th>
+            <td>{{ user_data.furigana }}</td>
+        </tr>
+        <tr>
+            <th>メールアドレス</th>
+            <td>{{ user_data.email }}</td>
+        </tr>
+        <tr>
+            <th>電話番号</th>
+            <td>{{ user_data.tel }}</td>
+        </tr>
+        <tr>
+            <th>性別</th>
+            <td>{{ user_data.get_gender_display }}</td>
+        </tr>
+        <tr>
+            <th>誕生日</th>
+            <td id="birthday">{{ user_data.birthday }}</td>
+        </tr>
     </table>
     <div class="text-left">
         <a href="{% url 'email_change' %}">メールアドレスの変更手続きはこちら</a><br>

@@ -1,53 +1,56 @@
 {% extends "app/base.html" %}
 
+{% block title %}
+<title>会員情報確認 | spoon</title>
+{% endblock %}
+
 {% block content %}
-<div class="signup-title">
+<div class="title">
     <span>SIGN UP</span>
 </div>
 
-<div class="profile">
-    <p class="text-center">以下の内容でよろしいでしょうか？</p>
+<div class="profile mx-auto">
+    <p class="text-center mb-4">以下の内容でよろしいでしょうか？</p>
     <table class="profile__table">
-        <tbody>
-            <tr>
-                <th>お名前</th>
-                <td>{{ name }}</td>
-            </tr>
-            <tr>
-                <th>フリガナ</th>
-                <td>{{ furigana }}</td>
-            </tr>
-            <tr>
-                <th>メールアドレス</th>
-                <td>{{ email }}</td>
-            </tr>
-            <tr>
-                <th>電話番号</th>
-                <td>{{ tel }}</td>
-            </tr>
-            <tr>
-                <th>性別</th>
-                {% if gender == None %}
-                    <td></td>
-                {% else %}
-                    <td id="genderArea">{{ gender }}</td>
-                {% endif %}
-            </tr>
-            <tr>
-                <th>誕生日</th>
-                {% if birthday == None %}
-                    <td></td>
-                {% else %}
-                    <td>{{ birthday }}</td>
-                {% endif %}
-            </tr>
-        </tbody>
+        <tr>
+            <th>お名前</th>
+            <td>{{ name }}</td>
+        </tr>
+        <tr>
+            <th>フリガナ</th>
+            <td>{{ furigana }}</td>
+        </tr>
+        <tr>
+            <th>メールアドレス</th>
+            <td>{{ email }}</td>
+        </tr>
+        <tr>
+            <th>電話番号</th>
+            <td>{{ tel }}</td>
+        </tr>
+        <tr>
+            <th>性別</th>
+            {% if gender == None %}
+                <td></td>
+            {% else %}
+                <td id="genderArea">{{ gender }}</td>
+            {% endif %}
+        </tr>
+        <tr>
+            <th>誕生日</th>
+            {% if birthday == None %}
+                <td></td>
+            {% else %}
+                <td>{{ birthday }}</td>
+            {% endif %}
+        </tr>
     </table>
-    <button type="button" onclick=history.back()>戻る</button>
-    <form id="signup_done" action="{% url 'account_signup_done' %}">
-        {% csrf_token %}
-        <button type="submit" class="btn rounded-pill" ontouchstart="">登録</button>
-    </form>
+    <div class="position-relative text-center">
+        <button type="button" class="back-btn btn rounded-pill" onclick="history.back()">戻る</button>
+        <a id="signup_done" class="signup__form--btn btn rounded-pill" href="{% url 'account_signup_done' %}" ontouchstart="">
+            <i class="fas fa-user-plus fa-fw" aria-hidden="true"></i>登録
+        </a>
+    </div>
 </div>
 {% endblock %}
 
@@ -77,8 +80,8 @@
     const csrftoken = getCookie('csrftoken');
 
     // 登録ボタンクリックで発動
-    document.getElementById('signup_done').addEventListener('submit', () => {
-        const url = '{% url "account_signup_confirm" %}';
+    document.getElementById('signup_done').addEventListener('click', () => {
+        const url = '{% url "account_signup_done" %}';
 
         // 誕生日をYYYY-MM-DD形式に変更
         let birthday = '{{ birthday }}'.replace( /年/g, '-').replace( /月/g, '-').replace( /日/g, '');
