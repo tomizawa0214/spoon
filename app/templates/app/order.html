@@ -25,8 +25,8 @@
                     <label for="size_{{ size.id }}">
                         <img class="order__img" src="{{ size.image.url }}">
                         <div class="text-left">
-                            <p class="mb-1 ml-2">{{ size.title }}</p>
-                            <p class="order__price ml-2">\{{ size.price }}</p>
+                            <p class="order__item mb-1 ml-2">{{ size.title }}</p>
+                            <p class="order__item order__price ml-2">\{{ size.price }}</p>
                         </div>
                     </label>
                 </div>
@@ -41,10 +41,10 @@
                     <label for="flavor_{{ flavor.id }}">
                         <img class="order__img" src="{{ flavor.image.url }}">
                         <div class="text-left">
-                            <p class="order__ename mb-0 ml-2">{{ flavor.entitle }}</p>
-                            <p class="mb-1 ml-2">{{ flavor.title }}</p>
-                            <p class="order__price ml-2">
-                                <i class="order__price--icon mr-1 fas fa-plus-circle fa-fw" aria-hidden="true"></i>\{{ flavor.price }}
+                            <p class="order__item order__ename mb-0 ml-2">{{ flavor.entitle }}</p>
+                            <p class="order__item order__item mb-1 ml-2">{{ flavor.title }}</p>
+                            <p class="order__item order__price ml-2">
+                                <i class="order__price--icon fas fa-plus-square fa-fw" aria-hidden="true"></i>\{{ flavor.price }}
                             </p>
                         </div>
                     </label>
@@ -59,9 +59,9 @@
                     <label for="option_{{ option.id }}">
                         <img class="order__img" src="{{ option.image.url }}">
                         <div class="text-left">
-                            <p class="order__name mb-1 ml-2">{{ option.title }}</p>
-                            <p class="order__price ml-2">
-                                <i class="order__price--icon mr-1 fas fa-plus-circle fa-fw" aria-hidden="true"></i>\{{ option.price }}
+                            <p class="order__item order__name mb-1 ml-2">{{ option.title }}</p>
+                            <p class="order__item order__price ml-2">
+                                <i class="order__price--icon fas fa-plus-square fa-fw" aria-hidden="true"></i>\{{ option.price }}
                             </p>
                         </div>
                     </label>
@@ -70,95 +70,105 @@
             </div>
             <p class="m-0">※コーンはお持ち帰り用に単品でのお渡しとなります。</p>
             <p class="mb-5">※レジ袋はエコバッグをご持参いただければ不要です。</p>
+            <!-- 注文ボタン -->
             <div class="text-center mb-5">
                 <a id="order_plus" class="order__add-btn btn rounded-pill mr-5" ontouchstart="">追加注文する</a>
                 <a id="order_next" class="order__btn btn rounded-pill" href="{% url 'order_user' %}" ontouchstart="">ご注文手続きへ</a>
             </div>
         </div>
+        <!-- カート -->
         <div class="col-4">
             <div class="card sticky-top mt-2 ml-4">
                 <p class="order__step text-center p-1 mb-3">ご注文内容</p>
+                <!-- データベース用 -->
                 <div id="posts">
                     {% for cart in cart_data %}
-                        <div id="order{{ cart.id }}">
-                            <div class="d-flex justify-content-between">
-                                <span>{{ cart.size_title }}</span>
+                        <div id="order{{ cart.id }}"class="mb-3">
+                            <div class="d-flex justify-content-between mx-2">
+                                <strong>{{ cart.size_title }}</strong>
                                 <div>
-                                    <span class="mr-2">\{{ cart.size_price }}</span>
-                                    <span id="{{ cart.id }}" onclick="delOrder(this);">✕</span>
+                                    <strong class="order__price--cart m-0">\{{ cart.size_price }}</strong>
+                                    <span id="{{ cart.id }}" onclick="delOrder(this);">
+                                        <i class="order__price--cart--delete-icon fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                                    </span>
                                 </div>
                             </div>
-                            <div class="d-flex justify-content-between">
+                            <div class="d-flex justify-content-between mx-2">
                                 <span>{{ cart.flavor_title }}</span>
-                                <span class="mr-4">\{{ cart.flavor_price }}</span>
+                                <span class="order__price--cart">\{{ cart.flavor_price }}</span>
                             </div>
-                            <div class="d-flex justify-content-between">
+                            <div class="d-flex justify-content-between mx-2">
                                 <span>{{ cart.flavor2_title }}</span>
                                 {% if cart.flavor2_title != "" %}
-                                <span class="mr-4">\{{ cart.flavor2_price }}</span>
+                                    <span class="order__price--cart">\{{ cart.flavor2_price }}</span>
                                 {% endif %}
                             </div>
-                            <div class="d-flex justify-content-between">
+                            <div class="d-flex justify-content-between mx-2">
                                 <span>{{ cart.option_title }}</span>
                                 {% if cart.option_title != "" %}
-                                <span class="mr-4">\{{ cart.option_price }}</span>
+                                    <span class="order__price--cart">\{{ cart.option_price }}</span>
                                 {% endif %}
                             </div>
-                            <div class="d-flex justify-content-between">
+                            <div class="d-flex justify-content-between mx-2">
                                 <span>{{ cart.option2_title }}</span>
                                 {% if cart.option2_title != "" %}
-                                <span class="mr-4">\{{ cart.option2_price }}</span>
+                                    <span class="order__price--cart">\{{ cart.option2_price }}</span>
                                 {% endif %}
                             </div>
-                            <div class="d-flex justify-content-between">
+                            <div class="d-flex justify-content-between mx-2">
                                 <span>{{ cart.option3_title }}</span>
                                 {% if cart.option3_title != "" %}
-                                    <span class="mr-4">\{{ cart.option3_price }}</span>
+                                    <span class="order__price--cart">\{{ cart.option3_price }}</span>
                                 {% endif %}
                             </div>
-                            <div class="d-flex justify-content-between">
+                            <div class="d-flex justify-content-between mx-2">
                                 <span>{{ cart.option4_title }}</span>
                                 {% if cart.option4_title != "" %}
-                                    <span class="mr-4">\{{ cart.option4_price }}</span>
+                                    <span class="order__price--cart">\{{ cart.option4_price }}</span>
                                 {% endif %}
                             </div>
-                            <hr>
                         </div>
                     {% endfor %}
                 </div>
-                <div class="d-flex justify-content-between">
-                    <span id="size_title"></span>
-                    <span id="size_price"></span>
+                <!-- リアルタイム更新用 -->
+                <div class="d-flex justify-content-between mx-2">
+                    <strong id="size_title"></strong>
+                    <strong id="size_price" class="order__price--cart"></strong>
                 </div>
-                <div class="d-flex justify-content-between">
+                <div class="d-flex justify-content-between mx-2">
                     <span id="flavor_title"></span>
-                    <span id="flavor_price"></span>
+                    <span id="flavor_price" class="order__price--cart"></span>
                 </div>
-                <div class="d-flex justify-content-between">
+                <div class="d-flex justify-content-between mx-2">
                     <span id="flavor2_title"></span>
-                    <span id="flavor2_price"></span>
+                    <span id="flavor2_price" class="order__price--cart"></span>
                 </div>
-                <div class="d-flex justify-content-between">
+                <div class="d-flex justify-content-between mx-2">
                     <span id="option_title"></span>
-                    <span id="option_price"></span>
+                    <span id="option_price" class="order__price--cart"></span>
                 </div>
-                <div class="d-flex justify-content-between">
+                <div class="d-flex justify-content-between mx-2">
                     <span id="option2_title"></span>
-                    <span id="option2_price"></span>
+                    <span id="option2_price" class="order__price--cart"></span>
                 </div>
-                <div class="d-flex justify-content-between">
+                <div class="d-flex justify-content-between mx-2">
                     <span id="option3_title"></span>
-                    <span id="option3_price"></span>
+                    <span id="option3_price" class="order__price--cart"></span>
                 </div>
-                <div class="d-flex justify-content-between">
+                <div class="d-flex justify-content-between mx-2">
                     <span id="option4_title"></span>
-                    <span id="option4_price"></span>
+                    <span id="option4_price" class="order__price--cart"></span>
                 </div>
-                <p class="order__total text-center">合計：\
+                <hr class="order__border mx-2">
+                <div class="order__total d-flex justify-content-between mx-2">
+                    <strong>合計</strong>
                     <span id="total" class="d-none">0</span>
-                    <span id="total_price">{{ get_total_price|intcomma }}</span>
-                </p>
-                <a id="order_next_2" class="btn btn-danger" href="{% url 'order_user' %}">ご注文手続きへ</a>
+                    <span id="total_price" class="order__price">\{{ get_total_price|intcomma }}</span>
+                </div>
+                <!-- 注文ボタン -->
+                <div class="text-center">
+                    <a id="order_next_2" class="order__btn btn rounded-pill mt-4 mb-4" href="{% url 'order_user' %}" ontouchstart="">ご注文手続きへ</a>
+                </div>
             </div>
         </div>
     </div>
@@ -209,8 +219,10 @@
 
     // 空の表示
     const order_total = document.querySelector('.order__total');
-    if ( total_price.textContent == 0 && flavor_title.textContent == '' ) {
+    if ( total_price.textContent == '\\0' && flavor_title.textContent == '' ) {
         order_total.className = 'order__total d-none';
+        document.getElementById('order_next_2').className = 'd-none';
+        document.querySelector('.order__border').className = 'order__border d-none';
         order_total.insertAdjacentHTML(
             'beforebegin',
             '<p class="order__no-cart text-center">カートは空です。<br>ぜひお買い物をお楽しみください。</p>'
@@ -277,7 +289,9 @@
         // カートの空表記を削除
         if ( document.getElementsByClassName('order__no-cart').length ) {
             document.querySelector('.order__no-cart').remove();
-            order_total.className = 'order__total text-center';
+            order_total.className = 'order__total d-flex justify-content-between mx-2';
+            document.getElementById('order_next_2').className = 'order__btn btn rounded-pill mt-4 mb-4';
+            document.querySelector('.order__border').className = 'order__border';
         }
 
         // サイズ・オプションの取得金額にデフォルト値を設定
@@ -321,7 +335,7 @@
                     // ダブルサイズ選択の場合
                     if ( size[2].checked ) {
                         flavor_title.textContent = flavor_value[0];
-                        flavor_price.textContent = '\\' + flavor_value[1];
+                        flavor_price.textContent =  '\\' + flavor_value[1];
                         flavor2_title.textContent = flavor_value[0];
                         flavor2_price.textContent = '\\' + flavor_value[1];
                     } else {
@@ -380,21 +394,23 @@
         }
         // 非同期通信状態かリロードされたかを判定
         if ( total.textContent == 0 && postArea.children.length == 0 ) {
-            total_price.textContent = size_total + flavor_total + option_total;
+            total_price.textContent = '\\' +  ( size_total + flavor_total + option_total );
         } else if ( total.textContent == 0 && '{{ get_total_price }}' > 0 ) {
             // データベースから最新の合計値を取得して足す
             let total_fee = Number('{{ get_total_price }}') + size_total + flavor_total + option_total;
-            total_price.textContent = total_fee.toLocaleString();
+            total_price.textContent = '\\' + total_fee.toLocaleString();
         } else {
             // カンマを除いて整数値へ変換後、非同期通信で合計値を足す
             let total_flag = total.textContent.replace( /,/g, '');
             let total_fee = Number(total_flag) + size_total + flavor_total + option_total;
-            total_price.textContent = total_fee.toLocaleString();
+            total_price.textContent = '\\' + total_fee.toLocaleString();
         }
 
         // カートの空表記を判定
-        if ( total_price.textContent == 0 && flavor_title.textContent == '' ) {
+        if ( total_price.textContent == '\\0' && flavor_title.textContent == '' ) {
             order_total.className = 'order__total d-none';
+            document.getElementById('order_next_2').className = 'd-none';
+            document.querySelector('.order__border').className = 'order__border d-none';
             order_total.insertAdjacentHTML(
                 'beforebegin',
                 '<p class="order__no-cart text-center">カートは空です。<br>ぜひお買い物をお楽しみください。</p>'
@@ -472,55 +488,54 @@
             option3_price.textContent = '';
             option4_title.textContent = '';
             option4_price.textContent = '';
-            total_price.textContent = response.get_total_price.toLocaleString();
+            total_price.textContent = '\\' + response.get_total_price.toLocaleString();
             // 仮の合計金額を初期化
             total.textContent = '';
             // 追加するエレメント
-            const element  = Object.assign(document.createElement('div'), { className: 'd-flex justify-content-between'});
-            const element2  = Object.assign(document.createElement('span'), { textContent: response.size_title });
+            const element  = Object.assign(document.createElement('div'), { className: 'd-flex justify-content-between mx-2'});
+            const element2  = Object.assign(document.createElement('strong'), { textContent: response.size_title });
             const element3  = Object.assign(document.createElement('div'));
-            const element4  = Object.assign(document.createElement('span'), { className: 'mr-2', textContent: '\\' + response.size_price });
-            const element5  = Object.assign(document.createElement('span'), { id: response.cart_id, textContent: '✕' });
-            const element6  = Object.assign(document.createElement('div'), { className: 'd-flex justify-content-between'});
+            const element4  = Object.assign(document.createElement('strong'), { className: 'order__price--cart m-0', textContent: '\\' + response.size_price });
+            const element5  = Object.assign(document.createElement('span'), { id: response.cart_id, innerHTML: '<i class="order__price--cart--delete-icon fas fa-times-circle fa-fw" aria-hidden="true"></i>' });
+            const element6  = Object.assign(document.createElement('div'), { className: 'd-flex justify-content-between mx-2'});
             const element7  = Object.assign(document.createElement('span'), { textContent: response.flavor_title });
-            const element8  = Object.assign(document.createElement('span'), { className: 'mr-4', textContent: '+\\' + response.flavor_price });
-            const element9  = Object.assign(document.createElement('div'), { className: 'd-flex justify-content-between'});
+            const element8  = Object.assign(document.createElement('span'), { className: 'order__price--cart', textContent: '\\' + response.flavor_price });
+            const element9  = Object.assign(document.createElement('div'), { className: 'd-flex justify-content-between mx-2'});
             const element10  = Object.assign(document.createElement('span'), { textContent: response.flavor2_title });
             if ( response.flavor2_title == '' ) {
                 var element11  = Object.assign(document.createElement('span'));
             } else {
-                var element11  = Object.assign(document.createElement('span'), { className: 'mr-4', textContent: '+\\' + response.flavor2_price });
+                var element11  = Object.assign(document.createElement('span'), { className: 'order__price--cart', textContent: '\\' + response.flavor2_price });
             }
-            const element12  = Object.assign(document.createElement('div'), { className: 'd-flex justify-content-between'});
+            const element12  = Object.assign(document.createElement('div'), { className: 'd-flex justify-content-between mx-2'});
             const element13  = Object.assign(document.createElement('span'), { textContent: response.option_title });
             if ( response.option_title == '' ) {
                 var element14  = Object.assign(document.createElement('span'));
             } else {
-                var element14  = Object.assign(document.createElement('span'), { className: 'mr-4', textContent: '+\\' + response.option_price });
+                var element14  = Object.assign(document.createElement('span'), { className: 'order__price--cart', textContent: '\\' + response.option_price });
             }
-            const element15  = Object.assign(document.createElement('div'), { className: 'd-flex justify-content-between'});
+            const element15  = Object.assign(document.createElement('div'), { className: 'd-flex justify-content-between mx-2'});
             const element16  = Object.assign(document.createElement('span'), { textContent: response.option2_title });
             if ( response.option2_title == '' ) {
                 var element17  = Object.assign(document.createElement('span'));
             } else {
-                var element17  = Object.assign(document.createElement('span'), { className: 'mr-4', textContent: '+\\' + response.option2_price });
+                var element17  = Object.assign(document.createElement('span'), { className: 'order__price--cart', textContent: '\\' + response.option2_price });
             }
-            const element18  = Object.assign(document.createElement('div'), { className: 'd-flex justify-content-between'});
+            const element18  = Object.assign(document.createElement('div'), { className: 'd-flex justify-content-between mx-2'});
             const element19  = Object.assign(document.createElement('span'), { textContent: response.option3_title });
             if ( response.option3_title == '' ) {
                 var element20  = Object.assign(document.createElement('span'));
             } else {
-                var element20  = Object.assign(document.createElement('span'), { className: 'mr-4', textContent: '+\\' + response.option3_price });
+                var element20  = Object.assign(document.createElement('span'), { className: 'order__price--cart', textContent: '\\' + response.option3_price });
             }
-            const element21  = Object.assign(document.createElement('div'), { className: 'd-flex justify-content-between'});
+            const element21  = Object.assign(document.createElement('div'), { className: 'd-flex justify-content-between mx-2'});
             const element22  = Object.assign(document.createElement('span'), { textContent: response.option4_title });
             if ( response.option4_title == '' ) {
                 var element23  = Object.assign(document.createElement('span'));
             } else {
-                var element23  = Object.assign(document.createElement('span'), { className: 'mr-4', textContent: '+\\' + response.option4_price });
+                var element23  = Object.assign(document.createElement('span'), { className: 'order__price--cart', textContent: '\\' + response.option4_price });
             }
-            const element24  = Object.assign(document.createElement('hr'));
-            const element25  = Object.assign(document.createElement('div'), { id: 'order' + response.cart_id });
+            const element24  = Object.assign(document.createElement('div'), { id: 'order' + response.cart_id, className: 'mb-3' });
             // 階層に合わせて要素をまとめる
             element.appendChild(element2);
             element3.appendChild(element4);
@@ -538,16 +553,15 @@
             element18.appendChild(element20);
             element21.appendChild(element22);
             element21.appendChild(element23);
-            element25.appendChild(element);
-            element25.appendChild(element6);
-            element25.appendChild(element9);
-            element25.appendChild(element12);
-            element25.appendChild(element15);
-            element25.appendChild(element18);
-            element25.appendChild(element21);
-            element25.appendChild(element24);
+            element24.appendChild(element);
+            element24.appendChild(element6);
+            element24.appendChild(element9);
+            element24.appendChild(element12);
+            element24.appendChild(element15);
+            element24.appendChild(element18);
+            element24.appendChild(element21);
             // 最後に追加
-            postArea.insertBefore(element25, postArea.lastChild.nextSibling);
+            postArea.insertBefore(element24, postArea.lastChild.nextSibling);
             
             // 仮の合計値も変更
             total.textContent = response.get_total_price;
@@ -628,7 +642,7 @@
             return response.json();
         }).then(response => {
             // 合計値を削除後の金額に変更
-            total_price.textContent = response.get_total_price.toLocaleString();
+            total_price.textContent = '\\' + response.get_total_price.toLocaleString();
 
             // 仮の合計値も削除後の金額に変更
             total.textContent = response.get_total_price;
@@ -636,6 +650,17 @@
             // HTMLからクリックされた注文アイテムを削除
             let cart = document.getElementById('order' + id_value);
             cart.remove();
+
+            // カートの空表記を判定
+            if ( total_price.textContent == '\\0' && flavor_title.textContent == '' ) {
+                order_total.className = 'order__total d-none';
+                document.getElementById('order_next_2').className = 'd-none';
+                document.querySelector('.order__border').className = 'order__border d-none';
+                order_total.insertAdjacentHTML(
+                    'beforebegin',
+                    '<p class="order__no-cart text-center">カートは空です。<br>ぜひお買い物をお楽しみください。</p>'
+                );
+            }
         }).catch(error => {
             console.log(error);
         });

@@ -21,6 +21,10 @@ label img {
   }
   &__img {
     width: 100%;
+    cursor: pointer;
+  }
+  &__item {
+    cursor: pointer;
   }
   &__price {
     color: #E8435F;
@@ -30,6 +34,19 @@ label img {
     &--icon {
       font-size: 25px;
       color: rgba(0, 0, 0, .125);
+    }
+    &--cart {
+      color: #E8435F;
+      margin-right: 30px;
+      &--delete-icon {
+        font-size: 20px;
+        color: #E8435F;
+        cursor: pointer;
+      }
+      &--icon {
+        font-size: 16px;
+        color: rgba(0, 0, 0, .125);
+      }
     }
   }
   &__ename {

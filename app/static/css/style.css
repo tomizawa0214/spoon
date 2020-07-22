@@ -343,6 +343,11 @@ label img {
 
 .order__img {
   width: 100%;
+  cursor: pointer;
+}
+
+.order__item {
+  cursor: pointer;
 }
 
 .order__price {
@@ -354,6 +359,22 @@ label img {
 
 .order__price--icon {
   font-size: 25px;
+  color: rgba(0, 0, 0, 0.125);
+}
+
+.order__price--cart {
+  color: #E8435F;
+  margin-right: 30px;
+}
+
+.order__price--cart--delete-icon {
+  font-size: 20px;
+  color: #E8435F;
+  cursor: pointer;
+}
+
+.order__price--cart--icon {
+  font-size: 16px;
   color: rgba(0, 0, 0, 0.125);
 }
 
