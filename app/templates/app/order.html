@@ -68,16 +68,16 @@
                 </div>
                 {% endfor %}
             </div>
-            <p class="m-0">※コーンはお持ち帰り用の単品でのお渡しとなります。</p>
-            <p class="mb-5">※ビニル袋はエコバッグをご持参いただければ不要です。</p>
-            <div class="my-5 text-center">
-                <a id="order_plus" class="btn btn-primary">追加注文する</a>
-                <a id="order_next" class="btn btn-danger" href="{% url 'order_user' %}">ご注文手続きへ</a>
+            <p class="m-0">※コーンはお持ち帰り用に単品でのお渡しとなります。</p>
+            <p class="mb-5">※レジ袋はエコバッグをご持参いただければ不要です。</p>
+            <div class="text-center mb-5">
+                <a id="order_plus" class="order__add-btn btn rounded-pill mr-5" ontouchstart="">追加注文する</a>
+                <a id="order_next" class="order__btn btn rounded-pill" href="{% url 'order_user' %}" ontouchstart="">ご注文手続きへ</a>
             </div>
         </div>
         <div class="col-4">
             <div class="card sticky-top mt-2 ml-4">
-                <p class="text-center">ご注文内容</p>
+                <p class="order__step text-center p-1 mb-3">ご注文内容</p>
                 <div id="posts">
                     {% for cart in cart_data %}
                         <div id="order{{ cart.id }}">
@@ -154,7 +154,7 @@
                     <span id="option4_title"></span>
                     <span id="option4_price"></span>
                 </div>
-                <p class="text-center">合計：￥
+                <p class="order__total text-center">合計：\
                     <span id="total" class="d-none">0</span>
                     <span id="total_price">{{ get_total_price|intcomma }}</span>
                 </p>
@@ -206,6 +206,16 @@
     const postArea = document.getElementById('posts')
     // 再注文を受けてデータベース登録が無い場合
     let r_order_error = document.getElementById('error');
+
+    // 空の表示
+    const order_total = document.querySelector('.order__total');
+    if ( total_price.textContent == 0 && flavor_title.textContent == '' ) {
+        order_total.className = 'order__total d-none';
+        order_total.insertAdjacentHTML(
+            'beforebegin',
+            '<p class="order__no-cart text-center">カートは空です。<br>ぜひお買い物をお楽しみください。</p>'
+        );
+    }
 
     // 選択解除
     const invalid = (type) => {
@@ -264,6 +274,12 @@
 
     // サイズ・フレーバー・オプションのいずれかを選択すると発動
     const to_check = () => {
+        // カートの空表記を削除
+        if ( document.getElementsByClassName('order__no-cart').length ) {
+            document.querySelector('.order__no-cart').remove();
+            order_total.className = 'order__total text-center';
+        }
+
         // サイズ・オプションの取得金額にデフォルト値を設定
         let size_total = 0;
         let flavor_total = 0;
@@ -374,6 +390,15 @@
             let total_flag = total.textContent.replace( /,/g, '');
             let total_fee = Number(total_flag) + size_total + flavor_total + option_total;
             total_price.textContent = total_fee.toLocaleString();
+        }
+
+        // カートの空表記を判定
+        if ( total_price.textContent == 0 && flavor_title.textContent == '' ) {
+            order_total.className = 'order__total d-none';
+            order_total.insertAdjacentHTML(
+                'beforebegin',
+                '<p class="order__no-cart text-center">カートは空です。<br>ぜひお買い物をお楽しみください。</p>'
+            );
         }
     }
 

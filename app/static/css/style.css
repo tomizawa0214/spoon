@@ -338,7 +338,6 @@ label img {
 }
 
 .order__step {
-  background: #FDF5F7;
   background: #F8DDE3;
 }
 
@@ -366,6 +365,73 @@ label img {
 
 .order__name {
   line-height: 20px;
+}
+
+.order__add-btn {
+  position: relative;
+  width: 200px;
+  margin-top: 50px;
+  color: #fff;
+  background: #E8435F;
+  -webkit-box-shadow: 0 3px 0 #AC1531;
+          box-shadow: 0 3px 0 #AC1531;
+  border: 0;
+  font-weight: bold;
+  -webkit-transition: .3s;
+  transition: .3s;
+  color: #E8435F !important;
+  border: 2px solid #E8435F;
+  background: #FDF5F7;
+  -webkit-box-shadow: 0 3px 0 #CCC;
+          box-shadow: 0 3px 0 #CCC;
+}
+
+.order__add-btn:hover {
+  color: #fff;
+  opacity: .7;
+}
+
+.order__add-btn:active {
+  top: 3px;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.order__add-btn i {
+  margin: 0 5px 0 0;
+}
+
+.order__add-btn:hover {
+  color: #E8435F !important;
+}
+
+.order__btn {
+  position: relative;
+  width: 200px;
+  margin-top: 50px;
+  color: #fff;
+  background: #E8435F;
+  -webkit-box-shadow: 0 3px 0 #AC1531;
+          box-shadow: 0 3px 0 #AC1531;
+  border: 0;
+  font-weight: bold;
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+
+.order__btn:hover {
+  color: #fff;
+  opacity: .7;
+}
+
+.order__btn:active {
+  top: 3px;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.order__btn i {
+  margin: 0 5px 0 0;
 }
 
 @media screen and (max-width: 576px) {

@@ -17,7 +17,6 @@ label img {
 
 .order {
   &__step {
-    background: #FDF5F7;
     background: #F8DDE3;
   }
   &__img {
@@ -40,6 +39,19 @@ label img {
   }
   &__name {
     line-height: 20px;
+  }
+  &__add-btn {
+    @include button;
+    color: #E8435F !important;
+    border: 2px solid #E8435F;
+    background: #FDF5F7;
+    box-shadow: 0 3px 0 #CCC;
+    &:hover {
+      color: #E8435F !important;
+    }
+  }
+  &__btn {
+    @include button;
   }
 }
 

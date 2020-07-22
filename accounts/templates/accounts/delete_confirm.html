@@ -16,7 +16,7 @@
 <p class="delete__text text-center mb-5">退会手続きを実行します。</p>
 <p class="text-center">下記ボタンを押すと退会手続きを実行します。<br>オーダーサービスのご利用はできなくなり、お客様の情報はすべて削除されます。<br>会員情報は元に戻せません。本当によろしいですか？</p>
 <div class="text-center">
-    <a class="profile__btn btn rounded-pill" href="{% url 'delete_complete' %}">はい、退会します</a><br>
-    <button type="button" class="deleteno__btn btn rounded-pill mt-4" onclick="history.back()">いいえ、退会しません</button>
+    <a class="profile__btn btn rounded-pill" href="{% url 'delete_complete' %}" ontouchstart="">はい、退会します</a><br>
+    <button type="button" class="deleteno__btn btn rounded-pill mt-4" onclick="history.back()" ontouchstart="">いいえ、退会しません</button>
 </div>
 {% endblock %}
