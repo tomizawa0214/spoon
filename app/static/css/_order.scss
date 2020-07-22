@@ -16,6 +16,18 @@ label img {
 }
 
 .order {
+  &__alert {
+    z-index: 9999;
+    animation : fadeOut 1s ease-in-out 2s forwards;
+    @keyframes fadeOut {
+      0% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+  }
   &__step {
     background: #F8DDE3;
   }
@@ -39,7 +51,7 @@ label img {
       color: #E8435F;
       margin-right: 30px;
       &--delete-icon {
-        font-size: 20px;
+        font-size: 16px;
         color: #E8435F;
         cursor: pointer;
       }

@@ -337,6 +337,30 @@ label img {
   border-radius: 10%;
 }
 
+.order__alert {
+  z-index: 9999;
+  -webkit-animation: fadeOut 1s ease-in-out 2s forwards;
+          animation: fadeOut 1s ease-in-out 2s forwards;
+}
+
+@-webkit-keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 .order__step {
   background: #F8DDE3;
 }
@@ -368,7 +392,7 @@ label img {
 }
 
 .order__price--cart--delete-icon {
-  font-size: 20px;
+  font-size: 16px;
   color: #E8435F;
   cursor: pointer;
 }
