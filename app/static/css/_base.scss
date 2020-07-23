@@ -95,6 +95,12 @@ main {
   font-weight: 600;
 }
 
+.help-text {
+  font-size: 14px;
+  line-height: 22px;
+  letter-spacing: .5px;
+}
+
 .back-btn {
   @include button;
   position: absolute;

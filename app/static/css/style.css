@@ -60,6 +60,12 @@ main {
   font-weight: 600;
 }
 
+.help-text {
+  font-size: 14px;
+  line-height: 22px;
+  letter-spacing: .5px;
+}
+
 .back-btn {
   position: relative;
   width: 200px;
@@ -530,6 +536,44 @@ label img {
   }
 }
 
+.order-user__form {
+  margin: 0px auto 80px;
+}
+
+.order-user__form--table {
+  width: 100%;
+  max-width: 350px;
+}
+
+.order-user__form--btn {
+  position: relative;
+  width: 200px;
+  margin-top: 50px;
+  color: #fff;
+  background: #E8435F;
+  -webkit-box-shadow: 0 3px 0 #AC1531;
+          box-shadow: 0 3px 0 #AC1531;
+  border: 0;
+  font-weight: bold;
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+
+.order-user__form--btn:hover {
+  color: #fff;
+  opacity: .7;
+}
+
+.order-user__form--btn:active {
+  top: 3px;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.order-user__form--btn i {
+  margin: 0 5px 0 0;
+}
+
 .thanks {
   text-align: center;
   margin: 0 0 80px;
@@ -715,11 +759,6 @@ label img {
 
 .login__form--btn i {
   margin: 0 5px 0 0;
-}
-
-.login__text-help {
-  font-size: 14px;
-  letter-spacing: .5px;
 }
 
 .logout {

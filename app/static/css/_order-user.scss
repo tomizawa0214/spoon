@@ -1,0 +1,12 @@
+.order-user {
+    &__form {
+        margin: 0px auto 80px;
+        &--table {
+            width: 100%;
+            max-width: 350px;
+        }
+        &--btn {
+            @include button;
+        }
+    }
+}
