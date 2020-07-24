@@ -1,94 +1,110 @@
 {% extends "app/base.html" %}
 {% load humanize %}
 
+{% block title %}
+<title>注文確認 | spoon</title>
+{% endblock %}
+
 {% block content %}
-<div class="order-title">
+<div class="title">
     <span>ORDER</span>
 </div>
 
-<p class="text-center">以下の内容でよろしいでしょうか？</p>
+<p class="text-center mb-4">以下の内容でよろしいでしょうか？</p>
 <p id="error" class="d-none"></p>
-<div class="row">
-    <div class="col-7">
-        <table class="profile__table">
-            <tbody>
-                <tr>
-                    <th>お名前</th>
-                    <td id="name">{{ name }}</td>
-                </tr>
-                <tr>
-                    <th>フリガナ</th>
-                    <td id="furigana">{{ furigana }}</td>
-                </tr>
-                <tr>
-                    <th>メールアドレス</th>
-                    <td id="email">{{ email }}</td>
-                </tr>
-                <tr>
-                    <th>電話番号</th>
-                    <td id="tel">{{ tel }}</td>
-                </tr>
-                <tr>
-                    <th>受取日時</th>
-                    <td id="receipt">{{ date }}　{{ time }}</td>
-                </tr>
-            </tbody>
+<div class="row justify-content-center">
+    <div class="col-6">
+        <table class="order-confirm__table">
+            <tr>
+                <th>お名前</th>
+                <td id="name">{{ name }}</td>
+            </tr>
+            <tr>
+                <th>フリガナ</th>
+                <td id="furigana">{{ furigana }}</td>
+            </tr>
+            <tr>
+                <th>メールアドレス</th>
+                <td id="email">{{ email }}</td>
+            </tr>
+            <tr>
+                <th>電話番号</th>
+                <td id="tel">{{ tel }}</td>
+            </tr>
+            <tr>
+                <th>受取日時</th>
+                <td id="receipt">{{ date }}　{{ time }}</td>
+            </tr>
         </table>
-        <div class="text-left">
-            <span>※お支払いは店頭にて現金のみとなります。</span><br>
-            <span>※店舗の状況により商品のお渡しにお時間をいただく場合がございます。</span>
-        </div>
-    </div>
-    <div class="col-3">
-        <div class="card">
-            <p class="text-center">ご注文内容</p>
-            {% for cart in cart_data %}
-                <div class="d-flex justify-content-between">
-                    <span>{{ cart.size_title }}</span>
-                    <span>￥{{ cart.size_price }}</span>
-                </div>
-                <div class="d-flex justify-content-between">
-                    <span>{{ cart.flavor_title }}</span>
-                    <span>￥{{ cart.flavor_price }}</span>
-                </div>
-                <div class="d-flex justify-content-between">
-                    <span>{{ cart.flavor2_title }}</span>
-                    {% if cart.flavor2_title != "" %}
-                    <span>￥{{ cart.flavor2_price }}</span>
-                    {% endif %}
-                </div>
-                <div class="d-flex justify-content-between">
-                    <span>{{ cart.option_title }}</span>
-                    {% if cart.option_title != "" %}
-                    <span>￥{{ cart.option_price }}</span>
-                    {% endif %}
-                </div>
-                <div class="d-flex justify-content-between">
-                    <span>{{ cart.option2_title }}</span>
-                    {% if cart.option2_title != "" %}
-                    <span>￥{{ cart.option2_price }}</span>
-                    {% endif %}
-                </div>
-                <div class="d-flex justify-content-between">
-                    <span>{{ cart.option3_title }}</span>
-                    {% if cart.option3_title != "" %}
-                        <span>￥{{ cart.option3_price }}</span>
-                    {% endif %}
-                </div>
-                <hr>
-            {% endfor %}
-            <p class="text-center">合計：￥
-                <span>{{ get_total_price|intcomma }}</span>
+        <div class="mt-1">
+            <p class="help-text m-0">
+                ※お支払いは店頭にて現金のみとなります。<br>
+                ※店舗の状況により商品のお渡しにお時間をいただく場合がございます。
             </p>
         </div>
     </div>
+    <div class="col-4">
+        <div class="card ml-4">
+            <p class="order__step text-center p-1 mb-3">ご注文内容</p>
+            {% for cart in cart_data %}
+                {% if forloop.last %}
+                    <div class="m-0">
+                {% else %}
+                    <div class="mb-3">
+                {% endif %}
+                    <div class="d-flex justify-content-between mx-2">
+                        <strong>{{ cart.size_title }}</strong>
+                        <div>
+                            <strong class="order__price--cart m-0">\{{ cart.size_price }}</strong>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between mx-2">
+                        <span>{{ cart.flavor_title }}</span>
+                        <span class="order__price--cart m-0">\{{ cart.flavor_price }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between mx-2">
+                        <span>{{ cart.flavor2_title }}</span>
+                        {% if cart.flavor2_title != "" %}
+                            <span class="order__price--cart m-0">\{{ cart.flavor2_price }}</span>
+                        {% endif %}
+                    </div>
+                    <div class="d-flex justify-content-between mx-2">
+                        <span>{{ cart.option_title }}</span>
+                        {% if cart.option_title != "" %}
+                            <span class="order__price--cart m-0">\{{ cart.option_price }}</span>
+                        {% endif %}
+                    </div>
+                    <div class="d-flex justify-content-between mx-2">
+                        <span>{{ cart.option2_title }}</span>
+                        {% if cart.option2_title != "" %}
+                            <span class="order__price--cart m-0">\{{ cart.option2_price }}</span>
+                        {% endif %}
+                    </div>
+                    <div class="d-flex justify-content-between mx-2">
+                        <span>{{ cart.option3_title }}</span>
+                        {% if cart.option3_title != "" %}
+                            <span class="order__price--cart m-0">\{{ cart.option3_price }}</span>
+                        {% endif %}
+                    </div>
+                    <div class="d-flex justify-content-between mx-2">
+                        <span>{{ cart.option4_title }}</span>
+                        {% if cart.option4_title != "" %}
+                            <span class="order__price--cart m-0">\{{ cart.option4_price }}</span>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+            <hr class="order__border mx-2">
+            <div class="order__total d-flex justify-content-between mx-2 mb-3">
+                <strong>合計</strong>
+                <span class="order__price">\{{ get_total_price|intcomma }}</span>
+            </div>
+        </div>
+    </div>
 </div>
-
-<div class="mt-5 text-center">
-    <!-- <button type="button" onclick="history.back()">戻る</button> -->
-    <a class="btn btn-primary" href="{% url 'order_user' %}">戻る</a>
-    <!-- <button id="order_done"  class="btn rounded-pill" type="button" ontouchstart="">注文を確定</button> -->
-    <a id="order_done" class="btn rounded-pill" href="{% url 'order_thanks' %}" ontouchstart=''">注文を確定</a>
+<div class="position-relative text-center">
+    <a class="back-btn btn rounded-pill" href="{% url 'order_user' %}" ontouchstart="">戻る</a>
+    <a id="order_done" class="order__btn btn rounded-pill" href="{% url 'order_thanks' %}" ontouchstart="">注文を確定</a>
 </div>
 {% endblock %}
 

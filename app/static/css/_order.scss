@@ -84,6 +84,49 @@ label img {
   }
 }
 
+.order-user {
+  &__form {
+      margin: 0px auto 80px;
+      &--table {
+          width: 100%;
+          max-width: 350px;
+      }
+      &--btn {
+          @include button;
+      }
+  }
+}
+
+.order-confirm {
+  &__table {
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, .125);
+    border-radius: .25rem;
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden;
+    tr:not(:last-of-type) {
+      th, td {
+        border-bottom: 1px solid rgba(0, 0, 0, .125);
+      }
+    }
+    th {
+      width: 180px;
+      text-align: left;
+      padding: 16px 24px;
+      background: #FDF5F7;
+      border-right: 1px solid rgba(0, 0, 0, .125);
+    }
+    td {
+      text-align: left;
+      padding: 16px 24px;
+    }
+  }
+  &__btn {
+    @include button;
+  }
+}
+
 // -----xs(Extra Small)-----
 @media screen and (max-width: 576px) {
   .order {
