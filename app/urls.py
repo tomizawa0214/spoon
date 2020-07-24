@@ -10,6 +10,7 @@ urlpatterns = [
     path('order/user/', views.OrderUserView.as_view(), name='order_user'),
     path('order/confirm/', views.OrderConfirmView.as_view(), name='order_confirm'),
     path('order/thanks/', views.OrderThanksView.as_view(), name='order_thanks'),
+    path('concept/', views.AboutView.as_view(), name='about'),
     path('access/', views.AccessView.as_view(), name='access'),
     path('contact/', views.ContactView.as_view(), name='contact'),
     path('contact/thanks', views.ContactThanksView.as_view(), name='contact_thanks'),

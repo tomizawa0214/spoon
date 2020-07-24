@@ -16,7 +16,7 @@
             <div class="title">
                 <span>ORDER</span>
             </div>
-            <p class="order__step text-center mb-3 p-1">STEP1.　ジェラートのサイズをお選びください。</p>
+            <p class="order__step text-center mb-3 p-1 rounded-pill">STEP1.　ジェラートのサイズをお選びください。</p>
             <p id="size_error" class="d-none text-center error-msg"></p>
             <div class="row mb-5">
                 {% for size in size_item %}
@@ -32,7 +32,7 @@
                 </div>
                 {% endfor %}
             </div>
-            <p class="order__step text-center mb-3 p-1">STEP2.　ジェラートのフレーバーをお選びください。</p>
+            <p class="order__step text-center mb-3 p-1 rounded-pill">STEP2.　ジェラートのフレーバーをお選びください。</p>
             <p id="flavor_error" class="d-none text-center error-msg"></p>
             <div class="row mb-5">
                 {% for flavor in flavor_item %}
@@ -51,7 +51,7 @@
                 </div>
                 {% endfor %}
             </div>
-            <p class="order__step text-center mb-3 p-1">STEP3.　オプションをお選びください。【※任意】</p>
+            <p class="order__step text-center mb-3 p-1 rounded-pill">STEP3.　オプションをお選びください。【※任意】</p>
             <div class="row">
                 {% for option in option_item %}
                 <div class="col-3 text-center selection-group">
@@ -79,7 +79,7 @@
         <!-- カート -->
         <div class="col-4">
             <div class="card sticky-top mt-2 ml-4">
-                <p class="order__step text-center p-1 mb-3">ご注文内容</p>
+                <p class="order__content text-center p-1 mb-3">ご注文内容</p>
                 <!-- データベース用 -->
                 <div id="posts">
                     {% for cart in cart_data %}

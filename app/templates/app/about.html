@@ -1,0 +1,44 @@
+{% extends "app/base.html" %}
+{% load static %}
+
+{% block title %}
+<title>当店紹介 | spoon</title>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-9 p-0">
+        <h1 class="title">
+            <span>CONCEPT</span>
+        </h1>
+        <div class="about row">
+            <div class="col-6">
+                <img class="w-100" src="{% static 'img/about1_ダミー.png' %}">
+            </div>
+            <div class="col-6">
+                <h2 class="about__subheading">手づくりジェラート専門店</h2>
+                <p>spoonの美味しさは、一度食べたらきっとわかっていただけるでしょう。なんといっても特徴は、その“食感”。伝統的な製造工程に基づき、独自の製法で仕上げる「シンプルななめらかさ」への追求を日々続けてきました。口に入れれば、香りが広がりながら舌の上でしっとりととろけて、やがて、ほのかな甘みの余韻を残しつつフワッと消えていく…。食べた瞬間は濃厚なのに、スーッと喉を通り過ぎていくサッパリとした食感は、他のジェラートとは違うspoonならではのオリジナルの味わいです。</p>
+            </div>
+        </div>
+        <div class="about row">
+            <div class="col-6">
+                <h2 class="about__subheading">新鮮素材のオリジナルフレーバー</h2>
+                <p>理想の味に近づける為、様々な産地からベストな素材を取り寄せ、試作を重ね商品企画が出来上がるまでに1年以上かけるフレーバーもあります。 spoonでしか食べる事のできないオリジナリティ溢れたフレーバーは、お客様の「笑顔」と「驚き」の為に、納得するまで何度も何度も試作を繰り返し、完成させます。 すべての方が笑顔になれる「幸せなひととき」を、心をこめてお届けします。</p>
+            </div>
+            <div class="col-6">
+                <img class="w-100" src="{% static 'img/about2_ダミー.png' %}">
+            </div>
+        </div>
+        <div class="about row">
+            <div class="col-6">
+                <img class="w-100" src="{% static 'img/about3_ダミー.png' %}">
+            </div>
+            <div class="col-6">
+                <h2 class="about__subheading">ジェラートの秘密</h2>
+                <p>ジェラートは、栄養学的に見ても優れた商品です。ジェラートの原料牛乳は、米食中心の日本人の栄養バランスを整える最も良い食品と言われています。牛乳のタンパク質（protein）は、米のタンパク質とよく補充し合ってさらに良質のタンパク質に変身します。またカルシウム、ビタミンB2も簡単に他の商品よりも早く、確実に吸収されます。子供から大人まで、安心しておすすめ出来ます。</p>
+            </div>
+        </div>
+    </div>
+    {% include 'app/sidebar.html' %}
+</div>
+{% endblock %}

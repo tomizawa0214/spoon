@@ -1,0 +1,18 @@
+.sidebar {
+    padding-left: 60px;
+    &__store {
+        &--img {
+            width: 100%;
+        }
+        &--name {
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: .5px;
+        }
+    }
+}
+
+.iswd-base {
+    border: 0 !important;
+    background: #F2F8ED !important;
+}

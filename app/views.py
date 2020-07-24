@@ -307,6 +307,18 @@ class DeleteOrderView(LoginRequiredMixin, View):
         return JsonResponse(data)
 
 
+class AboutView(View):
+    def get(self, request, *args, **kwargs):
+        # 未注文のカート件数を取得
+        count = None
+        if request.user.is_authenticated:
+            count = Cart.objects.filter(user=request.user, ordered=False).count()
+
+        return render(request, 'app/about.html', {
+            'count': count
+        })
+
+
 class AccessView(View):
     def get(self, request, *args, **kwargs):
         # 未注文のカート件数を取得

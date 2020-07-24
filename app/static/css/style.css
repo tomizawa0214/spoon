@@ -34,7 +34,7 @@ main {
   position: relative;
   display: inline-block;
   z-index: 1;
-  padding: 0 15px;
+  padding: 0 30px;
   background: #fff;
 }
 
@@ -240,21 +240,6 @@ main {
   letter-spacing: 0;
 }
 
-.store-img {
-  width: 100%;
-}
-
-.store-name {
-  font-size: 18px;
-  font-weight: 600;
-  letter-spacing: .5px;
-}
-
-.iswd-base {
-  border: none !important;
-  background: #FCE8EB !important;
-}
-
 @media screen and (max-width: 576px) {
   .top__item--image1 {
     height: 400px;
@@ -324,6 +309,16 @@ main {
   }
 }
 
+.about {
+  margin: 80px 0;
+}
+
+.about__subheading {
+  color: #E8435F;
+  font-size: 20px;
+  font-weight: 600;
+}
+
 /* ラジオボタンとチェックボックスを非表示 */
 .selection-group input[type="radio"],
 .selection-group input[type="checkbox"] {
@@ -368,6 +363,10 @@ label img {
 }
 
 .order__step {
+  background: #F2F8ED;
+}
+
+.order__content {
   background: #F8DDE3;
 }
 
@@ -511,7 +510,7 @@ label img {
   width: 180px;
   text-align: left;
   padding: 16px 24px;
-  background: #FDF5F7;
+  background: #F2F8ED;
   border-right: 1px solid rgba(0, 0, 0, 0.125);
 }
 
@@ -569,53 +568,6 @@ label img {
   .order__wrap:last-child {
     padding: 0;
   }
-}
-
-.thanks {
-  text-align: center;
-  margin: 0 0 80px;
-}
-
-.thanks p:first-of-type {
-  font-size: 30px;
-  font-weight: bold;
-  margin: 0 0 10px;
-}
-
-.thanks p:last-of-type {
-  margin: 0 0 30px;
-}
-
-.thanks a {
-  position: relative;
-  width: 200px;
-  margin-top: 50px;
-  color: #fff;
-  background: #E8435F;
-  -webkit-box-shadow: 0 3px 0 #AC1531;
-          box-shadow: 0 3px 0 #AC1531;
-  border: 0;
-  font-weight: bold;
-  -webkit-transition: .3s;
-  transition: .3s;
-  background: #a85413;
-  -webkit-box-shadow: 0 3px 0 #492408;
-          box-shadow: 0 3px 0 #492408;
-}
-
-.thanks a:hover {
-  color: #fff;
-  opacity: .7;
-}
-
-.thanks a:active {
-  top: 3px;
-  -webkit-box-shadow: none;
-          box-shadow: none;
-}
-
-.thanks a i {
-  margin: 0 5px 0 0;
 }
 
 .footer {
@@ -864,7 +816,7 @@ label img {
   width: 180px;
   text-align: left;
   padding: 16px 24px;
-  background: #FDF5F7;
+  background: #F2F8ED;
   border-right: 1px solid rgba(0, 0, 0, 0.125);
 }
 
@@ -907,7 +859,7 @@ label img {
 }
 
 .history__header {
-  background: #FDF5F7;
+  background: #F2F8ED;
 }
 
 .history__header--orderday {
@@ -1068,4 +1020,23 @@ label img {
 
 .contact__form--btn i {
   margin: 0 5px 0 0;
+}
+
+.sidebar {
+  padding-left: 60px;
+}
+
+.sidebar__store--img {
+  width: 100%;
+}
+
+.sidebar__store--name {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: .5px;
+}
+
+.iswd-base {
+  border: 0 !important;
+  background: #F2F8ED !important;
 }
