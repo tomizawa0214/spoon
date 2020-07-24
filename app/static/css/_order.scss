@@ -91,9 +91,6 @@ label img {
           width: 100%;
           max-width: 350px;
       }
-      &--btn {
-          @include button;
-      }
   }
 }
 
@@ -121,9 +118,6 @@ label img {
       text-align: left;
       padding: 16px 24px;
     }
-  }
-  &__btn {
-    @include button;
   }
 }
 

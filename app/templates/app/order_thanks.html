@@ -1,12 +1,28 @@
 {% extends "app/base.html" %}
+{% load static %}
 
 {% block title %}
 <title>注文完了 | spoon</title>
 {% endblock %}
 
 {% block content %}
-<div class="thanks">
-  <p>ご注文いただき、ありがとうございます。</p>
-  <p>ご注文内容の確認メールをお送りさせていただきました。<br>メール本文記載の注文番号を店頭にてご提示ください。<br>店頭にて商品をご用意してお待ちしております。<br>今後ともご愛顧賜りますよう、よろしくお願い申し上げます。</p>
+<div class="title">
+  <span>ORDER</span>
+</div>
+
+<div class="text-center mb-4">
+  <img class="done-check" src="{% static 'img/check.svg' %}">
+</div>
+
+<p class="done-text text-center mb-5">ご注文いただき、ありがとうございます。</p>
+<p class="text-center">
+  ご注文内容の確認メールをお送りさせていただきました。<br>
+  メール本文記載の注文番号を店頭にてご提示ください。<br>
+  店頭にて商品をご用意してお待ちしております。
+</p>
+<p class="text-center">今後ともご愛顧賜りますよう、よろしくお願い申し上げます。</p>
+
+<div class="text-center">
+  <a class="contact__form--btn btn rounded-pill" href="/">トップページに戻る</a>
 </div>
 {% endblock %}

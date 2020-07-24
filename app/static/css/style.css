@@ -494,35 +494,6 @@ label img {
   max-width: 350px;
 }
 
-.order-user__form--btn {
-  position: relative;
-  width: 200px;
-  margin-top: 50px;
-  color: #fff;
-  background: #E8435F;
-  -webkit-box-shadow: 0 3px 0 #AC1531;
-          box-shadow: 0 3px 0 #AC1531;
-  border: 0;
-  font-weight: bold;
-  -webkit-transition: .3s;
-  transition: .3s;
-}
-
-.order-user__form--btn:hover {
-  color: #fff;
-  opacity: .7;
-}
-
-.order-user__form--btn:active {
-  top: 3px;
-  -webkit-box-shadow: none;
-          box-shadow: none;
-}
-
-.order-user__form--btn i {
-  margin: 0 5px 0 0;
-}
-
 .order-confirm__table {
   width: 100%;
   border: 1px solid rgba(0, 0, 0, 0.125);
@@ -547,35 +518,6 @@ label img {
 .order-confirm__table td {
   text-align: left;
   padding: 16px 24px;
-}
-
-.order-confirm__btn {
-  position: relative;
-  width: 200px;
-  margin-top: 50px;
-  color: #fff;
-  background: #E8435F;
-  -webkit-box-shadow: 0 3px 0 #AC1531;
-          box-shadow: 0 3px 0 #AC1531;
-  border: 0;
-  font-weight: bold;
-  -webkit-transition: .3s;
-  transition: .3s;
-}
-
-.order-confirm__btn:hover {
-  color: #fff;
-  opacity: .7;
-}
-
-.order-confirm__btn:active {
-  top: 3px;
-  -webkit-box-shadow: none;
-          box-shadow: none;
-}
-
-.order-confirm__btn i {
-  margin: 0 5px 0 0;
 }
 
 @media screen and (max-width: 576px) {
