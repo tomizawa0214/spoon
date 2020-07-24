@@ -119,6 +119,17 @@ main {
   max-width: 1200px;
 }
 
+.access__name {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: .5px;
+}
+
+.access__name--e {
+  font-family: "Montserrat", "Roboto", "游ゴシック体", "Yu Gothic", YuGothic, "游ゴシック", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", MeiryoKe_PGothic, "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+  font-size: 25px;
+}
+
 .header {
   width: 100%;
   max-width: 1200px;
@@ -1032,7 +1043,7 @@ label img {
 
 .sidebar__store--name {
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: .5px;
 }
 

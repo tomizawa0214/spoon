@@ -1,0 +1,11 @@
+.access {
+    &__name {
+        font-size: 20px;
+        font-weight: 700;
+        letter-spacing: .5px;
+        &--e {
+            @include E-font;
+            font-size: 25px;
+        }
+    }
+}
