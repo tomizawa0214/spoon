@@ -5,8 +5,8 @@ import datetime
 import locale
 
 # 現在日時を取得
-# dt = datetime.datetime.now()
-dt = datetime.datetime(2019, 2, 26, 14, 9)
+dt = datetime.datetime.now()
+# dt = datetime.datetime(2019, 2, 26, 14, 9)
 # 日本語表記の曜日名・月名
 locale.setlocale(locale.LC_TIME, 'ja_JP.UTF-8')
 
@@ -55,7 +55,7 @@ def get_times(start_time):
     while(True):
         TIME_CHOICES.append((handle_time.strftime('%H:%M'), handle_time.strftime('%H:%M')))
         next_time = handle_time + timedelta(minutes=30)
-        if next_time.time() <= datetime.time(17):
+        if next_time.time() < datetime.time(17, 1):
             handle_time = next_time
         else:
             break
