@@ -55,7 +55,7 @@ def get_times(start_time):
     while(True):
         TIME_CHOICES.append((handle_time.strftime('%H:%M'), handle_time.strftime('%H:%M')))
         next_time = handle_time + timedelta(minutes=30)
-        if next_time.time() < datetime.time(17, 1):
+        if next_time.time() < datetime.time(17):
             handle_time = next_time
         else:
             break
@@ -73,7 +73,7 @@ def get_fulltimes(box):
 # 現在時刻が11:00～16:30
 if datetime.time(11) <= dt.time() < datetime.time(16, 31):
     # 現在時刻から30分後を取得
-    after_30 = dt + timedelta(minutes=30)
+    after_30 = dt.replace(second=0, microsecond=0) + timedelta(minutes=30)
     # 30分後の一の位を取得
     after_30_one = ''.join(list(reversed(str(after_30.minute))))[0]
     # 10分毎の値に丸める
