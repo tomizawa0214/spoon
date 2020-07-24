@@ -104,6 +104,9 @@
                     {% if cart.option3_title != '' %}
                         <img class="history__option-img" src="{{ cart.option3_image.url }}">
                     {% endif %}
+                    {% if cart.option4_title != '' %}
+                        <img class="history__option-img" src="{{ cart.option4_image.url }}">
+                    {% endif %}
                 </div>
             </div>
             <table>
@@ -117,22 +120,38 @@
                 </tr>
                 <tr>
                     <th class="align-top">【オプション】</th>
-                    {% if cart.option_title == "" and cart.option2_title == "" and cart.option3_title == ""  %}
+                    {% if cart.option_title == "" and cart.option2_title == "" and cart.option3_title == "" and cart.option4_title == "" %}
                         <td>なし</td>
-                    {% elif cart.option_title != "" and cart.option2_title == "" and cart.option3_title == ""  %}
+                    {% elif cart.option_title != "" and cart.option2_title == "" and cart.option3_title == "" and cart.option4_title == "" %}
                         <td>{{ cart.option_title }}</td>
-                    {% elif cart.option_title == "" and cart.option2_title != "" and cart.option3_title == ""  %}
+                    {% elif cart.option_title == "" and cart.option2_title != "" and cart.option3_title == "" and cart.option4_title == "" %}
                         <td>{{ cart.option2_title }}</td>
-                    {% elif cart.option_title == "" and cart.option2_title == "" and cart.option3_title != ""  %}
+                    {% elif cart.option_title == "" and cart.option2_title == "" and cart.option3_title != "" and cart.option4_title == "" %}
                         <td>{{ cart.option3_title }}</td>
-                    {% elif cart.option_title != "" and cart.option2_title != "" and cart.option3_title == ""  %}
+                    {% elif cart.option_title == "" and cart.option2_title == "" and cart.option3_title == ""  and cart.option4_title != "" %}
+                        <td>{{ cart.option4_title }}</td>
+                    {% elif cart.option_title != "" and cart.option2_title != "" and cart.option3_title == "" and cart.option4_title == "" %}
                         <td>{{ cart.option_title }}<br>{{ cart.option2_title }}</td>
-                    {% elif cart.option_title != "" and cart.option2_title == "" and cart.option3_title != ""  %}
+                    {% elif cart.option_title != "" and cart.option2_title == "" and cart.option3_title != "" and cart.option4_title == "" %}
                         <td>{{ cart.option_title }}<br>{{ cart.option3_title }}</td>
-                    {% elif cart.option_title == "" and cart.option2_title != "" and cart.option3_title != ""  %}
+                    {% elif cart.option_title != "" and cart.option2_title == "" and cart.option3_title == "" and cart.option4_title != "" %}
+                        <td>{{ cart.option_title }}<br>{{ cart.option4_title }}</td>
+                    {% elif cart.option_title == "" and cart.option2_title != "" and cart.option3_title != "" and cart.option4_title == "" %}
                         <td>{{ cart.option2_title }}<br>{{ cart.option3_title }}</td>
-                    {% elif cart.option_title != "" and cart.option2_title != "" and cart.option3_title != ""  %}
+                    {% elif cart.option_title == "" and cart.option2_title != "" and cart.option3_title == "" and cart.option4_title != "" %}
+                        <td>{{ cart.option2_title }}<br>{{ cart.option4_title }}</td>
+                    {% elif cart.option_title == "" and cart.option2_title == "" and cart.option3_title != "" and cart.option4_title != "" %}
+                        <td>{{ cart.option3_title }}<br>{{ cart.option4_title }}</td>
+                    {% elif cart.option_title != "" and cart.option2_title != "" and cart.option3_title != "" and cart.option4_title == "" %}
                         <td>{{ cart.option_title }}<br>{{ cart.option2_title }}<br>{{ cart.option3_title }}</td>
+                    {% elif cart.option_title == "" and cart.option2_title != "" and cart.option3_title != "" and cart.option4_title != "" %}
+                        <td>{{ cart.option2_title }}<br>{{ cart.option3_title }}<br>{{ cart.option4_title }}</td>
+                    {% elif cart.option_title != "" and cart.option2_title == "" and cart.option3_title != "" and cart.option4_title != "" %}
+                        <td>{{ cart.option_title }}<br>{{ cart.option3_title }}<br>{{ cart.option4_title }}</td>
+                    {% elif cart.option_title != "" and cart.option2_title != "" and cart.option3_title == "" and cart.option4_title != "" %}
+                        <td>{{ cart.option_title }}<br>{{ cart.option2_title }}<br>{{ cart.option4_title }}</td>
+                    {% elif cart.option_title != "" and cart.option2_title != "" and cart.option3_title != "" and cart.option4_title != "" %}
+                        <td>{{ cart.option_title }}<br>{{ cart.option2_title }}<br>{{ cart.option3_title }}<br>{{ cart.option4_title }}</td>
                     {% endif %}
                 </tr>
             </table>

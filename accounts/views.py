@@ -389,6 +389,16 @@ class ProfileView(LoginRequiredMixin, View):
                     cart.option3_title = ''
                 else:
                     error_flag.append(same_cart.option3_title)
+
+                # データベースの存在を確認（オプション4）
+                if OptionItem.objects.filter(title=same_cart.option4_title).exists():
+                    optionitem = OptionItem.objects.get(title=same_cart.option4_title)
+                    cart.option4_title = optionitem.title
+                    cart.option4_price = optionitem.price
+                elif same_cart.option4_title == '':
+                    cart.option4_title = ''
+                else:
+                    error_flag.append(same_cart.option4_title)
                 
                 # データベースにすべてあればカートに登録
                 if len(error_flag) == 0:
