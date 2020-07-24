@@ -1,0 +1,45 @@
+{% extends "app/base.html" %}
+{% load static %}
+
+{% block title %}
+<title>ご利用ガイド | spoon</title>
+{% endblock %}
+
+{% block content %}
+<h1 class="title">
+    <span>ORDER GUIDE</span>
+</h1>
+
+<div class="row justify-content-center">
+    <div class="col-4">
+        <img class="w-100" src="{% static 'img/ガイド_イメージ1.png' %}">
+    </div>
+    <div class="align-self-center">
+        <h2 class="guide__title">待ち時間なし！ 並ばず注文できる新サービス！</h2>
+        <p class="guide__help">
+            ご自宅でも、外出先でも、ゆっくり自分のペースで事前に注文。<br>
+            かんたん3ステップでお店に並ばず受け取れるから衛生面でも安心。<br>
+            ぜひこの機会にご利用ください！
+        </p>
+    </div>
+</div>
+<div class="guide__step">
+    <span>かんたん3ステップ</span>
+</div>
+<div class="guide__three row justify-content-center text-center align-items-center">
+    <div class="guide__three--box col-2 py-5 position-relative">
+        <span class="guide__three--box--step pt-2">1</span>
+        <span>無料会員登録</span>
+    </div>
+    <i class="guide__three--arrow col-1 fas fa-caret-right fa-fw" aria-hidden="true"></i>
+    <div class="guide__three--box col-2 py-5">
+        <span class="guide__three--box--step pt-2">2</span>
+        <span>WEBで注文</span>
+    </div>
+    <i class="guide__three--arrow col-1 fas fa-caret-right fa-fw" aria-hidden="true"></i>
+    <div class="guide__three--box col-2 py-5">
+        <span class="guide__three--box--step pt-2">3</span>
+        <span>店頭決済＆受取</span>
+    </div>
+</div>
+{% endblock %}
