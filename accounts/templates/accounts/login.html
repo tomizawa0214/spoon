@@ -13,7 +13,7 @@
 <div class="login mx-auto">
     <p class="text-center mb-4">
         アカウントをお持ちでない場合は、
-        <a href="{% url 'account_signup' %}">こちら</a>
+        <a class="login__link" href="{% url 'account_signup' %}">こちら</a>
         から会員登録をお願いします。
     </p>
     <form method="POST" class="login__form text-center">
@@ -52,7 +52,7 @@
                                 ※{{ error }}
                             </p>
                         {% endfor %}
-                        <a class="d-inline-block mt-1" href="{% url 'password_reset' %}">パスワードをお忘れの場合</a>
+                        <a class="login__link d-inline-block mt-1" href="{% url 'password_reset' %}">パスワードをお忘れの場合</a>
                     </td>
                 </tr>
                 <tr>

@@ -81,14 +81,6 @@ main {
   margin: 50px 0 80px;
 }
 
-a {
-  color: #1B95E0;
-  text-decoration: none;
-  &:hover {
-    text-decoration: underline;
-  }
-}
-
 .title {
   @include sectionTitle;
 }

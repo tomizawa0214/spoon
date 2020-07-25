@@ -22,15 +22,6 @@ main {
   margin: 50px 0 80px;
 }
 
-a {
-  color: #1B95E0;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
 .title {
   font-family: "Montserrat", "Roboto", "游ゴシック体", "Yu Gothic", YuGothic, "游ゴシック", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", MeiryoKe_PGothic, "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
   position: relative;
@@ -416,7 +407,7 @@ label img {
 
 .order__price--cart {
   color: #E8435F;
-  margin-right: 30px;
+  margin-right: 25px;
 }
 
 .order__price--cart--delete-icon {
@@ -688,6 +679,15 @@ label img {
   }
 }
 
+.login__link {
+  color: #1B95E0;
+  text-decoration: none;
+}
+
+.login__link:hover {
+  text-decoration: underline;
+}
+
 .login__form--table {
   border-collapse: separate;
   border-spacing: 24px 36px;
@@ -732,12 +732,8 @@ label img {
   margin: 0 5px 0 0;
 }
 
-.logout {
-  max-width: 500px;
-}
-
 .logout__form {
-  margin: 0px auto 80px;
+  margin: 50px 0 80px;
 }
 
 .logout__form--btn {
