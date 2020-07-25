@@ -11,17 +11,17 @@ spoonをご利用いただき、ありがとうございます。
 ※こちらの番号を店頭レジにてお伝えください。
 
 ＜ご注文情報＞
--------------------------------------
+-----------------------------------------
 ●【お名前】{{ order_latest.name }} 様
 ●【メールアドレス】{{ order_latest.email }}
 ●【電話番号】{{ order_latest.tel }}
 ●【受取日時】{{ order_latest.receipt }}
 ●【ご注文日時】{{ order_latest.created|date:"Y年n月j日(l) G:i"|cut:"曜日" }}
--------------------------------------
+-----------------------------------------
 {% for cart in order_latest.cart.all %}●【サイズ】{{ cart.size_title }}
 {% if cart.flavor2_title == "" %}●【フレーバー】{{ cart.flavor_title }}{% else %}●【フレーバー】{{ cart.flavor_title }}・{{ cart.flavor2_title }}{% endif %}
 {% if cart.option_title == "" and cart.option2_title == "" and cart.option3_title == "" and cart.option4_title == "" %}●【オプション】なし{% elif cart.option_title != "" and cart.option2_title == "" and cart.option3_title == "" and cart.option4_title == "" %}●【オプション】{{ cart.option_title }}{% elif cart.option_title == "" and cart.option2_title != "" and cart.option3_title == "" and cart.option4_title == "" %}●【オプション】{{ cart.option2_title }}{% elif cart.option_title == "" and cart.option2_title == "" and cart.option3_title != "" and cart.option4_title == "" %}●【オプション】{{ cart.option3_title }}{% elif cart.option_title == "" and cart.option2_title == "" and cart.option3_title == ""  and cart.option4_title != "" %}●【オプション】{{ cart.option4_title }}{% elif cart.option_title != "" and cart.option2_title != "" and cart.option3_title == "" and cart.option4_title == "" %}●【オプション】{{ cart.option_title }}・{{ cart.option2_title }}{% elif cart.option_title != "" and cart.option2_title == "" and cart.option3_title != "" and cart.option4_title == "" %} ●【オプション】{{ cart.option_title }}・{{ cart.option3_title }}{% elif cart.option_title != "" and cart.option2_title == "" and cart.option3_title == "" and cart.option4_title != "" %}●【オプション】{{ cart.option_title }}・{{ cart.option4_title }}{% elif cart.option_title == "" and cart.option2_title != "" and cart.option3_title != "" and cart.option4_title == "" %}●【オプション】{{ cart.option2_title }}・{{ cart.option3_title }}{% elif cart.option_title == "" and cart.option2_title != "" and cart.option3_title == "" and cart.option4_title != "" %}●【オプション】{{ cart.option2_title }}・{{ cart.option4_title }}{% elif cart.option_title == "" and cart.option2_title == "" and cart.option3_title != "" and cart.option4_title != "" %}●【オプション】{{ cart.option3_title }}・{{ cart.option4_title }}{% elif cart.option_title != "" and cart.option2_title != "" and cart.option3_title != "" and cart.option4_title == "" %}●【オプション】{{ cart.option_title }}・{{ cart.option2_title }}・{{ cart.option3_title }}{% elif cart.option_title == "" and cart.option2_title != "" and cart.option3_title != "" and cart.option4_title != "" %}●【オプション】{{ cart.option2_title }}・{{ cart.option3_title }}・{{ cart.option4_title }}{% elif cart.option_title != "" and cart.option2_title == "" and cart.option3_title != "" and cart.option4_title != "" %}●【オプション】{{ cart.option_title }}・{{ cart.option3_title }}・{{ cart.option4_title }}{% elif cart.option_title != "" and cart.option2_title != "" and cart.option3_title == "" and cart.option4_title != "" %}●【オプション】{{ cart.option_title }}・{{ cart.option2_title }}・{{ cart.option4_title }}{% elif cart.option_title != "" and cart.option2_title != "" and cart.option3_title != "" and cart.option4_title != "" %}●【オプション】{{ cart.option_title }}・{{ cart.option2_title }}・{{ cart.option3_title }}・{{ cart.option4_title }}{% endif %}
--------------------------------------
+-----------------------------------------
 {% endfor %}●合計 ￥{{ order_latest.get_total|intcomma}}（税込）
 
 ご注文いただきました商品は店頭にてご用意してお待ちしております。
@@ -33,10 +33,10 @@ spoonをご利用いただき、ありがとうございます。
 ※店舗の状況により商品のお渡しにお時間をいただく場合がございます。
 ※当メールは送信専用アドレスから送信されています。ご返信いただきましてもお返事いたしかねますのでご了承ください。
 
-*****************************
+******************************************
 《spoon ジェラート＆焼菓子》
 https://spoon-gelato.jp
 
 群馬県高崎市菅谷町1243-10
 TEL: 027-310-0112
-*****************************
+******************************************
