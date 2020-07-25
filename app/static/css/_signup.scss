@@ -1,15 +1,21 @@
 .signup {
   &__required {
-    color: #FF0000;
+    color: #E8435F;
     font-weight: 700;
   }
   &__form {
     margin: 0px auto 80px;
     &--table {
-      width: 400px;
+      border-collapse: separate;
+      border-spacing: 24px 36px;
+      max-width: 1000px;
+      background: #F2F8ED;
+      td {
+        width: 500px;
+      }
     }
     &--terms {
-      max-width: 650px;
+      max-width: 1000px;
       height: 300px;
       overflow-y: scroll;
     }
