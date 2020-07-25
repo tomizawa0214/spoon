@@ -293,6 +293,7 @@ a:hover {
 
 .nav__wrap ul li a:hover {
   opacity: .5;
+  text-decoration: none;
 }
 
 .nav__wrap ul li a span {

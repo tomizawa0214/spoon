@@ -22,9 +22,9 @@
 {% block content %}
 <div class="row">
     <div class="col-9 p-0">
-        <div class="title">
-            <span>WHAT'S NEW</span>
-        </div>
+        <h1 class="title">
+            <span>お知らせ</span>
+        </h1>
         
         {% for news in news_data %}
             <p class="top__news mb-3">
@@ -33,9 +33,9 @@
             </p>
         {% endfor %}
 
-        <div class="title mt-5">
-            <span>PICK UP</span>
-        </div>
+        <h1 class="title mt-5">
+            <span>おすすめ商品</span>
+        </h1>
 
         {% for pick in pick_data %}
             <div class="d-flex mb-5">
