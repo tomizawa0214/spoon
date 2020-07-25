@@ -1,14 +1,16 @@
 .login {
   &__form {
-    margin: 0px auto 80px;
-    &--field {
-      max-width: 400px;
+    &--table {
+      border-collapse: separate;
+      border-spacing: 24px 36px;
+      max-width: 600px;
+      background: #F2F8ED;
+      td {
+        width: 500px;
+      }
     }
     &--save {
       letter-spacing: 0;
-    }
-    &--error {
-      color: #ff0000;
     }
     &--btn {
       @include button;

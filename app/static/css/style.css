@@ -22,6 +22,15 @@ main {
   margin: 50px 0 80px;
 }
 
+a {
+  color: #1B95E0;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
 .title {
   font-family: "Montserrat", "Roboto", "游ゴシック体", "Yu Gothic", YuGothic, "游ゴシック", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", MeiryoKe_PGothic, "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
   position: relative;
@@ -70,7 +79,7 @@ main {
 .back-btn {
   position: relative;
   width: 200px;
-  margin-top: 50px;
+  margin-top: 50px 0 80px;
   color: #fff;
   background: #E8435F;
   -webkit-box-shadow: 0 3px 0 #AC1531;
@@ -149,7 +158,7 @@ main {
 
 .header a {
   text-decoration: none;
-  color: #212529;
+  color: #333;
 }
 
 .header__link {
@@ -277,7 +286,7 @@ main {
   font-family: "Montserrat", "Roboto", "游ゴシック体", "Yu Gothic", YuGothic, "游ゴシック", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", MeiryoKe_PGothic, "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
   text-align: center;
   letter-spacing: 3px;
-  color: #212529;
+  color: #333;
   -webkit-transition: .3s;
   transition: .3s;
 }
@@ -433,7 +442,7 @@ label img {
 .order__add-btn {
   position: relative;
   width: 200px;
-  margin-top: 50px;
+  margin-top: 50px 0 80px;
   color: #fff;
   background: #E8435F;
   -webkit-box-shadow: 0 3px 0 #AC1531;
@@ -471,7 +480,7 @@ label img {
 .order__btn {
   position: relative;
   width: 200px;
-  margin-top: 50px;
+  margin-top: 50px 0 80px;
   color: #fff;
   background: #E8435F;
   -webkit-box-shadow: 0 3px 0 #AC1531;
@@ -678,26 +687,25 @@ label img {
   }
 }
 
-.login__form {
-  margin: 0px auto 80px;
+.login__form--table {
+  border-collapse: separate;
+  border-spacing: 24px 36px;
+  max-width: 600px;
+  background: #F2F8ED;
 }
 
-.login__form--field {
-  max-width: 400px;
+.login__form--table td {
+  width: 500px;
 }
 
 .login__form--save {
   letter-spacing: 0;
 }
 
-.login__form--error {
-  color: #ff0000;
-}
-
 .login__form--btn {
   position: relative;
   width: 200px;
-  margin-top: 50px;
+  margin-top: 50px 0 80px;
   color: #fff;
   background: #E8435F;
   -webkit-box-shadow: 0 3px 0 #AC1531;
@@ -734,7 +742,7 @@ label img {
 .logout__form--btn {
   position: relative;
   width: 200px;
-  margin-top: 50px;
+  margin-top: 50px 0 80px;
   color: #fff;
   background: #E8435F;
   -webkit-box-shadow: 0 3px 0 #AC1531;
@@ -765,10 +773,6 @@ label img {
   font-weight: 700;
 }
 
-.signup__form {
-  margin: 0px auto 80px;
-}
-
 .signup__form--table {
   border-collapse: separate;
   border-spacing: 24px 36px;
@@ -789,7 +793,7 @@ label img {
 .signup__form--btn {
   position: relative;
   width: 200px;
-  margin-top: 50px;
+  margin-top: 50px 0 80px;
   color: #fff;
   background: #E8435F;
   -webkit-box-shadow: 0 3px 0 #AC1531;
@@ -848,7 +852,7 @@ label img {
 .profile__btn {
   position: relative;
   width: 200px;
-  margin-top: 50px;
+  margin-top: 50px 0 80px;
   color: #fff;
   background: #E8435F;
   -webkit-box-shadow: 0 3px 0 #AC1531;
@@ -889,7 +893,7 @@ label img {
 .history__header--btn {
   position: relative;
   width: 200px;
-  margin-top: 50px;
+  margin-top: 50px 0 80px;
   color: #fff;
   background: #E8435F;
   -webkit-box-shadow: 0 3px 0 #AC1531;
@@ -946,7 +950,7 @@ label img {
 .deleteno__btn {
   position: relative;
   width: 200px;
-  margin-top: 50px;
+  margin-top: 50px 0 80px;
   color: #fff;
   background: #E8435F;
   -webkit-box-shadow: 0 3px 0 #AC1531;
@@ -1016,7 +1020,7 @@ label img {
 .contact__form--btn {
   position: relative;
   width: 200px;
-  margin-top: 50px;
+  margin-top: 50px 0 80px;
   color: #fff;
   background: #E8435F;
   -webkit-box-shadow: 0 3px 0 #AC1531;

@@ -6,42 +6,100 @@
 {% endblock %}
 
 {% block content %}
-<div class="title">
-    <span>LOGIN</span>
-</div>
+<h1 class="title">
+    <span>ログイン</span>
+</h1>
 
 <div class="login mx-auto">
-    <p class="text-center mb-4">アカウントをお持ちでない場合は、<a href="{% url 'account_signup' %}">こちら</a>から会員登録をお願いします。</p>
-    {% for field in form %}
-        <p class="error-msg text-center m-0">
-            {% for error in field.errors %}
-                ※{{ error }}<br>
-            {% endfor %}
-        </p>
-    {% endfor %}
-    {% for error in form.non_field_errors %}
-        <p class="error-msg text-center m-0">
-            ※{{ error }}
-        </p>
-    {% endfor %}
+    <p class="text-center mb-4">
+        アカウントをお持ちでない場合は、
+        <a href="{% url 'account_signup' %}">こちら</a>
+        から会員登録をお願いします。
+    </p>
     <form method="POST" class="login__form text-center">
         {% csrf_token %}
-        <div class="login__form--field mx-auto mb-3">
-            {% render_field form.login class="form-control" placeholder="メールアドレス" %}
-        </div>
-        <div class="login__form--field mx-auto mb-1">
-            {% render_field form.password class="form-control" placeholder="パスワード" %}
-            <div class="mt-1 text-right">
-                <a href="{% url 'password_reset' %}">パスワードをお忘れの場合</a>
-            </div>
-        </div>
-        <p class="login__form--save mt-4 mb-0">
-            <input type="checkbox" name="remember" id="id_remember">
-            <label for="id_remember">ログイン状態を保存する</label>
-        </p>
+        <table class="login__form--table card mx-auto p-3 mb-5">
+            <tbody class="mx-auto">
+                <tr>
+                    <td>
+                        {% render_field form.login class="form-control" placeholder="メールアドレス" %}
+                        {% for field in form %}
+                            <p class="error-msg email_error text-left d-none m-0">
+                                {% for error in field.errors %}
+                                    ※{{ error }}<br>
+                                {% endfor %}
+                            </p>
+                        {% endfor %}
+                        {% for error in form.non_field_errors %}
+                            <p class="error-msg email_error text-left d-none m-0">
+                                ※{{ error }}
+                            </p>
+                        {% endfor %}
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-right">
+                        {% render_field form.password class="form-control" placeholder="パスワード" %}
+                        {% for field in form %}
+                            <p class="error-msg pw_error text-left d-none m-0">
+                                {% for error in field.errors %}
+                                    ※{{ error }}<br>
+                                {% endfor %}
+                            </p>
+                        {% endfor %}
+                        {% for error in form.non_field_errors %}
+                            <p class="error-msg pw_error text-left d-none m-0">
+                                ※{{ error }}
+                            </p>
+                        {% endfor %}
+                        <a class="d-inline-block mt-1" href="{% url 'password_reset' %}">パスワードをお忘れの場合</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="login__form--save mt-4 mb-0">
+                        <input type="checkbox" name="remember" id="id_remember">
+                        <label for="id_remember">ログイン状態を保存する</label>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
         <button type="submit" class="login__form--btn btn rounded-pill" ontouchstart="">
             <i class="fas fa-sign-in-alt fa-fw" aria-hidden="true"></i>ログイン
         </button>
     </form>
 </div>
+{% endblock %}
+
+{% block extrajs %}
+<script>
+    'use strict';
+
+    // エラーメッセージ（メールアドレス）
+    const email_error = document.querySelectorAll('.email_error');
+    const login = document.getElementById('id_login');
+    for ( let i = 0; i < email_error.length; i++ ) {
+        if ( email_error[i].textContent.match(/メール/) ) {
+            email_error[i].className = 'error-msg m-0 d-block text-left';
+            login.className = 'form-control form-error';
+        }
+        login.addEventListener('click', () => {
+            email_error[i].className = 'error-msg email_error d-none m-0'
+            login.className = 'form-control'
+        })
+    }
+
+    // エラーメッセージ（パスワード）
+    const pw_error = document.querySelectorAll('.pw_error');
+    const pw = document.getElementById('id_password');
+    for ( let k = 0; k < pw_error.length; k++ ) {
+        if ( pw_error[k].textContent.match(/パスワード/) ) {
+            pw_error[k].className = 'error-msg m-0 d-block text-left';
+            pw.className = 'form-control form-error';
+        }
+        pw.addEventListener('click', () => {
+            pw_error[k].className = 'error-msg pw_error d-none m-0'
+            pw.className = 'form-control'
+        })
+    }
+</script>
 {% endblock %}
