@@ -1,7 +1,6 @@
 .logout {
-  max-width: 500px;
   &__form {
-    margin: 0px auto 80px;
+    margin: 50px 0 80px;
     &--btn {
       @include button;
     }
