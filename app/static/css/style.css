@@ -48,7 +48,7 @@ main {
   width: 100%;
   height: 1px;
   content: '';
-  background: #333;
+  background: #212529;
 }
 
 .done-check {
@@ -81,7 +81,7 @@ main {
   position: absolute;
   left: 0;
   width: 70px;
-  color: #000;
+  color: #212529;
   background: #CED4DA;
   -webkit-box-shadow: 0 3px 0 #94A0AC;
           box-shadow: 0 3px 0 #94A0AC;
@@ -103,7 +103,7 @@ main {
 }
 
 .back-btn:hover {
-  color: #000;
+  color: #212529;
 }
 
 .error-msg {
@@ -148,7 +148,7 @@ main {
 
 .header a {
   text-decoration: none;
-  color: #000;
+  color: #212529;
 }
 
 .header__link {
@@ -161,22 +161,23 @@ main {
 }
 
 .header__link--icon {
-  width: 40px;
+  height: 40px;
 }
 
 .header__link--text {
   font-family: "Montserrat", "Roboto", "游ゴシック体", "Yu Gothic", YuGothic, "游ゴシック", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", MeiryoKe_PGothic, "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
   font-size: 12px;
-  letter-spacing: 1px;
+  letter-spacing: .2px;
 }
 
 .header__link--badge {
   font-family: "Montserrat", "Roboto", "游ゴシック体", "Yu Gothic", YuGothic, "游ゴシック", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", MeiryoKe_PGothic, "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+  margin-left: -2px;
   padding: 3px 8px;
   font-size: 12px;
   vertical-align: 3px;
-  color: #fff;
-  background: #e8435f;
+  color: #FFF;
+  background: #E8435F;
 }
 
 @media screen and (max-width: 576px) {
@@ -275,7 +276,7 @@ main {
   font-family: "Montserrat", "Roboto", "游ゴシック体", "Yu Gothic", YuGothic, "游ゴシック", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", MeiryoKe_PGothic, "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
   text-align: center;
   letter-spacing: 3px;
-  color: #000;
+  color: #212529;
   -webkit-transition: .3s;
   transition: .3s;
 }
@@ -759,7 +760,7 @@ label img {
 }
 
 .signup__required {
-  color: #FF0000;
+  color: #E8435F;
   font-weight: 700;
 }
 
@@ -768,11 +769,18 @@ label img {
 }
 
 .signup__form--table {
-  width: 400px;
+  border-collapse: separate;
+  border-spacing: 24px 36px;
+  max-width: 1000px;
+  background: #F2F8ED;
+}
+
+.signup__form--table td {
+  width: 500px;
 }
 
 .signup__form--terms {
-  max-width: 650px;
+  max-width: 1000px;
   height: 300px;
   overflow-y: scroll;
 }

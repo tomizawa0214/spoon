@@ -41,7 +41,7 @@
     width: 100%;
     height: 1px;
     content: '';
-    background: #333;
+    background: #212529;
   }
 }
 
@@ -106,11 +106,11 @@ main {
   position: absolute;
   left: 0;
   width: 70px;
-  color: #000;
+  color: #212529;
   background: #CED4DA;
   box-shadow: 0 3px 0 #94A0AC;
   &:hover {
-    color: #000;
+    color: #212529;
   }
 }
 

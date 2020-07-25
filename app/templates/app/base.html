@@ -6,7 +6,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
         {% block title %}
         {% endblock %}
@@ -18,33 +18,33 @@
             <a href="/">
                 <img src="{% static 'img/logo.png' %}">
             </a>
-            <div>
-                <a class="header__link d-inline-block text-center mr-5" href="/">
+            <div class="d-flex align-items-center">
+                <a class="header__link text-center mr-5" href="/">
                     <img class="header__link--icon" src="{% static 'img/home.svg' %}" alt="ホーム"><br>
-                    <span class="header__link--text">HOME</span>
+                    <span class="header__link--text">ホーム</span>
                 </a>
                 {% if user.is_authenticated %}
-                    <a class="header__link d-inline-block text-center mr-5" href="{% url 'profile' %}">
+                    <a class="header__link text-center mr-5" href="{% url 'profile' %}">
                         <img class="header__link--icon" src="{% static 'img/mypage.svg' %}" alt="マイページ"><br>
-                        <span class="header__link--text">MY PAGE</span>
+                        <span class="header__link--text">マイページ</span>
                     </a>
-                    <a class="header__link d-inline-block text-center mr-5" href="{% url 'order' %}">
+                    <a class="header__link text-center mr-5" href="{% url 'order' %}">
                         <img class="header__link--icon" src="{% static 'img/cart.svg' %}" alt="カート"><br>
-                        <span class="header__link--text">CART</span>
+                        <span class="header__link--text">カート</span>
                         <span class="header__link--badge badge">{{ count }}</span>
                     </a>
-                    <a class="header__link d-inline-block text-center" href="{% url 'account_logout' %}">
+                    <a class="header__link text-center" href="{% url 'account_logout' %}">
                         <img class="header__link--icon" src="{% static 'img/logout.svg' %}" alt="ログアウト"><br>
-                        <span class="header__link--text">LOGOUT</span>
+                        <span class="header__link--text">ログアウト</span>
                     </a>
                 {% else %}
-                    <a class="header__link d-inline-block text-center mr-5" href="{% url 'account_signup' %}">
+                    <a class="header__link text-center mr-5" href="{% url 'account_signup' %}">
                         <img class="header__link--icon" src="{% static 'img/signup.svg' %}" alt="会員登録"><br>
-                        <span class="header__link--text">SIGN UP</span>
+                        <span class="header__link--text">会員登録</span>
                     </a>
-                    <a class="header__link d-inline-block text-center" href="{% url 'account_login' %}">
+                    <a class="header__link text-center" href="{% url 'account_login' %}">
                         <img class="header__link--icon" src="{% static 'img/login.svg' %}" alt="ログイン"><br>
-                        <span class="header__link--text">LOGIN</span>
+                        <span class="header__link--text">ログイン</span>
                     </a>
                 {% endif %}
             </div>
@@ -120,10 +120,7 @@
             </div>
         </footer>
 
-        <script src="https://kit.fontawesome.com/a29680248f.js" crossorigin="anonymous"></script>
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
         {% block extrajs %}
         {% endblock %}
     </body>

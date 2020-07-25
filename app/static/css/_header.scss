@@ -11,7 +11,7 @@
   }
   a {
     text-decoration: none;
-    color: #000;
+    color: #212529;
   }
   &__link {
     transition: .3s;
@@ -19,20 +19,21 @@
       opacity: .5;
     }
     &--icon {
-      width: 40px;
+      height: 40px;
     }
     &--text {
       @include E-font;
       font-size: 12px;
-      letter-spacing: 1px;
+      letter-spacing: .2px;
     }
     &--badge {
       @include E-font;
+      margin-left: -2px;
       padding: 3px 8px;
       font-size: 12px;
       vertical-align: 3px;
-      color: #fff;
-      background: #e8435f;
+      color: #FFF;
+      background: #E8435F;
     }
   }
 }
