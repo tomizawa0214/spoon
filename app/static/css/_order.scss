@@ -52,7 +52,7 @@ label img {
     }
     &--cart {
       color: #E8435F;
-      margin-right: 30px;
+      margin-right: 25px;
       &--delete-icon {
         font-size: 16px;
         color: #E8435F;
@@ -89,10 +89,14 @@ label img {
 
 .order-user {
   &__form {
-      margin: 0px auto 80px;
       &--table {
-          width: 100%;
-          max-width: 350px;
+        border-collapse: separate;
+        border-spacing: 24px 36px;
+        max-width: 1000px;
+        background: #F2F8ED;
+        td {
+          width: 500px;
+        }
       }
   }
 }

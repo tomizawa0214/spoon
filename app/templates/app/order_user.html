@@ -15,93 +15,80 @@
     <p class="text-center mb-4">ご注文様の情報とお受け取り日時をご入力ください。</p>
     <form method="POST" action="{% url 'order_confirm' %}" class="order-user__form text-center">
         {% csrf_token %}
-        <table class="order-user__form--table mx-auto card p-3 mb-4">
-            <tr>
-                <th class="text-left">
-                    <label for="id_name" class="m-0">
-                        <i class="fas fa-user fa-fw mr-1" aria-hidden="true"></i>お名前
-                        <span class="signup__required">【必須】</span>
-                    </label>
-                </th>
-            </tr>
-            <tr>
-                <td class="pb-4">
-                    {% render_field profile_form.name class="form-control w-75" %}
-                </td>
-            </tr>
-            <tr>
-                <th class="text-left">
-                    <label for="id_furigana" class="m-0">
-                        <i class="fas fa-user-edit fa-fw mr-1" aria-hidden="true"></i>フリガナ
-                        <span class="signup__required">【必須】</span>
-                    </label>
-                </th>
-            </tr>
-            <tr>
-                <td class="pb-4">
-                    {% render_field profile_form.furigana class="form-control w-75" %}
-                </td>
-            </tr>
-            <tr>
-                <th class="text-left">
-                    <label for="id_email" class="m-0">
-                        <i class="far fa-envelope fa-fw mr-1" aria-hidden="true"></i>メールアドレス
-                        <span class="signup__required">【必須】</span>
-                    </label>
-                </th>
-            </tr>
-            <tr>
-                <td class="pb-4">
-                    {% render_field profile_form.email class="form-control" placeholder="メールアドレス" %}
-                    {% for field in form %}
-                        <p class="error-msg email_error d-none m-0">
-                            {% for error in field.errors %}
-                                ※{{ error }}<br>
-                            {% endfor %}
-                        </p>
-                    {% endfor %}
-                    {% for error in profile_form.non_field_errors %}
-                        <p class="error-msg email_error d-none m-0">
-                            ※{{ error }}
-                        </p>
-                    {% endfor %}
-                </td>
-            </tr>
-            <tr>
-                <th class="text-left">
-                    <label for="id_tel" class="m-0">
-                        <i class="fas fa-phone-alt fa-fw mr-1" aria-hidden="true"></i>電話番号
-                        <span class="signup__required">【必須】</span>
-                    </label>
-                </th>
-            </tr>
-            <tr>
-                <td class="pb-4">
-                    {% render_field profile_form.tel class="form-control" %}
-                </td>
-            </tr>
-            <tr>
-                <th class="text-left">
-                    <label class="m-0">
-                        <i class="far fa-clock fa-fw mr-1" aria-hidden="true"></i>受取日時
-                        <span class="signup__required">【必須】</span>
-                    </label>
-                </th>
-            </tr>
-            <tr>
-                <td class="d-flex">
-                    {% if today_order %}
-                        <span class="mr-3">{% render_field receipt_form.date class="form-control" %}</span>
-                        <span id="specified_time">{% render_field receipt_form.time class="form-control" %}</span>
-                        <span id="full_time">{% render_field receipt_form.fulltime class="form-control" %}</span>
-                    {% else %}
-                        <span class="mr-3">{% render_field receipt_form.no_today class="form-control" %}</span>
-                        <span>{% render_field receipt_form.fulltime class="form-control" %}</span>
-                    {% endif %}
-                </td>
-            </tr>
+        <table class="order-user__form--table mx-auto card p-3">
+            <tbody class="mx-auto">
+                <tr>
+                    <th class="text-right">
+                        <label for="id_name">お名前
+                            <span class="signup__required">【必須】</span>
+                        </label>
+                    </th>
+                    <td>
+                        {% render_field profile_form.name class="form-control" %}
+                    </td>
+                </tr>
+                <tr>
+                    <th class="text-right">
+                        <label for="id_furigana">フリガナ
+                            <span class="signup__required">【必須】</span>
+                        </label>
+                    </th>
+                    <td>
+                        {% render_field profile_form.furigana class="form-control" %}
+                    </td>
+                </tr>
+                <tr>
+                    <th class="text-right">
+                        <label for="id_email">メールアドレス
+                            <span class="signup__required">【必須】</span>
+                        </label>
+                    </th>
+                    <td>
+                        {% render_field profile_form.email class="form-control" placeholder="メールアドレス" %}
+                        {% for field in form %}
+                            <p class="error-msg email_error d-none m-0">
+                                {% for error in field.errors %}
+                                    ※{{ error }}<br>
+                                {% endfor %}
+                            </p>
+                        {% endfor %}
+                        {% for error in profile_form.non_field_errors %}
+                            <p class="error-msg email_error d-none m-0">
+                                ※{{ error }}
+                            </p>
+                        {% endfor %}
+                    </td>
+                </tr>
+                <tr>
+                    <th class="text-right">
+                        <label for="id_tel">電話番号
+                            <span class="signup__required">【必須】</span>
+                        </label>
+                    </th>
+                    <td>
+                        {% render_field profile_form.tel class="form-control" %}
+                    </td>
+                </tr>
+                <tr>
+                    <th class="text-right">
+                        <label>受取日時
+                            <span class="signup__required">【必須】</span>
+                        </label>
+                    </th>
+                    <td class="d-flex">
+                        {% if today_order %}
+                            <span class="mr-3">{% render_field receipt_form.date class="form-select" %}</span>
+                            <span id="specified_time">{% render_field receipt_form.time class="form-select" %}</span>
+                            <span id="full_time">{% render_field receipt_form.fulltime class="form-select" %}</span>
+                        {% else %}
+                            <span class="mr-3">{% render_field receipt_form.no_today class="form-select" %}</span>
+                            <span>{% render_field receipt_form.fulltime class="form-select" %}</span>
+                        {% endif %}
+                    </td>
+                </tr>
+            </tbody>
         </table>
-        <div class="mx-auto">
+        <div class="mt-1">
             <p class="help-text d-inline-block text-left m-0">
                 ※当日のご注文受付は16:30までとさせていただきます。また店舗の状況により当日注文をお受けいたしかねる場合がございます。ご了承ください。<br>
                 ※16:30以降にご注文の場合は翌日11:30以降のお受け取りとなります。

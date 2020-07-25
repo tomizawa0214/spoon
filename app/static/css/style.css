@@ -70,7 +70,7 @@ main {
 .back-btn {
   position: relative;
   width: 200px;
-  margin-top: 50px 0 80px;
+  margin: 50px 0 80px;
   color: #fff;
   background: #E8435F;
   -webkit-box-shadow: 0 3px 0 #AC1531;
@@ -176,7 +176,6 @@ main {
   margin-left: -2px;
   padding: 3px 8px;
   font-size: 12px;
-  vertical-align: 3px;
   color: #FFF;
   background: #E8435F;
 }
@@ -434,7 +433,7 @@ label img {
 .order__add-btn {
   position: relative;
   width: 200px;
-  margin-top: 50px 0 80px;
+  margin: 50px 0 80px;
   color: #fff;
   background: #E8435F;
   -webkit-box-shadow: 0 3px 0 #AC1531;
@@ -472,7 +471,7 @@ label img {
 .order__btn {
   position: relative;
   width: 200px;
-  margin-top: 50px 0 80px;
+  margin: 50px 0 80px;
   color: #fff;
   background: #E8435F;
   -webkit-box-shadow: 0 3px 0 #AC1531;
@@ -498,13 +497,15 @@ label img {
   margin: 0 5px 0 0;
 }
 
-.order-user__form {
-  margin: 0px auto 80px;
+.order-user__form--table {
+  border-collapse: separate;
+  border-spacing: 24px 36px;
+  max-width: 1000px;
+  background: #F2F8ED;
 }
 
-.order-user__form--table {
-  width: 100%;
-  max-width: 350px;
+.order-user__form--table td {
+  width: 500px;
 }
 
 .order-confirm__table {
@@ -706,7 +707,7 @@ label img {
 .login__form--btn {
   position: relative;
   width: 200px;
-  margin-top: 50px 0 80px;
+  margin: 50px 0 80px;
   color: #fff;
   background: #E8435F;
   -webkit-box-shadow: 0 3px 0 #AC1531;
@@ -732,14 +733,10 @@ label img {
   margin: 0 5px 0 0;
 }
 
-.logout__form {
-  margin: 50px 0 80px;
-}
-
 .logout__form--btn {
   position: relative;
   width: 200px;
-  margin-top: 50px 0 80px;
+  margin: 50px 0 80px;
   color: #fff;
   background: #E8435F;
   -webkit-box-shadow: 0 3px 0 #AC1531;
@@ -790,7 +787,7 @@ label img {
 .signup__form--btn {
   position: relative;
   width: 200px;
-  margin-top: 50px 0 80px;
+  margin: 50px 0 80px;
   color: #fff;
   background: #E8435F;
   -webkit-box-shadow: 0 3px 0 #AC1531;
@@ -849,7 +846,7 @@ label img {
 .profile__btn {
   position: relative;
   width: 200px;
-  margin-top: 50px 0 80px;
+  margin: 50px 0 80px;
   color: #fff;
   background: #E8435F;
   -webkit-box-shadow: 0 3px 0 #AC1531;
@@ -890,7 +887,7 @@ label img {
 .history__header--btn {
   position: relative;
   width: 200px;
-  margin-top: 50px 0 80px;
+  margin: 50px 0 80px;
   color: #fff;
   background: #E8435F;
   -webkit-box-shadow: 0 3px 0 #AC1531;
@@ -947,7 +944,7 @@ label img {
 .deleteno__btn {
   position: relative;
   width: 200px;
-  margin-top: 50px 0 80px;
+  margin: 50px 0 80px;
   color: #fff;
   background: #E8435F;
   -webkit-box-shadow: 0 3px 0 #AC1531;
@@ -1017,7 +1014,7 @@ label img {
 .contact__form--btn {
   position: relative;
   width: 200px;
-  margin-top: 50px 0 80px;
+  margin: 50px 0 80px;
   color: #fff;
   background: #E8435F;
   -webkit-box-shadow: 0 3px 0 #AC1531;
