@@ -57,8 +57,15 @@
 
         <!-- Navigation-->
         <nav class="nav navbar navbar-expand py-3 px-2">
-        <div class="nav__wrap container-fluid m-auto">
+        <div class="nav__wrap container-fluid mx-auto p-0">
             <ul class="navbar-nav justify-content-between">
+                <li>
+                    <a class="nav-link" href="/">
+                        HOME<br class="d-none d-sm-block">
+                        <span>-トップページ-</span>
+                    </a>
+                </li>
+                <hr>
                 <li>
                     <a class="nav-link" href="{% url 'about' %}">
                         ABOUT<br class="d-none d-sm-block">
