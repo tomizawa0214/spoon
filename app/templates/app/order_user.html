@@ -24,7 +24,7 @@
                         </label>
                     </th>
                     <td>
-                        {% render_field profile_form.name class="form-control" %}
+                        {% render_field form.name class="form-control" %}
                     </td>
                 </tr>
                 <tr>
@@ -34,7 +34,7 @@
                         </label>
                     </th>
                     <td>
-                        {% render_field profile_form.furigana class="form-control" %}
+                        {% render_field form.furigana class="form-control" %}
                     </td>
                 </tr>
                 <tr>
@@ -44,16 +44,16 @@
                         </label>
                     </th>
                     <td>
-                        {% render_field profile_form.email class="form-control" placeholder="メールアドレス" %}
+                        {% render_field form.email class="form-control" placeholder="メールアドレス" %}
                         {% for field in form %}
-                            <p class="error-msg email_error d-none m-0">
+                            <p class="error-msg email_error d-none text-left m-0">
                                 {% for error in field.errors %}
                                     ※{{ error }}<br>
                                 {% endfor %}
                             </p>
                         {% endfor %}
-                        {% for error in profile_form.non_field_errors %}
-                            <p class="error-msg email_error d-none m-0">
+                        {% for error in form.non_field_errors %}
+                            <p class="error-msg email_error d-none text-left m-0">
                                 ※{{ error }}
                             </p>
                         {% endfor %}
@@ -66,7 +66,7 @@
                         </label>
                     </th>
                     <td>
-                        {% render_field profile_form.tel class="form-control" %}
+                        {% render_field form.tel class="form-control" %}
                     </td>
                 </tr>
                 <tr>
@@ -76,14 +76,21 @@
                         </label>
                     </th>
                     <td class="d-flex">
-                        {% if today_order %}
-                            <span class="mr-3">{% render_field receipt_form.date class="form-select" %}</span>
-                            <span id="specified_time">{% render_field receipt_form.time class="form-select" %}</span>
-                            <span id="full_time">{% render_field receipt_form.fulltime class="form-select" %}</span>
-                        {% else %}
-                            <span class="mr-3">{% render_field receipt_form.no_today class="form-select" %}</span>
-                            <span>{% render_field receipt_form.fulltime class="form-select" %}</span>
-                        {% endif %}
+                        <select id="date" name="date" class="form-select w-50 mr-3" onchange="timeChange();">
+                            {% for date in date_list %}
+                                <option value="{{ date }}">{{ date }}</option>
+                            {% endfor %}
+                        </select>
+                        <select id="specified_time" name="time" class="form-select w-25">
+                            {% for time in time_list %}
+                                <option value="{{ time }}">{{ time }}</option>
+                            {% endfor %}
+                        </select>
+                        <select id="full_time" name="fulltime" class="d-none form-select w-25">
+                            {% for fulltime in fulltime_list %}
+                                <option value="{{ fulltime }}">{{ fulltime }}</option>
+                            {% endfor %}
+                        </select>
                     </td>
                 </tr>
             </tbody>
@@ -107,28 +114,33 @@
 <script>
     'use strict';
 
-    // 当日注文可で本日選択時のみ指定時間に変更
-    if ( '{{ today_order }}' == 'True' ) {
-        let date = document.getElementById('id_date');
-        let specified_time = document.getElementById('specified_time');
-        let full_time = document.getElementById('full_time');
-        date.setAttribute('onchange', 'timeChange();');
+    // 本日を選択時のみ指定時間に変更
+    let date = document.getElementById('date');
+    let specified_time = document.getElementById('specified_time');
+    let full_time = document.getElementById('full_time');
 
-        var timeChange = () => {
-            if ( date.value.match(/本日/)) {
-                specified_time.className = 'd-block';
-                full_time.className = 'd-none';
-            } else {
-                specified_time.className = 'd-none';
-                full_time.className = 'd-block';
-            }
+    let timeChange = () => {
+        if ( date.value.match(/本日/)) {
+            specified_time.className = 'd-block form-select w-25';
+            full_time.className = 'd-none';
+        } else {
+            specified_time.className = 'd-none';
+            full_time.className = 'd-block form-select w-25';
         }
+    }
 
-        // DOMツリーの構築後実行
-        window.addEventListener('DOMContentLoaded', () => {
-            timeChange();
+    // エラーメッセージ（メールアドレス）
+    const email_error = document.querySelectorAll('.email_error');
+    const email = document.getElementById('id_email');
+    for ( let i = 0; i < email_error.length; i++ ) {
+        if ( email_error[i].textContent.match(/メール/) ) {
+            email_error[i].className = 'error-msg m-0 d-block text-left';
+            email.className = 'form-control form-error';
+        }
+        email.addEventListener('click', () => {
+            email_error[i].className = 'error-msg email_error d-none m-0 text-left'
+            email.className = 'form-control'
         })
-
     }
 </script>
 {% endblock %}

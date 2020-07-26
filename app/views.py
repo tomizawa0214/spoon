@@ -1,7 +1,7 @@
 from django.views.generic import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
-from .forms import ReceiptForm, ContactForm
+from .forms import ContactForm
 from .models import PickUp, WhatsNew, TodayOrder, Order, Cart, SizeItem, FlavorItem, OptionItem
 from accounts.models import CustomUser
 from accounts.forms import ProfileForm
@@ -9,8 +9,10 @@ from django.conf import settings
 from django.core.mail import BadHeaderError, EmailMessage
 from django.http import JsonResponse, HttpResponse
 from django.template.loader import render_to_string
-from datetime import timedelta
+from datetime import datetime, timedelta
+from datetime import datetime, date, timedelta
 import datetime
+import locale
 import re
 
 class OrderThanksView(LoginRequiredMixin, View):
@@ -100,23 +102,18 @@ class OrderConfirmView(LoginRequiredMixin, View):
         })
 
     def post(self, request, *args, **kwargs):
-        profile_form = ProfileForm(request.POST or None)
-        receipt_form = ReceiptForm(request.POST or None)
+        form = ProfileForm(request.POST or None)
 
-        if profile_form.is_valid() and receipt_form.is_valid():
-            name = profile_form.cleaned_data['name']
-            furigana = profile_form.cleaned_data['furigana']
-            email = profile_form.cleaned_data['email']
-            tel = profile_form.cleaned_data['tel']
-
-            if receipt_form.cleaned_data['date'] != '':
-                date = receipt_form.cleaned_data['date']
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            furigana = form.cleaned_data['furigana']
+            email = form.cleaned_data['email']
+            tel = form.cleaned_data['tel']
+            date = request.POST.get('date')
+            if '本日' in date or '明日' in date:
+                time = request.POST.get('time')
             else:
-                date = receipt_form.cleaned_data['no_today']
-            if '本日' in date:
-                time = receipt_form.cleaned_data['time']
-            else:
-                time = receipt_form.cleaned_data['fulltime']
+                time = request.POST.get('fulltime')
 
             # ログインユーザーの注文未完了レコードをすべて取得
             cart_data = Cart.objects.filter(user=request.user, ordered=False).order_by('id')
@@ -142,10 +139,89 @@ class OrderConfirmView(LoginRequiredMixin, View):
         else:
             today_order = False
 
+        # 現在日時を取得
+        dt = datetime.datetime.now()
+        # 日本語表記の曜日名・月名
+        locale.setlocale(locale.LC_TIME, 'ja_JP.UTF-8')
+
+        date_list = []
+        def get_weeks(start_day, box):
+            for i in range(7):
+                if i == 0:
+                    box.append(days[i].strftime("%B%-d日(%a)") + start_day)
+                else:
+                    box.append(days[i].strftime("%B%-d日(%a)"))
+
+        # 現在時刻～16:30
+        if dt.time() < datetime.time(16, 31) and today_order == True:
+            # 本日から1週間分を取得
+            days = [dt + timedelta(days=day) for day in range(7)]
+            get_weeks("【本日】", date_list)
+        # 現在時刻が16:31以降
+        elif dt.time() >= datetime.time(16, 31) or today_order == False:
+            # 翌日から1週間分を取得
+            days = [dt + timedelta(days=day+1) for day in range(7)]
+            get_weeks("【明日】", date_list)
+
+        # 当日受付用
+        time_list = []
+        def get_times(start_time):
+            handle_time = start_time
+            # 現在時刻から10分毎の時間を取得
+            while start_time.hour < 17:
+                if handle_time.hour == start_time.hour: 
+                    time_list.append(handle_time.strftime('%H:%M'))
+                    next_time = handle_time + timedelta(minutes=10)
+                    handle_time = next_time
+                else:
+                    break
+            # 17:00まで30分毎の時間を取得
+            while(True):
+                time_list.append(handle_time.strftime('%H:%M'))
+                next_time = handle_time + timedelta(minutes=30)
+                if next_time.time() <= datetime.time(17):
+                    handle_time = next_time
+                else:
+                    break
+
+        def get_fulltimes(box):
+            handle_time = datetime.datetime.combine(datetime.date.today(), datetime.time(11, 30))
+            while(True):
+                box.append(handle_time.strftime('%H:%M'))
+                next_time = handle_time + timedelta(minutes=30)
+                if next_time.time() <= datetime.time(17):
+                    handle_time = next_time
+                else:
+                    break
+
+        # 現在時刻が11:00～16:30
+        if datetime.time(11) <= dt.time() < datetime.time(16, 31) and today_order == True:
+            # 現在時刻から30分後を取得
+            after_30 = dt.replace(second=0, microsecond=0) + timedelta(minutes=30)
+            # 30分後の一の位を取得
+            after_30_one = ''.join(list(reversed(str(after_30.minute))))[0]
+            # 10分毎の値に丸める
+            if after_30_one != "0":
+                round_time = 10 - int(after_30_one)
+                after_30 += timedelta(minutes=round_time)
+            # 10分毎のリストを作成
+            get_times(after_30)
+        # 現在時刻が16:31～翌10:59
+        elif dt.time() >= datetime.time(16, 31) or dt.time() < datetime.time(11) or today_order == False:
+            get_fulltimes(time_list)
+
+        fulltime_list = []
+        get_fulltimes(fulltime_list)
+
+        # 未注文のカート件数を取得
+        count = Cart.objects.filter(user=request.user, ordered=False).count()
+
         return render(request, 'app/order_user.html', {
-            'profile_form': profile_form,
-            'receipt_form': receipt_form,
-            'today_order': today_order,
+            'form': form,
+            'date_list': date_list,
+            'time_list': time_list,
+            'fulltime_list': fulltime_list,
+            'count': count,
         })
 
 
@@ -153,7 +229,7 @@ class OrderUserView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         # ログインユーザーと紐づける
         user_data = CustomUser.objects.get(id=request.user.id)
-        profile_form = ProfileForm(
+        form = ProfileForm(
             request.POST or None,
             initial={
                 'name': user_data.name,
@@ -162,7 +238,6 @@ class OrderUserView(LoginRequiredMixin, View):
                 'tel': user_data.tel
             }
         )
-        receipt_form = ReceiptForm(request.POST or None)
 
         # 当日受付の有無
         if TodayOrder.objects.filter(is_active=True).exists():
@@ -170,13 +245,89 @@ class OrderUserView(LoginRequiredMixin, View):
         else:
             today_order = False
 
+        # 現在日時を取得
+        dt = datetime.datetime.now()
+        # dt = datetime.datetime(2020, 7, 26, 18, 10)
+        # 日本語表記の曜日名・月名
+        locale.setlocale(locale.LC_TIME, 'ja_JP.UTF-8')
+
+        date_list = []
+        def get_weeks(start_day, box):
+            for i in range(7):
+                if i == 0:
+                    box.append(days[i].strftime("%B%-d日(%a)") + start_day)
+                else:
+                    box.append(days[i].strftime("%B%-d日(%a)"))
+
+        # 現在時刻～16:30
+        if dt.time() < datetime.time(16, 31) and today_order == True:
+            # 本日から1週間分を取得
+            days = [dt + timedelta(days=day) for day in range(7)]
+            get_weeks("【本日】", date_list)
+        # 現在時刻が16:31以降
+        elif dt.time() >= datetime.time(16, 31) or today_order == False:
+            # 翌日から1週間分を取得
+            days = [dt + timedelta(days=day+1) for day in range(7)]
+            get_weeks("【明日】", date_list)
+
+        # 当日受付用
+        time_list = []
+        def get_times(start_time):
+            handle_time = start_time
+            # 現在時刻から10分毎の時間を取得
+            while start_time.hour < 17:
+                if handle_time.hour == start_time.hour: 
+                    time_list.append(handle_time.strftime('%H:%M'))
+                    next_time = handle_time + timedelta(minutes=10)
+                    handle_time = next_time
+                else:
+                    break
+            # 17:00まで30分毎の時間を取得
+            while(True):
+                time_list.append(handle_time.strftime('%H:%M'))
+                next_time = handle_time + timedelta(minutes=30)
+                if next_time.time() <= datetime.time(17):
+                    handle_time = next_time
+                else:
+                    break
+
+        def get_fulltimes(box):
+            handle_time = datetime.datetime.combine(datetime.date.today(), datetime.time(11, 30))
+            while(True):
+                box.append(handle_time.strftime('%H:%M'))
+                next_time = handle_time + timedelta(minutes=30)
+                if next_time.time() <= datetime.time(17):
+                    handle_time = next_time
+                else:
+                    break
+
+        # 現在時刻が11:00～16:30
+        if datetime.time(11) <= dt.time() < datetime.time(16, 31) and today_order == True:
+            # 現在時刻から30分後を取得
+            after_30 = dt.replace(second=0, microsecond=0) + timedelta(minutes=30)
+            # 30分後の一の位を取得
+            after_30_one = ''.join(list(reversed(str(after_30.minute))))[0]
+            # 10分毎の値に丸める
+            if after_30_one != "0":
+                round_time = 10 - int(after_30_one)
+                after_30 += timedelta(minutes=round_time)
+            # 10分毎のリストを作成
+            get_times(after_30)
+        # 現在時刻が16:31～翌10:59
+        elif dt.time() >= datetime.time(16, 31) or dt.time() < datetime.time(11) or today_order == False:
+            get_fulltimes(time_list)
+
+        fulltime_list = []
+        get_fulltimes(fulltime_list)
+
         # 未注文のカート件数を取得
         count = Cart.objects.filter(user=request.user, ordered=False).count()
 
         return render(request, 'app/order_user.html', {
-            'profile_form': profile_form,
-            'receipt_form': receipt_form,
-            'today_order': today_order,
+            'form': form,
+            'date_list': date_list,
+            'time_list': time_list,
+            'fulltime_list': fulltime_list,
             'count': count
         })
 
