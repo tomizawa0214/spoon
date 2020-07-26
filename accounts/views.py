@@ -274,7 +274,6 @@ class ProfileEditView(LoginRequiredMixin, View):
             initial={
                 'name': user_data.name,
                 'furigana': user_data.furigana,
-                'email': user_data.email,
                 'tel': user_data.tel
             }
         )
@@ -289,6 +288,7 @@ class ProfileEditView(LoginRequiredMixin, View):
         })
 
     def post(self, request, *args, **kwargs):
+        user_data = CustomUser.objects.get(id=request.user.id)
         form = ProfileForm(request.POST or None)
 
         if form.is_valid():
@@ -296,13 +296,20 @@ class ProfileEditView(LoginRequiredMixin, View):
             user_data.name = form.cleaned_data['name']
             user_data.furigana = form.cleaned_data['furigana']
             user_data.tel = form.cleaned_data['tel']
-            user_data.gender = form.cleaned_data['gender']
-            user_data.birthday = form.cleaned_data['birthday']
+            if form.cleaned_data['gender'] != '':
+                user_data.gender = form.cleaned_data['gender']
+            if form.cleaned_data['birthday'] != None:
+                user_data.birthday = form.cleaned_data['birthday']
             user_data.save()
             return redirect('profile')
 
+        # 未注文のカート件数を取得
+        count = Cart.objects.filter(user=request.user, ordered=False).count()
+
         return render(request, 'accounts/profile_edit.html', {
+            'user_data': user_data,
             'form': form,
+            'count': count,
         })
 
 

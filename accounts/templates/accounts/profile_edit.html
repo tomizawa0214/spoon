@@ -25,7 +25,7 @@
                 </tr>
                 <tr>
                     <th>メールアドレス</th>
-                    <td><a href="{% url 'email_change' %}">メールアドレスの変更手続きはこちら</a></td>
+                    <td><a class="profile__link d-inline-block mt-1" href="{% url 'email_change' %}">メールアドレスの変更手続きはこちら</a></td>
                 </tr>
                 <tr>
                     <th>電話番号</th>
@@ -33,8 +33,8 @@
                 </tr>
                 <tr>
                     <th>性別</th>
-                    {% if user_data.get_gender_display == '' %}
-                        <td>{% render_field form.gender class="form-control w-25" %}</td>
+                    {% if user_data.get_gender_display == None %}
+                        <td>{% render_field form.gender class="form-select w-25" %}</td>
                     {% else %}
                         <td>{{ user_data.get_gender_display }}</td>
                     {% endif %}
@@ -42,14 +42,30 @@
                 <tr>
                     <th>誕生日</th>
                     {% if user_data.birthday == None %}
-                        <td class="d-flex align-items-center">{% render_field form.birthday class="form-control" %}</td>
+                        <td class="text-left">
+                            <div class="d-flex align-items-center">
+                                {% render_field form.birthday class="form-select" %}
+                            </div>
+                            {% for field in form %}
+                                <p class="error-msg birthday_error d-none m-0">
+                                    {% for error in field.errors %}
+                                        ※{{ error }}<br>
+                                    {% endfor %}
+                                </p>
+                            {% endfor %}
+                            {% for error in form.non_field_errors %}
+                                <p class="error-msg birthday_error d-none m-0">
+                                    ※{{ error }}
+                                </p>
+                            {% endfor %}
+                        </td>
                     {% else %}
                         <td>{{ user_data.birthday }}</td>
                     {% endif %}
                 </tr>
             </tbody>
         </table>
-        <p class="text-left m-0">※性別・誕生日は初回登録以降変更できません。</p>
+        <p class="help-text text-left mt-1 mb-0">※性別・誕生日は初回登録以降変更できません。</p>
         <div class="position-relative">
             <button type="button" class="back-btn btn rounded-pill" onclick="history.back()" ontouchstart="">戻る</button>
             <button class="profile__btn btn rounded-pill" type="submit" ontouchstart="">
@@ -69,18 +85,32 @@
     tel.setAttribute('type', 'tel');
 
     // 誕生日に年月日追加
-    if ( '{{ user_data.birthday }}' == 'None' ) {
+    if ( '{{ user_data.birthday }}' == 'None' || '{{ user_data.birthday }}' == '' ) {
         const year = document.getElementById('id_birthday_year');
-        const element = Object.assign(document.createElement('span'),{ className: 'mx-2', textContent: '年'});
+        const element = Object.assign(document.createElement('span'),{ className: 'ml-1 mr-4', textContent: '年'});
         year.parentNode.insertBefore(element, year.nextSibling);
 
         const month = document.getElementById('id_birthday_month');
-        const element2 = Object.assign(document.createElement('span'),{ className: 'mx-2', textContent: '月'});
+        const element2 = Object.assign(document.createElement('span'),{ className: 'ml-1 mr-4', textContent: '月'});
         month.parentNode.insertBefore(element2, month.nextSibling);
 
         const day = document.getElementById('id_birthday_day');
-        const element3 = Object.assign(document.createElement('span'),{ className: 'mx-2', textContent: '日'});
+        const element3 = Object.assign(document.createElement('span'),{ className: 'ml-1', textContent: '日'});
         day.parentNode.insertBefore(element3, day.nextSibling);
+    }
+
+    // エラーメッセージ（誕生日）
+    const birthday_error = document.querySelectorAll('.birthday_error');
+    const birthday_day = document.getElementById('id_birthday_day');
+    for ( let j = 0; j < birthday_error.length; j++ ) {
+        if ( birthday_error[j].textContent.match(/日付/) ) {
+            birthday_error[j].className = 'error-msg m-0 d-block';
+            birthday_day.className = 'form-control form-error';
+        }
+        birthday_day.addEventListener('click', () => {
+            birthday_error[j].className = 'error-msg birthday_error d-none m-0'
+            birthday_day.className = 'form-select'
+        })
     }
 </script>
 {% endblock %}

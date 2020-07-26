@@ -843,6 +843,15 @@ label img {
   padding: 16px 24px;
 }
 
+.profile__link {
+  color: #1B95E0;
+  text-decoration: none;
+}
+
+.profile__link:hover {
+  text-decoration: underline;
+}
+
 .profile__btn {
   position: relative;
   width: 200px;
@@ -920,11 +929,6 @@ label img {
 
 .history__img {
   width: 100px;
-}
-
-.history__icon {
-  font-size: 30px;
-  color: rgba(0, 0, 0, 0.125);
 }
 
 .history__option-img {

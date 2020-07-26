@@ -24,6 +24,13 @@
       padding: 16px 24px;
     }
   }
+  &__link {
+    color: #1B95E0;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
   &__btn {
     @include button;
   }
@@ -46,10 +53,6 @@
   }
   &__img {
     width: 100px;
-  }
-  &__icon {
-    font-size: 30px;
-    color: rgba(0, 0, 0, .125);
   }
   &__option-img {
     width: 60px;

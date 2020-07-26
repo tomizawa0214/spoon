@@ -39,7 +39,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     furigana = models.CharField('フリガナ', max_length=30)
     email = models.EmailField('メールアドレス', max_length=256, unique=True)
     tel = models.CharField('電話番号', max_length=13)
-    gender = models.CharField('性別', max_length=2, choices=GENDER_CHOICES, blank=True)
+    gender = models.CharField('性別', max_length=2, choices=GENDER_CHOICES, null=True, blank=True)
     birthday = models.DateField('誕生日', null=True, blank=True)
 
     is_staff = models.BooleanField(

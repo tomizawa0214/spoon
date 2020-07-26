@@ -1,10 +1,9 @@
 from django.views.generic import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
-from .forms import ContactForm
+from .forms import ReceiptForm, ContactForm
 from .models import PickUp, WhatsNew, TodayOrder, Order, Cart, SizeItem, FlavorItem, OptionItem
 from accounts.models import CustomUser
-from accounts.forms import ProfileForm
 from django.conf import settings
 from django.core.mail import BadHeaderError, EmailMessage
 from django.http import JsonResponse, HttpResponse
@@ -102,7 +101,7 @@ class OrderConfirmView(LoginRequiredMixin, View):
         })
 
     def post(self, request, *args, **kwargs):
-        form = ProfileForm(request.POST or None)
+        form = ReceiptForm(request.POST or None)
 
         if form.is_valid():
             name = form.cleaned_data['name']
@@ -229,7 +228,7 @@ class OrderUserView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         # ログインユーザーと紐づける
         user_data = CustomUser.objects.get(id=request.user.id)
-        form = ProfileForm(
+        form = ReceiptForm(
             request.POST or None,
             initial={
                 'name': user_data.name,

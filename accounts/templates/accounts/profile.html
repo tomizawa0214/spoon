@@ -30,7 +30,7 @@
         </tr>
         <tr>
             <th>性別</th>
-            <td>{{ user_data.get_gender_display }}</td>
+            <td id="gender">{{ user_data.get_gender_display }}</td>
         </tr>
         <tr>
             <th>誕生日</th>
@@ -38,9 +38,9 @@
         </tr>
     </table>
     <div class="text-left">
-        <a href="{% url 'email_change' %}">メールアドレスの変更手続きはこちら</a><br>
-        <a href="{% url 'password_change' %}">パスワードの変更手続きはこちら</a><br>
-        <a href="{% url 'delete_confirm' %}">会員サービスの退会手続きはこちら</a>
+        <a class="profile__link d-inline-block mt-1" href="{% url 'email_change' %}">メールアドレスの変更手続きはこちら</a><br>
+        <a class="profile__link d-inline-block mt-1" href="{% url 'password_change' %}">パスワードの変更手続きはこちら</a><br>
+        <a class="profile__link d-inline-block mt-1" href="{% url 'delete_confirm' %}">会員サービスの退会手続きはこちら</a>
     </div>
     <div class="text-center">
         <a class="profile__btn btn rounded-pill mb-5" href="{% url 'profile_edit' %}" ontouchstart="">
@@ -80,15 +80,11 @@
         <div class="d-flex m-4">
             <div>
                 <div class="d-flex history__content">
-                    <div class="d-flex align-items-center">
+                    <div class="d-flex align-items-center mr-2">
                         <img class="history__img" src="{{ cart.size_image.url }}">
-                        <i class="history__icon mx-1 fas fa-plus-circle fa-fw" aria-hidden="true"></i>
                     </div>
-                    <div class="d-flex align-items-center">
+                    <div class="d-flex align-items-center mr-2">
                         <img class="history__img" src="{{ cart.flavor_image.url }}">
-                        {% if cart.flavor2_title != '' %}
-                            <i class="history__icon mx-1 fas fa-plus-circle fa-fw" aria-hidden="true"></i>
-                        {% endif %}
                     </div>
                     {% if cart.flavor2_title != '' %}
                         <img class="history__img" src="{{ cart.flavor2_image.url }}">
@@ -96,13 +92,13 @@
                 </div>
                 <div class="d-flex mt-3">
                     {% if cart.option_title != '' %}
-                        <img class="history__option-img" src="{{ cart.option_image.url }}">
+                        <img class="history__option-img mr-2" src="{{ cart.option_image.url }}">
                     {% endif %}
                     {% if cart.option2_title != '' %}
-                        <img class="history__option-img" src="{{ cart.option2_image.url }}">
+                        <img class="history__option-img mr-2" src="{{ cart.option2_image.url }}">
                     {% endif %}
                     {% if cart.option3_title != '' %}
-                        <img class="history__option-img" src="{{ cart.option3_image.url }}">
+                        <img class="history__option-img mr-2" src="{{ cart.option3_image.url }}">
                     {% endif %}
                     {% if cart.option4_title != '' %}
                         <img class="history__option-img" src="{{ cart.option4_image.url }}">
@@ -172,6 +168,12 @@
 {% block extrajs %}
 <script>
     'use strict';
+
+    // 性別がNoneの場合は空白表示
+    const gender = document.getElementById('gender');
+    if ( gender.textContent == 'None') {
+        gender.textContent = '';
+    }
 
     // 誕生日がNoneの場合は空白表示
     const birthday = document.getElementById('birthday');
