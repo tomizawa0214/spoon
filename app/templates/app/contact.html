@@ -15,57 +15,50 @@
     <form method="POST" class="contact__form text-center">
         {% csrf_token %}
         <table class="contact__form--table mx-auto card p-3">
-            <tr>
-                <th class="text-left">
-                    <label for="id_name" class="m-0">
-                        <i class="fas fa-user fa-fw mr-1" aria-hidden="true"></i>お名前
-                        <span class="signup__required">【必須】</span>
-                    </label>
-                </th>
-            </tr>
-            <tr>
-                <td class="pb-4">
-                    {% render_field form.name class="form-control w-75" placeholder="お名前" %}
-                </td>
-            </tr>
-            <tr>
-                <th class="text-left">
-                    <label for="id_email" class="m-0">
-                        <i class="far fa-envelope fa-fw mr-1" aria-hidden="true"></i>メールアドレス
-                        <span class="signup__required">【必須】</span>
-                    </label>
-                </th>
-            </tr>
-            <tr>
-                <td class="pb-4">
-                    {% render_field form.email class="form-control" placeholder="メールアドレス" %}
-                    {% for field in form %}
-                        <p class="error-msg email_error d-none m-0">
-                            {% for error in field.errors %}
-                                ※{{ error }}<br>
-                            {% endfor %}
-                        </p>
-                    {% endfor %}
-                    {% for error in form.non_field_errors %}
-                        <p class="error-msg email_error d-none m-0">
-                            ※{{ error }}
-                        </p>
-                    {% endfor %}
-                </td>
-            </tr>
-            <tr>
-                <th class="text-left">
-                    <label for="id_message" class="m-0">
-                        <i class="far fa-comment fa-fw mr-1" aria-hidden="true"></i>メッセージ
-                        <span class="signup__required">【必須】</span>
-                    </label>
-                </th>
-            </tr>
-            <tr>
-                <td class="pb-4">
-                    {% render_field form.message class="form-control" placeholder="メッセージ" %}
-                </td>
-            </tr>
+            <tbody class="mx-auto">
+                <tr>
+                    <th class="text-right">
+                        <label for="id_name">お名前
+                            <span class="signup__required">【必須】</span>
+                        </label>
+                    </th>
+                    <td>
+                        {% render_field form.name class="form-control" placeholder="お名前" %}
+                    </td>
+                </tr>
+                <tr>
+                    <th class="text-right">
+                        <label for="id_email">メールアドレス
+                            <span class="signup__required">【必須】</span>
+                        </label>
+                    </th>
+                    <td class="text-left">
+                        {% render_field form.email class="form-control" placeholder="メールアドレス" %}
+                        {% for field in form %}
+                            <p class="error-msg email_error d-none m-0">
+                                {% for error in field.errors %}
+                                    ※{{ error }}<br>
+                                {% endfor %}
+                            </p>
+                        {% endfor %}
+                        {% for error in form.non_field_errors %}
+                            <p class="error-msg email_error d-none m-0">
+                                ※{{ error }}
+                            </p>
+                        {% endfor %}
+                    </td>
+                </tr>
+                <tr>
+                    <th class="text-right align-top">
+                        <label for="id_message">メッセージ
+                            <span class="signup__required">【必須】</span>
+                        </label>
+                    </th>
+                    <td>
+                        {% render_field form.message class="form-control" placeholder="メッセージ" %}
+                    </td>
+                </tr>
+            </tbody>
         </table>
         <button type="submit" class="contact__form--btn btn rounded-pill" ontouchstart="">
             <i class="fas fa-paper-plane fa-fw" aria-hidden="true"></i>送信

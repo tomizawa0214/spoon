@@ -1007,12 +1007,15 @@ label img {
   }
 }
 
-.contact__form {
-  margin: 0px auto 80px;
+.contact__form--table {
+  border-collapse: separate;
+  border-spacing: 24px 36px;
+  max-width: 1000px;
+  background: #F2F8ED;
 }
 
-.contact__form--table {
-  max-width: 350px;
+.contact__form--table td {
+  width: 600px;
 }
 
 .contact__form--btn {
