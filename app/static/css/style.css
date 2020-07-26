@@ -131,6 +131,17 @@ main {
   font-size: 25px;
 }
 
+.access__map {
+  height: 430px;
+  background: #F2F8ED;
+}
+
+.access__map--img {
+  height: 430px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
 .header {
   width: 100%;
   max-width: 1200px;

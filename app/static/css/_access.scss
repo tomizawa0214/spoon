@@ -8,4 +8,12 @@
             font-size: 25px;
         }
     }
+    &__map {
+        height: 430px;
+        background: #F2F8ED;
+        &--img {
+            height: 430px;
+            object-fit: cover;
+        }
+    }
 }
