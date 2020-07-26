@@ -33,7 +33,7 @@
                 </tr>
                 <tr>
                     <th>性別</th>
-                    {% if user_data.get_gender_display == None %}
+                    {% if user_data.get_gender_display == None or user_data.get_gender_display == '' %}
                         <td>{% render_field form.gender class="form-select w-25" %}</td>
                     {% else %}
                         <td>{{ user_data.get_gender_display }}</td>
