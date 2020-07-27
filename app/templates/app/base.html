@@ -7,7 +7,7 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
         {% block title %}
         {% endblock %}
@@ -15,7 +15,53 @@
 
     <body>
         <!-- header -->
-        <header class="header d-flex justify-content-between">
+        <header class="header d-sm-none">
+            <a href="/">
+                <img src="{% static 'img/logo.png' %}">
+            </a>
+            <nav class="nav navbar navbar-expand py-3 px-2">
+            <div class="nav__wrap container-fluid mx-auto p-0">
+                <ul class="navbar-nav justify-content-between">
+                    <li>
+                        <a class="nav-link" href="/">HOME
+                            <span>-トップページ-</span>
+                        </a>
+                    </li>
+                    <hr>
+                    <li>
+                        <a class="nav-link" href="{% url 'about' %}">ABOUT
+                            <span>-当店について-</span>
+                        </a>
+                    </li>
+                    <hr>
+                    <li>
+                        <a class="nav-link" href="{% url 'order_guide' %}">GUIDE
+                            <span>-ご利用方法-</span>
+                        </a>
+                    </li>
+                    <hr>
+                    <li>
+                        <a class="nav-link" href="{% url 'order' %}">ORDER
+                            <span>-ご予約注文-</span>
+                        </a>
+                    </li>
+                    <hr>
+                    <li>
+                        <a class="nav-link" href="{% url 'access' %}">ACCESS
+                            <span>-アクセス-</span>
+                        </a>
+                    </li>
+                    <hr>
+                    <li>
+                        <a class="nav-link" href="{% url 'contact' %}">CONTACT
+                            <span>-お問い合わせ-</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            </nav>
+        </header>
+        <header class="header d-none d-sm-flex justify-content-between">
             <a href="/">
                 <img src="{% static 'img/logo.png' %}">
             </a>
@@ -128,7 +174,8 @@
             </div>
         </footer>
 
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         {% block extrajs %}
         {% endblock %}
     </body>

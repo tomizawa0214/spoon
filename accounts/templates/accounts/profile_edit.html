@@ -34,7 +34,7 @@
                 <tr>
                     <th>性別</th>
                     {% if user_data.get_gender_display == None or user_data.get_gender_display == '' %}
-                        <td>{% render_field form.gender class="form-select w-25" %}</td>
+                        <td>{% render_field form.gender class="form-control w-25" %}</td>
                     {% else %}
                         <td>{{ user_data.get_gender_display }}</td>
                     {% endif %}
@@ -44,7 +44,7 @@
                     {% if user_data.birthday == None %}
                         <td class="text-left">
                             <div class="d-flex align-items-center">
-                                {% render_field form.birthday class="form-select" %}
+                                {% render_field form.birthday class="form-control" %}
                             </div>
                             {% for field in form %}
                                 <p class="error-msg birthday_error d-none m-0">
@@ -109,7 +109,7 @@
         }
         birthday_day.addEventListener('click', () => {
             birthday_error[j].className = 'error-msg birthday_error d-none m-0'
-            birthday_day.className = 'form-select'
+            birthday_day.className = 'form-control'
         })
     }
 </script>

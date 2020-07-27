@@ -78,7 +78,7 @@
                         </label>
                     </th>
                     <td>
-                        {% render_field form.gender class="form-select w-25" %}
+                        {% render_field form.gender class="form-control w-25" %}
                     </td>
                 </tr>
                 <tr>
@@ -89,7 +89,7 @@
                     </th>
                     <td class="text-left">
                         <div class="d-flex align-items-center">
-                            {% render_field form.birthday class="form-select" %}
+                            {% render_field form.birthday class="form-control" %}
                         </div>
                         {% for field in form %}
                             <p class="error-msg birthday_error d-none m-0">
@@ -238,7 +238,7 @@
         }
         birthday_day.addEventListener('click', () => {
             birthday_error[j].className = 'error-msg birthday_error d-none m-0'
-            birthday_day.className = 'form-select'
+            birthday_day.className = 'form-control'
         })
     }
 

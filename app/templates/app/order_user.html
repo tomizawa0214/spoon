@@ -76,17 +76,17 @@
                         </label>
                     </th>
                     <td class="d-flex">
-                        <select id="date" name="date" class="form-select w-50 mr-3" onchange="timeChange();">
+                        <select id="date" name="date" class="form-control w-50 mr-3" onchange="timeChange();">
                             {% for date in date_list %}
                                 <option value="{{ date }}">{{ date }}</option>
                             {% endfor %}
                         </select>
-                        <select id="specified_time" name="time" class="form-select w-25">
+                        <select id="specified_time" name="time" class="form-control w-25">
                             {% for time in time_list %}
                                 <option value="{{ time }}">{{ time }}</option>
                             {% endfor %}
                         </select>
-                        <select id="full_time" name="fulltime" class="d-none form-select w-25">
+                        <select id="full_time" name="fulltime" class="d-none form-control w-25">
                             {% for fulltime in fulltime_list %}
                                 <option value="{{ fulltime }}">{{ fulltime }}</option>
                             {% endfor %}
@@ -121,11 +121,11 @@
 
     let timeChange = () => {
         if ( date.value.match(/本日/)) {
-            specified_time.className = 'd-block form-select w-25';
+            specified_time.className = 'd-block form-control w-25';
             full_time.className = 'd-none';
         } else {
             specified_time.className = 'd-none';
-            full_time.className = 'd-block form-select w-25';
+            full_time.className = 'd-block form-control w-25';
         }
     }
 
