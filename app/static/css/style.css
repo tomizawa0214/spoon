@@ -142,6 +142,15 @@ main {
      object-fit: cover;
 }
 
+.access__adress--map {
+  color: #1B95E0;
+  text-decoration: none;
+}
+
+.access__adress--map:hover {
+  text-decoration: underline;
+}
+
 .header {
   width: 100%;
   max-width: 1200px;
@@ -1070,6 +1079,15 @@ label img {
   font-size: 18px;
   font-weight: 700;
   letter-spacing: .5px;
+}
+
+.sidebar__store--map {
+  color: #1B95E0;
+  text-decoration: none;
+}
+
+.sidebar__store--map:hover {
+  text-decoration: underline;
 }
 
 .iswd-base {
