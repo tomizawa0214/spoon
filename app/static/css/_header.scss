@@ -24,7 +24,6 @@
             height: 35px;
         }
         &--text {
-            @include E-font;
             font-size: 12px;
             letter-spacing: .2px;
         }
@@ -37,18 +36,6 @@
             background: #E8435F;
         }
     }
-}
-
-.spheader {
-    position: fixed;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 60px;
-    background: #FFF;
-    z-index: 999;
-    border-bottom: 1px solid rgba(0, 0, 0, .125);
 }
 
 .spnav {
@@ -79,12 +66,21 @@
                 background: #aaa;
                 transition: .5s;
             }
+            &--bar2, &--bar3 {
+                margin-top: 6px;
+            }
+            &--menu {
+                @include E-font;
+                font-size: 10px;
+                margin-top: 5px;
+                line-height: normal
+            }
         }
     }
     &__bg {
         position: absolute;
         width: 100%;
-        height: calc(100% - 60px);
+        height: calc(100% - 120px);
         top: 60px;
         left: 0;
         visibility: hidden;
@@ -94,7 +90,7 @@
     }
     &__menu {
         position: absolute;
-        height: calc(100% - 60px);
+        height: calc(100% - 120px);
         margin-top: 60px;
         width: 90%;
         max-width: 300px;
@@ -104,7 +100,6 @@
         transform: translateX(100%);
         transition: .5s ease-out;
         justify-content: space-evenly;
-        // height: 100%;
         &--link {
             text-decoration: none;
             color: #333;
@@ -135,7 +130,7 @@
 }
 
 .bar1-change {
-    transform: translate3d(0, 11px, 0) rotate(45deg);
+    transform: translate3d(0, 8px, 0) rotate(45deg);
 }
 
 .bar2-change {
@@ -148,4 +143,42 @@
 
 .menu-change {
     transform: none;
+}
+
+.spfooter {
+    position: fixed;
+    width: 100%;
+    height: 60px;
+    bottom: 0;
+    left: 0;
+    background: #FFF;
+    border-top: 1px solid rgba(0, 0, 0, .125);
+    z-index: 9999;
+    justify-content: space-evenly;
+    &__menu {
+        text-decoration: none;
+        color: #333;
+        transition: .3s;
+        &:hover {
+            text-decoration: none;
+            color: inherit;
+            opacity: .5;
+        }
+        &--icon {
+            height: 28px;
+        }
+        &--text {
+            font-size: 10px;
+            line-height: normal;
+            margin-top: 2px;
+        }
+        &--badge {
+            @include E-font;
+            margin-left: -3px;
+            padding: 3px 6px;
+            font-size: 10px;
+            color: #FFF;
+            background: #E8435F;
+        }
+    }
 }
