@@ -77,32 +77,3 @@
     color: #000;
   }
 }
-
-// -----xs(Extra Small)-----
-@media screen and (max-width: 576px) {
-  .profile-title {
-    &:after {
-      max-width: 300px;
-    }
-  }
-
-  .profile {
-    max-width: 300px;
-    &__table {
-      table-layout: fixed;
-      word-break: break-all;
-      word-wrap: break-word;
-      th {
-        display: block;
-        width: 100%;
-        padding: 4px 14px;
-      }
-      td {
-        display: block;
-        width: 100%;
-        padding: 16px 14px;
-        border: 0;
-      }
-    }
-  }
-}

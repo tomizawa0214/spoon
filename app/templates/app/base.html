@@ -7,51 +7,54 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
         {% block title %}
         {% endblock %}
     </head>
 
     <body>
-        <!-- header -->
-        <header class="header d-sm-none">
-            <a href="/">
-                <img src="{% static 'img/logo.png' %}">
-            </a>
-            <nav class="nav navbar navbar-expand py-3 px-2">
-            <div class="nav__wrap container-fluid mx-auto p-0">
-                <ul class="navbar-nav justify-content-between">
+        <!-- スマホ用ヘッダー -->
+        <header class="spnav d-sm-none">
+            <!-- <div class="spnav__header d-flex justify-content-between align-items-center p-2" tabindex="0"> -->
+            <div class="spnav__header d-flex justify-content-between align-items-center p-2">
+                <a class="spnav__header--link d-block" href="/">
+                    <img class="spnav__header--link--logo" src="{% static 'img/spoon_logo.svg' %}">
+                </a>
+                <div class="spnav__header--btn">
+                    <span class="spnav__header--btn--bar1 d-block"></span>
+                    <span class="spnav__header--btn--bar2 d-block mt-2"></span>
+                    <span class="spnav__header--btn--bar3 d-block mt-2"></span>
+                </div>
+            </div>
+            <div class="spnav__bg"></div>
+            <div class="spnav__menu">
+                <ul>
                     <li>
                         <a class="nav-link" href="/">HOME
                             <span>-トップページ-</span>
                         </a>
                     </li>
-                    <hr>
                     <li>
                         <a class="nav-link" href="{% url 'about' %}">ABOUT
                             <span>-当店について-</span>
                         </a>
                     </li>
-                    <hr>
                     <li>
                         <a class="nav-link" href="{% url 'order_guide' %}">GUIDE
                             <span>-ご利用方法-</span>
                         </a>
                     </li>
-                    <hr>
                     <li>
                         <a class="nav-link" href="{% url 'order' %}">ORDER
                             <span>-ご予約注文-</span>
                         </a>
                     </li>
-                    <hr>
                     <li>
                         <a class="nav-link" href="{% url 'access' %}">ACCESS
                             <span>-アクセス-</span>
                         </a>
                     </li>
-                    <hr>
                     <li>
                         <a class="nav-link" href="{% url 'contact' %}">CONTACT
                             <span>-お問い合わせ-</span>
@@ -59,37 +62,38 @@
                     </li>
                 </ul>
             </div>
-            </nav>
         </header>
-        <header class="header d-none d-sm-flex justify-content-between">
+
+        <!-- タブレット・PC用ヘッダー -->
+        <header class="header px-3 p-xl-0 m-3 mx-auto d-none d-sm-flex justify-content-between">
             <a href="/">
-                <img src="{% static 'img/logo.png' %}">
+                <img class="header__logo" src="{% static 'img/spoon_logo.svg' %}">
             </a>
             <div class="d-flex align-items-center">
-                <a class="header__link text-center mr-5" href="/">
+                <a class="header__link d-block text-center mr-4" href="/">
                     <img class="header__link--icon" src="{% static 'img/home.svg' %}" alt="ホーム"><br>
                     <span class="header__link--text">ホーム</span>
                 </a>
                 {% if user.is_authenticated %}
-                    <a class="header__link text-center mr-5" href="{% url 'profile' %}">
+                    <a class="header__link d-block text-center mr-4" href="{% url 'profile' %}">
                         <img class="header__link--icon" src="{% static 'img/mypage.svg' %}" alt="マイページ"><br>
                         <span class="header__link--text">マイページ</span>
                     </a>
-                    <a class="header__link text-center mr-5" href="{% url 'order' %}">
+                    <a class="header__link d-block text-center mr-4" href="{% url 'order' %}">
                         <img class="header__link--icon" src="{% static 'img/cart.svg' %}" alt="カート"><br>
                         <span class="header__link--text">カート</span>
                         <span class="header__link--badge badge">{{ count }}</span>
                     </a>
-                    <a class="header__link text-center" href="{% url 'account_logout' %}">
+                    <a class="header__link d-block text-center" href="{% url 'account_logout' %}">
                         <img class="header__link--icon" src="{% static 'img/logout.svg' %}" alt="ログアウト"><br>
                         <span class="header__link--text">ログアウト</span>
                     </a>
                 {% else %}
-                    <a class="header__link text-center mr-5" href="{% url 'account_signup' %}">
+                    <a class="header__link d-block text-center mr-4" href="{% url 'account_signup' %}">
                         <img class="header__link--icon" src="{% static 'img/signup.svg' %}" alt="会員登録"><br>
                         <span class="header__link--text">会員登録</span>
                     </a>
-                    <a class="header__link text-center" href="{% url 'account_login' %}">
+                    <a class="header__link d-block text-center" href="{% url 'account_login' %}">
                         <img class="header__link--icon" src="{% static 'img/login.svg' %}" alt="ログイン"><br>
                         <span class="header__link--text">ログイン</span>
                     </a>
@@ -102,8 +106,8 @@
         {% endblock %}
 
         <!-- Navigation-->
-        <nav class="nav navbar navbar-expand py-3 px-2">
-        <div class="nav__wrap container-fluid mx-auto p-0">
+        <nav class="nav navbar navbar-expand py-3 px-2 d-none d-sm-block">
+        <div class="nav__wrap container-fluid mx-auto p-0 d-none d-sm-block">
             <ul class="navbar-nav justify-content-between">
                 <li>
                     <a class="nav-link" href="/">
@@ -174,9 +178,21 @@
             </div>
         </footer>
 
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
         {% block extrajs %}
+            <script>
+                'use strict';
+
+                // スマホ用メニューバー
+                document.querySelector('.spnav__header--btn').addEventListener('click', () => {
+                    document.querySelector('.spnav__bg').classList.toggle('bg-change');
+                    document.querySelector('.spnav__header--btn--bar1').classList.toggle('bar1-change');
+                    document.querySelector('.spnav__header--btn--bar2').classList.toggle('bar2-change');
+                    document.querySelector('.spnav__header--btn--bar3').classList.toggle('bar3-change');
+                    document.querySelector('.spnav__menu').classList.toggle('menu-change');
+                });
+            </script>
         {% endblock %}
     </body>
 </html>

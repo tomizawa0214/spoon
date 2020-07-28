@@ -33,20 +33,3 @@
         }
     }
 }
-
-// -----xs(Extra Small)-----
-@media screen and (max-width: 576px) {
-    .top {
-        &__item {
-            &--image1 {
-                height: 400px;
-            }
-            &--image2 {
-                height: 400px;
-            }
-            &--image3 {
-                height: 400px;
-            }
-        }
-    }
-}
