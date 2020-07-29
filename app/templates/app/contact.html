@@ -11,7 +11,7 @@
 </h1>
 
 <div class="contact mx-auto">
-    <p class="text-center mb-4">ご質問やご要望がありましたら、どうぞお気軽にお問い合わせください。</p>
+    <p class="text-center mb-4">ご質問やご要望がありましたら、<br class="d-sm-none">どうぞお気軽にお問い合わせください。</p>
     <form method="POST" class="contact__form text-center">
         {% csrf_token %}
         <table class="contact__form--table d-table mx-auto card p-4 p-md-3">
@@ -60,7 +60,7 @@
                 </tr>
             </tbody>
         </table>
-        <button type="submit" class="contact__form--btn btn rounded-pill" ontouchstart="">
+        <button type="submit" class="contact__form--btn btn rounded-pill" ontouchstart="" onfocus="this.blur();">
             <i class="fas fa-paper-plane fa-fw" aria-hidden="true"></i>送信
         </button>
     </form>
