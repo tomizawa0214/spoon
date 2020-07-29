@@ -284,7 +284,7 @@ main {
   position: absolute;
   height: calc(100% - 120px);
   margin-top: 60px;
-  width: 80%;
+  width: 85%;
   max-width: 300px;
   top: 0;
   right: 0;
@@ -1066,14 +1066,11 @@ label img {
 }
 
 .contact__form--table {
+  table-layout: fixed;
+  width: 100%;
   border-collapse: separate;
-  border-spacing: 24px 36px;
-  max-width: 1000px;
+  border-spacing: 0;
   background: #F2F8ED;
-}
-
-.contact__form--table td {
-  width: 600px;
 }
 
 .contact__form--btn {
@@ -1103,6 +1100,16 @@ label img {
 
 .contact__form--btn i {
   margin: 0 5px 0 0;
+}
+
+@media screen and (min-width: 768px) {
+  .contact__form--table {
+    max-width: 800px;
+    border-spacing: 24px 36px;
+  }
+  .contact__form--table--body th {
+    width: 208px;
+  }
 }
 
 .sidebar {

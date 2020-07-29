@@ -14,25 +14,25 @@
     <p class="text-center mb-4">ご質問やご要望がありましたら、どうぞお気軽にお問い合わせください。</p>
     <form method="POST" class="contact__form text-center">
         {% csrf_token %}
-        <table class="contact__form--table mx-auto card p-3">
-            <tbody class="mx-auto">
-                <tr>
-                    <th class="text-right">
-                        <label for="id_name">お名前
+        <table class="contact__form--table d-table mx-auto card p-4 p-md-3">
+            <tbody class="contact__form--table--body mx-auto">
+                <tr class="d-block d-md-table-row">
+                    <th class="d-block d-md-table-cell text-left text-md-right align-top">
+                        <label for="id_name" class="m-0">お名前
                             <span class="signup__required">【必須】</span>
                         </label>
                     </th>
-                    <td>
+                    <td class="d-block d-md-table-cell mb-4">
                         {% render_field form.name class="form-control" placeholder="お名前" %}
                     </td>
                 </tr>
-                <tr>
-                    <th class="text-right">
-                        <label for="id_email">メールアドレス
+                <tr class="d-block d-md-table-row">
+                    <th class="d-block d-md-table-cell text-left text-md-right align-top">
+                        <label for="id_email" class="m-0">メールアドレス
                             <span class="signup__required">【必須】</span>
                         </label>
                     </th>
-                    <td class="text-left">
+                    <td class="d-block d-md-table-cell text-left mb-4 mb-md-0">
                         {% render_field form.email class="form-control" placeholder="メールアドレス" %}
                         {% for field in form %}
                             <p class="error-msg email_error d-none m-0">
@@ -48,13 +48,13 @@
                         {% endfor %}
                     </td>
                 </tr>
-                <tr>
-                    <th class="text-right align-top">
-                        <label for="id_message">メッセージ
+                <tr class="d-block d-md-table-row">
+                    <th class="d-block d-md-table-cell text-left text-md-right align-top">
+                        <label for="id_message" class="m-0">メッセージ
                             <span class="signup__required">【必須】</span>
                         </label>
                     </th>
-                    <td>
+                    <td class="d-block d-md-table-cell">
                         {% render_field form.message class="form-control" placeholder="メッセージ" %}
                     </td>
                 </tr>
