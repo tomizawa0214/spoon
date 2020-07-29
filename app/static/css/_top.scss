@@ -15,21 +15,45 @@
     }
     &__news {
         &--date {
-            color: #e8435f;
+            color: #E8435F;
         }
     }
     &__pick {
-        width: 200px;
-        &--ename {
-            font-size: 25px;
-            font-family: 'Dancing Script', cursive;
-            letter-spacing: 1px;
+        &--img {
+            width: 100%;
+            max-width: 300px;
+            object-fit: cover;
         }
-        &--price {
-            color: #E8435F;
-            font-size: 30px;
-            font-weight: 600;
-            letter-spacing: 0;
+        &--name {
+            &--e {
+                font-size: 25px;
+                font-family: 'Dancing Script', cursive;
+                letter-spacing: 1px;
+            }
+            &--j {
+                font-size: 18px;
+            }
+        }
+        &--size {
+            &--price {
+                color: #E8435F;
+                font-size: 30px;
+                font-weight: 600;
+                letter-spacing: 0;
+            }
+        }
+    }
+}
+
+@media screen and ( max-width: 575px ) {
+    .top {
+        &__pick {
+            &--name {
+                max-width: 300px;
+            }
+            &--size {
+                justify-content: space-evenly;
+            }
         }
     }
 }
