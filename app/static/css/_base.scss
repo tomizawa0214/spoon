@@ -4,124 +4,130 @@
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
 
 @mixin E-font {
-  font-family: "Montserrat", "Roboto", "游ゴシック体", "Yu Gothic", YuGothic, "游ゴシック", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", MeiryoKe_PGothic, "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+    font-family: "Montserrat", "Roboto", "游ゴシック体", "Yu Gothic", YuGothic, "游ゴシック", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", MeiryoKe_PGothic, "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
 }
 
 @mixin slideImage {
-  left: 50%;
-  transform: translateX(-50%) !important;
-  max-width: 1200px;
-  height: 500px;
-  background-size: cover;
-  background-position: center;
+    left: 50%;
+    transform: translateX(-50%) !important;
+    max-width: 1200px;
+    height: 500px;
+    background-size: cover;
+    background-position: center;
 }
 
 @mixin sectionTitle {
-  @include E-font;
-  position: relative;
-  margin: 0 0 40px;
-  text-align: center;
-  letter-spacing: 3px;
-  font-size: 20px;
-  span {
+    @include E-font;
     position: relative;
-    display: inline-block;
-    z-index: 1;
-    padding: 0 30px;
-    background: #fff;
-  }
-  &:after {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%);
-    display: block;
-    width: 100%;
-    height: 1px;
-    content: '';
-    background: #333;
-  }
+    margin: 0 0 40px;
+    text-align: center;
+    letter-spacing: 3px;
+    font-size: 20px;
+    span {
+        position: relative;
+        display: inline-block;
+        z-index: 1;
+        padding: 0 30px;
+        background: #fff;
+    }
+    &:after {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%);
+        display: block;
+        width: 100%;
+        height: 1px;
+        content: '';
+        background: #333;
+    }
 }
 
 @mixin button {
-  position: relative;
-  width: 200px;
-  margin: 50px 0 80px;
-  color: #fff;
-  background: #E8435F;
-  box-shadow: 0 3px 0 #AC1531;
-  border: 0;
-  font-weight: bold;
-  transition: .3s;
-  &:hover {
+    position: relative;
+    width: 200px;
+    margin: 50px 0 80px;
     color: #fff;
-    opacity: .7;
-  }
-  &:active {
-    top: 3px;
-    box-shadow: none;
-  }
-  i {
-    margin: 0 5px 0 0;
-  }
+    background: #E8435F;
+    box-shadow: 0 3px 0 #AC1531;
+    border: 0;
+    font-weight: bold;
+    transition: .3s;
+    &:hover {
+        color: #fff;
+        opacity: .7;
+    }
+    &:active {
+        top: 3px;
+        box-shadow: none;
+    }
+    i {
+        margin: 0 5px 0 0;
+    }
 }
 
 body {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  min-height: 100vh;
-  font-family: '游ゴシック', 'Yu Gothic', YuGothic, HiraKakuProN-W3, 'メイリオ', Meiryo, sans-serif;
-  letter-spacing: .8px;
-  line-height: 25px;
-  color: #333;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100vh;
+    font-family: '游ゴシック', 'Yu Gothic', YuGothic, HiraKakuProN-W3, 'メイリオ', Meiryo, sans-serif;
+    letter-spacing: .8px;
+    line-height: 25px;
+    color: #333;
 }
 
 main {
-  margin: 50px 0 80px;
+    margin: 50px 0 80px;
 }
 
 .title {
-  @include sectionTitle;
+    @include sectionTitle;
 }
 
 .done-check {
-  width: 100px;
+    width: 100px;
 }
 
 .done-text {
-  font-size: 20px;
-  font-weight: 600;
+    font-size: 20px;
+    font-weight: 600;
 }
 
 .help-text {
-  font-size: 14px;
-  line-height: 22px;
-  letter-spacing: .5px;
+    font-size: 14px;
+    line-height: 22px;
+    letter-spacing: .5px;
 }
 
 .back-btn {
-  @include button;
-  position: absolute;
-  left: 0;
-  width: 70px;
-  color: #212529;
-  background: #CED4DA;
-  box-shadow: 0 3px 0 #94A0AC;
-  &:hover {
+    @include button;
+    position: absolute;
+    left: 0;
+    width: 70px;
     color: #212529;
-  }
+    background: #CED4DA;
+    box-shadow: 0 3px 0 #94A0AC;
+    &:hover {
+        color: #212529;
+    }
 }
 
 .error-msg {
-  color: #FF0000;
+    color: #FF0000;
 }
 
 .form-error {
-  border: 2px solid #FF0000;
-  background: #FDF5F7;
+    border: 2px solid #FF0000;
+    background: #FDF5F7;
 }
 
 .container-fluid {
-  max-width: 1200px;
+    max-width: 1200px;
+}
+
+@media screen and ( max-width: 575px ) {
+    body {
+        padding: 60px 0;
+    }
 }

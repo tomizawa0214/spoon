@@ -99,52 +99,45 @@
         {% endblock %}
 
         <!-- Navigation-->
-        <nav class="nav navbar navbar-expand py-3 px-2 d-none d-sm-block">
-        <div class="nav__wrap container-fluid mx-auto p-0 d-none d-sm-block">
-            <ul class="navbar-nav justify-content-between">
-                <li>
-                    <a class="nav-link" href="/">
-                        HOME<br class="d-none d-sm-block">
-                        <span>-トップページ-</span>
+        <nav class="nav__wrap d-none d-sm-block container-fluid my-md-3 p-0">
+            <ul class="nav__wrap--menu d-md-flex p-0 m-0">
+                <li class="nav__wrap--menu--li text-center">
+                    <a class="nav__wrap--menu--li--link d-flex flex-column justify-content-center" href="/">
+                        <span class="nav__wrap--menu--li--link--e">HOME</span>
+                        <span class="nav__wrap--menu--li--link--j">-トップページ-</span>
                     </a>
                 </li>
-                <hr>
-                <li>
-                    <a class="nav-link" href="{% url 'about' %}">
-                        ABOUT<br class="d-none d-sm-block">
-                        <span>-当店について-</span>
+                <li class="nav__wrap--menu--li text-center">
+                    <a class="nav__wrap--menu--li--link d-flex flex-column justify-content-center" href="{% url 'about' %}">
+                        <span class="nav__wrap--menu--li--link--e">ABOUT</span>
+                        <span class="nav__wrap--menu--li--link--j">-当店について-</span>
                     </a>
                 </li>
-                <hr>
-                <li>
-                    <a class="nav-link" href="{% url 'order_guide' %}">
-                        GUIDE<br class="d-none d-sm-block">
-                        <span>-ご利用方法-</span>
+                <li class="nav__wrap--menu--li text-center">
+                    <a class="nav__wrap--menu--li--link d-flex flex-column justify-content-center" href="{% url 'order_guide' %}">
+                        <span class="nav__wrap--menu--li--link--e">GUIDE</span>
+                        <span class="nav__wrap--menu--li--link--j">-ご利用方法-</span>
                     </a>
                 </li>
-                <hr>
-                <li>
-                    <a class="nav-link" href="{% url 'order' %}">
-                        ORDER<br class="d-none d-sm-block">
-                        <span>-ご予約注文-</span>
+                <li class="nav__wrap--menu--li text-center">
+                    <a class="nav__wrap--menu--li--link d-flex flex-column justify-content-center" href="{% url 'order' %}">
+                        <span class="nav__wrap--menu--li--link--e">ORDER</span>
+                        <span class="nav__wrap--menu--li--link--j">-ご予約注文-</span>
                     </a>
                 </li>
-                <hr>
-                <li>
-                    <a class="nav-link" href="{% url 'access' %}">
-                        ACCESS<br class="d-none d-sm-block">
-                        <span>-アクセス-</span>
+                <li class="nav__wrap--menu--li text-center">
+                    <a class="nav__wrap--menu--li--link d-flex flex-column justify-content-center" href="{% url 'access' %}">
+                        <span class="nav__wrap--menu--li--link--e">ACCESS</span>
+                        <span class="nav__wrap--menu--li--link--j">-アクセス-</span>
                     </a>
                 </li>
-                <hr>
-                <li>
-                    <a class="nav-link" href="{% url 'contact' %}">
-                        CONTACT<br class="d-none d-sm-block">
-                        <span>-お問い合わせ-</span>
+                <li class="nav__wrap--menu--li text-center">
+                    <a class="nav__wrap--menu--li--link d-flex flex-column justify-content-center" href="{% url 'contact' %}">
+                        <span class="nav__wrap--menu--li--link--e">CONTACT</span>
+                        <span class="nav__wrap--menu--li--link--j">-お問い合わせ-</span>
                     </a>
                 </li>
             </ul>
-        </div>
         </nav>
         
         <main>
@@ -154,20 +147,20 @@
             </div>
         </main>
 
-        <footer class="footer">
-            <ul class="footer__link">
-                <li class="footer__link--item">
-                    <a href="/">特定商取引法に基づく表記</a>
+        <footer class="footer mt-auto">
+            <ul class="footer__link d-sm-flex justify-content-center p-0 my-4">
+                <li class="footer__link--item mr-sm-3 pr-sm-3 text-center">
+                    <a class="footer__link--item--menu" href="/">特定商取引法に基づく表記</a>
                 </li>
-                <li class="footer__link--item">
-                    <a href="/">プライバシーポリシー</a>
+                <li class="footer__link--item mr-sm-3 pt-2 pr-sm-3 pt-sm-0 text-center">
+                    <a class="footer__link--item--menu" href="/">プライバシーポリシー</a>
                 </li>
-                <li class="footer__link--item">
-                    <a href="/">会社概要</a>
+                <li class="footer__link--item border-right-0 pt-2 pt-sm-0 text-center">
+                    <a class="footer__link--item--menu" href="/">会社概要</a>
                 </li>
             </ul>
-            <div class="footer__copy">
-                <small>&copy; Praline 2020</small>
+            <div class="footer__copy d-flex justify-content-center">
+                <small class="my-4 text-center">&copy; Praline 2020</small>
             </div>
         </footer>
 
