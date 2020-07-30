@@ -4,7 +4,7 @@
         table-layout: fixed;
         width: 100%;
         border: 1px solid rgba(0, 0, 0, .125);
-        border-radius: 8px;
+        border-radius: 2px;
         border-collapse: separate;
         border-spacing: 0;
         overflow: hidden;
@@ -20,10 +20,12 @@
         }
     }
     &__link {
-        color: #1B95E0;
-        text-decoration: none;
-        &:hover {
-            text-decoration: underline;
+        &--text {
+            color: #1B95E0;
+            text-decoration: none;
+            &:hover {
+                text-decoration: underline;
+            }
         }
     }
     &__btn {
@@ -35,22 +37,31 @@
     max-width: 850px;
     &__header {
         background: #F2F8ED;
-        &--orderday {
-            font-weight: 700;
+        &--wrap {
+            &--orderday {
+                font-weight: 700;
+            }
         }
         &--btn {
             @include button;
             width: 130px;
         }
     }
-    &__content {
-        width: 450px;
-    }
     &__img {
         width: 100px;
     }
     &__option-img {
         width: 60px;
+    }
+    &__table {
+        table-layout: fixed;
+        width: 100%;
+        th {
+            width: 125px;
+        }
+    }
+    &__border {
+        border-top: 1px dashed rgba(0, 0, 0, .1); 
     }
     &__comment {
         max-width: 850px;
@@ -73,8 +84,35 @@
     }
 }
 
+
+@media screen and ( max-width: 396px ) {
+    .history {
+        &__table {
+            line-height: 22px;
+            tr, th, td {
+                display: block !important;
+            }
+            tr:not(:last-of-type) {
+                td {
+                    padding-bottom: 16px;
+                }
+            }
+            td {
+                margin-left: 5px;
+            }
+        }
+        &__img {
+            width: 70px;
+        }
+        &__option-img {
+            width: 50px;
+        }
+    }
+}
+
 @media screen and ( max-width: 575px ) {
     .profile {
+        max-width: 380px;
         &__table {
             tr:not(:last-of-type) {
                 td {
@@ -85,6 +123,41 @@
                 width: 100%;
                 border-bottom: 1px solid rgba(0, 0, 0, .125);
                 border-right: 0;
+            }
+        }
+        &__link {
+            max-width: 380px;
+        }
+    }
+    .history {
+        max-width: 380px;
+        &__header {
+            &--wrap {
+                flex-direction: column !important;
+                line-height: 20px;
+                margin-bottom: 16px;
+            }
+            &--btn {
+                width: 200px;
+            }
+        }
+    }
+}
+
+@media screen and ( min-width: 576px ) and ( max-width: 767px ) {
+    .history {
+        &__img {
+            width: 95px;
+        }
+        &__table {
+            line-height: 22px;
+            tr:not(:last-of-type) {
+                td {
+                    padding-bottom: 16px;
+                }
+            }
+            td {
+                margin-left: 5px;
             }
         }
     }

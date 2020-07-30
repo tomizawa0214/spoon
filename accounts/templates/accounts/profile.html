@@ -37,10 +37,10 @@
             <td id="birthday" class="d-block d-sm-table-cell text-center text-sm-left py-3 px-4">{{ user_data.birthday }}</td>
         </tr>
     </table>
-    <div class="text-left">
-        <a class="profile__link d-inline-block mt-1" href="{% url 'email_change' %}">メールアドレスの変更手続きはこちら</a><br>
-        <a class="profile__link d-inline-block mt-1" href="{% url 'password_change' %}">パスワードの変更手続きはこちら</a><br>
-        <a class="profile__link d-inline-block mt-1" href="{% url 'delete_confirm' %}">会員サービスの退会手続きはこちら</a>
+    <div class="profile__link text-left">
+        <a class="profile__link--text d-inline-block mt-1" href="{% url 'email_change' %}">メールアドレスの変更手続きはこちら</a><br>
+        <a class="profile__link--text d-inline-block mt-1" href="{% url 'password_change' %}">パスワードの変更手続きはこちら</a><br>
+        <a class="profile__link--text d-inline-block mt-1" href="{% url 'delete_confirm' %}">会員サービスの退会手続きはこちら</a>
     </div>
     <div class="text-center">
         <a class="profile__btn btn rounded-pill mb-5" href="{% url 'profile_edit' %}" ontouchstart="">
@@ -60,26 +60,28 @@
 <div class="history card mx-auto mb-5">
 {% endif %}
     <div class="history__header card-header p-0">
-        <div class="d-flex justify-content-between">
-            <div class="p-3 m-0">
-                <span class="history__header--orderday">注文日時</span><br>
-                <span>{{ order.created | date:"Y年n月j日(l) G:i" | cut:"曜日" }}</span>
+        <div class="d-flex flex-column flex-sm-row align-items-center justify-content-between">
+            <div class="d-md-flex pt-4 px-3 pt-sm-3 py-sm-3">
+                <div class="history__header--wrap d-flex flex-md-column mr-md-4 mr-lg-5">
+                    <span class="history__header--wrap--orderday mr-3">注文日時</span>
+                    <span>{{ order.created | date:"Y年n月j日(l) G:i" | cut:"曜日" }}</span>
+                </div>
+                <div class="history__header--wrap d-flex flex-md-column mr-md-4 mr-lg-5">
+                    <span class="history__header--wrap--orderday mr-3">受取日時</span>
+                    <span>{{ order.receipt }}</span>
+                </div>
+                <div class="history__header--wrap d-flex flex-md-column">
+                    <span class="history__header--wrap--orderday mr-3 mr-md-0">合計　　</span>
+                    <span>\{{ order.get_total | intcomma }}</span>
+                </div>
             </div>
-            <div class="p-3 m-0">
-                <span class="history__header--orderday">受取日時</span><br>
-                <span>{{ order.receipt }}</span>
-            </div>
-            <div class="p-3 m-0">
-                <span class="history__header--orderday">合計</span><br>
-                <span>\{{ order.get_total | intcomma }}</span>
-            </div>
-            <button type="button" id="{{ order.id }}" class="history__header--btn m-3 btn" onclick="sameOrder(this);" ontouchstart="">再度注文</button>
+            <button type="button" id="{{ order.id }}" class="history__header--btn mt-0 mb-4 my-sm-0 mr-sm-3 p-sm-3 p-md-2 btn" onclick="sameOrder(this);" ontouchstart="">再度注文</button>
         </div>
     </div>
     {% for cart in order.cart.all %}
-        <div class="d-flex m-4">
-            <div>
-                <div class="d-flex history__content">
+        <div class="row p-0 m-4">
+            <div class="col-sm-8 col-md-7 mb-3 mb-sm-0 p-0">
+                <div class="d-flex justify-content-center justify-content-sm-start">
                     <div class="d-flex align-items-center mr-2">
                         <img class="history__img" src="{{ cart.size_image.url }}">
                     </div>
@@ -90,7 +92,7 @@
                         <img class="history__img" src="{{ cart.flavor2_image.url }}">
                     {% endif %}
                 </div>
-                <div class="d-flex mt-3">
+                <div class="d-flex  justify-content-center justify-content-sm-start mt-2 mt-sm-3">
                     {% if cart.option_title != '' %}
                         <img class="history__option-img mr-2" src="{{ cart.option_image.url }}">
                     {% endif %}
@@ -105,51 +107,53 @@
                     {% endif %}
                 </div>
             </div>
-            <table>
-                <tr>
-                    <th>【サイズ】</th>
-                    <td>{{ cart.size_title }}</td>
-                </tr>
-                <tr>
-                    <th class="align-top">【フレーバー】</th>
-                    <td>{{ cart.flavor_title }}<br>{{ cart.flavor2_title }}</td>
-                </tr>
-                <tr>
-                    <th class="align-top">【オプション】</th>
-                    {% if cart.option_title == "" and cart.option2_title == "" and cart.option3_title == "" and cart.option4_title == "" %}
-                        <td>なし</td>
-                    {% elif cart.option_title != "" and cart.option2_title == "" and cart.option3_title == "" and cart.option4_title == "" %}
-                        <td>{{ cart.option_title }}</td>
-                    {% elif cart.option_title == "" and cart.option2_title != "" and cart.option3_title == "" and cart.option4_title == "" %}
-                        <td>{{ cart.option2_title }}</td>
-                    {% elif cart.option_title == "" and cart.option2_title == "" and cart.option3_title != "" and cart.option4_title == "" %}
-                        <td>{{ cart.option3_title }}</td>
-                    {% elif cart.option_title == "" and cart.option2_title == "" and cart.option3_title == ""  and cart.option4_title != "" %}
-                        <td>{{ cart.option4_title }}</td>
-                    {% elif cart.option_title != "" and cart.option2_title != "" and cart.option3_title == "" and cart.option4_title == "" %}
-                        <td>{{ cart.option_title }}<br>{{ cart.option2_title }}</td>
-                    {% elif cart.option_title != "" and cart.option2_title == "" and cart.option3_title != "" and cart.option4_title == "" %}
-                        <td>{{ cart.option_title }}<br>{{ cart.option3_title }}</td>
-                    {% elif cart.option_title != "" and cart.option2_title == "" and cart.option3_title == "" and cart.option4_title != "" %}
-                        <td>{{ cart.option_title }}<br>{{ cart.option4_title }}</td>
-                    {% elif cart.option_title == "" and cart.option2_title != "" and cart.option3_title != "" and cart.option4_title == "" %}
-                        <td>{{ cart.option2_title }}<br>{{ cart.option3_title }}</td>
-                    {% elif cart.option_title == "" and cart.option2_title != "" and cart.option3_title == "" and cart.option4_title != "" %}
-                        <td>{{ cart.option2_title }}<br>{{ cart.option4_title }}</td>
-                    {% elif cart.option_title == "" and cart.option2_title == "" and cart.option3_title != "" and cart.option4_title != "" %}
-                        <td>{{ cart.option3_title }}<br>{{ cart.option4_title }}</td>
-                    {% elif cart.option_title != "" and cart.option2_title != "" and cart.option3_title != "" and cart.option4_title == "" %}
-                        <td>{{ cart.option_title }}<br>{{ cart.option2_title }}<br>{{ cart.option3_title }}</td>
-                    {% elif cart.option_title == "" and cart.option2_title != "" and cart.option3_title != "" and cart.option4_title != "" %}
-                        <td>{{ cart.option2_title }}<br>{{ cart.option3_title }}<br>{{ cart.option4_title }}</td>
-                    {% elif cart.option_title != "" and cart.option2_title == "" and cart.option3_title != "" and cart.option4_title != "" %}
-                        <td>{{ cart.option_title }}<br>{{ cart.option3_title }}<br>{{ cart.option4_title }}</td>
-                    {% elif cart.option_title != "" and cart.option2_title != "" and cart.option3_title == "" and cart.option4_title != "" %}
-                        <td>{{ cart.option_title }}<br>{{ cart.option2_title }}<br>{{ cart.option4_title }}</td>
-                    {% elif cart.option_title != "" and cart.option2_title != "" and cart.option3_title != "" and cart.option4_title != "" %}
-                        <td>{{ cart.option_title }}<br>{{ cart.option2_title }}<br>{{ cart.option3_title }}<br>{{ cart.option4_title }}</td>
-                    {% endif %}
-                </tr>
+            <table class="history__table col-sm-4 col-md-5 p-0">
+                <tbody>
+                    <tr class="d-sm-block d-md-table-row">
+                        <th class="d-sm-block d-md-table-cell">【サイズ】</th>
+                        <td class="d-sm-block d-md-table-cell">{{ cart.size_title }}</td>
+                    </tr>
+                    <tr class="d-sm-block d-md-table-row">
+                        <th class="align-top d-sm-block d-md-table-cell">【フレーバー】</th>
+                        <td class="d-sm-block d-md-table-cell">{{ cart.flavor_title }}<br>{{ cart.flavor2_title }}</td>
+                    </tr>
+                    <tr class="d-sm-block d-md-table-row">
+                        <th class="align-top d-sm-block d-md-table-cell">【オプション】</th>
+                        {% if cart.option_title == "" and cart.option2_title == "" and cart.option3_title == "" and cart.option4_title == "" %}
+                            <td class="d-sm-block d-md-table-cell">なし</td>
+                        {% elif cart.option_title != "" and cart.option2_title == "" and cart.option3_title == "" and cart.option4_title == "" %}
+                            <td class="d-sm-block d-md-table-cell">{{ cart.option_title }}</td>
+                        {% elif cart.option_title == "" and cart.option2_title != "" and cart.option3_title == "" and cart.option4_title == "" %}
+                            <td class="d-sm-block d-md-table-cell">{{ cart.option2_title }}</td>
+                        {% elif cart.option_title == "" and cart.option2_title == "" and cart.option3_title != "" and cart.option4_title == "" %}
+                            <td class="d-sm-block d-md-table-cell">{{ cart.option3_title }}</td>
+                        {% elif cart.option_title == "" and cart.option2_title == "" and cart.option3_title == ""  and cart.option4_title != "" %}
+                            <td class="d-sm-block d-md-table-cell">{{ cart.option4_title }}</td>
+                        {% elif cart.option_title != "" and cart.option2_title != "" and cart.option3_title == "" and cart.option4_title == "" %}
+                            <td class="d-sm-block d-md-table-cell">{{ cart.option_title }}<br>{{ cart.option2_title }}</td>
+                        {% elif cart.option_title != "" and cart.option2_title == "" and cart.option3_title != "" and cart.option4_title == "" %}
+                            <td class="d-sm-block d-md-table-cell">{{ cart.option_title }}<br>{{ cart.option3_title }}</td>
+                        {% elif cart.option_title != "" and cart.option2_title == "" and cart.option3_title == "" and cart.option4_title != "" %}
+                            <td class="d-sm-block d-md-table-cell">{{ cart.option_title }}<br>{{ cart.option4_title }}</td>
+                        {% elif cart.option_title == "" and cart.option2_title != "" and cart.option3_title != "" and cart.option4_title == "" %}
+                            <td class="d-sm-block d-md-table-cell">{{ cart.option2_title }}<br>{{ cart.option3_title }}</td>
+                        {% elif cart.option_title == "" and cart.option2_title != "" and cart.option3_title == "" and cart.option4_title != "" %}
+                            <td class="d-sm-block d-md-table-cell">{{ cart.option2_title }}<br>{{ cart.option4_title }}</td>
+                        {% elif cart.option_title == "" and cart.option2_title == "" and cart.option3_title != "" and cart.option4_title != "" %}
+                            <td class="d-sm-block d-md-table-cell">{{ cart.option3_title }}<br>{{ cart.option4_title }}</td>
+                        {% elif cart.option_title != "" and cart.option2_title != "" and cart.option3_title != "" and cart.option4_title == "" %}
+                            <td class="d-sm-block d-md-table-cell">{{ cart.option_title }}<br>{{ cart.option2_title }}<br>{{ cart.option3_title }}</td>
+                        {% elif cart.option_title == "" and cart.option2_title != "" and cart.option3_title != "" and cart.option4_title != "" %}
+                            <td class="d-sm-block d-md-table-cell">{{ cart.option2_title }}<br>{{ cart.option3_title }}<br>{{ cart.option4_title }}</td>
+                        {% elif cart.option_title != "" and cart.option2_title == "" and cart.option3_title != "" and cart.option4_title != "" %}
+                            <td class="d-sm-block d-md-table-cell">{{ cart.option_title }}<br>{{ cart.option3_title }}<br>{{ cart.option4_title }}</td>
+                        {% elif cart.option_title != "" and cart.option2_title != "" and cart.option3_title == "" and cart.option4_title != "" %}
+                            <td class="d-sm-block d-md-table-cell">{{ cart.option_title }}<br>{{ cart.option2_title }}<br>{{ cart.option4_title }}</td>
+                        {% elif cart.option_title != "" and cart.option2_title != "" and cart.option3_title != "" and cart.option4_title != "" %}
+                            <td class="d-sm-block d-md-table-cell">{{ cart.option_title }}<br>{{ cart.option2_title }}<br>{{ cart.option3_title }}<br>{{ cart.option4_title }}</td>
+                        {% endif %}
+                    </tr>
+                </tbody>
             </table>
         </div>
         {% if not forloop.last %}

@@ -926,7 +926,7 @@ label img {
   table-layout: fixed;
   width: 100%;
   border: 1px solid rgba(0, 0, 0, 0.125);
-  border-radius: 8px;
+  border-radius: 2px;
   border-collapse: separate;
   border-spacing: 0;
   overflow: hidden;
@@ -942,12 +942,12 @@ label img {
   border-right: 1px solid rgba(0, 0, 0, 0.125);
 }
 
-.profile__link {
+.profile__link--text {
   color: #1B95E0;
   text-decoration: none;
 }
 
-.profile__link:hover {
+.profile__link--text:hover {
   text-decoration: underline;
 }
 
@@ -988,7 +988,7 @@ label img {
   background: #F2F8ED;
 }
 
-.history__header--orderday {
+.history__header--wrap--orderday {
   font-weight: 700;
 }
 
@@ -1022,16 +1022,25 @@ label img {
   margin: 0 5px 0 0;
 }
 
-.history__content {
-  width: 450px;
-}
-
 .history__img {
   width: 100px;
 }
 
 .history__option-img {
   width: 60px;
+}
+
+.history__table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+.history__table th {
+  width: 125px;
+}
+
+.history__border {
+  border-top: 1px dashed rgba(0, 0, 0, 0.1);
 }
 
 .history__comment {
@@ -1081,7 +1090,31 @@ label img {
   color: #000;
 }
 
+@media screen and (max-width: 396px) {
+  .history__table {
+    line-height: 22px;
+  }
+  .history__table tr, .history__table th, .history__table td {
+    display: block !important;
+  }
+  .history__table tr:not(:last-of-type) td {
+    padding-bottom: 16px;
+  }
+  .history__table td {
+    margin-left: 5px;
+  }
+  .history__img {
+    width: 70px;
+  }
+  .history__option-img {
+    width: 50px;
+  }
+}
+
 @media screen and (max-width: 575px) {
+  .profile {
+    max-width: 380px;
+  }
   .profile__table tr:not(:last-of-type) td {
     border-bottom: 1px solid rgba(0, 0, 0, 0.125);
   }
@@ -1089,6 +1122,38 @@ label img {
     width: 100%;
     border-bottom: 1px solid rgba(0, 0, 0, 0.125);
     border-right: 0;
+  }
+  .profile__link {
+    max-width: 380px;
+  }
+  .history {
+    max-width: 380px;
+  }
+  .history__header--wrap {
+    -webkit-box-orient: vertical !important;
+    -webkit-box-direction: normal !important;
+        -ms-flex-direction: column !important;
+            flex-direction: column !important;
+    line-height: 20px;
+    margin-bottom: 16px;
+  }
+  .history__header--btn {
+    width: 200px;
+  }
+}
+
+@media screen and (min-width: 576px) and (max-width: 767px) {
+  .history__img {
+    width: 95px;
+  }
+  .history__table {
+    line-height: 22px;
+  }
+  .history__table tr:not(:last-of-type) td {
+    padding-bottom: 16px;
+  }
+  .history__table td {
+    margin-left: 5px;
   }
 }
 
