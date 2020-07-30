@@ -141,7 +141,7 @@ class PickUp(models.Model):
     image = ProcessedImageField(
         verbose_name='画像',
         upload_to='images',
-        processors=[ResizeToFill(200, 200)],
+        processors=[ResizeToFill(600, 600)],
         options={'quality': 60}
     )
 
