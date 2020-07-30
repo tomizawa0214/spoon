@@ -62,6 +62,7 @@ main {
 }
 
 .help-text {
+  display: inline-block;
   font-size: 14px;
   line-height: 22px;
   letter-spacing: .5px;
@@ -1387,6 +1388,50 @@ label img {
 
 @media screen and (min-width: 576px) {
   .email-change__form {
+    border-spacing: 36px 36px;
+  }
+}
+
+.password-reset__form {
+  table-layout: fixed;
+  width: 100%;
+  max-width: 600px;
+  border-collapse: separate;
+  border-spacing: 24px 24px;
+  background: #F2F8ED;
+}
+
+.password-reset__btn {
+  position: relative;
+  width: 200px;
+  margin: 50px 0 80px;
+  color: #fff;
+  background: #E8435F;
+  -webkit-box-shadow: 0 3px 0 #AC1531;
+          box-shadow: 0 3px 0 #AC1531;
+  border: 0;
+  font-weight: bold;
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+
+.password-reset__btn:hover {
+  color: #fff;
+  opacity: .7;
+}
+
+.password-reset__btn:active {
+  top: 3px;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.password-reset__btn i {
+  margin: 0 5px 0 0;
+}
+
+@media screen and (min-width: 576px) {
+  .password-reset__form {
     border-spacing: 36px 36px;
   }
 }
