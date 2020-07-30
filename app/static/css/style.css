@@ -923,6 +923,7 @@ label img {
 }
 
 .profile__table {
+  table-layout: fixed;
   width: 100%;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 8px;
@@ -937,15 +938,8 @@ label img {
 
 .profile__table th {
   width: 180px;
-  text-align: left;
-  padding: 16px 24px;
   background: #F2F8ED;
   border-right: 1px solid rgba(0, 0, 0, 0.125);
-}
-
-.profile__table td {
-  text-align: left;
-  padding: 16px 24px;
 }
 
 .profile__link {
@@ -1085,6 +1079,17 @@ label img {
 
 .deleteno__btn:hover {
   color: #000;
+}
+
+@media screen and (max-width: 575px) {
+  .profile__table tr:not(:last-of-type) td {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  }
+  .profile__table th {
+    width: 100%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+    border-right: 0;
+  }
 }
 
 .contact__form--table {

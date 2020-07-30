@@ -12,29 +12,29 @@
 
 <div class="profile mx-auto">
     <table class="profile__table">
-        <tr>
-            <th>お名前</th>
-            <td>{{ user_data.name }}</td>
+        <tr class="d-block d-sm-table-row">
+            <th class="d-block d-sm-table-cell text-center text-sm-left py-1 py-sm-3 px-4">お名前</th>
+            <td class="d-block d-sm-table-cell text-center text-sm-left py-3 px-4">{{ user_data.name }}</td>
         </tr>
-        <tr>
-            <th>フリガナ</th>
-            <td>{{ user_data.furigana }}</td>
+        <tr class="d-block d-sm-table-row">
+            <th class="d-block d-sm-table-cell text-center text-sm-left py-1 py-sm-3 px-4">フリガナ</th>
+            <td class="d-block d-sm-table-cell text-center text-sm-left py-3 px-4">{{ user_data.furigana }}</td>
         </tr>
-        <tr>
-            <th>メールアドレス</th>
-            <td>{{ user_data.email }}</td>
+        <tr class="d-block d-sm-table-row">
+            <th class="d-block d-sm-table-cell text-center text-sm-left py-1 py-sm-3 px-4">メールアドレス</th>
+            <td class="d-block d-sm-table-cell text-center text-sm-left py-3 px-4 overflow-auto">{{ user_data.email }}</td>
         </tr>
-        <tr>
-            <th>電話番号</th>
-            <td>{{ user_data.tel }}</td>
+        <tr class="d-block d-sm-table-row">
+            <th class="d-block d-sm-table-cell text-center text-sm-left py-1 py-sm-3 px-4">電話番号</th>
+            <td class="d-block d-sm-table-cell text-center text-sm-left py-3 px-4">{{ user_data.tel }}</td>
         </tr>
-        <tr>
-            <th>性別</th>
-            <td id="gender">{{ user_data.get_gender_display }}</td>
+        <tr class="d-block d-sm-table-row">
+            <th class="d-block d-sm-table-cell text-center text-sm-left py-1 py-sm-3 px-4">性別</th>
+            <td id="gender" class="d-block d-sm-table-cell text-center text-sm-left py-3 px-4">{{ user_data.get_gender_display }}</td>
         </tr>
-        <tr>
-            <th>誕生日</th>
-            <td id="birthday">{{ user_data.birthday }}</td>
+        <tr class="d-block d-sm-table-row">
+            <th class="d-block d-sm-table-cell text-center text-sm-left py-1 py-sm-3 px-4">誕生日</th>
+            <td id="birthday" class="d-block d-sm-table-cell text-center text-sm-left py-3 px-4">{{ user_data.birthday }}</td>
         </tr>
     </table>
     <div class="text-left">

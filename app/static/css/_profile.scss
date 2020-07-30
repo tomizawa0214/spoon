@@ -1,79 +1,91 @@
 .profile {
-  max-width: 600px;
-  &__table {
-    width: 100%;
-    border: 1px solid rgba(0, 0, 0, .125);
-    border-radius: 8px;
-    border-collapse: separate;
-    border-spacing: 0;
-    overflow: hidden;
-    tr:not(:last-of-type) {
-      th, td {
-        border-bottom: 1px solid rgba(0, 0, 0, .125);
-      }
+    max-width: 600px;
+    &__table {
+        table-layout: fixed;
+        width: 100%;
+        border: 1px solid rgba(0, 0, 0, .125);
+        border-radius: 8px;
+        border-collapse: separate;
+        border-spacing: 0;
+        overflow: hidden;
+        tr:not(:last-of-type) {
+            th, td {
+                border-bottom: 1px solid rgba(0, 0, 0, .125);
+            }
+        }
+        th {
+            width: 180px;
+            background: #F2F8ED;
+            border-right: 1px solid rgba(0, 0, 0, .125);
+        }
     }
-    th {
-      width: 180px;
-      text-align: left;
-      padding: 16px 24px;
-      background: #F2F8ED;
-      border-right: 1px solid rgba(0, 0, 0, .125);
+    &__link {
+        color: #1B95E0;
+        text-decoration: none;
+        &:hover {
+            text-decoration: underline;
+        }
     }
-    td {
-      text-align: left;
-      padding: 16px 24px;
+    &__btn {
+        @include button;
     }
-  }
-  &__link {
-    color: #1B95E0;
-    text-decoration: none;
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-  &__btn {
-    @include button;
-  }
 }
 
 .history {
-  max-width: 850px;
-  &__header {
-    background: #F2F8ED;
-    &--orderday {
-      font-weight: 700;
-    }
-    &--btn {
-      @include button;
-      width: 130px;
-    }
-  }
-  &__content {
-    width: 450px;
-  }
-  &__img {
-    width: 100px;
-  }
-  &__option-img {
-    width: 60px;
-  }
-  &__comment {
     max-width: 850px;
-  }
+    &__header {
+        background: #F2F8ED;
+        &--orderday {
+            font-weight: 700;
+        }
+        &--btn {
+            @include button;
+            width: 130px;
+        }
+    }
+    &__content {
+        width: 450px;
+    }
+    &__img {
+        width: 100px;
+    }
+    &__option-img {
+        width: 60px;
+    }
+    &__comment {
+        max-width: 850px;
+    }
 }
 
 .delete__text {
-  font-size: 20px;
-  font-weight: 600;
-  color: #E8435F;
+    font-size: 20px;
+    font-weight: 600;
+    color: #E8435F;
 }
 
 .deleteno__btn {
-  @include button;
-  color: #000;
-  background: #CED4DA;
-  box-shadow: 0 3px 0 #94A0AC;
-  &:hover {
-    color: #000;
-  }
+    @include button;
+        color: #000;
+        background: #CED4DA;
+        box-shadow: 0 3px 0 #94A0AC;
+    &:hover {
+        color: #000;
+    }
+}
+
+@media screen and ( max-width: 575px ) {
+    .profile {
+        &__table {
+            tr:not(:last-of-type) {
+                td {
+                    border-bottom: 1px solid rgba(0, 0, 0, .125);
+                }
+            }
+            th {
+                width: 100%;
+                border-bottom: 1px solid rgba(0, 0, 0, .125);
+                border-right: 0;
+            }
+        }
+    }
 }
