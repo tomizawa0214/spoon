@@ -1,27 +1,47 @@
 .access {
-    &__name {
-        font-size: 20px;
-        font-weight: 700;
-        letter-spacing: .5px;
-        &--e {
-            @include E-font;
-            font-size: 25px;
-        }
-    }
     &__map {
-        height: 430px;
+        max-width: 700px;
         background: #F2F8ED;
-        &--img {
-            height: 430px;
-            object-fit: cover;
+    }
+    &__info {
+        &--name {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: .5px;
+            &--e {
+                @include E-font;
+                font-size: 25px;
+            }
+        }
+        &--table {
+            table-layout: fixed;
+            border-collapse: collapse;
+            tr {
+                border-top: 1px solid rgba(0, 0, 0, .125);
+                border-bottom: 1px solid rgba(0, 0, 0, .125);
+                th {
+                    padding: 17.8px 0;
+                    width: 94px;
+                }
+                &--map {
+                    color: #1B95E0;
+                    text-decoration: none;
+                    &:hover {
+                    text-decoration: underline;
+                    }
+                }
+            }
         }
     }
-    &__adress {
-        &--map {
-            color: #1B95E0;
-            text-decoration: none;
-            &:hover {
-            text-decoration: underline;
+}
+
+@media screen and ( min-width: 992px ) {
+    .access {
+        align-items: flex-start;
+        flex-wrap: nowrap;
+        &__info {
+            &--table {
+                width: 100%;
             }
         }
     }

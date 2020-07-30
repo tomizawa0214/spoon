@@ -6,9 +6,6 @@
             border-collapse: separate;
             border-spacing: 0;
             background: #F2F8ED;
-            // &--body, tr, th, td {
-            //     width: 100%;
-            // }
         }
         &--btn {
             @include button;

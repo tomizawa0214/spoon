@@ -10,46 +10,43 @@
     <span>アクセス</span>
 </h1>
 
-<div class="access row m-0">
-    <div class="access__map col-7 card p-0">
-        <img class="access__map--img" src="{% static 'img/spoon_地図.svg' %}">
-    </div>
-    <div class="col-5 pl-5 pr-0">
-        <p class="access__name ml-3 mb-5">
-            <span class="access__name--e mr-3">spoon</span>
+<div class="access row justify-content-center m-0">
+    <img class="access__map card col-lg-7 p-0" src="{% static 'img/spoon_地図.svg' %}">
+    <div class="access__info col-lg-5 pl-0 pl-lg-4 pt-5 pt-lg-0 pr-0">
+        <p class="access__info--name ml-lg-3 mb-5 text-center text-lg-left">
+            <span class="access__info--name--e mr-2">spoon</span>
             ジェラート＆焼菓子
         </p>
-        <hr>
-        <div class="ml-3">
-            <span class="mr-5">住所　　</span>
-            <a class="access__adress--map" href="https://www.google.co.jp/maps/place/spoon+%E3%82%B8%E3%82%A7%E3%83%A9%E3%83%BC%E3%83%88%EF%BC%86%E7%84%BC%E3%81%8D%E8%8F%93%E5%AD%90/@36.3803419,139.0091424,469m/data=!3m2!1e3!4b1!4m5!3m4!1s0x601e8dfaabf8e28b:0x3b529be4bc41202a!8m2!3d36.3803397!4d139.0102367?hl=ja">群馬県高崎市菅谷町1243-10</a>
-        </div>
-        <hr>
-        <div class="ml-3">
-            <span class="mr-5">電話番号</span>
-            <span>027-310-0112</span>
-        </div>
-        <hr>
-        <div class="ml-3">
-            <span class="mr-5">営業時間</span>
-            <span>11:00～18:00</span>
-        </div>
-        <hr>
-        <div class="ml-3">
-            <span class="mr-5">定休日　</span>
-            <span>不定休</span>
-        </div>
-        <hr>
-        <div class="ml-3">
-            <span class="mr-5">駐車場　</span>
-            <span>あり（5台）</span>
-        </div>
-        <hr>
-        <div class="ml-3">
-            <span class="mr-5">席数　　</span>
-            <span>2席</span>
-        </div>
-        <hr>
+        <table class="access__info--table mx-auto">
+            <tbody>
+                <tr>
+                    <th class="pl-4">住所</th>
+                    <td class="pl-4 pr-3">
+                        <a class="access__info--table--map" href="https://www.google.co.jp/maps/place/spoon+%E3%82%B8%E3%82%A7%E3%83%A9%E3%83%BC%E3%83%88%EF%BC%86%E7%84%BC%E3%81%8D%E8%8F%93%E5%AD%90/@36.3803419,139.0091424,469m/data=!3m2!1e3!4b1!4m5!3m4!1s0x601e8dfaabf8e28b:0x3b529be4bc41202a!8m2!3d36.3803397!4d139.0102367?hl=ja">群馬県高崎市菅谷町1243-10</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="pl-4">電話番号</th>
+                    <td class="pl-4">027-310-0112</td>
+                </tr>
+                <tr>
+                    <th class="pl-4">営業時間</th>
+                    <td class="pl-4">11:00～18:00</td>
+                </tr>
+                <tr>
+                    <th class="pl-4">定休日</th>
+                    <td class="pl-4">不定休</td>
+                </tr>
+                <tr>
+                    <th class="pl-4">駐車場</th>
+                    <td class="pl-4">あり（5台）</td>
+                </tr>
+                <tr>
+                    <th class="pl-4">席数</th>
+                    <td class="pl-4">2席</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 {% endblock %}

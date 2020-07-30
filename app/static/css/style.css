@@ -133,35 +133,57 @@ main {
   }
 }
 
-.access__name {
+.access__map {
+  max-width: 700px;
+  background: #F2F8ED;
+}
+
+.access__info--name {
   font-size: 20px;
   font-weight: 700;
   letter-spacing: .5px;
 }
 
-.access__name--e {
+.access__info--name--e {
   font-family: "Montserrat", "Roboto", "游ゴシック体", "Yu Gothic", YuGothic, "游ゴシック", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", MeiryoKe_PGothic, "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
   font-size: 25px;
 }
 
-.access__map {
-  height: 430px;
-  background: #F2F8ED;
+.access__info--table {
+  table-layout: fixed;
+  border-collapse: collapse;
 }
 
-.access__map--img {
-  height: 430px;
-  -o-object-fit: cover;
-     object-fit: cover;
+.access__info--table tr {
+  border-top: 1px solid rgba(0, 0, 0, 0.125);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
 }
 
-.access__adress--map {
+.access__info--table tr th {
+  padding: 17.8px 0;
+  width: 94px;
+}
+
+.access__info--table tr--map {
   color: #1B95E0;
   text-decoration: none;
 }
 
-.access__adress--map:hover {
+.access__info--table tr--map:hover {
   text-decoration: underline;
+}
+
+@media screen and (min-width: 992px) {
+  .access {
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+    -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+  }
+  .access__info--table {
+    width: 100%;
+  }
 }
 
 .header {
