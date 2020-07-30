@@ -844,7 +844,7 @@ label img {
   }
 }
 
-.logout__form--btn {
+.logout__btn {
   position: relative;
   width: 200px;
   margin: 50px 0 80px;
@@ -858,18 +858,18 @@ label img {
   transition: .3s;
 }
 
-.logout__form--btn:hover {
+.logout__btn:hover {
   color: #fff;
   opacity: .7;
 }
 
-.logout__form--btn:active {
+.logout__btn:active {
   top: 3px;
   -webkit-box-shadow: none;
           box-shadow: none;
 }
 
-.logout__form--btn i {
+.logout__btn i {
   margin: 0 5px 0 0;
 }
 
@@ -1478,4 +1478,33 @@ label img {
   .password-reset__form {
     border-spacing: 36px 36px;
   }
+}
+
+.delete__btn {
+  position: relative;
+  width: 200px;
+  margin: 50px 0 80px;
+  color: #fff;
+  background: #E8435F;
+  -webkit-box-shadow: 0 3px 0 #AC1531;
+          box-shadow: 0 3px 0 #AC1531;
+  border: 0;
+  font-weight: bold;
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+
+.delete__btn:hover {
+  color: #fff;
+  opacity: .7;
+}
+
+.delete__btn:active {
+  top: 3px;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.delete__btn i {
+  margin: 0 5px 0 0;
 }

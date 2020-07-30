@@ -13,14 +13,19 @@
 <div class="text-center mb-4">
     <img class="done-check" src="{% static 'img/delete.svg' %}">
 </div>
-<p class="delete__text text-center mb-5">退会手続きを実行します。</p>
-<p class="text-center">
-    下記ボタンを押すと退会手続きを実行します。<br>
-    オーダーサービスのご利用はできなくなり、お客様の情報はすべて削除されます。<br>
-    会員情報は元に戻せません。本当によろしいですか？
-</p>
+
+<div class="mx-auto text-center m-0">
+    <p class="delete__text d-inline-block text-left mb-5">退会手続きを実行します。</p><br>
+    <p class="d-inline-block text-left m-0">
+        下記ボタンを押すと退会手続きを実行します。<br>
+        会員サービスのご利用はできなくなり、<br class="d-none d-sm-block">
+        お客様の情報はすべて削除されます。<br>
+        会員情報は元に戻せません。本当によろしいですか？
+    </p>
+</div>
+
 <div class="text-center">
-    <a class="profile__btn btn rounded-pill mb-0" href="{% url 'delete_complete' %}" ontouchstart="">はい、退会します</a><br>
-    <button type="button" class="deleteno__btn btn rounded-pill mt-4" onclick="history.back()" ontouchstart="">いいえ、退会しません</button>
+    <a class="delete__btn btn rounded-pill mb-0" href="{% url 'delete_complete' %}" ontouchstart="" onfocus="this.blur();">はい、退会します</a><br>
+    <button type="button" class="deleteno__btn btn rounded-pill mt-4" onclick="history.back()" ontouchstart="" onfocus="this.blur();">いいえ、退会しません</button>
 </div>
 {% endblock %}
