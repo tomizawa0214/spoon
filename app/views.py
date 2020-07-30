@@ -554,6 +554,18 @@ class ContactThanksView(View):
         })
 
 
+class CompanyView(View):
+    def get(self, request, *args, **kwargs):
+        # 未注文のカート件数を取得
+        count = None
+        if request.user.is_authenticated:
+            count = Cart.objects.filter(user=request.user, ordered=False).count()
+
+        return render(request, 'app/company.html', {
+            'count': count
+        })
+
+
 class IndexView(View):
     def get(self, request, *args, **kwargs):
         # 前日日付分の注文フラグを完了にする

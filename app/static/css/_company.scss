@@ -1,0 +1,25 @@
+.company {
+    table-layout: fixed;
+    border-collapse: collapse;
+    tr {
+        border-top: 1px solid rgba(0, 0, 0, .125);
+        border-bottom: 1px solid rgba(0, 0, 0, .125);
+        th {
+            width: 132px;
+        }
+        &:first-of-type {
+            border-top: 0;
+        }
+    }
+}
+
+
+@media screen and ( max-width: 575px ) {
+    .company {
+        tr {
+            th {
+                width: 120px;
+            }
+        }
+    }
+}

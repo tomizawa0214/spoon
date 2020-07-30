@@ -134,6 +134,30 @@ main {
   }
 }
 
+.company {
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+.company tr {
+  border-top: 1px solid rgba(0, 0, 0, 0.125);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.company tr th {
+  width: 132px;
+}
+
+.company tr:first-of-type {
+  border-top: 0;
+}
+
+@media screen and (max-width: 575px) {
+  .company tr th {
+    width: 120px;
+  }
+}
+
 .access__map {
   max-width: 700px;
   background: #F2F8ED;
