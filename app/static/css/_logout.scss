@@ -1,7 +1,5 @@
 .logout {
-  &__form {
-    &--btn {
+    &__btn {
       @include button;
     }
-  }
 }

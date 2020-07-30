@@ -9,11 +9,11 @@
     <span>ログアウト</span>
 </h1>
 
-<div class="logout m-auto">
-    <p class="text-center m-auto">ログアウトしますか？</p>
-    <form method="POST" class="logout__form text-center">
+<div class="mx-auto text-center">
+    <p class="d-inline-block text-left">ログアウトしますか？</p>
+    <form method="POST" class="text-center">
         {% csrf_token %}
-        <button type="submit" class="logout__form--btn btn rounded-pill" ontouchstart="">
+        <button type="submit" class="logout__btn btn rounded-pill" ontouchstart="" onfocus="this.blur();">
             <i class="fas fa-sign-out-alt fa-fw" aria-hidden="true"></i>ログアウト
         </button>
     </form>
