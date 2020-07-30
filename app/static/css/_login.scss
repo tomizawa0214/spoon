@@ -1,5 +1,6 @@
 .login {
     &__link {
+        font-size: 14px;
         color: #1B95E0;
         text-decoration: none;
         &:hover {
@@ -8,19 +9,32 @@
     }
     &__form {
         &--table {
-            border-collapse: separate;
-            border-spacing: 24px 36px;
+            table-layout: fixed;
+            width: 100%;
             max-width: 600px;
+            border-collapse: separate;
+            border-spacing: 24px 24px;
             background: #F2F8ED;
-            td {
-                width: 500px;
-            }
         }
         &--save {
             letter-spacing: 0;
         }
         &--btn {
             @include button;
+        }
+    }
+}
+
+
+@media screen and ( min-width: 576px ) {
+    .login {
+        &__form {
+            &--table {
+                border-spacing: 36px 36px;
+                // td {
+                //     max-width: 450px;
+                // }
+            }
         }
     }
 }

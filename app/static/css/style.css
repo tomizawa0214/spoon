@@ -786,6 +786,7 @@ label img {
 }
 
 .login__link {
+  font-size: 14px;
   color: #1B95E0;
   text-decoration: none;
 }
@@ -795,14 +796,12 @@ label img {
 }
 
 .login__form--table {
-  border-collapse: separate;
-  border-spacing: 24px 36px;
+  table-layout: fixed;
+  width: 100%;
   max-width: 600px;
+  border-collapse: separate;
+  border-spacing: 24px 24px;
   background: #F2F8ED;
-}
-
-.login__form--table td {
-  width: 500px;
 }
 
 .login__form--save {
@@ -836,6 +835,12 @@ label img {
 
 .login__form--btn i {
   margin: 0 5px 0 0;
+}
+
+@media screen and (min-width: 576px) {
+  .login__form--table {
+    border-spacing: 36px 36px;
+  }
 }
 
 .logout__form--btn {

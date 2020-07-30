@@ -10,15 +10,15 @@
     <span>ログイン</span>
 </h1>
 
-<div class="login mx-auto">
-    <p class="text-center mb-4">
+<div class="login mx-auto text-center">
+    <p class="d-inline-block text-left mb-4">
         アカウントをお持ちでない場合は、
         <a class="login__link" href="{% url 'account_signup' %}">こちら</a>
         から会員登録をお願いします。
     </p>
     <form method="POST" class="login__form text-center">
         {% csrf_token %}
-        <table class="login__form--table card mx-auto p-3 mb-5">
+        <table class="login__form--table d-table card mx-auto p-sm-3">
             <tbody class="mx-auto">
                 <tr>
                     <td>
