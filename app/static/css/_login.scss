@@ -1,26 +1,26 @@
 .login {
-  &__link {
-    color: #1B95E0;
-    text-decoration: none;
-    &:hover {
-      text-decoration: underline;
+    &__link {
+        color: #1B95E0;
+        text-decoration: none;
+        &:hover {
+            text-decoration: underline;
+        }
     }
-  }
-  &__form {
-    &--table {
-      border-collapse: separate;
-      border-spacing: 24px 36px;
-      max-width: 600px;
-      background: #F2F8ED;
-      td {
-        width: 500px;
-      }
+    &__form {
+        &--table {
+            border-collapse: separate;
+            border-spacing: 24px 36px;
+            max-width: 600px;
+            background: #F2F8ED;
+            td {
+                width: 500px;
+            }
+        }
+        &--save {
+            letter-spacing: 0;
+        }
+        &--btn {
+            @include button;
+        }
     }
-    &--save {
-      letter-spacing: 0;
-    }
-    &--btn {
-      @include button;
-    }
-  }
 }

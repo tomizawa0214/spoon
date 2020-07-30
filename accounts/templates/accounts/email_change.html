@@ -7,17 +7,19 @@
 
 {% block content %}
 <h1 class="title">
-    <span>メールアドレス変更</span>
+    <span class="px-3">メールアドレス変更</span>
 </h1>
 
-<div class="text-center">
-    <p class="mb-4">
-        メールを送信してメールアドレスの変更手続きを行います。<br>
-        下記にご希望の新しいメールアドレスをご入力ください。
-    </p>
-    <form method="POST">
+<div class="text-sm-center">
+    <div class="text-center mx-auto">
+        <p class="d-inline-block text-left mb-4">
+            メールを送信してメールアドレスの変更手続きを行います。<br>
+            下記にご希望の新しいメールアドレスをご入力ください。
+        </p>
+    </div>
+    <form method="POST" class="text-center">
         {% csrf_token %}
-        <table class="login__form--table card mx-auto p-3 mb-5">
+        <table class="email-change__form d-table card mx-auto">
             <tbody class="mx-auto">
                 <tr>
                     <td>
@@ -38,7 +40,7 @@
                 </tr>
             </tbody>
         </table>
-        <button type="submit" class="login__form--btn btn rounded-pill" ontouchstart="">
+        <button type="submit" class="email-change__btn btn rounded-pill" ontouchstart="" onfocus="this.blur();">
             <i class="fas fa-paper-plane fa-fw" aria-hidden="true"></i>送信
         </button>
     </form>
