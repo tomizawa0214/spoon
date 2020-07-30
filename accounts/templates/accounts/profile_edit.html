@@ -15,35 +15,37 @@
         {% csrf_token %}
         <table class="profile__table">
             <tbody>
-                <tr>
-                    <th>お名前</th>
-                    <td>{% render_field form.name class="form-control"%}</td>
+                <tr class="d-block d-sm-table-row">
+                    <th class="d-block d-sm-table-cell text-center text-sm-left py-1 py-sm-3 px-4">お名前</th>
+                    <td class="d-block d-sm-table-cell text-center text-sm-left py-3 px-4">{% render_field form.name class="form-control"%}</td>
                 </tr>
-                <tr>
-                    <th>フリガナ</th>
-                    <td>{% render_field form.furigana class="form-control"%}</td>
+                <tr class="d-block d-sm-table-row">
+                    <th class="d-block d-sm-table-cell text-center text-sm-left py-1 py-sm-3 px-4">フリガナ</th>
+                    <td class="d-block d-sm-table-cell text-center text-sm-left py-3 px-4">{% render_field form.furigana class="form-control"%}</td>
                 </tr>
-                <tr>
-                    <th>メールアドレス</th>
-                    <td><a class="profile__link d-inline-block mt-1" href="{% url 'email_change' %}">メールアドレスの変更手続きはこちら</a></td>
+                <tr class="d-block d-sm-table-row">
+                    <th class="d-block d-sm-table-cell text-center text-sm-left py-1 py-sm-3 px-4">メールアドレス</th>
+                    <td class="d-block d-sm-table-cell text-center text-sm-left py-3 px-4">
+                        <a class="profile__link d-inline-block mt-1" href="{% url 'email_change' %}">メールアドレスの変更手続きはこちら</a>
+                    </td>
                 </tr>
-                <tr>
-                    <th>電話番号</th>
-                    <td>{% render_field form.tel class="form-control"%}</td>
+                <tr class="d-block d-sm-table-row">
+                    <th class="d-block d-sm-table-cell text-center text-sm-left py-1 py-sm-3 px-4">電話番号</th>
+                    <td class="d-block d-sm-table-cell text-center text-sm-left py-3 px-4">{% render_field form.tel class="form-control"%}</td>
                 </tr>
-                <tr>
-                    <th>性別</th>
+                <tr class="d-block d-sm-table-row">
+                    <th class="d-block d-sm-table-cell text-center text-sm-left py-1 py-sm-3 px-4">性別</th>
                     {% if user_data.get_gender_display == None or user_data.get_gender_display == '' %}
-                        <td>{% render_field form.gender class="form-control w-25" %}</td>
+                        <td class="d-block d-sm-table-cell text-center text-sm-left py-3 px-4">{% render_field form.gender class="form-control" %}</td>
                     {% else %}
-                        <td>{{ user_data.get_gender_display }}</td>
+                        <td class="d-block d-sm-table-cell text-center text-sm-left py-3 px-4">{{ user_data.get_gender_display }}</td>
                     {% endif %}
                 </tr>
-                <tr>
-                    <th>誕生日</th>
+                <tr class="d-block d-sm-table-row">
+                    <th class="d-block d-sm-table-cell text-center text-sm-left py-1 py-sm-3 px-4">誕生日</th>
                     {% if user_data.birthday == None %}
-                        <td class="text-left">
-                            <div class="d-flex align-items-center">
+                        <td class="d-block d-sm-table-cell text-left py-3 px-4">
+                            <div class="profile__table--birthday d-sm-flex align-items-center">
                                 {% render_field form.birthday class="form-control" %}
                             </div>
                             {% for field in form %}
@@ -60,15 +62,15 @@
                             {% endfor %}
                         </td>
                     {% else %}
-                        <td>{{ user_data.birthday }}</td>
+                        <td class="d-block d-sm-table-cell text-center text-sm-left py-3 px-4">{{ user_data.birthday }}</td>
                     {% endif %}
                 </tr>
             </tbody>
         </table>
         <p class="help-text text-left mt-1 mb-0">※性別・誕生日は初回登録以降変更できません。</p>
         <div class="position-relative">
-            <button type="button" class="back-btn btn rounded-pill" onclick="history.back()" ontouchstart="">戻る</button>
-            <button class="profile__btn btn rounded-pill" type="submit" ontouchstart="">
+            <button type="button" class="d-none d-sm-block back-btn btn rounded-pill" onclick="history.back()" ontouchstart="" onfocus="this.blur();">戻る</button>
+            <button class="profile__btn btn rounded-pill" type="submit" ontouchstart="" onfocus="this.blur();">
                 <i class="fas fa-user-plus fa-fw" aria-hidden="true"></i>登録
             </button>
         </div>
@@ -87,11 +89,11 @@
     // 誕生日に年月日追加
     if ( '{{ user_data.birthday }}' == 'None' || '{{ user_data.birthday }}' == '' ) {
         const year = document.getElementById('id_birthday_year');
-        const element = Object.assign(document.createElement('span'),{ className: 'ml-1 mr-4', textContent: '年'});
+        const element = Object.assign(document.createElement('span'),{ className: 'ml-1 mr-sm-3', textContent: '年'});
         year.parentNode.insertBefore(element, year.nextSibling);
 
         const month = document.getElementById('id_birthday_month');
-        const element2 = Object.assign(document.createElement('span'),{ className: 'ml-1 mr-4', textContent: '月'});
+        const element2 = Object.assign(document.createElement('span'),{ className: 'ml-1 mr-sm-3', textContent: '月'});
         month.parentNode.insertBefore(element2, month.nextSibling);
 
         const day = document.getElementById('id_birthday_day');

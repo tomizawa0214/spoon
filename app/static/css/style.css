@@ -1123,6 +1123,13 @@ label img {
     border-bottom: 1px solid rgba(0, 0, 0, 0.125);
     border-right: 0;
   }
+  .profile__table--birthday {
+    display: -ms-grid !important;
+    display: grid !important;
+    -ms-grid-columns: 1fr auto !important;
+        grid-template-columns: 1fr auto !important;
+    row-gap: 16px;
+  }
   .profile__link {
     max-width: 380px;
   }
@@ -1139,6 +1146,19 @@ label img {
   }
   .history__header--btn {
     width: 200px;
+  }
+  #id_gender {
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 576px) {
+  #id_gender {
+    width: 33%;
+  }
+  #id_birthday_month, #id_birthday_day {
+    width: 60%;
+    padding: 6px;
   }
 }
 

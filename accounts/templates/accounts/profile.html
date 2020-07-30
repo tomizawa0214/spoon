@@ -12,30 +12,32 @@
 
 <div class="profile mx-auto">
     <table class="profile__table">
-        <tr class="d-block d-sm-table-row">
-            <th class="d-block d-sm-table-cell text-center text-sm-left py-1 py-sm-3 px-4">お名前</th>
-            <td class="d-block d-sm-table-cell text-center text-sm-left py-3 px-4">{{ user_data.name }}</td>
-        </tr>
-        <tr class="d-block d-sm-table-row">
-            <th class="d-block d-sm-table-cell text-center text-sm-left py-1 py-sm-3 px-4">フリガナ</th>
-            <td class="d-block d-sm-table-cell text-center text-sm-left py-3 px-4">{{ user_data.furigana }}</td>
-        </tr>
-        <tr class="d-block d-sm-table-row">
-            <th class="d-block d-sm-table-cell text-center text-sm-left py-1 py-sm-3 px-4">メールアドレス</th>
-            <td class="d-block d-sm-table-cell text-center text-sm-left py-3 px-4 overflow-auto">{{ user_data.email }}</td>
-        </tr>
-        <tr class="d-block d-sm-table-row">
-            <th class="d-block d-sm-table-cell text-center text-sm-left py-1 py-sm-3 px-4">電話番号</th>
+        <tbody>
+            <tr class="d-block d-sm-table-row">
+                <th class="d-block d-sm-table-cell text-center text-sm-left py-1 py-sm-3 px-4">お名前</th>
+                <td class="d-block d-sm-table-cell text-center text-sm-left py-3 px-4">{{ user_data.name }}</td>
+            </tr>
+            <tr class="d-block d-sm-table-row">
+                <th class="d-block d-sm-table-cell text-center text-sm-left py-1 py-sm-3 px-4">フリガナ</th>
+                <td class="d-block d-sm-table-cell text-center text-sm-left py-3 px-4">{{ user_data.furigana }}</td>
+            </tr>
+            <tr class="d-block d-sm-table-row">
+                <th class="d-block d-sm-table-cell text-center text-sm-left py-1 py-sm-3 px-4">メールアドレス</th>
+                <td class="d-block d-sm-table-cell text-center text-sm-left py-3 px-4 overflow-auto">{{ user_data.email }}</td>
+            </tr>
+            <tr class="d-block d-sm-table-row">
+                <th class="d-block d-sm-table-cell text-center text-sm-left py-1 py-sm-3 px-4">電話番号</th>
             <td class="d-block d-sm-table-cell text-center text-sm-left py-3 px-4">{{ user_data.tel }}</td>
-        </tr>
-        <tr class="d-block d-sm-table-row">
-            <th class="d-block d-sm-table-cell text-center text-sm-left py-1 py-sm-3 px-4">性別</th>
-            <td id="gender" class="d-block d-sm-table-cell text-center text-sm-left py-3 px-4">{{ user_data.get_gender_display }}</td>
-        </tr>
-        <tr class="d-block d-sm-table-row">
-            <th class="d-block d-sm-table-cell text-center text-sm-left py-1 py-sm-3 px-4">誕生日</th>
-            <td id="birthday" class="d-block d-sm-table-cell text-center text-sm-left py-3 px-4">{{ user_data.birthday }}</td>
-        </tr>
+            </tr>
+            <tr class="d-block d-sm-table-row">
+                <th class="d-block d-sm-table-cell text-center text-sm-left py-1 py-sm-3 px-4">性別</th>
+                <td id="gender" class="d-block d-sm-table-cell text-center text-sm-left py-3 px-4">{{ user_data.get_gender_display }}</td>
+            </tr>
+            <tr class="d-block d-sm-table-row">
+                <th class="d-block d-sm-table-cell text-center text-sm-left py-1 py-sm-3 px-4">誕生日</th>
+                <td id="birthday" class="d-block d-sm-table-cell text-center text-sm-left py-3 px-4">{{ user_data.birthday }}</td>
+            </tr>
+        </tbody>
     </table>
     <div class="profile__link text-left">
         <a class="profile__link--text d-inline-block mt-1" href="{% url 'email_change' %}">メールアドレスの変更手続きはこちら</a><br>
@@ -43,7 +45,7 @@
         <a class="profile__link--text d-inline-block mt-1" href="{% url 'delete_confirm' %}">会員サービスの退会手続きはこちら</a>
     </div>
     <div class="text-center">
-        <a class="profile__btn btn rounded-pill mb-5" href="{% url 'profile_edit' %}" ontouchstart="">
+        <a class="profile__btn btn rounded-pill mb-5" href="{% url 'profile_edit' %}" ontouchstart="" onfocus="this.blur();">
             <i class="fas fa-edit fa-fw" aria-hidden="true"></i>編集
         </a>
     </div>
@@ -75,7 +77,7 @@
                     <span>\{{ order.get_total | intcomma }}</span>
                 </div>
             </div>
-            <button type="button" id="{{ order.id }}" class="history__header--btn mt-0 mb-4 my-sm-0 mr-sm-3 p-sm-3 p-md-2 btn" onclick="sameOrder(this);" ontouchstart="">再度注文</button>
+            <button type="button" id="{{ order.id }}" class="history__header--btn mt-0 mb-4 my-sm-0 mr-sm-3 p-sm-3 p-md-2 btn" onclick="sameOrder(this);" ontouchstart="" onfocus="this.blur();">再度注文</button>
         </div>
     </div>
     {% for cart in order.cart.all %}
@@ -168,6 +170,7 @@
     <p class="text-center">現在ご注文履歴はありません。<br>ぜひお買い物をお楽しみください。</p>
 {% endfor %}
 {% endblock %}
+
 
 {% block extrajs %}
 <script>
