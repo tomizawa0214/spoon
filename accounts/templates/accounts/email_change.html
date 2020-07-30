@@ -10,16 +10,14 @@
     <span class="px-3">メールアドレス変更</span>
 </h1>
 
-<div class="text-sm-center">
-    <div class="text-center mx-auto">
-        <p class="d-inline-block text-left mb-4">
-            メールを送信してメールアドレスの変更手続きを行います。<br>
-            下記にご希望の新しいメールアドレスをご入力ください。
-        </p>
-    </div>
+<div class="mx-auto text-center">
+    <p class="d-inline-block text-left mb-4">
+        メールを送信してメールアドレスの変更手続きを行います。<br>
+        下記にご希望の新しいメールアドレスをご入力ください。
+    </p>
     <form method="POST" class="text-center">
         {% csrf_token %}
-        <table class="email-change__form d-table card mx-auto">
+        <table class="email-change__form d-table card mx-auto p-sm-3">
             <tbody class="mx-auto">
                 <tr>
                     <td>
