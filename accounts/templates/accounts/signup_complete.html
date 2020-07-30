@@ -13,9 +13,12 @@
 <div class="text-center mb-4">
     <img class="done-check" src="{% static 'img/check.svg' %}">
 </div>
-<p class="done-text text-center mb-5">本登録が完了しました。</p>
-<p class="text-center">登録されたメールアドレスとパスワードでログインしてください。</p>
+<div class="mx-auto text-center">
+    <p class="done-text d-inline-block text-left mb-5">本登録が完了しました</p><br>
+    <p class="d-inline-block text-left">退登録されたメールアドレスとパスワードでログインしてください。</p>
+</div>
+
 <div class="text-center">
-    <a class="signup__form--btn btn rounded-pill" href="{% url 'account_login' %}" ontouchstart="">ログイン画面へ</a>
+    <a class="signup__btn btn rounded-pill" href="{% url 'account_login' %}" ontouchstart="" onfocus="this.blur();">ログイン画面へ</a>
 </div>
 {% endblock %}

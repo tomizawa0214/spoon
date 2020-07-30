@@ -1,25 +1,94 @@
 .signup {
-  &__required {
-    color: #E8435F;
-    font-weight: 700;
-  }
-  &__form {
-    &--table {
-      border-collapse: separate;
-      border-spacing: 24px 36px;
-      max-width: 1000px;
-      background: #F2F8ED;
-      td {
-        width: 500px;
-      }
+    &__required {
+        color: #E8435F;
+        font-weight: 700;
     }
-    &--terms {
-      max-width: 1000px;
-      height: 300px;
-      overflow-y: scroll;
+    &__table {
+        table-layout: fixed;
+        width: 100%;
+        max-width: 1000px;
+        border-collapse: separate;
+        border-spacing: 0;
+        background: #F2F8ED;
     }
-    &--btn {
-      @include button;
+    &__terms {
+        max-width: 1000px;
+        height: 300px;
+        font-size: 14px;
+        line-height: 22px;
+        letter-spacing: .5px;
+        overflow-y: scroll;
     }
-  }
+    &__btn {
+        @include button;
+    }
+}
+
+.signup-ck {
+    max-width: 600px;
+    &__table {
+        table-layout: fixed;
+        width: 100%;
+        border: 1px solid rgba(0, 0, 0, .125);
+        border-radius: 2px;
+        border-collapse: separate;
+        border-spacing: 0;
+        overflow: hidden;
+        tr:not(:last-of-type) {
+            th, td {
+                border-bottom: 1px solid rgba(0, 0, 0, .125);
+            }
+        }
+        th {
+            width: 180px;
+            background: #F2F8ED;
+            border-right: 1px solid rgba(0, 0, 0, .125);
+        }
+    }
+}
+
+
+@media screen and ( max-width: 575px ) {
+    .signup {
+        &__table {
+            &--birthday {
+                display: grid !important;
+                grid-template-columns: 1fr auto !important;
+                row-gap: 16px;
+            }
+            th {
+                letter-spacing: .6px;
+            }
+        }
+    }
+
+    .signup-ck {
+        max-width: 380px;
+        &__table {
+            tr:not(:last-of-type) {
+                td {
+                    border-bottom: 1px solid rgba(0, 0, 0, .125);
+                }
+            }
+            th {
+                width: 100%;
+                border-bottom: 1px solid rgba(0, 0, 0, .125);
+                border-right: 0;
+            }
+        }
+    }
+}
+
+@media screen and ( min-width: 768px ) {
+    .signup {
+        &__table {
+            max-width: 800px;
+            border-spacing: 24px 36px;
+            &--body {
+                th {
+                    width: 230px;
+                }
+            }
+        }
+    }
 }

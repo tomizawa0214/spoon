@@ -9,51 +9,53 @@
     <span>会員登録</span>
 </h1>
 
-<div class="profile mx-auto">
-    <p class="text-center mb-4">以下の内容でよろしいでしょうか？</p>
-    <table class="profile__table">
-        <tr>
-            <th>お名前</th>
-            <td>{{ name }}</td>
-        </tr>
-        <tr>
-            <th>フリガナ</th>
-            <td>{{ furigana }}</td>
-        </tr>
-        <tr>
-            <th>メールアドレス</th>
-            <td>{{ email }}</td>
-        </tr>
-        <tr>
-            <th>電話番号</th>
-            <td>{{ tel }}</td>
-        </tr>
-        <tr>
-            <th>性別</th>
-            {% if gender == None %}
-                <td></td>
-            {% else %}
-                <td id="genderArea">{{ gender }}</td>
-            {% endif %}
-        </tr>
-        <tr>
-            <th>誕生日</th>
-            {% if birthday == None %}
-                <td></td>
-            {% else %}
-                <td>{{ birthday }}</td>
-            {% endif %}
-        </tr>
+<div class="signup-ck mx-auto text-center">
+    <p class="d-inline-block text-center mb-4">以下の内容でよろしいでしょうか？</p>
+    <table class="signup-ck__table">
+        <tbody>
+            <tr class="d-block d-sm-table-row">
+                <th class="d-block d-sm-table-cell text-center text-sm-left py-1 py-sm-3 px-4">お名前</th>
+                <td class="d-block d-sm-table-cell text-center text-sm-left py-3 px-4">{{ name }}</td>
+            </tr>
+            <tr class="d-block d-sm-table-row">
+                <th class="d-block d-sm-table-cell text-center text-sm-left py-1 py-sm-3 px-4">フリガナ</th>
+                <td class="d-block d-sm-table-cell text-center text-sm-left py-3 px-4">{{ furigana }}</td>
+            </tr>
+            <tr class="d-block d-sm-table-row">
+                <th class="d-block d-sm-table-cell text-center text-sm-left py-1 py-sm-3 px-4">メールアドレス</th>
+                <td class="d-block d-sm-table-cell text-center text-sm-left py-3 px-4 overflow-auto">{{ email }}</td>
+            </tr>
+            <tr class="d-block d-sm-table-row">
+                <th class="d-block d-sm-table-cell text-center text-sm-left py-1 py-sm-3 px-4">電話番号</th>
+                <td class="d-block d-sm-table-cell text-center text-sm-left py-3 px-4">{{ tel }}</td>
+            </tr>
+            <tr class="d-block d-sm-table-row">
+                <th class="d-block d-sm-table-cell text-center text-sm-left py-1 py-sm-3 px-4">性別</th>
+                {% if gender == None %}
+                    <td></td>
+                {% else %}
+                    <td id="genderArea" class="d-block d-sm-table-cell text-center text-sm-left py-3 px-4">{{ gender }}</td>
+                {% endif %}
+            </tr>
+            <tr class="d-block d-sm-table-row">
+                <th class="d-block d-sm-table-cell text-center text-sm-left py-1 py-sm-3 px-4">誕生日</th>
+                {% if birthday == None %}
+                    <td></td>
+                {% else %}
+                    <td class="d-block d-sm-table-cell text-center text-sm-left py-3 px-4">{{ birthday }}</td>
+                {% endif %}
+            </tr>
+        </tbody>
     </table>
     <div class="position-relative text-center">
-        <!-- <button type="button" class="back-btn btn rounded-pill" onclick="history.back()">戻る</button> -->
-        <a class="back-btn btn rounded-pill"  href="{% url 'account_signup' %}" ontouchstart="">戻る</a>
-        <a id="signup_done" class="signup__form--btn btn rounded-pill" href="{% url 'account_signup_done' %}" ontouchstart="">
+        <a class="back-btn d-none d-sm-block btn rounded-pill"  href="{% url 'account_signup' %}" ontouchstart="" onfocus="this.blur();">戻る</a>
+        <a id="signup_done" class="signup__btn btn rounded-pill" href="{% url 'account_signup_done' %}" ontouchstart="" onfocus="this.blur();">
             <i class="fas fa-user-plus fa-fw" aria-hidden="true"></i>登録
         </a>
     </div>
 </div>
 {% endblock %}
+
 
 {% block extrajs %}
 <script>
