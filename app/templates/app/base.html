@@ -62,38 +62,38 @@
         </header>
 
         <!-- タブレット・PC用ヘッダー -->
-        <header class="header px-3 p-xl-0 m-3 mx-auto d-none d-sm-flex justify-content-between">
+        <header class="header p-3 mx-auto d-none d-sm-flex justify-content-between">
             <a href="/">
                 <img class="header__logo" src="{% static 'img/spoon_logo.svg' %}">
             </a>
             <div class="d-flex align-items-center">
-                <a class="spfooter__menu d-flex flex-column mr-4" href="/">
-                    <img class="spfooter__menu--icon" src="{% static 'img/home.svg' %}" alt="ホーム">
-                    <span class="spfooter__menu--text">ホーム</span>
+                <a class="header__link d-flex flex-column mr-4" href="/">
+                    <img class="header__link--icon" src="{% static 'img/home.svg' %}" alt="ホーム">
+                    <span class="header__link--text">ホーム</span>
                 </a>
                 {% if user.is_authenticated %}
-                    <a class="spfooter__menu d-flex flex-column mr-4" href="{% url 'profile' %}">
-                        <img class="spfooter__menu--icon" src="{% static 'img/mypage.svg' %}" alt="マイページ">
-                        <span class="spfooter__menu--text">マイページ</span>
+                    <a class="header__link d-flex flex-column mr-4" href="{% url 'profile' %}">
+                        <img class="header__link--icon" src="{% static 'img/mypage.svg' %}" alt="マイページ">
+                        <span class="header__link--text">マイページ</span>
                     </a>
-                    <a class="spfooter__menu cart-jump d-flex flex-column mr-4" href="{% url 'order' %}">
-                        <img class="spfooter__menu--icon" src="{% static 'img/cart.svg' %}" alt="カート">
-                        <span class="spfooter__menu--text">カート
-                            <span class="spfooter__menu--badge badge">{{ count }}</span>
+                    <a class="header__link cart-jump d-flex flex-column mr-4" href="{% url 'order' %}">
+                        <img class="header__link--icon" src="{% static 'img/cart.svg' %}" alt="カート">
+                        <span class="header__link--text">カート
+                            <span class="header__link--badge badge">{{ count }}</span>
                         </span>
                     </a>
-                    <a class="spfooter__menu d-flex flex-column" href="{% url 'account_logout' %}">
-                        <img class="spfooter__menu--icon" src="{% static 'img/logout.svg' %}" alt="ログアウト">
-                        <span class="spfooter__menu--text">ログアウト</span>
+                    <a class="header__link d-flex flex-column" href="{% url 'account_logout' %}">
+                        <img class="header__link--icon" src="{% static 'img/logout.svg' %}" alt="ログアウト">
+                        <span class="header__link--text">ログアウト</span>
                     </a>
                 {% else %}
-                    <a class="spfooter__menu d-flex flex-column mr-4" href="{% url 'account_signup' %}">
-                        <img class="spfooter__menu--icon" src="{% static 'img/signup.svg' %}" alt="会員登録">
-                        <span class="spfooter__menu--text">会員登録</span>
+                    <a class="header__link d-flex flex-column mr-4" href="{% url 'account_signup' %}">
+                        <img class="header__link--icon" src="{% static 'img/signup.svg' %}" alt="会員登録">
+                        <span class="spfooter__link--text">会員登録</span>
                     </a>
-                    <a class="spfooter__menu d-flex flex-column" href="{% url 'account_login' %}">
-                        <img class="spfooter__menu--icon" src="{% static 'img/login.svg' %}" alt="ログイン">
-                        <span class="spfooter__menu--text">ログイン</span>
+                    <a class="header__link d-flex flex-column" href="{% url 'account_login' %}">
+                        <img class="header__link--icon" src="{% static 'img/login.svg' %}" alt="ログイン">
+                        <span class="header__link--text">ログイン</span>
                     </a>
                 {% endif %}
             </div>
