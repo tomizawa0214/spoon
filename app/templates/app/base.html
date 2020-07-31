@@ -14,6 +14,11 @@
     </head>
 
     <body>
+        <!-- Back To Top -->
+        <div class="back-to-top" data-toggle="tooltip" data-placement="left" title="Back to Top">
+            <i class="fas fa-angle-up" aria-hidden="true"></i>
+        </div>
+        
         <!-- スマホ用ヘッダー -->
         <header class="spnav d-sm-none">
             <div class="spnav__header d-flex justify-content-between align-items-center p-2">
@@ -71,7 +76,7 @@
                         <img class="spfooter__menu--icon" src="{% static 'img/mypage.svg' %}" alt="マイページ">
                         <span class="spfooter__menu--text">マイページ</span>
                     </a>
-                    <a class="spfooter__menu d-flex flex-column mr-4" href="{% url 'order' %}">
+                    <a class="spfooter__menu cart-jump d-flex flex-column mr-4" href="{% url 'order' %}">
                         <img class="spfooter__menu--icon" src="{% static 'img/cart.svg' %}" alt="カート">
                         <span class="spfooter__menu--text">カート
                             <span class="spfooter__menu--badge badge">{{ count }}</span>
@@ -140,6 +145,9 @@
             </ul>
         </nav>
         
+        {% block order %}
+        {% endblock %}
+
         <main>
             <div class="container-fluid">
                 {% block content %}
@@ -175,7 +183,7 @@
                     <img class="spfooter__menu--icon" src="{% static 'img/mypage.svg' %}" alt="マイページ">
                     <span class="spfooter__menu--text">マイページ</span>
                 </a>
-                <a class="spfooter__menu d-flex flex-column" href="{% url 'order' %}">
+                <a class="spfooter__menu cart-jump d-flex flex-column" href="{% url 'order' %}">
                     <img class="spfooter__menu--icon" src="{% static 'img/cart.svg' %}" alt="カート">
                     <span class="spfooter__menu--text">カート
                         <span class="spfooter__menu--badge badge">{{ count }}</span>
@@ -216,6 +224,35 @@
                 document.querySelector('.spnav__header--btn--bar2').classList.toggle('bar2-change');
                 document.querySelector('.spnav__header--btn--bar3').classList.toggle('bar3-change');
                 document.querySelector('.spnav__menu').classList.toggle('menu-change');
+            });
+
+            // スクロール量が300に達したらボタン表示。300未満は非表示
+            window.addEventListener('scroll', () => {
+                const pageTopBtn = document.querySelector('.back-to-top');
+                let scroll = document.documentElement.scrollTop || document.body.scrollTop;
+                if (scroll > 300) {
+                    pageTopBtn.style.opacity = '1';
+                } else {
+                    pageTopBtn.style.opacity = null;
+                }
+            });
+
+            // スムーススクロールのフォーマット
+            const scrollFunc = Point => {
+                const point = document.querySelector(Point);　// スクロール先の対象を取得
+                const elemY = point.getBoundingClientRect().top;　// 画面の上端から要素の上端までの距離を取得
+                const scrollY = window.pageYOffset; // 現在のスクロール量を取得
+                const top = elemY + scrollY + (-140); // 対象までのスクロール量を算出
+                
+                window.scroll({
+                    top: top, // スクロール量の設定
+                    behavior: 'smooth' // スクロール動作の設定
+                });
+            }
+            // ページトップへスムーススクロール
+            document.querySelector('.back-to-top').addEventListener('click', e => {
+                e.preventDefault();
+                scrollFunc('html, body');
             });
         </script>
         {% block extrajs %}
