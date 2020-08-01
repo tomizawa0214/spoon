@@ -129,15 +129,28 @@
 
 .order-user {
     &__form {
-        &--table {
-            border-collapse: separate;
-            border-spacing: 24px 36px;
-            max-width: 1000px;
-            background: #F2F8ED;
-            td {
-                width: 500px;
+        table-layout: fixed;
+        width: 100%;
+        max-width: 800px;
+        border-collapse: separate;
+        border-spacing: 24px 36px;
+        background: #F2F8ED;
+        &--body {
+            th {
+                width: 195px;
+            }
+            &--select {
+                &--date {
+                    width: 50%;
+                }
+                &--time {
+                    width: 25%;
+                }
             }
         }
+    }
+    &__help {
+        max-width: 800px;
     }
 }
 
@@ -175,6 +188,9 @@
             width: 250px;
             height: 300px;
         }
+        &__reorder {
+            top: 60px;
+        }
         &__header {
             position: fixed;
             display: grid;
@@ -183,13 +199,13 @@
             top: 60px;
             left: 0;
             z-index: 9998;
-            background: #FFF;
+            background: #FDFDFD;
             &--menu {
                 border-top: 1px solid #A3CD7E;
                 border-bottom: 1px solid #A3CD7E;
                 transition: .3s;
                 cursor: pointer;
-                background-image: linear-gradient(to right, #F2F8ED 0%, #FFF 100%);
+                background-image: linear-gradient(to right, #F2F8ED 0%, #FDFDFD 100%);
                 &--icon {
                     height: 32px;
                 }
@@ -213,19 +229,40 @@
             width: calc( 100vw - calc( 100vw - ( 100% + 30px )));
             margin-left: -15px;
         }
-        // &__select {
-        //     &--img {
-        //         width: 43%;
-        //         max-width: 200px;
-        //     }
-        // }
+    }
+
+    .order-user {
+        &__form {
+            border-spacing: 0;
+            &--body {
+                &--select {
+                    &--date {
+                        width: 100% !important;
+                    }
+                    &--time {
+                        width: 100% !important;
+                    }
+                }
+            }
+        }
     }
 }
 
+
 @media screen and ( max-width: 767px ) {
-    .order {
-        &__cart {
-            max-width: 370px;
+    .order-user {
+        &__form {
+            border-spacing: 0;
+            &--body {
+                &--select {
+                    &--date {
+                        width: 40%;
+                    }
+                    &--time {
+                        width: 20%;
+                    }
+                }
+            }
         }
     }
 }

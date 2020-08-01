@@ -6,19 +6,19 @@
         list-style: none;
         &--item {
             &--menu {
-                color: #FFF;
+                color: #FDFDFD;
                 text-decoration: underline;
                 transition: .3s;
                 &:hover {
                     opacity: .5;
-                    color: #FFF;
+                    color: #FDFDFD;
                 }
             }
         }
     }
 &__copy {
     small {
-        color: #FFF;
+        color: #FDFDFD;
     }
 }
 }
@@ -27,7 +27,7 @@
     .footer {
         &__link {
             &--item {
-                border-right: 1px solid #FFF;
+                border-right: 1px solid #FDFDFD;
             }
         }
     }

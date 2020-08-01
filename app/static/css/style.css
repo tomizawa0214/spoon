@@ -37,7 +37,7 @@ main {
   display: inline-block;
   z-index: 1;
   padding: 0 30px;
-  background: #FFF;
+  background: #FDFDFD;
 }
 
 .title:after {
@@ -73,7 +73,7 @@ main {
   position: relative;
   width: 200px;
   margin: 50px 0 0px;
-  color: #FFF;
+  color: #FDFDFD;
   background: #E8435F;
   -webkit-box-shadow: 0 3px 0 #AC1531;
           box-shadow: 0 3px 0 #AC1531;
@@ -91,7 +91,7 @@ main {
 }
 
 .back-btn:hover {
-  color: #FFF;
+  color: #FDFDFD;
   opacity: .7;
 }
 
@@ -151,7 +151,7 @@ main {
 }
 
 .back-to-top:hover {
-  color: #FFF;
+  color: #FDFDFD;
   border: none;
   background: #E8435F;
   -webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
@@ -288,7 +288,7 @@ main {
   margin-left: -2px;
   padding: 3px 8px;
   font-size: 12px;
-  color: #FFF;
+  color: #FDFDFD;
   background: #E8435F;
 }
 
@@ -306,7 +306,7 @@ main {
   position: fixed;
   width: 100%;
   height: 60px;
-  background: #FFF;
+  background: #FDFDFD;
   border-bottom: 1px solid rgba(0, 0, 0, 0.125);
   pointer-events: auto;
 }
@@ -365,7 +365,7 @@ main {
   max-width: 300px;
   top: 0;
   right: 0;
-  background: #FFF;
+  background: #FDFDFD;
   -webkit-transform: translateX(100%);
           transform: translateX(100%);
   -webkit-transition: .5s ease-out;
@@ -433,7 +433,7 @@ main {
   height: 60px;
   bottom: 0;
   left: 0;
-  background: #FFF;
+  background: #FDFDFD;
   border-top: 1px solid rgba(0, 0, 0, 0.125);
   z-index: 9999;
   -webkit-box-pack: space-evenly;
@@ -469,7 +469,7 @@ main {
   margin-left: -3px;
   padding: 3px 6px;
   font-size: 10px;
-  color: #FFF;
+  color: #FDFDFD;
   background: #E8435F;
 }
 
@@ -749,7 +749,7 @@ main {
   position: relative;
   width: 200px;
   margin: 50px 0 0px;
-  color: #FFF;
+  color: #FDFDFD;
   background: #E8435F;
   -webkit-box-shadow: 0 3px 0 #AC1531;
           box-shadow: 0 3px 0 #AC1531;
@@ -765,7 +765,7 @@ main {
 }
 
 .order__add:hover {
-  color: #FFF;
+  color: #FDFDFD;
   opacity: .7;
 }
 
@@ -781,7 +781,7 @@ main {
   position: relative;
   width: 200px;
   margin: 50px 0 0px;
-  color: #FFF;
+  color: #FDFDFD;
   background: #E8435F;
   -webkit-box-shadow: 0 3px 0 #AC1531;
           box-shadow: 0 3px 0 #AC1531;
@@ -792,7 +792,7 @@ main {
 }
 
 .order__btn:hover {
-  color: #FFF;
+  color: #FDFDFD;
   opacity: .7;
 }
 
@@ -869,7 +869,7 @@ main {
     top: 60px;
     left: 0;
     z-index: 9998;
-    background: #FFF;
+    background: #FDFDFD;
   }
   .order__header--menu {
     border-top: 1px solid #A3CD7E;
@@ -877,8 +877,8 @@ main {
     -webkit-transition: .3s;
     transition: .3s;
     cursor: pointer;
-    background-image: -webkit-gradient(linear, left top, right top, from(#F2F8ED), to(#FFF));
-    background-image: linear-gradient(to right, #F2F8ED 0%, #FFF 100%);
+    background-image: -webkit-gradient(linear, left top, right top, from(#F2F8ED), to(#FDFDFD));
+    background-image: linear-gradient(to right, #F2F8ED 0%, #FDFDFD 100%);
   }
   .order__header--menu--icon {
     height: 32px;
@@ -953,7 +953,7 @@ main {
 }
 
 .footer__link--item--menu {
-  color: #FFF;
+  color: #FDFDFD;
   text-decoration: underline;
   -webkit-transition: .3s;
   transition: .3s;
@@ -961,16 +961,16 @@ main {
 
 .footer__link--item--menu:hover {
   opacity: .5;
-  color: #FFF;
+  color: #FDFDFD;
 }
 
 .footer__copy small {
-  color: #FFF;
+  color: #FDFDFD;
 }
 
 @media screen and (min-width: 576px) {
   .footer__link--item {
-    border-right: 1px solid #FFF;
+    border-right: 1px solid #FDFDFD;
   }
 }
 
@@ -1001,7 +1001,7 @@ main {
   position: relative;
   width: 200px;
   margin: 50px 0 0px;
-  color: #FFF;
+  color: #FDFDFD;
   background: #E8435F;
   -webkit-box-shadow: 0 3px 0 #AC1531;
           box-shadow: 0 3px 0 #AC1531;
@@ -1012,7 +1012,7 @@ main {
 }
 
 .login__form--btn:hover {
-  color: #FFF;
+  color: #FDFDFD;
   opacity: .7;
 }
 
@@ -1030,7 +1030,7 @@ main {
   position: relative;
   width: 200px;
   margin: 50px 0 0px;
-  color: #FFF;
+  color: #FDFDFD;
   background: #E8435F;
   -webkit-box-shadow: 0 3px 0 #AC1531;
           box-shadow: 0 3px 0 #AC1531;
@@ -1041,7 +1041,7 @@ main {
 }
 
 .logout__btn:hover {
-  color: #FFF;
+  color: #FDFDFD;
   opacity: .7;
 }
 
@@ -1076,7 +1076,7 @@ main {
   position: relative;
   width: 200px;
   margin: 50px 0 0px;
-  color: #FFF;
+  color: #FDFDFD;
   background: #E8435F;
   -webkit-box-shadow: 0 3px 0 #AC1531;
           box-shadow: 0 3px 0 #AC1531;
@@ -1087,7 +1087,7 @@ main {
 }
 
 .signup__btn:hover {
-  color: #FFF;
+  color: #FDFDFD;
   opacity: .7;
 }
 
@@ -1190,7 +1190,7 @@ main {
   position: relative;
   width: 200px;
   margin: 50px 0 0px;
-  color: #FFF;
+  color: #FDFDFD;
   background: #E8435F;
   -webkit-box-shadow: 0 3px 0 #AC1531;
           box-shadow: 0 3px 0 #AC1531;
@@ -1201,7 +1201,7 @@ main {
 }
 
 .profile__btn:hover {
-  color: #FFF;
+  color: #FDFDFD;
   opacity: .7;
 }
 
@@ -1225,7 +1225,7 @@ main {
   position: relative;
   width: 200px;
   margin: 50px 0 0px;
-  color: #FFF;
+  color: #FDFDFD;
   background: #E8435F;
   -webkit-box-shadow: 0 3px 0 #AC1531;
           box-shadow: 0 3px 0 #AC1531;
@@ -1237,7 +1237,7 @@ main {
 }
 
 .history__header--btn:hover {
-  color: #FFF;
+  color: #FDFDFD;
   opacity: .7;
 }
 
@@ -1280,7 +1280,7 @@ main {
   position: relative;
   width: 200px;
   margin: 50px 0 0px;
-  color: #FFF;
+  color: #FDFDFD;
   background: #E8435F;
   -webkit-box-shadow: 0 3px 0 #AC1531;
           box-shadow: 0 3px 0 #AC1531;
@@ -1295,7 +1295,7 @@ main {
 }
 
 .deleteno__btn:hover {
-  color: #FFF;
+  color: #FDFDFD;
   opacity: .7;
 }
 
@@ -1406,7 +1406,7 @@ main {
   position: relative;
   width: 200px;
   margin: 50px 0 0px;
-  color: #FFF;
+  color: #FDFDFD;
   background: #E8435F;
   -webkit-box-shadow: 0 3px 0 #AC1531;
           box-shadow: 0 3px 0 #AC1531;
@@ -1417,7 +1417,7 @@ main {
 }
 
 .contact__form--btn:hover {
-  color: #FFF;
+  color: #FDFDFD;
   opacity: .7;
 }
 
@@ -1509,7 +1509,7 @@ main {
   display: inline-block;
   z-index: 1;
   padding: 0 20px;
-  background: #fff;
+  background: #FDFDFD;
 }
 
 .guide__step:after {
@@ -1543,7 +1543,7 @@ main {
   font-size: 25px;
   font-weight: 700;
   color: #E8435F;
-  background: #FFF;
+  background: #FDFDFD;
   border: 2px solid #E8435F;
   border-radius: 50%;
 }
@@ -1566,7 +1566,7 @@ main {
   position: relative;
   width: 200px;
   margin: 50px 0 0px;
-  color: #FFF;
+  color: #FDFDFD;
   background: #E8435F;
   -webkit-box-shadow: 0 3px 0 #AC1531;
           box-shadow: 0 3px 0 #AC1531;
@@ -1577,7 +1577,7 @@ main {
 }
 
 .email-change__btn:hover {
-  color: #FFF;
+  color: #FDFDFD;
   opacity: .7;
 }
 
@@ -1604,7 +1604,7 @@ main {
   position: relative;
   width: 200px;
   margin: 50px 0 0px;
-  color: #FFF;
+  color: #FDFDFD;
   background: #E8435F;
   -webkit-box-shadow: 0 3px 0 #AC1531;
           box-shadow: 0 3px 0 #AC1531;
@@ -1615,7 +1615,7 @@ main {
 }
 
 .password-change__btn:hover {
-  color: #FFF;
+  color: #FDFDFD;
   opacity: .7;
 }
 
@@ -1642,7 +1642,7 @@ main {
   position: relative;
   width: 200px;
   margin: 50px 0 0px;
-  color: #FFF;
+  color: #FDFDFD;
   background: #E8435F;
   -webkit-box-shadow: 0 3px 0 #AC1531;
           box-shadow: 0 3px 0 #AC1531;
@@ -1653,7 +1653,7 @@ main {
 }
 
 .password-reset__btn:hover {
-  color: #FFF;
+  color: #FDFDFD;
   opacity: .7;
 }
 
@@ -1671,7 +1671,7 @@ main {
   position: relative;
   width: 200px;
   margin: 50px 0 0px;
-  color: #FFF;
+  color: #FDFDFD;
   background: #E8435F;
   -webkit-box-shadow: 0 3px 0 #AC1531;
           box-shadow: 0 3px 0 #AC1531;
@@ -1682,7 +1682,7 @@ main {
 }
 
 .delete__btn:hover {
-  color: #FFF;
+  color: #FDFDFD;
   opacity: .7;
 }
 
