@@ -370,9 +370,6 @@ main {
           transform: translateX(100%);
   -webkit-transition: .5s ease-out;
   transition: .5s ease-out;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
 }
 
 .spnav__menu--link {
