@@ -23,7 +23,7 @@
             </tr>
             <tr class="d-block d-sm-table-row">
                 <th class="d-block d-sm-table-cell text-center text-sm-left py-1 py-sm-3 px-4">メールアドレス</th>
-                <td class="d-block d-sm-table-cell text-center text-sm-left py-3 px-4 overflow-auto">{{ email }}</td>
+                <td class="signup-ck__table--email d-block d-sm-table-cell text-center text-sm-left py-3 px-4 overflow-auto">{{ email }}</td>
             </tr>
             <tr class="d-block d-sm-table-row">
                 <th class="d-block d-sm-table-cell text-center text-sm-left py-1 py-sm-3 px-4">電話番号</th>
@@ -40,7 +40,7 @@
             <tr class="d-block d-sm-table-row">
                 <th class="d-block d-sm-table-cell text-center text-sm-left py-1 py-sm-3 px-4">誕生日</th>
                 {% if birthday == None %}
-                    <td></td>
+                    <td class="d-block d-sm-table-cell text-center text-sm-left py-3 px-4"></td>
                 {% else %}
                     <td class="d-block d-sm-table-cell text-center text-sm-left py-3 px-4">{{ birthday }}</td>
                 {% endif %}

@@ -1116,6 +1116,11 @@ main {
   border-right: 1px solid rgba(0, 0, 0, 0.125);
 }
 
+.signup-ck__table--email::-webkit-scrollbar {
+  display: none;
+  -webkit-appearance: none;
+}
+
 @media screen and (max-width: 575px) {
   .signup__table--birthday {
     display: -ms-grid !important;
@@ -1172,6 +1177,11 @@ main {
   width: 180px;
   background: #F2F8ED;
   border-right: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.profile__table--email::-webkit-scrollbar {
+  display: none;
+  -webkit-appearance: none;
 }
 
 .profile__link--text {
