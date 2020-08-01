@@ -187,14 +187,12 @@
             </div>
         </div>
     </div>
-    <div class="text-center">
-        <p class="help-text d-sm-block text-left mt-1 mt-md-5 mb-0">
-            ※写真はすべてイメージです。<br>
-            ※ジェラートカップはふた付きとなります。<br>
-            ※コーンはお持ち帰り用に単品でのお渡しとなります。<br>
-            ※レジ袋はエコバッグをご持参いただければ不要です。
-        </p>
-    </div>
+    <p class="help-text d-sm-block mt-1 mt-sm-5 mb-0">
+        ※写真はすべてイメージです。<br>
+        ※ジェラートカップはふた付きとなります。<br>
+        ※コーンはお持ち帰り用に単品でのお渡しとなります。<br>
+        ※レジ袋はエコバッグをご持参いただければ不要です。
+    </p>
 </div>
 {% endblock %}
 
@@ -513,6 +511,10 @@
             option4_title.textContent = '';
             option4_price.textContent = '';
             total_price.textContent = '\\' + response.get_total_price.toLocaleString();
+            // カートの数値を更新
+            document.querySelector('.header__link--badge').textContent = response.count;
+            document.querySelector('.spfooter__menu--badge').textContent = response.count;
+            
             // 仮の合計金額を初期化
             total.textContent = '';
             // 追加するエレメント
@@ -698,6 +700,10 @@
             // HTMLからクリックされた注文アイテムを削除
             let cart = document.getElementById('order' + id_value);
             cart.remove();
+
+            // カートの数値を更新
+            document.querySelector('.header__link--badge').textContent = response.count;
+            document.querySelector('.spfooter__menu--badge').textContent = response.count;
 
             // カートの空表記を判定
             if ( total_price.textContent == '\\0' && flavor_title.textContent == '' ) {

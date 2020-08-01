@@ -397,6 +397,8 @@ class AddOrderView(LoginRequiredMixin, View):
         get_total_price = sum(total_price)
         # 最新レコードのidを取得
         cart_id = cart_data.last().id
+        # カート件数を取得
+        count = Cart.objects.filter(user=request.user, ordered=False).count()
 
         data = {
             'size_title': size_title,
@@ -415,6 +417,7 @@ class AddOrderView(LoginRequiredMixin, View):
             'option4_price': option4_price,
             'get_total_price': get_total_price,
             'cart_id': cart_id,
+            'count': count
         }
         return JsonResponse(data)
 
@@ -433,9 +436,12 @@ class DeleteOrderView(LoginRequiredMixin, View):
         total_price = [i.get_total_item_price() for i in cart_data]
         # 総合計値を取得
         get_total_price = sum(total_price)
+        # カート件数を取得
+        count = Cart.objects.filter(user=request.user, ordered=False).count()
 
         data = {
             'get_total_price': get_total_price,
+            'count': count
         }
         return JsonResponse(data)
 
