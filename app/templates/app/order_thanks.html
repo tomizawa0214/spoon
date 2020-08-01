@@ -7,22 +7,24 @@
 
 {% block content %}
 <h1 class="title">
-  <span>ご予約注文</span>
+    <span>ご予約注文</span>
 </h1>
 
 <div class="text-center mb-4">
-  <img class="done-check" src="{% static 'img/check.svg' %}">
+    <img class="done-check" src="{% static 'img/check.svg' %}">
 </div>
 
-<p class="done-text text-center mb-5">ご注文いただき、ありがとうございます。</p>
-<p class="text-center">
-  ご注文内容の確認メールをお送りさせていただきました。<br>
-  メール本文記載の注文番号を店頭にてご提示ください。<br>
-  店頭にて商品をご用意してお待ちしております。
-</p>
-<p class="text-center">今後ともご愛顧賜りますよう、よろしくお願い申し上げます。</p>
+<div class="class mx-auto text-center">
+    <p class="done-text text-center">ご注文いただき、<br class="d-sm-none">ありがとうございます。</p><br>
+    <p class="d-inline-block text-left">
+        ご注文内容の確認メールをお送りさせていただきました。<br>
+        メール本文記載の注文番号を店頭にてご提示ください。<br>
+        店頭にて商品をご用意してお待ちしております。<br><br>
+        今後ともご愛顧賜りますよう、よろしくお願い申し上げます。
+    </p>
+</div>
 
 <div class="text-center">
-  <a class="contact__form--btn btn rounded-pill" href="/">トップページに戻る</a>
+    <a class="order__btn btn rounded-pill" href="/">トップページに戻る</a>
 </div>
 {% endblock %}

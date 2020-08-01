@@ -154,11 +154,12 @@
     }
 }
 
-.order-confirm {
+.order-ck {
     &__table {
+        table-layout: fixed;
         width: 100%;
         border: 1px solid rgba(0, 0, 0, .125);
-        border-radius: .25rem;
+        border-radius: 2px;
         border-collapse: separate;
         border-spacing: 0;
         overflow: hidden;
@@ -169,14 +170,12 @@
         }
         th {
             width: 180px;
-            text-align: left;
-            padding: 16px 24px;
             background: #F2F8ED;
             border-right: 1px solid rgba(0, 0, 0, .125);
         }
-        td {
-            text-align: left;
-            padding: 16px 24px;
+        &--email::-webkit-scrollbar {
+            display: none;
+            -webkit-appearance: none;
         }
     }
 }
@@ -246,6 +245,31 @@
             }
         }
     }
+
+    .order-ck {
+        &__table {
+            max-width: 380px;
+            tr:not(:last-of-type) {
+                td {
+                    border-bottom: 1px solid rgba(0, 0, 0, .125);
+                }
+            }
+            th {
+                width: 100%;
+                border-bottom: 1px solid rgba(0, 0, 0, .125);
+                border-right: 0;
+            }
+            &--help {
+                max-width: 380px;
+                &--text {
+                    font-size: 13px;
+                }
+            }
+        }
+        &__cart {
+            max-width: 380px;
+        }
+    }
 }
 
 
@@ -282,9 +306,18 @@
             &--ename {
                 font-size: 16px;
             }
-            &--price {
-                font-size: 25px;
+        }
+    }
+
+    .order-ck {
+        &__table {
+            max-width: 550px;
+            &--help {
+                max-width: 550px;
             }
+        }
+        &__cart {
+            max-width: 550px;
         }
     }
 }

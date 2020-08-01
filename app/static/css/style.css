@@ -123,6 +123,10 @@ main {
           box-shadow: none;
 }
 
+.card {
+  background: #FDFDFD;
+}
+
 @media screen and (max-width: 575px) {
   body {
     padding: 60px 0;
@@ -822,30 +826,29 @@ main {
   max-width: 800px;
 }
 
-.order-confirm__table {
+.order-ck__table {
+  table-layout: fixed;
   width: 100%;
   border: 1px solid rgba(0, 0, 0, 0.125);
-  border-radius: .25rem;
+  border-radius: 2px;
   border-collapse: separate;
   border-spacing: 0;
   overflow: hidden;
 }
 
-.order-confirm__table tr:not(:last-of-type) th, .order-confirm__table tr:not(:last-of-type) td {
+.order-ck__table tr:not(:last-of-type) th, .order-ck__table tr:not(:last-of-type) td {
   border-bottom: 1px solid rgba(0, 0, 0, 0.125);
 }
 
-.order-confirm__table th {
+.order-ck__table th {
   width: 180px;
-  text-align: left;
-  padding: 16px 24px;
   background: #F2F8ED;
   border-right: 1px solid rgba(0, 0, 0, 0.125);
 }
 
-.order-confirm__table td {
-  text-align: left;
-  padding: 16px 24px;
+.order-ck__table--email::-webkit-scrollbar {
+  display: none;
+  -webkit-appearance: none;
 }
 
 @media screen and (max-width: 575px) {
@@ -907,6 +910,26 @@ main {
   .order-user__form--body--select--time {
     width: 100% !important;
   }
+  .order-ck__table {
+    max-width: 380px;
+  }
+  .order-ck__table tr:not(:last-of-type) td {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  }
+  .order-ck__table th {
+    width: 100%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+    border-right: 0;
+  }
+  .order-ck__table--help {
+    max-width: 380px;
+  }
+  .order-ck__table--help--text {
+    font-size: 13px;
+  }
+  .order-ck__cart {
+    max-width: 380px;
+  }
 }
 
 @media screen and (max-width: 767px) {
@@ -934,8 +957,14 @@ main {
   .order__select--ename {
     font-size: 16px;
   }
-  .order__select--price {
-    font-size: 25px;
+  .order-ck__table {
+    max-width: 550px;
+  }
+  .order-ck__table--help {
+    max-width: 550px;
+  }
+  .order-ck__cart {
+    max-width: 550px;
   }
 }
 
@@ -1132,7 +1161,7 @@ main {
   .signup__table th {
     letter-spacing: .6px;
   }
-  .signup-ck {
+  .signup-ck__table {
     max-width: 380px;
   }
   .signup-ck__table tr:not(:last-of-type) td {

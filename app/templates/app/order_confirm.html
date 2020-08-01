@@ -10,42 +10,46 @@
     <span>ご予約注文</span>
 </h1>
 
-<p class="text-center mb-4">以下の内容でよろしいでしょうか？</p>
-<p id="error" class="d-none"></p>
+<div class="mx-auto text-center">
+    <p class="text-center mb-4">以下の内容でよろしいでしょうか？</p>
+    <p id="error" class="d-none"></p>
+</div>
 <div class="row justify-content-center">
-    <div class="col-6">
-        <table class="order-confirm__table">
-            <tr>
-                <th>お名前</th>
-                <td id="name">{{ name }}</td>
-            </tr>
-            <tr>
-                <th>フリガナ</th>
-                <td id="furigana">{{ furigana }}</td>
-            </tr>
-            <tr>
-                <th>メールアドレス</th>
-                <td id="email">{{ email }}</td>
-            </tr>
-            <tr>
-                <th>電話番号</th>
-                <td id="tel">{{ tel }}</td>
-            </tr>
-            <tr>
-                <th>受取日時</th>
-                <td id="receipt">{{ date }}　{{ time }}</td>
-            </tr>
+    <div class="col-lg-7">
+        <table class="order-ck__table mx-auto">
+            <tbody>
+                <tr class="d-block d-sm-table-row">
+                    <th class="d-block d-sm-table-cell text-center text-sm-left py-1 py-sm-3 px-4">お名前</th>
+                    <td id="name" class="d-block d-sm-table-cell text-center text-sm-left py-3 px-4">{{ name }}</td>
+                </tr>
+                <tr class="d-block d-sm-table-row">
+                    <th class="d-block d-sm-table-cell text-center text-sm-left py-1 py-sm-3 px-4">フリガナ</th>
+                    <td id="furigana" class="d-block d-sm-table-cell text-center text-sm-left py-3 px-4">{{ furigana }}</td>
+                </tr>
+                <tr class="d-block d-sm-table-row">
+                    <th class="d-block d-sm-table-cell text-center text-sm-left py-1 py-sm-3 px-4">メールアドレス</th>
+                    <td id="email" class="order-ck__table--email d-block d-sm-table-cell text-center text-sm-left py-3 px-4 overflow-auto">{{ email }}</td>
+                </tr>
+                <tr class="d-block d-sm-table-row">
+                    <th class="d-block d-sm-table-cell text-center text-sm-left py-1 py-sm-3 px-4">電話番号</th>
+                    <td id="tel" class="d-block d-sm-table-cell text-center text-sm-left py-3 px-4">{{ tel }}</td>
+                </tr>
+                <tr class="d-block d-sm-table-row">
+                    <th class="d-block d-sm-table-cell text-center text-sm-left py-1 py-sm-3 px-4">受取日時</th>
+                    <td id="receipt" class="d-block d-sm-table-cell text-center text-sm-left py-3 px-4">{{ date }}　{{ time }}</td>
+                </tr>
+            </tbody>
         </table>
-        <div class="mt-1">
-            <p class="help-text m-0">
+        <div class="order-ck__table--help mx-auto mt-1">
+            <p class="order-ck__table--help--text help-text d-inline-block d-sm-block m-0">
                 ※お支払いは店頭にて現金のみとなります。<br>
                 ※店舗の状況により商品のお渡しにお時間をいただく場合がございます。
             </p>
         </div>
     </div>
-    <div class="col-4">
-        <div class="card ml-4">
-            <p class="order__content text-center p-1 mb-3">ご注文内容</p>
+    <div class="col-lg-5">
+        <div class="order-ck__cart card mx-auto mt-5 mt-lg-0 ml-lg-3">
+            <p class="order__cart--content text-center p-1 mb-3">ご注文内容</p>
             {% for cart in cart_data %}
                 {% if forloop.last %}
                     <div class="m-0">
@@ -55,41 +59,41 @@
                     <div class="d-flex justify-content-between mx-2">
                         <strong>{{ cart.size_title }}</strong>
                         <div>
-                            <strong class="order__price--cart m-0">\{{ cart.size_price }}</strong>
+                            <strong class="order__select--cart--price m-0">\{{ cart.size_price }}</strong>
                         </div>
                     </div>
-                    <div class="d-flex justify-content-between mx-2">
+                    <div class="order__select--cart d-flex justify-content-between mx-2">
                         <span>{{ cart.flavor_title }}</span>
-                        <span class="order__price--cart m-0">\{{ cart.flavor_price }}</span>
+                        <span class="order__select--cart--price m-0">\{{ cart.flavor_price }}</span>
                     </div>
-                    <div class="d-flex justify-content-between mx-2">
+                    <div class="order__select--cart d-flex justify-content-between mx-2">
                         <span>{{ cart.flavor2_title }}</span>
                         {% if cart.flavor2_title != "" %}
-                            <span class="order__price--cart m-0">\{{ cart.flavor2_price }}</span>
+                            <span class="order__select--cart--price m-0">\{{ cart.flavor2_price }}</span>
                         {% endif %}
                     </div>
-                    <div class="d-flex justify-content-between mx-2">
+                    <div class="order__select--cart d-flex justify-content-between mx-2">
                         <span>{{ cart.option_title }}</span>
                         {% if cart.option_title != "" %}
-                            <span class="order__price--cart m-0">\{{ cart.option_price }}</span>
+                            <span class="order__select--cart--price m-0">\{{ cart.option_price }}</span>
                         {% endif %}
                     </div>
-                    <div class="d-flex justify-content-between mx-2">
+                    <div class="order__select--cart d-flex justify-content-between mx-2">
                         <span>{{ cart.option2_title }}</span>
                         {% if cart.option2_title != "" %}
-                            <span class="order__price--cart m-0">\{{ cart.option2_price }}</span>
+                            <span class="order__select--cart--price m-0">\{{ cart.option2_price }}</span>
                         {% endif %}
                     </div>
-                    <div class="d-flex justify-content-between mx-2">
+                    <div class="order__select--cart d-flex justify-content-between mx-2">
                         <span>{{ cart.option3_title }}</span>
                         {% if cart.option3_title != "" %}
-                            <span class="order__price--cart m-0">\{{ cart.option3_price }}</span>
+                            <span class="order__select--cart--price m-0">\{{ cart.option3_price }}</span>
                         {% endif %}
                     </div>
-                    <div class="d-flex justify-content-between mx-2">
+                    <div class="order__select--cart d-flex justify-content-between mx-2">
                         <span>{{ cart.option4_title }}</span>
                         {% if cart.option4_title != "" %}
-                            <span class="order__price--cart m-0">\{{ cart.option4_price }}</span>
+                            <span class="order__select--cart--price m-0">\{{ cart.option4_price }}</span>
                         {% endif %}
                     </div>
                 </div>
@@ -97,13 +101,13 @@
             <hr class="order__border mx-2">
             <div class="order__total d-flex justify-content-between mx-2 mb-3">
                 <strong>合計</strong>
-                <span class="order__price">\{{ get_total_price|intcomma }}</span>
+                <span class="order__select--price">\{{ get_total_price|intcomma }}</span>
             </div>
         </div>
     </div>
 </div>
 <div class="position-relative text-center">
-    <a class="back-btn btn rounded-pill" href="{% url 'order_user' %}" ontouchstart="">戻る</a>
+    <a class="back-btn btn d-none d-sm-block rounded-pill" href="{% url 'order_user' %}" ontouchstart="">戻る</a>
     <a id="order_done" class="order__btn btn rounded-pill" href="{% url 'order_thanks' %}" ontouchstart="">注文を確定</a>
 </div>
 {% endblock %}

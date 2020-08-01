@@ -67,8 +67,8 @@
     }
 
     .signup-ck {
-        max-width: 380px;
         &__table {
+            max-width: 380px;
             tr:not(:last-of-type) {
                 td {
                     border-bottom: 1px solid rgba(0, 0, 0, .125);
