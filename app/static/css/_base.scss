@@ -29,7 +29,7 @@
         display: inline-block;
         z-index: 1;
         padding: 0 30px;
-        background: #fff;
+        background: #FFF;
     }
     &:after {
         position: absolute;
@@ -47,21 +47,21 @@
 @mixin button {
     position: relative;
     width: 200px;
-    margin: 50px 0 80px;
-    color: #fff;
+    margin: 50px 0 0px;
+    color: #FFF;
     background: #E8435F;
     box-shadow: 0 3px 0 #AC1531;
     border: 0;
     font-weight: bold;
     transition: .3s;
     &:hover {
-        color: #fff;
+        color: #FFF;
         opacity: .7;
     }
-    &:active {
-        top: 3px;
-        box-shadow: none;
-    }
+    // &:active {
+    //     top: 3px;
+    //     box-shadow: none;
+    // }
     i {
         margin: 0 5px 0 0;
     }
@@ -75,6 +75,7 @@ body {
     font-family: '游ゴシック', 'Yu Gothic', YuGothic, HiraKakuProN-W3, 'メイリオ', Meiryo, sans-serif;
     letter-spacing: .8px;
     line-height: 25px;
+    background: #FDFDFD;
     color: #333;
 }
 
@@ -126,6 +127,12 @@ main {
 
 .container-fluid {
     max-width: 1200px;
+}
+
+.btn:focus {
+    outline: none;
+    top: 3px;
+    box-shadow: none;
 }
 
 @media screen and ( max-width: 575px ) {

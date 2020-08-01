@@ -11,39 +11,39 @@
     <span>ご予約注文</span>
 </h1>
 
-<div class="order-user mx-auto">
-    <p class="text-center mb-4">ご注文様の情報とお受け取り日時をご入力ください。</p>
-    <form method="POST" action="{% url 'order_confirm' %}" class="order-user__form text-center">
+<div class="mx-auto text-center">
+    <p class="d-inline-block text-left mb-4">ご注文様の情報とお受け取り日時をご入力ください。</p>
+    <form method="POST" action="{% url 'order_confirm' %}" class="text-center">
         {% csrf_token %}
-        <table class="order-user__form--table mx-auto card p-3">
-            <tbody class="mx-auto">
-                <tr>
-                    <th class="text-right">
-                        <label for="id_name">お名前
+        <table class="order-user__form d-table card mx-auto p-4 p-md-3 ">
+            <tbody class="order-user__form--body mx-auto">
+                <tr class="d-block d-md-table-row">
+                    <th class="d-block d-md-table-cell text-left text-md-right align-top">
+                        <label for="id_name" class="m-0">お名前
                             <span class="signup__required">【必須】</span>
                         </label>
                     </th>
-                    <td>
+                    <td class="d-block d-md-table-cell mb-4">
                         {% render_field form.name class="form-control" %}
                     </td>
                 </tr>
-                <tr>
-                    <th class="text-right">
-                        <label for="id_furigana">フリガナ
+                <tr class="d-block d-md-table-row">
+                    <th class="d-block d-md-table-cell text-left text-md-right align-top">
+                        <label for="id_furigana" class="m-0">フリガナ
                             <span class="signup__required">【必須】</span>
                         </label>
                     </th>
-                    <td>
+                    <td class="d-block d-md-table-cell mb-4">
                         {% render_field form.furigana class="form-control" %}
                     </td>
                 </tr>
-                <tr>
-                    <th class="text-right">
-                        <label for="id_email">メールアドレス
+                <tr class="d-block d-md-table-row">
+                    <th class="d-block d-md-table-cell text-left text-md-right align-top">
+                        <label for="id_email" class="m-0">メールアドレス
                             <span class="signup__required">【必須】</span>
                         </label>
                     </th>
-                    <td>
+                    <td class="d-block d-md-table-cell mb-4">
                         {% render_field form.email class="form-control" placeholder="メールアドレス" %}
                         {% for field in form %}
                             <p class="error-msg email_error d-none text-left m-0">
@@ -59,34 +59,34 @@
                         {% endfor %}
                     </td>
                 </tr>
-                <tr>
-                    <th class="text-right">
-                        <label for="id_tel">電話番号
+                <tr class="d-block d-md-table-row">
+                    <th class="d-block d-md-table-cell text-left text-md-right align-top">
+                        <label for="id_tel" class="m-0">電話番号
                             <span class="signup__required">【必須】</span>
                         </label>
                     </th>
-                    <td>
+                    <td class="d-block d-md-table-cell mb-4">
                         {% render_field form.tel class="form-control" %}
                     </td>
                 </tr>
-                <tr>
-                    <th class="text-right">
-                        <label>受取日時
+                <tr class="d-block d-md-table-row">
+                    <th class="d-block d-md-table-cell text-left text-md-right align-top">
+                        <label class="m-0">受取日時
                             <span class="signup__required">【必須】</span>
                         </label>
                     </th>
-                    <td class="d-flex">
-                        <select id="date" name="date" class="form-control w-50 mr-3" onchange="timeChange();">
+                    <td class="d-block d-sm-flex mb-4">
+                        <select id="date" name="date" class="order-user__form--body--select--date form-control mb-2 mb-sm-0 mr-sm-3" onchange="timeChange();">
                             {% for date in date_list %}
                                 <option value="{{ date }}">{{ date }}</option>
                             {% endfor %}
                         </select>
-                        <select id="specified_time" name="time" class="form-control w-25">
+                        <select id="specified_time" name="time" class="order-user__form--body--select--time form-control">
                             {% for time in time_list %}
                                 <option value="{{ time }}">{{ time }}</option>
                             {% endfor %}
                         </select>
-                        <select id="full_time" name="fulltime" class="d-none form-control w-25">
+                        <select id="full_time" name="fulltime" class="order-user__form--body--select--time d-none form-control">
                             {% for fulltime in fulltime_list %}
                                 <option value="{{ fulltime }}">{{ fulltime }}</option>
                             {% endfor %}
@@ -95,14 +95,13 @@
                 </tr>
             </tbody>
         </table>
-        <div class="mt-1">
-            <p class="help-text d-inline-block text-left m-0">
-                ※当日のご注文受付は16:30までとさせていただきます。また店舗の状況により当日注文をお受けいたしかねる場合がございます。ご了承ください。<br>
-                ※16:30以降にご注文の場合は翌日11:30以降のお受け取りとなります。
+        <div class="order-user__help mx-auto mt-1">
+            <p class="help-text text-left m-0">
+                ※当日のご注文受付は16:30までとさせていただきます。また店舗の状況により当日注文をお受けいたしかねる場合がございます。ご了承ください。※16:30以降にご注文の場合は翌日11:30以降のお受け取りとなります。
             </p>
         </div>
         <div class="position-relative">
-            <a class="back-btn btn rounded-pill" href="{% url 'order' %}" ontouchstart="">戻る</a>
+            <a class="back-btn d-none d-sm-block btn rounded-pill" href="{% url 'order' %}" ontouchstart="">戻る</a>
             <button class="order__btn btn rounded-pill" type="submit" ontouchstart="">注文確認画面へ</button>
         </div>
     </form>
@@ -121,11 +120,11 @@
 
     let timeChange = () => {
         if ( date.value.match(/本日/)) {
-            specified_time.className = 'd-block form-control w-25';
+            specified_time.className = 'order-user__form--body--select--time d-block form-control';
             full_time.className = 'd-none';
         } else {
             specified_time.className = 'd-none';
-            full_time.className = 'd-block form-control w-25';
+            full_time.className = 'order-user__form--body--select--time d-block form-control';
         }
     }
 

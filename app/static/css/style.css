@@ -15,6 +15,7 @@ body {
   font-family: '游ゴシック', 'Yu Gothic', YuGothic, HiraKakuProN-W3, 'メイリオ', Meiryo, sans-serif;
   letter-spacing: .8px;
   line-height: 25px;
+  background: #FDFDFD;
   color: #333;
 }
 
@@ -36,7 +37,7 @@ main {
   display: inline-block;
   z-index: 1;
   padding: 0 30px;
-  background: #fff;
+  background: #FFF;
 }
 
 .title:after {
@@ -71,8 +72,8 @@ main {
 .back-btn {
   position: relative;
   width: 200px;
-  margin: 50px 0 80px;
-  color: #fff;
+  margin: 50px 0 0px;
+  color: #FFF;
   background: #E8435F;
   -webkit-box-shadow: 0 3px 0 #AC1531;
           box-shadow: 0 3px 0 #AC1531;
@@ -90,14 +91,8 @@ main {
 }
 
 .back-btn:hover {
-  color: #fff;
+  color: #FFF;
   opacity: .7;
-}
-
-.back-btn:active {
-  top: 3px;
-  -webkit-box-shadow: none;
-          box-shadow: none;
 }
 
 .back-btn i {
@@ -119,6 +114,13 @@ main {
 
 .container-fluid {
   max-width: 1200px;
+}
+
+.btn:focus {
+  outline: none;
+  top: 3px;
+  -webkit-box-shadow: none;
+          box-shadow: none;
 }
 
 @media screen and (max-width: 575px) {
@@ -746,8 +748,8 @@ main {
 .order__add {
   position: relative;
   width: 200px;
-  margin: 50px 0 80px;
-  color: #fff;
+  margin: 50px 0 0px;
+  color: #FFF;
   background: #E8435F;
   -webkit-box-shadow: 0 3px 0 #AC1531;
           box-shadow: 0 3px 0 #AC1531;
@@ -763,14 +765,8 @@ main {
 }
 
 .order__add:hover {
-  color: #fff;
+  color: #FFF;
   opacity: .7;
-}
-
-.order__add:active {
-  top: 3px;
-  -webkit-box-shadow: none;
-          box-shadow: none;
 }
 
 .order__add i {
@@ -784,8 +780,8 @@ main {
 .order__btn {
   position: relative;
   width: 200px;
-  margin: 50px 0 80px;
-  color: #fff;
+  margin: 50px 0 0px;
+  color: #FFF;
   background: #E8435F;
   -webkit-box-shadow: 0 3px 0 #AC1531;
           box-shadow: 0 3px 0 #AC1531;
@@ -796,29 +792,37 @@ main {
 }
 
 .order__btn:hover {
-  color: #fff;
+  color: #FFF;
   opacity: .7;
-}
-
-.order__btn:active {
-  top: 3px;
-  -webkit-box-shadow: none;
-          box-shadow: none;
 }
 
 .order__btn i {
   margin: 0 5px 0 0;
 }
 
-.order-user__form--table {
+.order-user__form {
+  table-layout: fixed;
+  width: 100%;
+  max-width: 800px;
   border-collapse: separate;
   border-spacing: 24px 36px;
-  max-width: 1000px;
   background: #F2F8ED;
 }
 
-.order-user__form--table td {
-  width: 500px;
+.order-user__form--body th {
+  width: 195px;
+}
+
+.order-user__form--body--select--date {
+  width: 50%;
+}
+
+.order-user__form--body--select--time {
+  width: 25%;
+}
+
+.order-user__help {
+  max-width: 800px;
 }
 
 .order-confirm__table {
@@ -851,6 +855,9 @@ main {
   .order__alert {
     width: 250px;
     height: 300px;
+  }
+  .order__reorder {
+    top: 60px;
   }
   .order__header {
     position: fixed;
@@ -894,11 +901,26 @@ main {
     width: calc( 100vw - calc( 100vw - ( 100% + 30px )));
     margin-left: -15px;
   }
+  .order-user__form {
+    border-spacing: 0;
+  }
+  .order-user__form--body--select--date {
+    width: 100% !important;
+  }
+  .order-user__form--body--select--time {
+    width: 100% !important;
+  }
 }
 
 @media screen and (max-width: 767px) {
-  .order__cart {
-    max-width: 370px;
+  .order-user__form {
+    border-spacing: 0;
+  }
+  .order-user__form--body--select--date {
+    width: 40%;
+  }
+  .order-user__form--body--select--time {
+    width: 20%;
   }
 }
 
@@ -978,8 +1000,8 @@ main {
 .login__form--btn {
   position: relative;
   width: 200px;
-  margin: 50px 0 80px;
-  color: #fff;
+  margin: 50px 0 0px;
+  color: #FFF;
   background: #E8435F;
   -webkit-box-shadow: 0 3px 0 #AC1531;
           box-shadow: 0 3px 0 #AC1531;
@@ -990,14 +1012,8 @@ main {
 }
 
 .login__form--btn:hover {
-  color: #fff;
+  color: #FFF;
   opacity: .7;
-}
-
-.login__form--btn:active {
-  top: 3px;
-  -webkit-box-shadow: none;
-          box-shadow: none;
 }
 
 .login__form--btn i {
@@ -1013,8 +1029,8 @@ main {
 .logout__btn {
   position: relative;
   width: 200px;
-  margin: 50px 0 80px;
-  color: #fff;
+  margin: 50px 0 0px;
+  color: #FFF;
   background: #E8435F;
   -webkit-box-shadow: 0 3px 0 #AC1531;
           box-shadow: 0 3px 0 #AC1531;
@@ -1025,14 +1041,8 @@ main {
 }
 
 .logout__btn:hover {
-  color: #fff;
+  color: #FFF;
   opacity: .7;
-}
-
-.logout__btn:active {
-  top: 3px;
-  -webkit-box-shadow: none;
-          box-shadow: none;
 }
 
 .logout__btn i {
@@ -1065,8 +1075,8 @@ main {
 .signup__btn {
   position: relative;
   width: 200px;
-  margin: 50px 0 80px;
-  color: #fff;
+  margin: 50px 0 0px;
+  color: #FFF;
   background: #E8435F;
   -webkit-box-shadow: 0 3px 0 #AC1531;
           box-shadow: 0 3px 0 #AC1531;
@@ -1077,14 +1087,8 @@ main {
 }
 
 .signup__btn:hover {
-  color: #fff;
+  color: #FFF;
   opacity: .7;
-}
-
-.signup__btn:active {
-  top: 3px;
-  -webkit-box-shadow: none;
-          box-shadow: none;
 }
 
 .signup__btn i {
@@ -1185,8 +1189,8 @@ main {
 .profile__btn {
   position: relative;
   width: 200px;
-  margin: 50px 0 80px;
-  color: #fff;
+  margin: 50px 0 0px;
+  color: #FFF;
   background: #E8435F;
   -webkit-box-shadow: 0 3px 0 #AC1531;
           box-shadow: 0 3px 0 #AC1531;
@@ -1197,14 +1201,8 @@ main {
 }
 
 .profile__btn:hover {
-  color: #fff;
+  color: #FFF;
   opacity: .7;
-}
-
-.profile__btn:active {
-  top: 3px;
-  -webkit-box-shadow: none;
-          box-shadow: none;
 }
 
 .profile__btn i {
@@ -1226,8 +1224,8 @@ main {
 .history__header--btn {
   position: relative;
   width: 200px;
-  margin: 50px 0 80px;
-  color: #fff;
+  margin: 50px 0 0px;
+  color: #FFF;
   background: #E8435F;
   -webkit-box-shadow: 0 3px 0 #AC1531;
           box-shadow: 0 3px 0 #AC1531;
@@ -1239,14 +1237,8 @@ main {
 }
 
 .history__header--btn:hover {
-  color: #fff;
+  color: #FFF;
   opacity: .7;
-}
-
-.history__header--btn:active {
-  top: 3px;
-  -webkit-box-shadow: none;
-          box-shadow: none;
 }
 
 .history__header--btn i {
@@ -1287,8 +1279,8 @@ main {
 .deleteno__btn {
   position: relative;
   width: 200px;
-  margin: 50px 0 80px;
-  color: #fff;
+  margin: 50px 0 0px;
+  color: #FFF;
   background: #E8435F;
   -webkit-box-shadow: 0 3px 0 #AC1531;
           box-shadow: 0 3px 0 #AC1531;
@@ -1303,14 +1295,8 @@ main {
 }
 
 .deleteno__btn:hover {
-  color: #fff;
+  color: #FFF;
   opacity: .7;
-}
-
-.deleteno__btn:active {
-  top: 3px;
-  -webkit-box-shadow: none;
-          box-shadow: none;
 }
 
 .deleteno__btn i {
@@ -1419,8 +1405,8 @@ main {
 .contact__form--btn {
   position: relative;
   width: 200px;
-  margin: 50px 0 80px;
-  color: #fff;
+  margin: 50px 0 0px;
+  color: #FFF;
   background: #E8435F;
   -webkit-box-shadow: 0 3px 0 #AC1531;
           box-shadow: 0 3px 0 #AC1531;
@@ -1431,14 +1417,8 @@ main {
 }
 
 .contact__form--btn:hover {
-  color: #fff;
+  color: #FFF;
   opacity: .7;
-}
-
-.contact__form--btn:active {
-  top: 3px;
-  -webkit-box-shadow: none;
-          box-shadow: none;
 }
 
 .contact__form--btn i {
@@ -1585,8 +1565,8 @@ main {
 .email-change__btn {
   position: relative;
   width: 200px;
-  margin: 50px 0 80px;
-  color: #fff;
+  margin: 50px 0 0px;
+  color: #FFF;
   background: #E8435F;
   -webkit-box-shadow: 0 3px 0 #AC1531;
           box-shadow: 0 3px 0 #AC1531;
@@ -1597,14 +1577,8 @@ main {
 }
 
 .email-change__btn:hover {
-  color: #fff;
+  color: #FFF;
   opacity: .7;
-}
-
-.email-change__btn:active {
-  top: 3px;
-  -webkit-box-shadow: none;
-          box-shadow: none;
 }
 
 .email-change__btn i {
@@ -1629,8 +1603,8 @@ main {
 .password-change__btn {
   position: relative;
   width: 200px;
-  margin: 50px 0 80px;
-  color: #fff;
+  margin: 50px 0 0px;
+  color: #FFF;
   background: #E8435F;
   -webkit-box-shadow: 0 3px 0 #AC1531;
           box-shadow: 0 3px 0 #AC1531;
@@ -1641,14 +1615,8 @@ main {
 }
 
 .password-change__btn:hover {
-  color: #fff;
+  color: #FFF;
   opacity: .7;
-}
-
-.password-change__btn:active {
-  top: 3px;
-  -webkit-box-shadow: none;
-          box-shadow: none;
 }
 
 .password-change__btn i {
@@ -1673,8 +1641,8 @@ main {
 .password-reset__btn {
   position: relative;
   width: 200px;
-  margin: 50px 0 80px;
-  color: #fff;
+  margin: 50px 0 0px;
+  color: #FFF;
   background: #E8435F;
   -webkit-box-shadow: 0 3px 0 #AC1531;
           box-shadow: 0 3px 0 #AC1531;
@@ -1685,14 +1653,8 @@ main {
 }
 
 .password-reset__btn:hover {
-  color: #fff;
+  color: #FFF;
   opacity: .7;
-}
-
-.password-reset__btn:active {
-  top: 3px;
-  -webkit-box-shadow: none;
-          box-shadow: none;
 }
 
 .password-reset__btn i {
@@ -1708,8 +1670,8 @@ main {
 .delete__btn {
   position: relative;
   width: 200px;
-  margin: 50px 0 80px;
-  color: #fff;
+  margin: 50px 0 0px;
+  color: #FFF;
   background: #E8435F;
   -webkit-box-shadow: 0 3px 0 #AC1531;
           box-shadow: 0 3px 0 #AC1531;
@@ -1720,14 +1682,8 @@ main {
 }
 
 .delete__btn:hover {
-  color: #fff;
+  color: #FFF;
   opacity: .7;
-}
-
-.delete__btn:active {
-  top: 3px;
-  -webkit-box-shadow: none;
-          box-shadow: none;
 }
 
 .delete__btn i {

@@ -72,7 +72,7 @@
                     </div>
                 {% endfor %}
             </div>
-            <p class="order__step order__option mb-3 py-1 px-3 px-md-2 rounded-sm-pill">STEP3.　オプションをお選びください。【※任意】</p>
+            <p class="order__step order__option mb-3 py-1 px-3 px-md-2 rounded-sm-pill">STEP3.　オプションをお選びください。<br class="d-md-none">【※任意】</p>
             <div class="row">
                 {% for option in option_item %}
                     <div class="order__select col-lg-3 text-center">
@@ -181,8 +181,8 @@
                 </div>
                 <!-- 注文ボタン -->
                 <div class="mt-4 mx-auto">
-                    <a id="order_plus" class="order__add d-block btn rounded-pill my-4" ontouchstart="" onfocus="this.blur();">追加注文</a>
-                    <a id="order_next" class="order__btn d-block btn rounded-pill my-4" href="{% url 'order_user' %}" ontouchstart="" onfocus="this.blur();">ご注文手続きへ</a>
+                    <a id="order_plus" class="order__add d-block btn rounded-pill my-4" ontouchstart="">追加注文</a>
+                    <a id="order_next" class="order__btn d-block btn rounded-pill my-4" href="{% url 'order_user' %}" ontouchstart="">ご注文手続きへ</a>
                 </div>
             </div>
         </div>
