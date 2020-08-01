@@ -12,7 +12,7 @@
         background: #FDF5F7;
         font-size: 20px;
         z-index: 9999;
-        animation : fadeOut .5s ease-in-out 2.5s forwards;
+        animation : fadeOut 2s ease-in-out .5s forwards;
         @keyframes fadeOut {
             0% {
                 opacity: 1;
