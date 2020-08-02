@@ -12,7 +12,7 @@
 </h1>
 
 <div class="mx-auto text-center">
-    <p id="error" class="d-none"></p>
+    <p id="user_error" class="d-none"></p>
 </div>
 <div class="row justify-content-center">
     <div class="col-lg-7">
@@ -48,7 +48,7 @@
         </div>
     </div>
     <div class="col-lg-5">
-        <div class="order-ck__cart card mx-auto mt-5 mt-md-0 ml-lg-4">
+        <div class="order-ck__cart card mt-5 mt-lg-0 mx-auto ml-lg-4">
             <p class="order__cart--content text-center p-1 mb-3">ご注文内容</p>
             {% for cart in cart_data %}
                 {% if forloop.last %}
@@ -121,8 +121,8 @@
                                 <span class="order-ck__coupon--content--main--label--sub">ミニサイズ1個分</span><br>
                                 <span class="order-ck__coupon--content--main--label--title d-inline-block mt-1">値引クーポン</span>
                             </label><br>
-                            <input type="checkbox" id="coupon" class="order-ck__coupon--content--main--ckbox">
-                            <span class="order-ck__coupon--content--main--ckbox">利用する</span>
+                            <input type="checkbox" id="coupon" name="coupon" class="order-ck__coupon--content--main--ckbox">
+                            <label for="coupon" class="order-ck__coupon--content--main--ckbox">利用する</label>
                         </div>
                     </div>
                     <div class="order-ck__coupon--content--right">
@@ -131,7 +131,10 @@
                 </div>
             </div>
         </div>
-        <div class="order-ck__cart--help mx-auto mt-1 ml-lg-4">
+        <div class="mx-auto text-center ml-lg-4">
+            <p id="coupon_error" class="order-ck_coupon--error d-none"></p>
+        </div>
+        <div class="order-ck__cart--help mx-auto mt-1 ml-lg-4 d-none">
             <p class="order-ck__cart--help--text help-text d-sm-block m-0">
                 ※イラストはイメージです。
                 ※クーポンのご利用は1回限りとなります。
@@ -154,8 +157,10 @@
 
     // クーポン発行
     if ( '{{ coupon }}' == 'get' ) {
-        const issueCoupon = document.querySelector('.order-ck__coupon')
+        const helpCoupon = document.querySelector('.order-ck__cart--help');
+        const issueCoupon = document.querySelector('.order-ck__coupon');
         issueCoupon.classList.remove('d-none');
+        helpCoupon.classList.remove('d-none');
     }
 
     // クーポン利用
@@ -163,6 +168,7 @@
     const useCoupon = document.querySelector('.order-ck__coupon--content--main--ckbox');
     const selectCouponPrice = document.querySelector('.order-ck__cart--coupon--price');
     const totalPrice = document.querySelector('.order__select--price');
+    const couponError = document.getElementById('coupon_error');
     useCoupon.addEventListener('click', () => {
         if ( useCoupon.checked ) {
             // クーポンの利用可否を確認
@@ -180,25 +186,9 @@
                 totalPrice.textContent = '\\' + total.toLocaleString();
             } else {
                 useCoupon.checked = false;
-                // エラーアラートを表示
-                const element  = Object.assign(document.createElement('div'), { className: 'order__reorder sticky-top rounded-0 alert alert-danger alert-dismissible fade show m-0' });
-                const element2  = Object.assign(document.createElement('strong'), { innerText: 'ミニサイズが含まれていないまたは単品でのご注文のため、クーポンのご利用ができません。' });
-                const element3  = Object.assign(document.createElement('button'), { className: 'order__reorder--btn close', type: 'button' });
-                const element4  = Object.assign(document.createElement('span'), { className: 'order__reorder--close', innerHTML: '&times;' });
-                // 階層に合わせて要素をまとめる
-                element3.appendChild(element4);
-                element.appendChild(element2);
-                element.appendChild(element3);
-                // 最後に追加
-                document.body.insertBefore(element, document.body.firstChild);
-
-                let order_alert = document.querySelector('.order__reorder');
-                order_alert.setAttribute('role', 'alert');
-                let alert_btn = document.querySelector('.order__reorder--btn');
-                alert_btn.setAttribute('data-dismiss', 'alert');
-                alert_btn.setAttribute('aria-label', 'Close');
-                let alert_close = document.querySelector('.order__reorder--close');
-                alert_close.setAttribute('aria-hidden', 'true');
+                // エラーメッセージを表示
+                couponError.className = 'order-ck__coupon--error';
+                couponError.textContent = '※ミニサイズが含まれていないまたは単品でのご注文のため、クーポンがご利用いただけません。';
             }
         } else {
             if ( '{{ use_coupon }}' == 'valid' ) {
@@ -230,18 +220,27 @@
 
     // 注文を確定ボタンクリックで発動
     document.getElementById('order_done').addEventListener('click', e => {// ページ遷移をキャンセル
-        let name = document.getElementById('name')
-        let furigana = document.getElementById('furigana')
-        let email = document.getElementById('email')
-        let tel = document.getElementById('tel')
-        let receipt = document.getElementById('receipt')
+        const name = document.getElementById('name')
+        const furigana = document.getElementById('furigana')
+        const email = document.getElementById('email')
+        const tel = document.getElementById('tel')
+        const receipt = document.getElementById('receipt')
         if ( name.textContent == '' ||  furigana.textContent == '' || email.textContent == '' || tel.textContent == '' || receipt.textContent == '' ) {
             e.preventDefault(); // ページ遷移をキャンセル
-            error.className = 'd-block text-center';
-            error.style.color = 'red';
-            error.textContent = '※ページを戻ってご注文者様の情報を入力してください';
+            const userError = document.getElementById('user_error');
+            userError.className = 'error-msg d-inline-block text-left';
+            userError.textContent = '※ご注文者様の情報を入力してください。';
         } else {
             const url = '{% url "order_thanks" %}';
+
+            // クーポン金額を取得
+            if ( '{{ use_coupon }}' == 'valid' ) {
+                var coupon = 280;
+            } else if ( '{{ use_coupon }}' == 'valid_plus' ) {
+                var coupon = 310;
+            } else {
+                var coupon = 0;
+            }
 
             // 日付から【本日】or【翌日】を削除
             let date = '{{ date }}'.replace( /【本日】/g, '').replace( /【明日】/g, '');
@@ -260,6 +259,7 @@
             body.append('email', '{{ email }}');
             body.append('tel', '{{ tel }}');
             body.append('receipt', receipt);
+            body.append('coupon', coupon);
 
             fetch(url, {
                 method: 'POST',

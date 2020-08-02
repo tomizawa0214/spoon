@@ -84,12 +84,16 @@ class Order(models.Model):
     created = models.DateTimeField('注文日時', default=timezone.now)
     order_day = models.IntegerField('注文受取日')
     count = models.IntegerField('注文番号', default=0)
+    coupon_use = models.BooleanField('クーポン利用', default=False)
+    coupon_price = models.IntegerField('クーポン金額', default=0)
+    coupon_day = models.DateTimeField('クーポン使用日', default=timezone.now)
     flag = models.BooleanField(default=False)
 
     def get_total(self):
         total = 0
         for cart in self.cart.all():
             total += cart.get_total_item_price()
+        total -= self.coupon_price
         return total
 
     def __str__(self):

@@ -1013,7 +1013,7 @@ main {
 .order-ck__coupon--content--main--label--title {
   color: #E8435F;
   font-size: 20px;
-  letter-spacing: .3px;
+  letter-spacing: 0;
 }
 
 .order-ck__coupon--content--main--ckbox {
@@ -1021,11 +1021,11 @@ main {
   cursor: pointer;
 }
 
-.order-ck__coupon--content--error {
-  font-size: 14px;
+.order-ck__coupon--error {
+  display: inline-block;
+  margin: 0;
+  text-align: left;
   color: #FF0000;
-  line-height: 18px;
-  letter-spacing: .5px;
 }
 
 .order-ck__btn {
@@ -1136,6 +1136,9 @@ main {
   .order-ck__cart--help--text {
     font-size: 13px;
   }
+  .order-ck__coupon--error {
+    max-width: 380px;
+  }
 }
 
 @media screen and (min-width: 576px) and (max-width: 767px) {
@@ -1176,6 +1179,9 @@ main {
   }
   .order-ck__cart--help {
     max-width: 550px;
+  }
+  .order-ck__coupon--error {
+    max-width: 380px;
   }
 }
 

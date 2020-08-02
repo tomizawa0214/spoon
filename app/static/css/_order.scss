@@ -295,7 +295,7 @@
                     &--title {
                         color: #E8435F;
                         font-size: 20px;
-                        letter-spacing: .3px;
+                        letter-spacing: 0;
                     }
                 }
                 &--ckbox {
@@ -303,12 +303,12 @@
                     cursor: pointer;
                 }
             }
-            &--error {
-                font-size: 14px;
-                color: #FF0000;
-                line-height: 18px;
-                letter-spacing: .5px;
-            }
+        }
+        &--error {
+            display: inline-block;
+            margin: 0;
+            text-align: left;
+            color: #FF0000;
         }
     }
     &__btn {
@@ -411,6 +411,11 @@
                 }
             }
         }
+        &__coupon {
+            &--error {
+                max-width: 380px;
+            }
+        }
     }
 }
 
@@ -468,6 +473,11 @@
             max-width: 550px;
             &--help {
                 max-width: 550px;
+            }
+        }
+        &__coupon {
+            &--error {
+                max-width: 380px;
             }
         }
     }

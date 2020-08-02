@@ -43,6 +43,12 @@ class OrderThanksView(LoginRequiredMixin, View):
                 order_day = int(receipt[-12:-10])
             order.order_day = order_day
 
+            # クーポン使用有無を登録
+            coupon_price = int(request.POST.get('coupon'))
+            if coupon_price > 0:
+                order.coupon_use = True
+                order.coupon_price = coupon_price
+
             # 注文番号を登録
             x = 1
             while Order.objects.filter(order_day=order_day, count=x, flag=False).exists():
@@ -61,6 +67,7 @@ class OrderThanksView(LoginRequiredMixin, View):
             context = {
                 'order_latest': order_latest,
                 'order_id': order_id,
+                'coupon_price': coupon_price
             }
 
             subject = render_to_string('app/mail_template/order_subject.txt', context)
@@ -85,15 +92,22 @@ class OrderConfirmView(LoginRequiredMixin, View):
         total_price = [i.get_total_item_price() for i in cart_data]
         # 総合計値を取得
         get_total_price = sum(total_price)
-        # 誕生月を取得
-        birthmonth = 0
-        user_data = CustomUser.objects.get(id=request.user.id)
-        birthday = user_data.birthday
-        if birthday != None:
-            birthmonth = birthday.month
-        # 現在月と誕生月を確認
-        if datetime.datetime.now().month == birthmonth:
-            coupon = 'get'
+
+        # 現在日時を取得
+        dt = datetime.datetime.now()
+        # 今年のクーポン利用を確認
+        if not Order.objects.filter(user=request.user, coupon_use=True, coupon_day__contains=dt.year).exists():
+            # 誕生月を取得
+            birthmonth = 0
+            user_data = CustomUser.objects.get(id=request.user.id)
+            birthday = user_data.birthday
+            if birthday != None:
+                birthmonth = birthday.month
+            # 現在月と誕生月を確認
+            if dt.month == birthmonth:
+                coupon = 'get'
+            else:
+                coupon = 'no'
         else:
             coupon = 'no'
 
@@ -124,15 +138,21 @@ class OrderConfirmView(LoginRequiredMixin, View):
             # 総合計値を取得
             get_total_price = sum(total_price)
 
-            # 誕生月を取得
-            birthmonth = 0
-            user_data = CustomUser.objects.get(id=request.user.id)
-            birthday = user_data.birthday
-            if birthday != None:
-                birthmonth = birthday.month
-            # 現在月と誕生月を確認
-            if datetime.datetime.now().month == birthmonth:
-                coupon = 'get'
+            # 現在日時を取得
+            dt = datetime.datetime.now()
+            # 今年のクーポン利用を確認
+            if not Order.objects.filter(user=request.user, coupon_use=True, coupon_day__contains=dt.year).exists():
+                # 誕生月を取得
+                birthmonth = 0
+                user_data = CustomUser.objects.get(id=request.user.id)
+                birthday = user_data.birthday
+                if birthday != None:
+                    birthmonth = birthday.month
+                # 現在月と誕生月を確認
+                if dt.month == birthmonth:
+                    coupon = 'get'
+                else:
+                    coupon = 'no'
             else:
                 coupon = 'no'
 
@@ -569,16 +589,21 @@ class IndexView(View):
         # 最新2件を取得
         pick_data = PickUp.objects.all().order_by('-id')[0:2]
 
-        # 誕生月を取得
-        birthmonth = 0
-        user_data = CustomUser.objects.get(id=request.user.id)
-        birthday = user_data.birthday
-        if birthday != None:
-            birthmonth = birthday.month
-
-        # 現在月と誕生月を確認
-        if datetime.datetime.now().month == birthmonth:
-            coupon = 'get'
+        # 現在日時を取得
+        dt = datetime.datetime.now()
+        # 今年のクーポン利用を確認
+        if not Order.objects.filter(user=request.user, coupon_use=True, coupon_day__contains=dt.year).exists():
+            # 誕生月を取得
+            birthmonth = 0
+            user_data = CustomUser.objects.get(id=request.user.id)
+            birthday = user_data.birthday
+            if birthday != None:
+                birthmonth = birthday.month
+            # 現在月と誕生月を確認
+            if dt.month == birthmonth:
+                coupon = 'get'
+            else:
+                coupon = 'no'
         else:
             coupon = 'no'
 
