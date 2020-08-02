@@ -218,11 +218,6 @@
             position: relative;
             max-width: 280px;
             padding: 10px;
-            cursor: pointer;
-            transition: .3s;
-            &:hover {
-                opacity: .7;
-            }
             &--left {
                 position: absolute;
                 top: 0;

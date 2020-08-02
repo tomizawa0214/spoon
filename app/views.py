@@ -96,7 +96,6 @@ class OrderConfirmView(LoginRequiredMixin, View):
             coupon = 'get'
         else:
             coupon = 'no'
-        print(coupon)
 
         return render(request, 'app/order_confirm.html', {
             'cart_data': cart_data,
@@ -124,6 +123,7 @@ class OrderConfirmView(LoginRequiredMixin, View):
             total_price = [i.get_total_item_price() for i in cart_data]
             # 総合計値を取得
             get_total_price = sum(total_price)
+
             # 誕生月を取得
             birthmonth = 0
             user_data = CustomUser.objects.get(id=request.user.id)
@@ -136,6 +136,18 @@ class OrderConfirmView(LoginRequiredMixin, View):
             else:
                 coupon = 'no'
 
+            # カートが2点以上かつミニサイズを含むか確認
+            if cart_data.count() > 1:
+                if cart_data.filter(size_title='ミニサイズ').exists():
+                    use_coupon = 'valid'
+                    # ミニサイズのプラス金額有無を確認
+                    if cart_data.filter(size_title='ミニサイズ', flavor_price__gt=0):
+                        use_coupon = 'valid_plus'
+                else:
+                    use_coupon = 'invalid'
+            else:
+                use_coupon = 'invalid'
+
             return render(request, 'app/order_confirm.html', {
                 'name': name,
                 'furigana': furigana,
@@ -145,7 +157,8 @@ class OrderConfirmView(LoginRequiredMixin, View):
                 'time': time,
                 'cart_data': cart_data,
                 'get_total_price': get_total_price,
-                'coupon': coupon
+                'coupon': coupon,
+                'use_coupon': use_coupon
             })
 
         # 当日受付の有無
@@ -423,7 +436,7 @@ class AddOrderView(LoginRequiredMixin, View):
         # 最新レコードのidを取得
         cart_id = cart_data.last().id
         # カート件数を取得
-        count = Cart.objects.filter(user=request.user, ordered=False).count()
+        count = cart_data.count()
 
         data = {
             'size_title': size_title,
