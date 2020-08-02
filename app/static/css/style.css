@@ -1463,7 +1463,7 @@ main {
 }
 
 .history {
-  max-width: 850px;
+  max-width: 900px;
 }
 
 .history__header {
@@ -1472,6 +1472,10 @@ main {
 
 .history__header--wrap--orderday {
   font-weight: 700;
+}
+
+.history__header--wrap--coupon {
+  color: #FF0000;
 }
 
 .history__header--btn {
@@ -1499,7 +1503,9 @@ main {
 }
 
 .history__img {
-  width: 100px;
+  max-height: 100px;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 
 .history__option-img {
@@ -1644,6 +1650,14 @@ main {
   }
   .history__table td {
     margin-left: 5px;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 817px) {
+  .history__header--wrap {
+    font-size: 15px;
+    line-height: 22px;
+    letter-spacing: .7px;
   }
 }
 
