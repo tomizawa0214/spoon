@@ -1,5 +1,6 @@
 {% extends "app/base.html" %}
 {% load humanize %}
+{% load static %}
 
 {% block title %}
 <title>注文確認 | spoon</title>
@@ -11,7 +12,6 @@
 </h1>
 
 <div class="mx-auto text-center">
-    <p class="text-center mb-4">以下の内容でよろしいでしょうか？</p>
     <p id="error" class="d-none"></p>
 </div>
 <div class="row justify-content-center">
@@ -41,14 +41,14 @@
             </tbody>
         </table>
         <div class="order-ck__table--help mx-auto mt-1">
-            <p class="order-ck__table--help--text help-text d-inline-block d-sm-block m-0">
-                ※お支払いは店頭にて現金のみとなります。<br>
+            <p class="order-ck__table--help--text help-text d-sm-block m-0">
+                ※お支払いは店頭にて現金のみとなります。
                 ※店舗の状況により商品のお渡しにお時間をいただく場合がございます。
             </p>
         </div>
     </div>
     <div class="col-lg-5">
-        <div class="order-ck__cart card mx-auto mt-5 mt-lg-0 ml-lg-3">
+        <div class="order-ck__cart card mx-auto mt-5 mt-md-0 ml-lg-4">
             <p class="order__cart--content text-center p-1 mb-3">ご注文内容</p>
             {% for cart in cart_data %}
                 {% if forloop.last %}
@@ -98,17 +98,52 @@
                     </div>
                 </div>
             {% endfor %}
-            <hr class="order__border mx-2">
-            <div class="order__total d-flex justify-content-between mx-2 mb-3">
+            <hr class="order__cart--border mx-2">
+            <div class="order-ck__cart--coupon d-none">
+                <span>クーポンご利用</span>
+                <span class="order-ck__cart--coupon--price"></span>
+            </div>
+            <div class="order__cart--total d-flex justify-content-between mx-2 mb-3">
                 <strong>合計</strong>
                 <span class="order__select--price">\{{ get_total_price|intcomma }}</span>
             </div>
+            <!-- クーポン -->
+            <div class="order-ck__coupon mt-3 d-none">
+                <div class="order-ck__coupon--content mx-auto">
+                    <div class="order-ck__coupon--content--left">
+                        <span class="order-ck__coupon--content--left--ribbon">SPECIAL</span>
+                    </div>
+                    <div class="order-ck__coupon--content--main d-flex justify-content-center align-items-center p-2">
+                        <img class="order-ck__coupon--content--main--img" src="{% static 'img/gelato_illust.svg' %}" alt="ミニサイズジェラート">
+                        <div class="ml-2">
+                            <label for="coupon" class="order-ck__coupon--content--main--label m-0">
+                                <span class="order-ck__coupon--content--main--label--header d-block mb-2">お誕生月特典</span>
+                                <span class="order-ck__coupon--content--main--label--sub">ミニサイズ1個分</span><br>
+                                <span class="order-ck__coupon--content--main--label--title d-inline-block mt-1">値引クーポン</span>
+                            </label><br>
+                            <input type="checkbox" id="coupon" class="order-ck__coupon--content--main--ckbox">
+                            <span class="order-ck__coupon--content--main--ckbox">利用する</span>
+                        </div>
+                    </div>
+                    <div class="order-ck__coupon--content--right">
+                        <span class="order-ck__coupon--content--right--ribbon">COUPON</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="order-ck__cart--help mx-auto mt-1 ml-lg-4">
+            <p class="order-ck__cart--help--text help-text d-sm-block m-0">
+                ※イラストはイメージです。
+                ※クーポンのご利用は1回限りとなります。
+                ※ミニサイズ単品でのご利用はできません。
+                ※オプションは値引対象外となります。
+            </p>
         </div>
     </div>
 </div>
 <div class="position-relative text-center">
     <a class="back-btn btn d-none d-sm-block rounded-pill" href="{% url 'order_user' %}" ontouchstart="">戻る</a>
-    <a id="order_done" class="order__btn btn rounded-pill" href="{% url 'order_thanks' %}" ontouchstart="">注文を確定</a>
+    <a id="order_done" class="order-ck__btn btn rounded-pill" href="{% url 'order_thanks' %}" ontouchstart="">注文を確定</a>
 </div>
 {% endblock %}
 
@@ -116,6 +151,28 @@
 {% block extrajs %}
 <script>
     'use strict';
+
+    // クーポン発行
+    if ( '{{ coupon }}' == 'get' ) {
+        const issueCoupon = document.querySelector('.order-ck__coupon')
+        issueCoupon.classList.remove('d-none');
+    }
+
+    const coupon = document.querySelector('.order-ck__coupon--content');
+    const couponCart = document.querySelector('.order-ck__cart--coupon');
+    const couponInput = document.querySelector('.order-ck__coupon--content--main--ckbox');
+    coupon.addEventListener('click', () => {
+        couponInput.checked = !couponInput.checked
+
+        if ( couponInput.checked ) {
+            couponCart.classList.toggle('d-none');
+        } else {
+            couponCart.classList.toggle('d-none');
+
+        }
+    });
+    // // クーポン金額を取得
+    // const selectCouponPrice = document.querySelector('.order-ck__cart--coupon--price');
 
     // CSRF対策
     const getCookie = name => {

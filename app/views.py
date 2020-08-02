@@ -85,10 +85,23 @@ class OrderConfirmView(LoginRequiredMixin, View):
         total_price = [i.get_total_item_price() for i in cart_data]
         # 総合計値を取得
         get_total_price = sum(total_price)
+        # 誕生月を取得
+        birthmonth = 0
+        user_data = CustomUser.objects.get(id=request.user.id)
+        birthday = user_data.birthday
+        if birthday != None:
+            birthmonth = birthday.month
+        # 現在月と誕生月を確認
+        if datetime.datetime.now().month == birthmonth:
+            coupon = 'get'
+        else:
+            coupon = 'no'
+        print(coupon)
 
         return render(request, 'app/order_confirm.html', {
             'cart_data': cart_data,
-            'get_total_price': get_total_price
+            'get_total_price': get_total_price,
+            'coupon': coupon
         })
 
     def post(self, request, *args, **kwargs):
@@ -111,6 +124,17 @@ class OrderConfirmView(LoginRequiredMixin, View):
             total_price = [i.get_total_item_price() for i in cart_data]
             # 総合計値を取得
             get_total_price = sum(total_price)
+            # 誕生月を取得
+            birthmonth = 0
+            user_data = CustomUser.objects.get(id=request.user.id)
+            birthday = user_data.birthday
+            if birthday != None:
+                birthmonth = birthday.month
+            # 現在月と誕生月を確認
+            if datetime.datetime.now().month == birthmonth:
+                coupon = 'get'
+            else:
+                coupon = 'no'
 
             return render(request, 'app/order_confirm.html', {
                 'name': name,
@@ -121,6 +145,7 @@ class OrderConfirmView(LoginRequiredMixin, View):
                 'time': time,
                 'cart_data': cart_data,
                 'get_total_price': get_total_price,
+                'coupon': coupon
             })
 
         # 当日受付の有無
@@ -338,7 +363,7 @@ class OrderView(LoginRequiredMixin, View):
             'option_item': option_item,
             'cart_data': cart_data,
             'get_total_price': get_total_price,
-            'msg': msg,
+            'msg': msg
         })
 
 
@@ -531,7 +556,21 @@ class IndexView(View):
         # 最新2件を取得
         pick_data = PickUp.objects.all().order_by('-id')[0:2]
 
+        # 誕生月を取得
+        birthmonth = 0
+        user_data = CustomUser.objects.get(id=request.user.id)
+        birthday = user_data.birthday
+        if birthday != None:
+            birthmonth = birthday.month
+
+        # 現在月と誕生月を確認
+        if datetime.datetime.now().month == birthmonth:
+            coupon = 'get'
+        else:
+            coupon = 'no'
+
         return render(request, 'app/index.html', {
             'news_data': news_data,
-            'pick_data': pick_data
+            'pick_data': pick_data,
+            'coupon': coupon
         })

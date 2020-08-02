@@ -31,7 +31,9 @@
             <h1 class="title">
                 <span>ご予約注文</span>
             </h1>
-            <p class="order__step order__size mb-3 py-1 px-3 px-md-2 rounded-sm-pill">STEP1.　ジェラートのサイズをお選びください。</p>
+            <p class="order__step order__size mb-3 py-1 px-3 px-md-2 rounded-sm-pill">STEP1.　ジェラートのサイズをお選びください。<br>
+                <span class="order__step--help d-inline-block mt-1">※カップ写真はイメージです。実際の商品と異なります。</span>
+            </p>
             <div class="mx-auto text-center">
                 <p id="size_error" class="d-none"></p>
             </div>
@@ -72,7 +74,9 @@
                     </div>
                 {% endfor %}
             </div>
-            <p class="order__step order__option mb-3 py-1 px-3 px-md-2 rounded-sm-pill">STEP3.　オプションをお選びください。<br class="d-md-none">【※任意】</p>
+            <p class="order__step order__option mb-3 py-1 px-3 px-md-2 rounded-sm-pill">STEP3.　オプションをお選びください。<br>
+                <span class="order__step--help d-inline-block mt-1">※コーンはお持ち帰り用に単品でのお渡しとなります。※レジ袋はエコバッグをご持参いただければ不要です。</span>
+            </p>
             <div class="row">
                 {% for option in option_item %}
                     <div class="order__select col-lg-3 text-center">
@@ -97,9 +101,9 @@
                 <!-- データベース用 -->
                 <div id="posts">
                     {% for cart in cart_data %}
-                        <div id="order{{ cart.id }}"class="mb-3">
+                        <div id="order{{ cart.id }}" class="mb-3">
                             <div class="d-flex justify-content-between mx-2">
-                                <strong>{{ cart.size_title }}</strong>
+                                <strong class="order__cart--content--size">{{ cart.size_title }}</strong>
                                 <div>
                                     <strong class="order__select--cart--price m-0">\{{ cart.size_price }}</strong>
                                     <span id="{{ cart.id }}" onclick="delOrder(this);">
@@ -109,7 +113,7 @@
                             </div>
                             <div class="order__select--cart d-flex justify-content-between mx-2">
                                 <span>{{ cart.flavor_title }}</span>
-                                <span class="order__select--cart--price">\{{ cart.flavor_price }}</span>
+                                <span class="order__select--cart--price order__cart--content--flavor">\{{ cart.flavor_price }}</span>
                             </div>
                             <div class="order__select--cart d-flex justify-content-between mx-2">
                                 <span>{{ cart.flavor2_title }}</span>
@@ -173,33 +177,29 @@
                     <span id="option4_title"></span>
                     <span id="option4_price" class="order__select--cart--price"></span>
                 </div>
-                <hr class="order__border mx-2">
-                <div class="order__total d-flex justify-content-between mx-2">
+                <hr class="order__cart--border mx-2">
+                <div class="order__cart--total d-flex justify-content-between mx-2 mb-4">
                     <strong>合計</strong>
                     <span id="total" class="d-none">0</span>
                     <span id="total_price" class="order__select--price">\{{ get_total_price|intcomma }}</span>
                 </div>
-                <!-- 注文ボタン -->
-                <div class="mt-4 mx-auto">
-                    <a id="order_plus" class="order__add d-block btn rounded-pill my-4" ontouchstart="">追加注文</a>
-                    <a id="order_next" class="order__btn d-block btn rounded-pill my-4" href="{% url 'order_user' %}" ontouchstart="">ご注文手続きへ</a>
+                <div class="order__btn">
+                    <!-- 注文ボタン -->
+                    <div class="mx-auto text-center">
+                        <a id="order_plus" class="order__btn--add d-inline-block btn rounded-pill mt-4" ontouchstart="">追加注文</a><br>
+                        <a id="order_next" class="order__btn--next d-inline-block btn rounded-pill my-4" href="{% url 'order_user' %}" ontouchstart="">ご注文手続きへ</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <p class="help-text d-sm-block mt-1 mt-sm-5 mb-0">
-        ※写真はすべてイメージです。<br>
-        ※ジェラートカップはふた付きとなります。<br>
-        ※コーンはお持ち帰り用に単品でのお渡しとなります。<br>
-        ※レジ袋はエコバッグをご持参いただければ不要です。
-    </p>
 </div>
 {% endblock %}
 
 
 {% block extrajs %}
 <script>
-    'use strict';
+    'use strict'
 
     // ウインドウ幅に応じてbody要素を変更
     if ( window.innerWidth < 576 ) {
@@ -217,7 +217,7 @@
     let size = document.getElementsByName('size')
     let flavor = document.getElementsByName('flavor')
     let option = document.getElementsByName('option')
-    // // カート内のフィールドを取得
+    // カート内のフィールドを取得
     const size_title = document.getElementById('size_title');
     const size_price = document.getElementById('size_price');
     const flavor_title = document.getElementById('flavor_title');
@@ -234,22 +234,20 @@
     const option4_price = document.getElementById('option4_price');
     const total = document.getElementById('total');
     const total_price = document.getElementById('total_price');
-    // // エラーフィールドを取得
+    // エラーフィールドを取得
     const size_error = document.getElementById('size_error');
     const flavor_error = document.getElementById('flavor_error');
-    // // 登録フィールドを取得
+    // 登録フィールドを取得
     const postArea = document.getElementById('posts')
 
     // 空の表示
-    const order_total = document.querySelector('.order__total');
+    const order_total = document.querySelector('.order__cart--total');
     if ( total_price.textContent == '\\0' && flavor_title.textContent == '' ) {
-        order_total.className = 'order__total d-none';
-        document.getElementById('order_plus').className = 'd-none';
-        document.getElementById('order_next').className = 'd-none';
-        document.querySelector('.order__border').className = 'order__border d-none';
+        order_total.className = 'order__cart--total d-none';
+        document.querySelector('.order__cart--border').className = 'order__cart--border d-none';
         order_total.insertAdjacentHTML(
             'beforebegin',
-            '<p class="order__none">カートは空です。<br>ぜひお買い物をお楽しみください。</p>'
+            '<p class="order__none mb-4">カートは空です。<br>ぜひお買い物をお楽しみください。</p>'
         );
     }
 
@@ -313,10 +311,8 @@
         // カートの空表記を削除
         if ( document.getElementsByClassName('order__none').length ) {
             document.querySelector('.order__none').remove();
-            order_total.className = 'order__total d-flex justify-content-between mx-2';
-            document.getElementById('order_plus').className = 'order__add d-block btn rounded-pill my-4';
-            document.getElementById('order_next').className = 'order__btn d-block btn rounded-pill my-4';
-            document.querySelector('.order__border').className = 'order__border';
+            order_total.className = 'order__cart--total d-flex justify-content-between mx-2 mb-4';
+            document.querySelector('.order__cart--border').className = 'order__cart--border mx-2';
         }
 
         // サイズ・オプションの取得金額にデフォルト値を設定
@@ -429,13 +425,11 @@
 
         // カートの空表記を判定
         if ( total_price.textContent == '\\0' && flavor_title.textContent == '' ) {
-            order_total.className = 'order__total d-none';
-            document.getElementById('order_plus').className = 'd-none';
-            document.getElementById('order_next').className = 'd-none';
-            document.querySelector('.order__border').className = 'order__border d-none';
+            order_total.className = 'order__cart--total d-none';
+            document.querySelector('.order__cart--border').className = 'order__cart--border d-none';
             order_total.insertAdjacentHTML(
                 'beforebegin',
-                '<p class="order__none">カートは空です。<br>ぜひお買い物をお楽しみください。</p>'
+                '<p class="order__none mb-4">カートは空です。<br>ぜひお買い物をお楽しみください。</p>'
             );
         }
     }
@@ -486,15 +480,9 @@
             return response.json();
         }).then(response => {
             // 選択を初期化
-            for ( let i = 0; i < size.length; i++ ) {
-                size[i].checked = false;
-            }
-            for ( let j = 0; j < flavor.length; j++ ) {
-                flavor[j].checked = false;
-            }
-            for ( let k = 0; k < option.length; k++ ) {
-                option[k].checked = false;
-            }
+            invalid(size);
+            invalid(flavor);
+            invalid(option);
             // 選択したカート情報を初期化
             size_title.textContent = '';
             size_price.textContent = '';
@@ -514,18 +502,18 @@
             // カートの数値を更新
             document.querySelector('.header__link--badge').textContent = response.count;
             document.querySelector('.spfooter__menu--badge').textContent = response.count;
-            
+        
             // 仮の合計金額を初期化
             total.textContent = '';
             // 追加するエレメント
             const element  = Object.assign(document.createElement('div'), { className: 'd-flex justify-content-between mx-2'});
-            const element2  = Object.assign(document.createElement('strong'), { textContent: response.size_title });
+            const element2  = Object.assign(document.createElement('strong'), { className: 'order__cart--content--size', textContent: response.size_title });
             const element3  = Object.assign(document.createElement('div'));
             const element4  = Object.assign(document.createElement('strong'), { className: 'order__select--cart--price m-0', textContent: '\\' + response.size_price });
             const element5  = Object.assign(document.createElement('span'), { id: response.cart_id, innerHTML: '<i class="order__select--cart--delete fas fa-times-circle fa-fw" aria-hidden="true"></i>' });
             const element6  = Object.assign(document.createElement('div'), { className: 'order__select--cart d-flex justify-content-between mx-2'});
             const element7  = Object.assign(document.createElement('span'), { textContent: response.flavor_title });
-            const element8  = Object.assign(document.createElement('span'), { className: 'order__select--cart--price', textContent: '\\' + response.flavor_price });
+            const element8  = Object.assign(document.createElement('span'), { className: 'order__select--cart--price order__cart--content--flavor', textContent: '\\' + response.flavor_price });
             const element9  = Object.assign(document.createElement('div'), { className: 'order__select--cart d-flex justify-content-between mx-2'});
             const element10  = Object.assign(document.createElement('span'), { textContent: response.flavor2_title });
             if ( response.flavor2_title == '' ) {
@@ -667,13 +655,31 @@
             let delete_alert = () => {
                 order_alert.remove()
             }
-            setTimeout(delete_alert, 2500);
+            setTimeout(delete_alert, 1500);
         }
     });
 
 
     // カート注文の削除をクリックで発動
     const delOrder = (ele) => {
+        // すべてのチェックを一旦外す
+        invalid(size);
+        invalid(flavor);
+        invalid(option);
+        size_title.textContent = '';
+        size_price.textContent = '';
+        flavor_title.textContent = '';
+        flavor2_title.textContent = '';
+        flavor_price.textContent = '';
+        flavor2_price.textContent = '';
+        option_title.textContent = '';
+        option_price.textContent = '';
+        option2_title.textContent = '';
+        option2_price.textContent = '';
+        option3_title.textContent = '';
+        option3_price.textContent = '';
+        option4_title.textContent = '';
+        option4_price.textContent = '';
         let id_value = ele.id;
         const url = '{% url "delete_order" %}';
         // URLのクエリパラメータを管理
@@ -707,13 +713,11 @@
 
             // カートの空表記を判定
             if ( total_price.textContent == '\\0' && flavor_title.textContent == '' ) {
-                order_total.className = 'order__total d-none';
-                document.getElementById('order_plus').className = 'd-none';
-                document.getElementById('order_next').className = 'd-none';
-                document.querySelector('.order__border').className = 'order__border d-none';
+                order_total.className = 'order__cart--total d-none';
+                document.querySelector('.order__cart--border').className = 'order__cart--border d-none';
                 order_total.insertAdjacentHTML(
                     'beforebegin',
-                    '<p class="order__none">カートは空です。<br>ぜひお買い物をお楽しみください。</p>'
+                    '<p class="order__none mb-4">カートは空です。<br>ぜひお買い物をお楽しみください。</p>'
                 );
             }
         }).catch(error => {

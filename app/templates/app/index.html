@@ -74,3 +74,36 @@
     {% include 'app/sidebar.html' %}
 </div>
 {% endblock %}
+
+
+{% block extrajs %}
+<!-- <script>
+    'use strict';
+
+    // クーポン発行有無
+    if ( '{{ courpon }}' == 'get' ) {
+        const element  = Object.assign(document.createElement('div'), { className: 'order-user__courpon alert alert-dismissible fade show d-flex justify-content-center align-items-center m-0 p-3'});
+        const element2  = Object.assign(document.createElement('div'));
+        const element3  = Object.assign(document.createElement('img'), { className: 'done-check d-block mx-auto mb-2', src: "{# static 'img/check.svg' #}" });
+        const element4  = Object.assign(document.createElement('strong'), { innerHTML: 'お誕生月おめでとう!!' });
+        const element5  = Object.assign(document.createElement('button'), { className: 'order-user__courpon--btn close', type: 'button'});
+        const element6  = Object.assign(document.createElement('span'), { className: 'order-user__courpon--close', innerHTML: '&times;'});
+        // 階層に合わせて要素をまとめる
+        element2.appendChild(element3);
+        element2.appendChild(element4);
+        element5.appendChild(element6);
+        element.appendChild(element2);
+        element.appendChild(element5);
+        // 最後に追加
+        document.body.insertBefore(element, document.body.firstChild);
+
+        let order_alert = document.querySelector('.order-user__courpon');
+        order_alert.setAttribute('role', 'alert');
+        let alert_btn = document.querySelector('.order-user__courpon--btn');
+        alert_btn.setAttribute('data-dismiss', 'alert');
+        alert_btn.setAttribute('aria-label', 'Close');
+        let alert_close = document.querySelector('.order-user__courpon--close');
+        alert_close.setAttribute('aria-hidden', 'true');
+    }
+</script> -->
+{% endblock %}
