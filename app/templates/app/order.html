@@ -67,7 +67,7 @@
                                 <div class="text-left">
                                     <p class="order__select--item order__select--ename mb-0 ml-2 mt-1 mt-lg-0">{{ flavor.entitle }}</p>
                                     <p class="order__select--item mb-1 ml-2">{{ flavor.title }}</p>
-                                    <p class="order__select--item order__select--price ml-2">\{{ flavor.price }}</p>
+                                    <p class="order__select--item order__select--item--flavor order__select--price ml-2">\{{ flavor.price }}</p>
                                 </div>
                             </div>
                         </label>
@@ -217,6 +217,8 @@
     let size = document.getElementsByName('size')
     let flavor = document.getElementsByName('flavor')
     let option = document.getElementsByName('option')
+    // フレーバのプライスエリアを取得
+    const flavorPriceArea = document.querySelectorAll('.order__select--item--flavor');
     // カート内のフィールドを取得
     const size_title = document.getElementById('size_title');
     const size_price = document.getElementById('size_price');
@@ -333,6 +335,21 @@
                 size_title.textContent = size_value[0];
                 size_price.textContent = '\\' + size_value[1];
                 size_total = Number(size_value[1]);
+                // シングルサイズを選択でフレーバー金額を2倍に変更
+                if ( size[1].checked ) {
+                    for ( let g = 0; g < flavorPriceArea.length; g++ ) {
+                        if ( flavorPriceArea[g].textContent == '\\30' ) {
+                            flavorPriceArea[g].textContent = '\\60';
+                        }
+                    }
+                }
+            }
+        }
+        if ( size[1].checked == false ) {
+            for ( let h = 0; h < flavorPriceArea.length; h++ ) {
+                if ( flavorPriceArea[h].textContent == '\\60' ) {
+                    flavorPriceArea[h].textContent = '\\30';
+                }
             }
         }
 
@@ -357,6 +374,10 @@
                         flavor_price.textContent =  '\\' + flavor_value[1];
                         flavor2_title.textContent = flavor_value[0];
                         flavor2_price.textContent = '\\' + flavor_value[1];
+                    // シングルサイズ選択の場合
+                    } else if ( size[1].checked ) {
+                        flavor_title.textContent = flavor_value[0];
+                        flavor_price.textContent =  '\\' + flavor_value[1]*2;
                     } else {
                         flavor_title.textContent = flavor_value[0];
                         flavor_price.textContent = '\\' + flavor_value[1];
