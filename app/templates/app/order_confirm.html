@@ -114,11 +114,11 @@
                         <span class="order-ck__coupon--content--left--ribbon">SPECIAL</span>
                     </div>
                     <div class="order-ck__coupon--content--main d-flex justify-content-center align-items-center p-2">
-                        <img class="order-ck__coupon--content--main--img" src="{% static 'img/gelato_illust.svg' %}" alt="ミニサイズジェラート">
+                        <img class="order-ck__coupon--content--main--img" src="{% static 'img/gelato_illust.svg' %}" alt="シングルサイズジェラート">
                         <div class="ml-2">
                             <label for="coupon" class="order-ck__coupon--content--main--label m-0">
                                 <span class="order-ck__coupon--content--main--label--header d-block mb-2">お誕生月特典</span>
-                                <span class="order-ck__coupon--content--main--label--sub">ミニサイズ1個分</span><br>
+                                <span class="order-ck__coupon--content--main--label--sub">シングルサイズ1個分</span><br>
                                 <span class="order-ck__coupon--content--main--label--title d-inline-block mt-1">値引クーポン</span>
                             </label><br>
                             <input type="checkbox" id="coupon" name="coupon" class="order-ck__coupon--content--main--ckbox">
@@ -138,7 +138,7 @@
             <p class="order-ck__cart--help--text help-text d-sm-block m-0">
                 ※イラストはイメージです。
                 ※クーポンのご利用は1回限りとなります。
-                ※ミニサイズ単品でのご利用はできません。
+                ※金額がプラスになるフレーバーは値引対象外となります。
                 ※オプションは値引対象外となります。
             </p>
         </div>
@@ -174,32 +174,21 @@
             // クーポンの利用可否を確認
             if ( '{{ use_coupon }}' == 'valid' ) {
                 cartCoupon.classList.toggle('d-none');
-                selectCouponPrice.textContent = '-\\' + 280
+                selectCouponPrice.textContent = '-\\' + 330
                 let totalPriceNum = totalPrice.textContent.slice(1).replace( /,/g, '');
-                let total = Number(totalPriceNum) - 280;
-                totalPrice.textContent = '\\' + total.toLocaleString();
-            } else if ( '{{ use_coupon }}' == 'valid_plus' ) {
-                cartCoupon.classList.toggle('d-none');
-                selectCouponPrice.textContent = '-\\' + 310
-                let totalPriceNum = totalPrice.textContent.slice(1).replace( /,/g, '');
-                let total = Number(totalPriceNum) - 310;
+                let total = Number(totalPriceNum) - 330;
                 totalPrice.textContent = '\\' + total.toLocaleString();
             } else {
                 useCoupon.checked = false;
                 // エラーメッセージを表示
                 couponError.className = 'order-ck__coupon--error';
-                couponError.textContent = '※ミニサイズが含まれていないまたは単品でのご注文のため、クーポンがご利用いただけません。';
+                couponError.textContent = '※シングルサイズをご注文ください。';
             }
         } else {
             if ( '{{ use_coupon }}' == 'valid' ) {
                 cartCoupon.classList.toggle('d-none');
                 let totalPriceNum = totalPrice.textContent.slice(1).replace( /,/g, '');
-                let total = Number(totalPriceNum) + 280;
-                totalPrice.textContent = '\\' + total.toLocaleString();
-            } else if ( '{{ use_coupon }}' == 'valid_plus' ) {
-                cartCoupon.classList.toggle('d-none');
-                let totalPriceNum = totalPrice.textContent.slice(1).replace( /,/g, '');
-                let total = Number(totalPriceNum) + 310;
+                let total = Number(totalPriceNum) + 330;
                 totalPrice.textContent = '\\' + total.toLocaleString();
             }
         }

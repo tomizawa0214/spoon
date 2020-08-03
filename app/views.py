@@ -156,15 +156,9 @@ class OrderConfirmView(LoginRequiredMixin, View):
             else:
                 coupon = 'no'
 
-            # カートが2点以上かつミニサイズを含むか確認
-            if cart_data.count() > 1:
-                if cart_data.filter(size_title='ミニサイズ').exists():
-                    use_coupon = 'valid'
-                    # ミニサイズのプラス金額有無を確認
-                    if cart_data.filter(size_title='ミニサイズ', flavor_price__gt=0):
-                        use_coupon = 'valid_plus'
-                else:
-                    use_coupon = 'invalid'
+            # カートにシングルサイズを含むか確認
+            if cart_data.filter(size_title='シングルサイズ').exists():
+                use_coupon = 'valid'
             else:
                 use_coupon = 'invalid'
 
