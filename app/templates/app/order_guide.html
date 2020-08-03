@@ -2,44 +2,173 @@
 {% load static %}
 
 {% block title %}
-<title>ご利用ガイド | spoon</title>
+<title>お持ち帰り予約 - ご利用方法 | spoon</title>
 {% endblock %}
 
 {% block content %}
 <h1 class="title">
-    <span>ご利用方法</span>
+    <span>お持ち帰り予約</span>
 </h1>
 
-<div class="row justify-content-center">
-    <div class="col-4">
-        <img class="w-100" src="{% static 'img/ガイド_イメージ1.png' %}">
+<div class="guide mx-auto">
+    <div class="guide__top d-flex justify-content-between align-items-center px-4">
+        <img class="guide__top--img" src="{% static 'img/iPhone_illust.svg' %}">
+        <div>
+            <h2 class="guide__top--title">
+                お店で待たずに注文できる！<br>
+                「spoonのお持ち帰り予約」がお得！
+            </h2>
+            <p class="guide__top--content">
+                スマホやパソコンでご注文いただける便利なサービスです。<br>
+                ご自宅でも、外出先でも、どこでもお気軽に、<br>自分のペースでご注文いただけます。<br>
+                お店で待たずに受け取れるから衛生面でも安心。<br>
+                ぜひこの機会にご利用ください！<br><br>
+                <span class="help-text">
+                    ※ご利用には無料会員登録が必要です。<br>
+                    ※ご注文はジェラートのみとなります。<br>
+                    ※お支払いは店頭にて現金のみでお願いします。<br>
+                </span>
+            </p>
+        </div>
     </div>
-    <div class="align-self-center">
-        <h2 class="guide__title">待ち時間なし！ 並ばず注文できる新サービス！</h2>
-        <p class="guide__help">
-            ご自宅でも、外出先でも、ゆっくり自分のペースで事前に注文。<br>
-            かんたん3ステップでお店に並ばず受け取れるから衛生面でも安心。<br>
-            ぜひこの機会にご利用ください！
-        </p>
+    <div class="guide__merit mx-auto">
+        <p class="guide__merit--title py-3 pl-3">こんなことがお得！</p>
+        <ul class="guide__merit--ul pl-3">
+            <li class="my-4">
+                <div class="d-flex align-items-center">
+                    <span class="guide__merit--ul--part d-inline-block align-middle text-center p-3">
+                        ポイント<br>
+                        <span class="guide__merit--ul--part--num">1</span>
+                    </span>
+                    <span class="pl-4">
+                        事前に準備することで
+                        <span class="guide__merit--ul--benefits">さらに美味しい、ひんやりジェラート</span>
+                        をご提供♪
+                    </span>
+                </div>
+            </li>
+            <li class="mb-4">
+                <div class="d-flex align-items-center">
+                    <span class="guide__merit--ul--part d-inline-block align-middle text-center p-3">
+                        ポイント<br>
+                        <span class="guide__merit--ul--part--num">2</span>
+                    </span>
+                    <span class="pl-4">
+                        <span class="guide__merit--ul--benefits">WEB限定フレーバー</span>
+                        が、常時10種類以上♪
+                    </span>
+                </div>
+            </li>
+            <li class="mb-4">
+                <div class="d-flex align-items-center">
+                    <span class="guide__merit--ul--part d-inline-block align-middle text-center p-3">
+                        ポイント<br>
+                        <span class="guide__merit--ul--part--num">3</span>
+                    </span>
+                    <span class="pl-4">
+                        <span class="guide__merit--ul--benefits">お誕生月特典</span>
+                        で、お誕生月にシングルサイズ1個分を無料でGET♪
+                    </span>
+                </div>
+            </li>
+            <li class="mb-4">
+                <div class="d-flex align-items-center">
+                    <span class="guide__merit--ul--part d-inline-block align-middle text-center p-3">
+                        ポイント<br>
+                        <span class="guide__merit--ul--part--num">4</span>
+                    </span>
+                    <span class="pl-4">
+                        <span class="guide__merit--ul--benefits">リピートオーダー</span>
+                        で、ラクラクご注文♪
+                    </span>
+                </div>
+            </li>
+        </ul>
+        <span class="help-text">
+            ※WEB限定フレーバーは季節に応じて異なります。<br>
+            ※お誕生月特典は1回限りとなります。金額がプラスになるフレーバー、オプションは値引対象外となります。
+        </spn>
+    </div>
+    <div class="guide__exuse mx-auto">
+        <p class="guide__exuse--title py-3 pl-3">たとえば、こんなときに！</p>
+        <ul class="guide__exuse--ul pl-3">
+            <li class="my-4">
+                <p class="guide__exuse--ul--header d-inline-block mb-2">ゆっくり選んで注文したい！</p>
+                <p class="guide__exuse--ul--msg">
+                    並んでいる方やスタッフの目を気にして、つい焦って注文してしまうこと、ありませんか？<br>
+                    「やっぱりあっちにすればよかったな…」なんて思うことも。<br>
+                    spoonのお持ち帰り注文なら、自分のペースでゆっくり、じっくり商品が選べるので安心です。
+                </p>
+            </li>
+            <li class="my-4">
+                <p class="guide__exuse--ul--header d-inline-block mb-2">たくさん注文して、待たずに受け取りたい！</p>
+                <p class="guide__exuse--ul--msg">
+                    たくさん注文をしても、お店で待つことなくご希望の時間にお受け取りできます。差し入れなどにいかがですか？
+                </p>
+            </li>
+        </ul>
+    </div>
+    <div class="guide__info mx-auto">
+        <p class="guide__info--title py-3 pl-3">ご利用は、かんたん3ステップ！</p>
+        <div class="guide__info--step d-flex justify-content-center text-center align-items-center mb-5">
+            {% if user.is_authenticated %}
+            <a class="guide__info--step--box d-block py-4" href="{% url 'profile' %}">
+            {% else %}
+            <a class="guide__info--step--box d-block py-4" href="{% url 'account_signup' %}">
+            {% endif %}
+                <span class="guide__info--step--box--part">
+                    STEP<br>
+                    <span class="guide__info--step--box--part--num">1</span>
+                </span>
+                <img class="guide__info--step--box--img mb-3" src="{% static 'img/signup_guide.svg' %}"><br>
+                <span>無料会員登録</span>
+            </a>
+            <i class="guide__info--step--arrow fas fa-caret-right fa-fw" aria-hidden="true"></i>
+            <a class="guide__info--step--box py-4" href="{% url 'order' %}">
+                <span class="guide__info--step--box--part">
+                    STEP<br>
+                    <span class="guide__info--step--box--part--num">2</span>
+                </span>
+                <img class="guide__info--step--box--img mb-3" src="{% static 'img/cart_guide.svg' %}"><br>
+                <span>ネットで注文</span>
+            </a>
+            <i class="guide__info--step--arrow fas fa-caret-right fa-fw" aria-hidden="true"></i>
+            <div class="guide__info--step--box py-4">
+                <span class="guide__info--step--box--part">
+                    STEP<br>
+                    <span class="guide__info--step--box--part--num">3</span>
+                </span>
+                <img class="guide__info--step--box--img mb-3" src="{% static 'img/receipt.svg' %}"><br>
+                <span>決済＆受け取り</span>
+            </div>
+        </div>
+        <ul class="guide__info--ul pl-3">
+            <li class="my-4">
+                <p class="guide__info--ul--header d-inline-block mb-2">お時間について</p>
+                <p class="guide__info--ul--msg">
+                    お受け取りは、最速30分後から1週間以内となります。<br>
+                    お受け取り時間は、各日11:30～17:00までとなります。<br>
+                    土日祝の当日注文は、店舗の状況によりお受けいたしかねる場合がございます。<br>
+                </p>
+            </li>
+            <li class="my-4">
+                <p class="guide__info--ul--header d-inline-block mb-2">お支払いについて</p>
+                <p class="guide__info--ul--msg">
+                    お支払いは、商品のお受け取り時に店舗にて現金のみでお願いします。<br>
+                </p>
+            </li>
+            <li class="my-4">
+                <p class="guide__info--ul--header d-inline-block mb-2">メニューについて</p>
+                <p class="guide__info--ul--msg">
+                    お持ち帰り予約のご注文はジェラートのみとなります。焼菓子、ドリンクは対応しておりません。<br>
+                </p>
+            </li>
+        </ul>
+    </div>
+    <div class="text-center">
+        <a class="guide__btn btn rounded-pill" href="{% url 'order' %}" ontouchstart="">お持ち帰り注文する</a>
     </div>
 </div>
-<div class="guide__step">
-    <span>かんたん3ステップ</span>
-</div>
-<div class="guide__three row justify-content-center text-center align-items-center">
-    <div class="guide__three--box col-2 py-5 position-relative">
-        <span class="guide__three--box--step pt-2">1</span>
-        <span>無料会員登録</span>
-    </div>
-    <i class="guide__three--arrow col-1 fas fa-caret-right fa-fw" aria-hidden="true"></i>
-    <div class="guide__three--box col-2 py-5">
-        <span class="guide__three--box--step pt-2">2</span>
-        <span>WEBで注文</span>
-    </div>
-    <i class="guide__three--arrow col-1 fas fa-caret-right fa-fw" aria-hidden="true"></i>
-    <div class="guide__three--box col-2 py-5">
-        <span class="guide__three--box--step pt-2">3</span>
-        <span>店頭決済＆受取</span>
-    </div>
-</div>
+
+
 {% endblock %}

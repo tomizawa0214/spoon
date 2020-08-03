@@ -43,12 +43,8 @@
                     <span class="spnav__menu--link--j col-5 p-0">-当店について-</span>
                 </a>
                 <a class="spnav__menu--link row mb-3 mt-0 mx-0 py-3 justify-content-center" href="{% url 'order_guide' %}">
-                    <span class="spnav__menu--link--e col-5 p-0">GUIDE</span>
-                    <span class="spnav__menu--link--j col-5 p-0">-ご利用方法-</span>
-                </a>
-                <a class="spnav__menu--link row mb-3 mt-0 mx-0 py-3 justify-content-center" href="{% url 'order' %}">
                     <span class="spnav__menu--link--e col-5 p-0">ORDER</span>
-                    <span class="spnav__menu--link--j col-5 p-0">-ご予約注文-</span>
+                    <span class="spnav__menu--link--j col-5 p-0">-お持ち帰り予約-</span>
                 </a>
                 <a class="spnav__menu--link row mb-3 mt-0 mx-0 py-3 justify-content-center" href="{% url 'access' %}">
                     <span class="spnav__menu--link--e col-5 p-0">ACCESS</span>
@@ -62,7 +58,7 @@
         </header>
 
         <!-- タブレット・PC用ヘッダー -->
-        <header class="header py-3 mx-auto d-none d-sm-flex justify-content-between">
+        <header class="header pl-3 p-xl-0 py-3 mx-auto d-none d-sm-flex justify-content-between">
             <a href="/">
                 <img class="header__logo" src="{% static 'img/spoon_logo.svg' %}">
             </a>
@@ -118,16 +114,16 @@
                         <span class="nav__wrap--menu--li--link--j">-当店について-</span>
                     </a>
                 </li>
-                <li class="nav__wrap--menu--li text-center">
+                <!-- <li class="nav__wrap--menu--li text-center">
                     <a class="nav__wrap--menu--li--link d-flex flex-column justify-content-center" href="{% url 'order_guide' %}">
                         <span class="nav__wrap--menu--li--link--e">GUIDE</span>
                         <span class="nav__wrap--menu--li--link--j">-ご利用方法-</span>
                     </a>
-                </li>
+                </li> -->
                 <li class="nav__wrap--menu--li text-center">
-                    <a class="nav__wrap--menu--li--link d-flex flex-column justify-content-center" href="{% url 'order' %}">
+                    <a class="nav__wrap--menu--li--link d-flex flex-column justify-content-center" href="{% url 'order_guide' %}">
                         <span class="nav__wrap--menu--li--link--e">ORDER</span>
-                        <span class="nav__wrap--menu--li--link--j">-ご予約注文-</span>
+                        <span class="nav__wrap--menu--li--link--j">-お持ち帰り予約-</span>
                     </a>
                 </li>
                 <li class="nav__wrap--menu--li text-center">

@@ -64,8 +64,8 @@ main {
 
 .help-text {
   display: inline-block;
-  font-size: 14px;
-  line-height: 22px;
+  font-size: 12px;
+  line-height: 18px;
   letter-spacing: .5px;
 }
 
@@ -1754,75 +1754,203 @@ main {
   }
 }
 
-.guide__title {
-  font-size: 28px;
-  font-weight: 700;
-  color: #E8435F;
+.guide {
+  max-width: 800px;
 }
 
-.guide__help {
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 30px;
+.guide__top {
+  margin-bottom: 60px;
 }
 
-.guide__step {
-  position: relative;
-  margin: 60px 0 40px;
-  text-align: center;
-  letter-spacing: 3px;
+.guide__top--img {
+  height: 400px;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+.guide__top--title {
   font-size: 25px;
+  line-height: 1.5;
   font-weight: 700;
   color: #E8435F;
 }
 
-.guide__step span {
-  position: relative;
-  display: inline-block;
-  z-index: 1;
-  padding: 0 20px;
-  background: #FDFDFD;
+.guide__top--content {
+  font-size: 18px;
+  line-height: 1.7;
 }
 
-.guide__step:after {
+.guide__merit {
+  margin-bottom: 60px;
+}
+
+.guide__merit--title {
+  font-size: 18px;
+  font-weight: 700;
+  border-left: 8px solid #A3CD7E;
+  background: #F2F8ED;
+}
+
+.guide__merit--ul {
+  list-style: none;
+}
+
+.guide__merit--ul--part {
+  position: relative;
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 1;
+  background: #F8DDE3;
+  border-radius: 50%;
+}
+
+.guide__merit--ul--part:before {
+  content: "";
   position: absolute;
   top: 50%;
-  left: 50%;
-  -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
-  display: block;
-  width: 40%;
-  height: 2px;
-  content: '';
-  background: #E8435F;
+  right: -25px;
+  margin-top: -16px;
+  border: 15px solid transparent;
+  border-left: 22px solid #F8DDE3;
+  z-index: 0;
 }
 
-.guide__three--box {
+.guide__merit--ul--part--num {
+  font-size: 20px;
+}
+
+.guide__merit--ul--benefits {
+  color: #E8435F;
+  font-weight: 700;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(70%, transparent), color-stop(70%, #faf082));
+  background: linear-gradient(transparent 70%, #faf082 70%);
+}
+
+.guide__exuse {
+  margin-bottom: 60px;
+}
+
+.guide__exuse--title {
+  font-size: 18px;
+  font-weight: 700;
+  border-left: 8px solid #A3CD7E;
+  background: #F2F8ED;
+}
+
+.guide__exuse--ul {
+  list-style: none;
+}
+
+.guide__exuse--ul--header {
+  color: #E8435F;
+  font-weight: bold;
+  line-height: 1.2;
+  border-bottom: 1px solid #E8435F;
+}
+
+.guide__exuse--ul--msg {
+  font-size: 14px;
+  line-height: 22px;
+  letter-spacing: .5;
+}
+
+.guide__info {
+  margin-bottom: 60px;
+}
+
+.guide__info--title {
+  margin-bottom: 34px;
+  font-size: 18px;
+  font-weight: 700;
+  border-left: 8px solid #A3CD7E;
+  background: #F2F8ED;
+}
+
+.guide__info--step--box {
+  position: relative;
+  width: 190px;
   font-size: 20px;
   font-weight: 700;
-  color: #FFF000;
+  color: #faf082;
   background: #E8435F;
   border-radius: 20px;
+  -webkit-transition: .3s;
+  transition: .3s;
 }
 
-.guide__three--box--step {
-  font-family: "Montserrat", "Roboto", "游ゴシック体", "Yu Gothic", YuGothic, "游ゴシック", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", MeiryoKe_PGothic, "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+.guide__info--step--box:hover {
+  opacity: .5;
+  text-decoration: none;
+  color: #faf082;
+}
+
+.guide__info--step--box--part {
   position: absolute;
-  width: 50px;
-  height: 50px;
+  padding-top: 13px;
+  width: 60px;
+  height: 60px;
   top: -18px;
   left: -10px;
-  font-size: 25px;
-  font-weight: 700;
+  font-size: 10px;
+  font-weight: bold;
+  line-height: 1;
   color: #E8435F;
   background: #FDFDFD;
   border: 2px solid #E8435F;
   border-radius: 50%;
 }
 
-.guide__three--arrow {
+.guide__info--step--box--part--num {
+  font-size: 25px;
+}
+
+.guide__info--step--box--img {
+  height: 60px;
+}
+
+.guide__info--step--arrow {
   font-size: 50px;
   color: #E8435F;
+}
+
+.guide__info--ul {
+  list-style: none;
+}
+
+.guide__info--ul--header {
+  line-height: 1.2;
+  font-weight: bold;
+  border-bottom: 1px solid #333;
+}
+
+.guide__info--ul--msg {
+  font-size: 14px;
+  line-height: 22px;
+  letter-spacing: .5;
+}
+
+.guide__btn {
+  position: relative;
+  width: 200px;
+  margin: 50px 0 0px;
+  color: #FDFDFD;
+  background: #E8435F;
+  -webkit-box-shadow: 0 3px 0 #AC1531;
+          box-shadow: 0 3px 0 #AC1531;
+  border: 0;
+  font-weight: bold;
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+
+.guide__btn:hover {
+  color: #FDFDFD;
+  opacity: .7;
+}
+
+.guide__btn i {
+  margin: 0 5px 0 0;
 }
 
 .email-change__form {

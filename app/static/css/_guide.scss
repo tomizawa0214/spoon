@@ -1,66 +1,150 @@
 .guide {
-    &__title {
-        font-size: 28px;
-        font-weight: 700;
-        color: #E8435F;
-    }
-    &__help {
-        font-size: 20px;
-        font-weight: 700;
-        line-height: 30px;
-    }
-    &__step {
-        position: relative;
-        margin: 60px 0 40px;
-        text-align: center;
-        letter-spacing: 3px;
-        font-size: 25px;
-        font-weight: 700;
-        color: #E8435F;
-        span {
-            position: relative;
-            display: inline-block;
-            z-index: 1;
-            padding: 0 20px;
-            background: #FDFDFD;
+    max-width: 800px;
+    &__top {
+        margin-bottom: 60px;
+        &--img {
+            height: 400px;
+            object-fit: contain;
         }
-        &:after {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translateX(-50%);
-            display: block;
-            width: 40%;
-            height: 2px;
-            content: '';
-            background: #E8435F;
-        }
-    }
-    &__three {
-        &--box {
-            font-size: 20px;
+        &--title {
+            font-size: 25px;
+            line-height: 1.5;
             font-weight: 700;
-            color: #FFF000;
-            background: #E8435F;
-            border-radius: 20px;
-            &--step {
-                @include E-font;
-                position: absolute;
-                width: 50px;
-                height: 50px;
-                top: -18px;
-                left: -10px;
-                font-size: 25px;
-                font-weight: 700;
-                color: #E8435F;
-                background: #FDFDFD;
-                border: 2px solid #E8435F;
-                border-radius: 50%;
-            }
-        }
-        &--arrow {
-            font-size: 50px;
             color: #E8435F;
         }
+        &--content {
+            font-size: 18px;
+            line-height: 1.7;
+        }
+    }
+    &__merit {
+        margin-bottom: 60px;
+        &--title {
+            font-size: 18px;
+            font-weight: 700;
+            border-left: 8px solid #A3CD7E;
+            background: #F2F8ED;
+        }
+        &--ul {
+            list-style: none;
+            &--part {
+                position: relative;
+                font-size: 10px;
+                font-weight: bold;
+                letter-spacing: 0;
+                line-height: 1;
+                background: #F8DDE3;
+                border-radius: 50%;
+                &:before {
+                    content: "";
+                    position: absolute;
+                    top: 50%;
+                    right: -25px;
+                    margin-top: -16px;
+                    border: 15px solid transparent;
+                    border-left: 22px solid #F8DDE3;
+                    z-index: 0;
+                }
+                &--num {
+                    font-size: 20px;
+                }
+            }
+            &--benefits {
+                color: #E8435F;
+                font-weight: 700;
+                background: linear-gradient(transparent 70%, rgb(250, 240, 130) 70%);
+            }
+        }
+    }
+    &__exuse {
+        margin-bottom: 60px;
+        &--title {
+            font-size: 18px;
+            font-weight: 700;
+            border-left: 8px solid #A3CD7E;
+            background: #F2F8ED;
+        }
+        &--ul {
+            list-style: none;
+            &--header {
+                color: #E8435F;
+                font-weight: bold;
+                line-height: 1.2;
+                border-bottom: 1px solid #E8435F;
+            }
+            &--msg {
+                font-size: 14px;
+                line-height: 22px;
+                letter-spacing: .5;
+            }
+        }
+    }
+    &__info {
+        margin-bottom: 60px;
+        &--title {
+            margin-bottom: 34px;
+            font-size: 18px;
+            font-weight: 700;
+            border-left: 8px solid #A3CD7E;
+            background: #F2F8ED;
+        }
+        &--step {
+            &--box {
+                position: relative;
+                width: 190px;
+                font-size: 20px;
+                font-weight: 700;
+                color: rgb(250, 240, 130);
+                background: #E8435F;
+                border-radius: 20px;
+                transition: .3s;
+                &:hover {
+                    opacity: .5;
+                    text-decoration: none;
+                    color: rgb(250, 240, 130);
+                }
+                &--part {
+                    position: absolute;
+                    padding-top: 13px;
+                    width: 60px;
+                    height: 60px;
+                    top: -18px;
+                    left: -10px;
+                    font-size: 10px;
+                    font-weight: bold;
+                    line-height: 1;
+                    color: #E8435F;
+                    background: #FDFDFD;
+                    border: 2px solid #E8435F;
+                    border-radius: 50%;
+                    &--num {
+                        font-size: 25px;
+                    }
+                }
+                &--img {
+                    height: 60px;
+                }
+            }
+            &--arrow {
+                font-size: 50px;
+                color: #E8435F;
+            }
+        }
+        &--ul {
+            list-style: none;
+            &--header {
+                line-height: 1.2;
+                font-weight: bold;
+                border-bottom: 1px solid #333;
+            }
+            &--msg {
+                font-size: 14px;
+                line-height: 22px;
+                letter-spacing: .5;
+            }
+        }
+    }
+    &__btn {
+        @include button;
     }
 }
