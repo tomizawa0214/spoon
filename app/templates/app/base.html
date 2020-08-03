@@ -23,9 +23,9 @@
         <header class="spnav d-sm-none">
             <div class="spnav__header d-flex justify-content-between align-items-center p-2">
                 <a class="spnav__header--link d-block" href="/">
-                    <img class="spnav__header--link--logo" src="{% static 'img/spoon_logo.svg' %}">
+                    <img class="spnav__header--link--logo" src="{% static 'img/spoon_logo_1c.svg' %}">
                 </a>
-                <div class="spnav__header--btn d-flex flex-column align-items-center">
+                <div class="spnav__header--btn d-flex flex-column align-items-center justify-content-center">
                     <span class="spnav__header--btn--bar1"></span>
                     <span class="spnav__header--btn--bar2"></span>
                     <span class="spnav__header--btn--bar3"></span>
@@ -62,7 +62,7 @@
         </header>
 
         <!-- タブレット・PC用ヘッダー -->
-        <header class="header p-3 mx-auto d-none d-sm-flex justify-content-between">
+        <header class="header py-3 mx-auto d-none d-sm-flex justify-content-between">
             <a href="/">
                 <img class="header__logo" src="{% static 'img/spoon_logo.svg' %}">
             </a>
@@ -82,7 +82,7 @@
                             <span class="header__link--badge badge">{{ count }}</span>
                         </span>
                     </a>
-                    <a class="header__link d-flex flex-column" href="{% url 'account_logout' %}">
+                    <a class="header__link d-flex flex-column mr-4" href="{% url 'account_logout' %}">
                         <img class="header__link--icon" src="{% static 'img/logout.svg' %}" alt="ログアウト">
                         <span class="header__link--text">ログアウト</span>
                     </a>
@@ -91,7 +91,7 @@
                         <img class="header__link--icon" src="{% static 'img/signup.svg' %}" alt="会員登録">
                         <span class="header__link--text">会員登録</span>
                     </a>
-                    <a class="header__link d-flex flex-column" href="{% url 'account_login' %}">
+                    <a class="header__link d-flex flex-column mr-4" href="{% url 'account_login' %}">
                         <img class="header__link--icon" src="{% static 'img/login.svg' %}" alt="ログイン">
                         <span class="header__link--text">ログイン</span>
                     </a>
