@@ -671,17 +671,20 @@ main {
 
 .about {
   margin: 80px 0;
-  opacity: 0;
-  -webkit-transform: translateY(20px);
-          transform: translateY(20px);
-  -webkit-transition: 1s;
-  transition: 1s;
 }
 
 .about__subheading {
   color: #E8435F;
   font-size: 20px;
   font-weight: 600;
+}
+
+.about__fadein {
+  opacity: 0;
+  -webkit-transform: translateY(20px);
+          transform: translateY(20px);
+  -webkit-transition: 1s;
+  transition: 1s;
 }
 
 @media screen and (max-width: 575px) {
@@ -2027,6 +2030,14 @@ main {
   font-size: 14px;
   line-height: 22px;
   letter-spacing: .5;
+}
+
+.guide__fadein {
+  opacity: 0;
+  -webkit-transform: translateY(20px);
+          transform: translateY(20px);
+  -webkit-transition: 1s;
+  transition: 1s;
 }
 
 .guide__btn {

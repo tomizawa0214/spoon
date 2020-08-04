@@ -8,6 +8,12 @@
     font-family: "Montserrat", "Roboto", "游ゴシック体", "Yu Gothic", YuGothic, "游ゴシック", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", MeiryoKe_PGothic, "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
 }
 
+@mixin fadeIn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: 1s;
+}
+
 @mixin slideImage {
     left: 50%;
     transform: translateX(-50%) !important;

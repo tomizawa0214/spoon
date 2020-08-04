@@ -154,6 +154,9 @@
             }
         }
     }
+    &__fadein {
+        @include fadeIn;
+    }
     &__btn {
         @include button;
     }

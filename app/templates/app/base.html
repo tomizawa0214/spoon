@@ -275,9 +275,13 @@
                 let windowHeight = window.innerHeight; // ウィンドウの高さ
                 for (let i = 0; i < point.length; i++) {
                     let elemY = point[i].getBoundingClientRect().top;　// 対象の位置
+                    var delay = .5 * i;
                     if (scroll > scroll + elemY - windowHeight + 100) {
                         point[i].style.opacity = '1';
                         point[i].style.transform = 'translateY(0)';
+                        if (scroll == 0) {
+                            point[i].style.transitionDelay = delay + 's';
+                        }
                     }
                 }
             }
