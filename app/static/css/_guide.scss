@@ -11,6 +11,10 @@
             line-height: 1.5;
             font-weight: 700;
             color: #E8435F;
+            &--ename {
+                @include E-font;
+                margin-right: -5px;
+            }
         }
         &--content {
             font-size: 18px;
@@ -76,6 +80,10 @@
                 font-size: 14px;
                 line-height: 22px;
                 letter-spacing: .5;
+                &--ename {
+                    @include E-font;
+                    margin-right: -5px;
+                }
             }
         }
     }

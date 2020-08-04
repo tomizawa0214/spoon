@@ -264,18 +264,40 @@ main {
   opacity: .5;
 }
 
-.header a {
+.header__info {
+  margin-top: 7px;
+  color: #FDFDFD;
+  font-weight: bold;
+  letter-spacing: 0;
+  background: #E8435F;
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+
+.header__info--ename {
+  font-family: "Montserrat", "Roboto", "游ゴシック体", "Yu Gothic", YuGothic, "游ゴシック", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", MeiryoKe_PGothic, "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+}
+
+.header__info--arrow {
+  font-size: 18px;
+}
+
+.header__info:hover {
+  opacity: .5;
   text-decoration: none;
-  color: #333;
+  color: #FDFDFD;
 }
 
 .header__link {
+  color: #333;
   -webkit-transition: .3s;
   transition: .3s;
 }
 
 .header__link:hover {
   opacity: .5;
+  text-decoration: none;
+  color: #333;
 }
 
 .header__link--icon {
@@ -433,44 +455,78 @@ main {
   pointer-events: auto;
 }
 
-.spfooter {
+.spfooter__info {
+  position: fixed;
+  width: 100%;
+  height: 29px;
+  bottom: 60px;
+  left: 0;
+  z-index: 9999;
+  color: #FDFDFD;
+  font-weight: bold;
+  letter-spacing: 0;
+  background: #E8435F;
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+
+.spfooter__info--ename {
+  font-family: "Montserrat", "Roboto", "游ゴシック体", "Yu Gothic", YuGothic, "游ゴシック", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", MeiryoKe_PGothic, "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+}
+
+.spfooter__info--detail {
+  font-size: 10px;
+  letter-spacing: 0;
+}
+
+.spfooter__info--arrow {
+  font-size: 18px;
+}
+
+.spfooter__info:hover {
+  opacity: .5;
+  text-decoration: none;
+  color: #FDFDFD;
+}
+
+.spfooter__menu {
   position: fixed;
   width: 100%;
   height: 60px;
   bottom: 0;
   left: 0;
+  z-index: 9999;
   background: #FDFDFD;
   border-top: 1px solid rgba(0, 0, 0, 0.125);
-  z-index: 9999;
   -webkit-box-pack: space-evenly;
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
 }
 
-.spfooter__menu {
+.spfooter__menu--link {
   text-decoration: none;
   color: #333;
   -webkit-transition: .3s;
   transition: .3s;
 }
 
-.spfooter__menu:hover {
+.spfooter__menu--link:hover {
   text-decoration: none;
   color: inherit;
   opacity: .5;
 }
 
-.spfooter__menu--icon {
+.spfooter__menu--link--icon {
   height: 28px;
 }
 
-.spfooter__menu--text {
+.spfooter__menu--link--text {
   font-size: 10px;
   line-height: normal;
   margin-top: 2px;
 }
 
-.spfooter__menu--badge {
+.spfooter__menu--link--badge {
   font-family: "Montserrat", "Roboto", "游ゴシック体", "Yu Gothic", YuGothic, "游ゴシック", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", MeiryoKe_PGothic, "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
   margin-left: -3px;
   padding: 3px 6px;
@@ -1756,6 +1812,11 @@ main {
   color: #E8435F;
 }
 
+.guide__top--title--ename {
+  font-family: "Montserrat", "Roboto", "游ゴシック体", "Yu Gothic", YuGothic, "游ゴシック", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", MeiryoKe_PGothic, "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+  margin-right: -5px;
+}
+
 .guide__top--content {
   font-size: 18px;
   line-height: 1.7;
@@ -1834,6 +1895,11 @@ main {
   font-size: 14px;
   line-height: 22px;
   letter-spacing: .5;
+}
+
+.guide__exuse--ul--msg--ename {
+  font-family: "Montserrat", "Roboto", "游ゴシック体", "Yu Gothic", YuGothic, "游ゴシック", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", MeiryoKe_PGothic, "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+  margin-right: -5px;
 }
 
 .guide__info {

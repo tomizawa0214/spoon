@@ -11,14 +11,32 @@
         opacity: .5;
         }
     }
-    a {
-        text-decoration: none;
-        color: #333;
+    &__info {
+        margin-top: 7px;
+        color: #FDFDFD;
+        font-weight: bold;
+        letter-spacing: 0;
+        background: #E8435F;
+        transition: .3s;
+        &--ename {
+            @include E-font;
+        }
+        &--arrow {
+            font-size: 18px;
+        }
+        &:hover {
+            opacity: .5;
+            text-decoration: none;
+            color: #FDFDFD;
+        }
     }
     &__link {
+        color: #333;
         transition: .3s;
         &:hover {
             opacity: .5;
+            text-decoration: none;
+            color: #333;
         }
         &--icon {
             height: 35px;
@@ -155,39 +173,69 @@
 }
 
 .spfooter {
-    position: fixed;
-    width: 100%;
-    height: 60px;
-    bottom: 0;
-    left: 0;
-    background: #FDFDFD;
-    border-top: 1px solid rgba(0, 0, 0, .125);
-    z-index: 9999;
-    justify-content: space-evenly;
-    &__menu {
-        text-decoration: none;
-        color: #333;
+    &__info {
+        position: fixed;
+        width: 100%;
+        height: 29px;
+        bottom: 60px;
+        left: 0;
+        z-index: 9999;
+        color: #FDFDFD;
+        font-weight: bold;
+        letter-spacing: 0;
+        background: #E8435F;
         transition: .3s;
-        &:hover {
-            text-decoration: none;
-            color: inherit;
-            opacity: .5;
-        }
-        &--icon {
-            height: 28px;
-        }
-        &--text {
-            font-size: 10px;
-            line-height: normal;
-            margin-top: 2px;
-        }
-        &--badge {
+        &--ename {
             @include E-font;
-            margin-left: -3px;
-            padding: 3px 6px;
+        }
+        &--detail {
             font-size: 10px;
+            letter-spacing: 0;
+        }
+        &--arrow {
+            font-size: 18px;
+        }
+        &:hover {
+            opacity: .5;
+            text-decoration: none;
             color: #FDFDFD;
-            background: #E8435F;
+        }
+    }
+    &__menu {
+        position: fixed;
+        width: 100%;
+        height: 60px;
+        bottom: 0;
+        left: 0;
+        z-index: 9999;
+        background: #FDFDFD;
+        border-top: 1px solid rgba(0, 0, 0, .125);
+        justify-content: space-evenly;
+        &--link {
+            text-decoration: none;
+            color: #333;
+            transition: .3s;
+            &:hover {
+                text-decoration: none;
+                color: inherit;
+                opacity: .5;
+            }
+            &--icon {
+                height: 28px;
+            }
+            &--text {
+                font-size: 10px;
+                line-height: normal;
+                margin-top: 2px;
+            }
+            &--badge {
+                @include E-font;
+                margin-left: -3px;
+                padding: 3px 6px;
+                font-size: 10px;
+                color: #FDFDFD;
+                background: #E8435F;
+            }
         }
     }
 }
