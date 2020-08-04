@@ -253,9 +253,9 @@
             // スムーススクロールのフォーマット
             const scrollFunc = Point => {
                 const point = document.querySelector(Point);　// スクロール先の対象を取得
-                const elemY = point.getBoundingClientRect().top;　// 画面の上端から要素の上端までの距離を取得
-                const scrollY = window.pageYOffset; // 現在のスクロール量を取得
-                const top = elemY + scrollY + (-140); // 対象までのスクロール量を算出
+                let elemY = point.getBoundingClientRect().top;　// 画面の上端から要素の上端までの距離を取得
+                let scrollY = window.pageYOffset; // 現在のスクロール量を取得
+                let top = elemY + scrollY + (-140); // 対象までのスクロール量を算出
                 
                 window.scroll({
                     top: top, // スクロール量の設定
@@ -267,6 +267,20 @@
                 e.preventDefault();
                 scrollFunc('html, body');
             });
+
+            // フェードイン
+            const animation = target => {
+                const point = document.querySelectorAll(target);　// 対象
+                let scroll = window.pageYOffset; // スクロール量
+                let windowHeight = window.innerHeight; // ウィンドウの高さ
+                for (let i = 0; i < point.length; i++) {
+                    let elemY = point[i].getBoundingClientRect().top;　// 対象の位置
+                    if (scroll > scroll + elemY - windowHeight + 100) {
+                        point[i].style.opacity = '1';
+                        point[i].style.transform = 'translateY(0)';
+                    }
+                }
+            }
         </script>
         {% block extrajs %}
         {% endblock %}
