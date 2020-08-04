@@ -66,31 +66,31 @@
                 <div class="d-flex align-items-center">
                     <a class="header__link d-flex flex-column mr-4" href="/">
                         <img class="header__link--icon" src="{% static 'img/home.svg' %}" alt="ホーム">
-                        <span class="header__link--text">ホーム</span>
+                        <span class="header__link--text text-center">ホーム</span>
                     </a>
                     {% if user.is_authenticated %}
                         <a class="header__link d-flex flex-column mr-4" href="{% url 'profile' %}">
                             <img class="header__link--icon" src="{% static 'img/mypage.svg' %}" alt="マイページ">
-                            <span class="header__link--text">マイページ</span>
+                            <span class="header__link--text text-center">マイページ</span>
                         </a>
                         <a class="header__link cart-jump d-flex flex-column mr-4" href="{% url 'order' %}">
                             <img class="header__link--icon" src="{% static 'img/cart.svg' %}" alt="カート">
-                            <span class="header__link--text">カート
+                            <span class="header__link--text text-center">カート
                                 <span class="header__link--badge badge">{{ count }}</span>
                             </span>
                         </a>
                         <a class="header__link d-flex flex-column mr-4" href="{% url 'account_logout' %}">
                             <img class="header__link--icon" src="{% static 'img/logout.svg' %}" alt="ログアウト">
-                            <span class="header__link--text">ログアウト</span>
+                            <span class="header__link--text text-center">ログアウト</span>
                         </a>
                     {% else %}
                         <a class="header__link d-flex flex-column mr-4" href="{% url 'account_signup' %}">
                             <img class="header__link--icon" src="{% static 'img/signup.svg' %}" alt="会員登録">
-                            <span class="header__link--text">会員登録</span>
+                            <span class="header__link--text text-center">会員登録</span>
                         </a>
                         <a class="header__link d-flex flex-column mr-4" href="{% url 'account_login' %}">
                             <img class="header__link--icon" src="{% static 'img/login.svg' %}" alt="ログイン">
-                            <span class="header__link--text">ログイン</span>
+                            <span class="header__link--text text-center">ログイン</span>
                         </a>
                     {% endif %}
                 </div>

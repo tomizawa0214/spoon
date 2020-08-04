@@ -5,10 +5,18 @@
 {% endblock %}
 
 {% block info %}
-    <a class="header__info d-flex justify-content-end align-items-center py-1 px-2" href="{% url 'order_guide' %}">
-        <span class="header__info--ename d-inline-block">spoon</span>のお持ち帰り予約
-        <i class="header__info--arrow fas fa-chevron-circle-right fa-fw" aria-hidden="true"></i>
-    </a>
+    {% if user.is_authenticated %}
+        <a class="header__info d-flex justify-content-center align-items-center py-1" href="{% url 'order_guide' %}">
+            <span class="header__info--ename d-inline-block">spoon</span>のお持ち帰り予約
+            <span class="header__info--detail align-self-end ml-3">詳しくはこちら</span>
+            <i class="header__info--arrow fas fa-chevron-circle-right fa-fw" aria-hidden="true"></i>
+        </a>
+    {% else %}
+        <a class="header__info d-flex justify-content-end align-items-center py-1" href="{% url 'order_guide' %}">
+            <span class="header__info--ename d-inline-block ml-2">spoon</span>のお持ち帰り予約
+            <i class="header__info--arrow fas fa-chevron-circle-right fa-fw mr-2" aria-hidden="true"></i>
+        </a>
+    {% endif %}
 {% endblock %}
 
 {% block slider %}
@@ -88,7 +96,7 @@
 {% block footer_info %}
     <a class="spfooter__info d-flex justify-content-end align-items-center py-1 pr-1" href="{% url 'order_guide' %}">
         <span class="spfooter__info--ename d-inline-block">spoon</span>のお持ち帰り予約
-        <span class="spfooter__info--detail align-self-start ml-2">詳しくはこちら</span>
+        <span class="spfooter__info--detail align-self-start ml-3">詳しくはこちら</span>
         <i class="spfooter__info--arrow fas fa-chevron-circle-right fa-fw" aria-hidden="true"></i>
     </a>
 {% endblock %}
@@ -119,7 +127,7 @@
         if ( window.innerWidth < 768 ) {
             document.body.style.paddingBottom = '89px';
         } else {
-            document.body.style.paddingBottom = '60px';
+            document.body.style.paddingBottom = 0;
         }
     });
 </script>
