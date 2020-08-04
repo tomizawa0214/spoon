@@ -127,7 +127,7 @@ main {
   background: #FDFDFD;
 }
 
-@media screen and (max-width: 575px) {
+@media screen and (max-width: 767px) {
   body {
     padding: 60px 0;
   }
@@ -773,7 +773,8 @@ main {
 }
 
 .order__select--item {
-  line-height: 22px;
+  font-weight: bold;
+  line-height: 1;
   cursor: pointer;
 }
 
@@ -1837,7 +1838,7 @@ main {
 
 .guide__top--title {
   font-size: 25px;
-  line-height: 1.5;
+  line-height: 1.3;
   font-weight: 700;
   color: #E8435F;
 }
@@ -1848,7 +1849,7 @@ main {
 }
 
 .guide__top--content {
-  font-size: 18px;
+  font-size: 17px;
   line-height: 1.7;
 }
 
@@ -1869,6 +1870,8 @@ main {
 
 .guide__merit--ul--part {
   position: relative;
+  width: 72px;
+  height: 62px;
   font-size: 10px;
   font-weight: bold;
   letter-spacing: 0;
@@ -1956,12 +1959,6 @@ main {
   transition: .3s;
 }
 
-.guide__info--step--box:hover {
-  opacity: .5;
-  text-decoration: none;
-  color: #faf082;
-}
-
 .guide__info--step--box--part {
   position: absolute;
   padding-top: 13px;
@@ -1984,6 +1981,12 @@ main {
 
 .guide__info--step--box--img {
   height: 60px;
+}
+
+.guide__info--step a:hover {
+  opacity: .5;
+  text-decoration: none;
+  color: #faf082;
 }
 
 .guide__info--step--arrow {
@@ -2028,6 +2031,38 @@ main {
 
 .guide__btn i {
   margin: 0 5px 0 0;
+}
+
+@media screen and (max-width: 575px) {
+  .guide__merit--ul--part {
+    width: 45px;
+    height: 95px;
+  }
+  .guide__info--step {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .guide__info--step--box {
+    width: 250px;
+  }
+  .guide__info--step--arrow {
+    -webkit-transform: rotate(90deg);
+            transform: rotate(90deg);
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .guide__top--img {
+    height: 300px;
+  }
+  .guide__top--title {
+    font-size: 18px;
+  }
+  .guide__top--content {
+    font-size: 15px;
+  }
 }
 
 .email-change__form {

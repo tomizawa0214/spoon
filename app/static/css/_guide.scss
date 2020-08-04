@@ -8,7 +8,7 @@
         }
         &--title {
             font-size: 25px;
-            line-height: 1.5;
+            line-height: 1.3;
             font-weight: 700;
             color: #E8435F;
             &--ename {
@@ -17,7 +17,7 @@
             }
         }
         &--content {
-            font-size: 18px;
+            font-size: 17px;
             line-height: 1.7;
         }
     }
@@ -33,6 +33,8 @@
             list-style: none;
             &--part {
                 position: relative;
+                width: 72px;
+                height: 62px;
                 font-size: 10px;
                 font-weight: bold;
                 letter-spacing: 0;
@@ -106,11 +108,6 @@
                 background: #E8435F;
                 border-radius: 20px;
                 transition: .3s;
-                &:hover {
-                    opacity: .5;
-                    text-decoration: none;
-                    color: rgb(250, 240, 130);
-                }
                 &--part {
                     position: absolute;
                     padding-top: 13px;
@@ -133,6 +130,11 @@
                     height: 60px;
                 }
             }
+            a:hover {
+                opacity: .5;
+                text-decoration: none;
+                color: rgb(250, 240, 130);
+            }
             &--arrow {
                 font-size: 50px;
                 color: #E8435F;
@@ -154,5 +156,46 @@
     }
     &__btn {
         @include button;
+    }
+}
+
+
+@media screen and ( max-width: 575px ) {
+    .guide {
+        &__merit {
+            &--ul {
+                &--part {
+                    width: 45px;
+                    height: 95px;
+                }
+            }
+        }
+        &__info {
+            &--step {
+                flex-direction: column;
+                &--box {
+                    width: 250px;
+                }
+                &--arrow {
+                    transform: rotate(90deg);
+                }
+            }
+        }
+    }
+}
+
+@media screen and ( max-width: 767px ) {
+    .guide {
+        &__top {
+            &--img {
+                height: 300px;
+            }
+            &--title {
+                font-size: 18px;
+            }
+            &--content {
+                font-size: 15px;
+            }
+        }
     }
 }
