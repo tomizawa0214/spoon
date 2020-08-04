@@ -586,16 +586,19 @@ class IndexView(View):
         # 現在日時を取得
         dt = datetime.datetime.now()
         # 今年のクーポン利用を確認
-        if not Order.objects.filter(user=request.user, coupon_use=True, coupon_day__contains=dt.year).exists():
-            # 誕生月を取得
-            birthmonth = 0
-            user_data = CustomUser.objects.get(id=request.user.id)
-            birthday = user_data.birthday
-            if birthday != None:
-                birthmonth = birthday.month
-            # 現在月と誕生月を確認
-            if dt.month == birthmonth:
-                coupon = 'get'
+        if CustomUser.objects.filter(id=request.user.id).exists():
+            if not Order.objects.filter(user=request.user, coupon_use=True, coupon_day__contains=dt.year).exists():
+                # 誕生月を取得
+                birthmonth = 0
+                user_data = CustomUser.objects.get(id=request.user.id)
+                birthday = user_data.birthday
+                if birthday != None:
+                    birthmonth = birthday.month
+                # 現在月と誕生月を確認
+                if dt.month == birthmonth:
+                    coupon = 'get'
+                else:
+                    coupon = 'no'
             else:
                 coupon = 'no'
         else:
