@@ -521,8 +521,11 @@
             option4_price.textContent = '';
             total_price.textContent = '\\' + response.get_total_price.toLocaleString();
             // カートの数値を更新
-            document.querySelector('.header__link--badge').textContent = response.count;
-            document.querySelector('.spfooter__menu--badge').textContent = response.count;
+            if ( window.innerWidth < 768 ) {
+                document.querySelector('.spfooter__menu--badge').textContent = response.count;
+            } else {
+                document.querySelector('.header__link--badge').textContent = response.count;
+            }
         
             // 仮の合計金額を初期化
             total.textContent = '';
@@ -729,8 +732,11 @@
             cart.remove();
 
             // カートの数値を更新
-            document.querySelector('.header__link--badge').textContent = response.count;
-            document.querySelector('.spfooter__menu--badge').textContent = response.count;
+            if ( window.innerWidth < 768 ) {
+                document.querySelector('.spfooter__menu--badge').textContent = response.count;
+            } else {
+                document.querySelector('.header__link--badge').textContent = response.count;
+            }
 
             // カートの空表記を判定
             if ( total_price.textContent == '\\0' && flavor_title.textContent == '' ) {
