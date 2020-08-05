@@ -502,6 +502,7 @@ class AboutView(View):
     def get(self, request, *args, **kwargs):
         return render(request, 'app/about.html')
 
+
 class OrderGuideView(View):
     def get(self, request, *args, **kwargs):
         return render(request, 'app/order_guide.html')
@@ -559,6 +560,15 @@ class ContactView(View):
 class ContactThanksView(View):
     def get(self, request, *args, **kwargs):
         return render(request, 'app/contact_thanks.html')
+
+
+class SctlView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'app/sctl.html')
+
+class PrivacyView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'app/privacy.html')
 
 
 class CompanyView(View):
