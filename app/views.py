@@ -603,6 +603,8 @@ class IndexView(View):
                 coupon = 'no'
         else:
             coupon = 'no'
+        
+        print(coupon)
 
         return render(request, 'app/index.html', {
             'news_data': news_data,

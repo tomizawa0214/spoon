@@ -88,7 +88,7 @@
     height: 100vh;
     top: 0;
     left: 0;
-    z-index: 9999;
+    z-index: 9998;
     pointer-events: none;
     &__header {
         position: fixed;
@@ -205,7 +205,7 @@
         height: 29px;
         bottom: 60px;
         left: 0;
-        z-index: 9999;
+        z-index: 9998;
         color: #FDFDFD;
         font-weight: bold;
         letter-spacing: 0;
@@ -233,7 +233,7 @@
         height: 60px;
         bottom: 0;
         left: 0;
-        z-index: 9999;
+        z-index: 9998;
         background: #FDFDFD;
         border-top: 1px solid rgba(0, 0, 0, .125);
         justify-content: space-evenly;

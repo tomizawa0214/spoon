@@ -1,4 +1,5 @@
 {% extends "app/base.html" %}
+{% load static %}
 
 {% block title %}
 <title>spoon | ジェラート＆焼菓子</title>
@@ -27,9 +28,6 @@
         <li data-target="#slides" data-slide-to="2"></li>
     </ul>
     <div class="carousel-inner">
-        <!-- <div class="top__item--image2 carousel-item active">
-            <p>aaaaaaa</p>
-        </div> -->
         <div class="top__item--image1 carousel-item active"></div>
         <div class="top__item--image2 carousel-item"></div>
         <div class="top__item--image3 carousel-item"></div>
@@ -130,18 +128,16 @@
             document.body.style.paddingBottom = 0;
         }
     });
-</script>
-<!-- <script>
-    'use strict';
 
     // クーポン発行有無
-    if ( '{{ courpon }}' == 'get' ) {
-        const element  = Object.assign(document.createElement('div'), { className: 'order-user__courpon alert alert-dismissible fade show d-flex justify-content-center align-items-center m-0 p-3'});
-        const element2  = Object.assign(document.createElement('div'));
-        const element3  = Object.assign(document.createElement('img'), { className: 'done-check d-block mx-auto mb-2', src: "{# static 'img/check.svg' #}" });
-        const element4  = Object.assign(document.createElement('strong'), { innerHTML: 'お誕生月おめでとう!!' });
-        const element5  = Object.assign(document.createElement('button'), { className: 'order-user__courpon--btn close', type: 'button'});
-        const element6  = Object.assign(document.createElement('span'), { className: 'order-user__courpon--close', innerHTML: '&times;'});
+    if ( '{{ coupon }}' == 'get' ) {
+        const element  = Object.assign(document.createElement('div'), { className: 'top__coupon alert alert-dismissible fade show p-0 m-0'});
+        const element2  = Object.assign(document.createElement('div'), { className: 'd-flex flex-column justify-content-center align-items-center'});
+        const element3  = Object.assign(document.createElement('img'), { src: "{% static 'img/coupon.svg' %}" });
+        const element4 = Object.assign(document.createElement('a'), { href: "{% url 'order' %}", className: 'top__coupon--btn btn rounded-pill my-4', textContent: 'お持ち帰り予約に進む'});
+        const element5  = Object.assign(document.createElement('button'), { className: 'top__coupon--close close p-1', type: 'button'});
+        const element6  = Object.assign(document.createElement('span'), { className: 'top__coupon--close--btn', innerHTML: '&times;'});
+        const element7  = Object.assign(document.createElement('div'), { className: 'top__bg'});
         // 階層に合わせて要素をまとめる
         element2.appendChild(element3);
         element2.appendChild(element4);
@@ -150,14 +146,36 @@
         element.appendChild(element5);
         // 最後に追加
         document.body.insertBefore(element, document.body.firstChild);
+        document.body.insertBefore(element7, document.body.firstChild);
 
-        let order_alert = document.querySelector('.order-user__courpon');
-        order_alert.setAttribute('role', 'alert');
-        let alert_btn = document.querySelector('.order-user__courpon--btn');
-        alert_btn.setAttribute('data-dismiss', 'alert');
-        alert_btn.setAttribute('aria-label', 'Close');
-        let alert_close = document.querySelector('.order-user__courpon--close');
-        alert_close.setAttribute('aria-hidden', 'true');
+        let couponAlert = document.querySelector('.top__coupon');
+        couponAlert.setAttribute('role', 'alert');
+        let couponBtn = document.querySelector('.top__coupon--close');
+        couponBtn.setAttribute('data-dismiss', 'alert');
+        couponBtn.setAttribute('aria-label', 'Close');
+        let couponClose = document.querySelector('.top__coupon--close--btn');
+        couponClose.setAttribute('aria-hidden', 'true');
+
+        //フェードアウト & 削除
+        const bg = document.querySelector('.top__bg');
+        couponBtn.addEventListener('click', () => {
+            couponAlert.style.opacity = 0;
+            couponAlert.style.transition = '.5s';
+            bg.style.opacity = 0;
+            bg.style.transition = '.5s';
+            bg.remove();
+        });
+        bg.addEventListener('click', () => {
+            couponAlert.style.opacity = 0;
+            couponAlert.style.transition = '.5s';
+            bg.style.opacity = 0;
+            bg.style.transition = '.5s';
+            let deleteAlert = () => {
+                couponAlert.remove();
+                bg.remove();
+            }
+            setTimeout(deleteAlert, 500);
+        });
     }
-</script> -->
+</script>
 {% endblock %}

@@ -131,6 +131,10 @@ main {
     max-width: 1200px;
 }
 
+*:focus {
+    outline: none !important;
+}
+
 .btn:focus {
     outline: none;
     top: 3px;
