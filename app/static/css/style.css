@@ -465,7 +465,7 @@ main {
 
 .bg-change {
   visibility: visible;
-  opacity: .6;
+  opacity: .7;
   pointer-events: auto;
 }
 
@@ -573,14 +573,19 @@ main {
   position: fixed;
   width: 300px;
   height: 460px;
-  top: 50%;
+  top: 40%;
   left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
   background: #FDF5F7;
   z-index: 9999;
   border: 0;
   border-radius: 0;
+  opacity: 0;
+  -webkit-transform: translateY(20px);
+          transform: translateY(20px);
+  -webkit-transition: 1s;
+  transition: 1s;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
 }
 
 .top__coupon--btn {
@@ -611,12 +616,12 @@ main {
 }
 
 .top__bg {
-  position: absolute;
+  position: fixed;
   width: 100%;
   height: 100vh;
   top: 0;
   left: 0;
-  opacity: .6;
+  opacity: .7;
   background: #000;
   z-index: 9999;
 }
@@ -690,6 +695,23 @@ main {
     -webkit-box-pack: space-evenly;
         -ms-flex-pack: space-evenly;
             justify-content: space-evenly;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .top__coupon {
+    width: 450px;
+    height: 673px;
+  }
+  .top__coupon img {
+    width: 100%;
+    -o-object-fit: contain;
+       object-fit: contain;
+  }
+  .top__coupon--btn {
+    margin: 35px 0 !important;
+    width: 250px;
+    font-size: 18px;
   }
 }
 

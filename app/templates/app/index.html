@@ -135,7 +135,7 @@
         const element2  = Object.assign(document.createElement('div'), { className: 'd-flex flex-column justify-content-center align-items-center'});
         const element3  = Object.assign(document.createElement('img'), { src: "{% static 'img/coupon.svg' %}" });
         const element4 = Object.assign(document.createElement('a'), { href: "{% url 'order' %}", className: 'top__coupon--btn btn rounded-pill my-4', textContent: 'お持ち帰り予約に進む'});
-        const element5  = Object.assign(document.createElement('button'), { className: 'top__coupon--close close p-1', type: 'button'});
+        const element5  = Object.assign(document.createElement('button'), { className: 'top__coupon--close close p-1 p-md-2', type: 'button'});
         const element6  = Object.assign(document.createElement('span'), { className: 'top__coupon--close--btn', innerHTML: '&times;'});
         const element7  = Object.assign(document.createElement('div'), { className: 'top__bg'});
         // 階層に合わせて要素をまとめる
@@ -156,6 +156,14 @@
         let couponClose = document.querySelector('.top__coupon--close--btn');
         couponClose.setAttribute('aria-hidden', 'true');
 
+        // フェードイン
+        const fadeIn = () => {
+            couponAlert.style.opacity = 1;
+            couponAlert.style.top = '50%';
+        }
+        setTimeout(fadeIn, 300);
+
+
         //フェードアウト & 削除
         const bg = document.querySelector('.top__bg');
         couponBtn.addEventListener('click', () => {
@@ -170,7 +178,7 @@
             couponAlert.style.transition = '.5s';
             bg.style.opacity = 0;
             bg.style.transition = '.5s';
-            let deleteAlert = () => {
+            const deleteAlert = () => {
                 couponAlert.remove();
                 bg.remove();
             }
