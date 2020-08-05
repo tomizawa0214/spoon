@@ -1596,6 +1596,9 @@ main {
 }
 
 .profile__link--text {
+  font-size: 14px;
+  line-height: 22px;
+  letter-spacing: .5;
   color: #1B95E0;
   text-decoration: none;
 }
