@@ -172,6 +172,28 @@ main {
   }
 }
 
+.sctl {
+  margin-top: 64px;
+  max-width: 700px;
+  list-style: none;
+}
+
+.sctl__li--heading {
+  font-weight: bold;
+  border-left: 8px solid #ED6D85;
+  background: #ECECED;
+}
+
+.sctl__li--text--ename {
+  font-family: "Montserrat", "Roboto", "游ゴシック体", "Yu Gothic", YuGothic, "游ゴシック", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", MeiryoKe_PGothic, "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+}
+
+@media screen and (max-width: 575px) {
+  .sctl-title {
+    letter-spacing: 1.4px;
+  }
+}
+
 .company {
   table-layout: fixed;
   border-collapse: collapse;

@@ -1,0 +1,24 @@
+.sctl {
+    margin-top: 64px;
+    max-width: 700px;
+    list-style: none;
+    &__li {
+        &--heading {
+            font-weight: bold;
+            border-left: 8px solid #ED6D85;
+            background: #ECECED;
+        }
+        &--text {
+            &--ename {
+                @include E-font;
+            }
+        }
+    }
+}
+
+
+@media screen and ( max-width: 575px ) {
+    .sctl-title {
+        letter-spacing: 1.4px;
+    }
+}

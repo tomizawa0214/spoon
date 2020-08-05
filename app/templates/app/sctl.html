@@ -7,41 +7,58 @@
 
 {% block content %}
 <h1 class="title">
-    <span>特定商取引法に基づく表記</span>
+    <span class="sctl-title px-2 px-sm-3">特定商取引法に基づく表記</span>
 </h1>
 
-<table class="company mx-auto">
-    <tbody>
-        <tr>
-            <th class="px-2 py-4 p-sm-4">社名</th>
-            <td class="px-2 py-4 p-sm-4">有限会社プラリネ</td>
-        </tr>
-        <tr>
-            <th class="px-2 py-4 p-sm-4 align-top">所在地</th>
-            <td class="px-2 py-4 p-sm-4">〒370-0074<br class="d-sm-none">
-                <span class="ml-sm-3">群馬県高崎市下小鳥町67番地5</span>
-            </td>
-        </tr>
-        <tr>
-            <th class="px-2 py-4 p-sm-4">電話番号</th>
-            <td class="px-2 py-4 p-sm-4">027-363-8258</td>
-        </tr>
-        <tr>
-            <th class="px-2 py-4 p-sm-4">代表取締役</th>
-            <td class="px-2 py-4 p-sm-4">細谷和利</td>
-        </tr>
-        <tr>
-            <th class="px-2 py-4 p-sm-4">設立</th>
-            <td class="px-2 py-4 p-sm-4">2000年1月</td>
-        </tr>
-        <tr>
-            <th class="px-2 py-4 p-sm-4">資本金</th>
-            <td class="px-2 py-4 p-sm-4">300万円</td>
-        </tr>
-        <tr>
-            <th class="px-2 py-4 p-sm-4 align-top">事業内容</th>
-            <td class="px-2 py-4 p-sm-4">パンの製造・販売、カフェ経営、ジェラート店経営</td>
-        </tr>
-    </tbody>
-</table>
+<ul class="sctl mx-auto p-0">
+    <li class="sctl__li mb-5">
+        <p class="sctl__li--heading mb-2 pl-3 py-2">販売業者名</p>
+        <p class="sctl__li--text px-4">有限会社プラリネ</p>
+    </li>
+    <li class="sctl__li mb-5">
+        <p class="sctl__li--heading mb-2 pl-3 py-2">代表者</p>
+        <p class="sctl__li--text px-4">細谷和利</p>
+    </li>
+    <li class="sctl__li mb-5">
+        <p class="sctl__li--heading mb-2 pl-3 py-2">販売元</p>
+        <p class="sctl__li--text px-4">
+            <span class="sctl__li--text--ename d-inline-block">spoon</span>
+            ジェラート＆焼菓子
+        </p>
+    </li>
+    <li class="sctl__li mb-5">
+        <p class="sctl__li--heading mb-2 pl-3 py-2">所在地</p>
+        <p class="sctl__li--text px-4">〒370-0074 <br class="d-sm-none">群馬県高崎市下小鳥町67番地5</p>
+    </li>
+    <li class="sctl__li mb-5">
+        <p class="sctl__li--heading mb-2 pl-3 py-2">電話番号</p>
+        <p class="sctl__li--text px-4">027-363-8258</p>
+    </li>
+    <li class="sctl__li mb-5">
+        <p class="sctl__li--heading mb-2 pl-3 py-2">販売商品</p>
+        <p class="sctl__li--text px-4">手づくりジェラート</p>
+    </li>
+    <li class="sctl__li mb-5">
+        <p class="sctl__li--heading mb-2 pl-3 py-2">販売価格</p>
+        <p class="sctl__li--text px-4">
+            <a href="{% url 'order' %}">
+                <span class="sctl__li--text--ename">spoon</span>
+                のお持ち帰り予約
+            </a>
+            ページをご覧ください
+        </p>
+    </li>
+    <li class="sctl__li mb-5">
+        <p class="sctl__li--heading mb-2 pl-3 py-2">商品代金以外の必要料金</p>
+        <p class="sctl__li--text px-4">特になし　<br class="d-sm-none">※料金に消費税を含みます</p>
+    </li>
+    <li class="sctl__li mb-5">
+        <p class="sctl__li--heading mb-2 pl-3 py-2">お支払い方法</p>
+        <p class="sctl__li--text px-4">店頭にて現金のみの取り扱いとなります</p>
+    </li>
+    <li class="sctl__li mb-5">
+        <p class="sctl__li--heading mb-2 pl-3 py-2">返品・交換・キャンセル等</p>
+        <p class="sctl__li--text px-4">商品の性質上、お客様ご都合による返品、交換はいたしかねますのでご了承ください。万が一商品に不良や品違いがございましたら、当日中に購入店舗へ直接お電話にてご連絡ください。交換または返金をさせていただきます。翌日を過ぎますと返品交換のご要望はお受けできなくなりますのでご了承ください。</p>
+    </li>
+</ul>
 {% endblock %}
