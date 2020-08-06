@@ -32,7 +32,7 @@
                 <span>お持ち帰り予約</span>
             </h1>
             <p class="order__step order__size mb-3 py-1 px-3 px-md-2 rounded-sm-pill">STEP1. ジェラートのサイズをお選びください。<br>
-                <span class="order__step--help d-inline-block mt-1">※カップ写真はイメージです。実際の商品と異なります。</span>
+                <span class="order__step--help d-inline-block mt-1">※写真はイメージです。お持ち帰り用は別カップになります。</span>
             </p>
             <div class="mx-auto text-center">
                 <p id="size_error" class="d-none"></p>
@@ -53,7 +53,9 @@
                     </div>
                 {% endfor %}
             </div>
-            <p class="order__step order__flavor mb-3 py-1 px-3 px-md-2 rounded-sm-pill">STEP2. ジェラートのフレーバーをお選びください。</p>
+            <p class="order__step order__flavor mb-3 py-1 px-3 px-md-2 rounded-sm-pill">STEP2. ジェラートのフレーバーをお選びください。
+                <span class="order__step--help d-inline-block mt-1">※写真はイメージです。お持ち帰り用は別カップになります。</span>
+            </p>
             <div class="class mx-auto text-center">
                 <p id="flavor_error" class="d-none"></p>
             </div>
@@ -208,10 +210,15 @@
     // ウインドウ幅に応じてbody要素を変更
     if ( window.innerWidth < 576 ) {
         document.body.style.paddingTop = '124px';
+    } else if ( window.innerWidth < 768 ) {
+        document.body.style.paddingTop = '60px';
     }
+
     window.addEventListener('resize', event => {
         if ( window.innerWidth < 576 ) {
             document.body.style.paddingTop = '124px';
+        } else if ( window.innerWidth < 768 ) {
+            document.body.style.paddingTop = '60px';
         } else {
             document.body.style.paddingTop = 0;
         }

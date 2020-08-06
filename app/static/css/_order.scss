@@ -39,7 +39,9 @@
         border-left: 8px solid #A3CD7E;
         letter-spacing: 0;
         background: #F2F8ED;
+        font-weight: bold;
         &--help {
+            font-weight: normal;
             font-size: 12px;
             line-height: 16px;
         }
