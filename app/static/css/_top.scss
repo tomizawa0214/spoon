@@ -35,15 +35,24 @@
     &__item {
         &--image1 {
             @include slideImage;
-            background-image: url("/static/img/slide_1.png");
+            background-image: url("/static/img/slide1.png");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: 25% 0;
         }
         &--image2 {
             @include slideImage;
-            background-image: url("/static/img/slide_2.png");
+            background-image: url("/static/img/slide2.png");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: 72% 0;
         }
         &--image3 {
             @include slideImage;
-            background-image: url("/static/img/slide_3.png");
+            background-image: url("/static/img/slide3.png");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: 52% 0;
         }
     }
     &__news {
