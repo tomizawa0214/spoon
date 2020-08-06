@@ -900,7 +900,7 @@ main {
 
 .order__select input[type="radio"]:checked + label img,
 .order__select input[type="checkbox"]:checked + label img {
-  background: #ED6D85;
+  border: 6px solid #ED6D85;
   border-radius: 10%;
 }
 
@@ -1382,7 +1382,6 @@ main {
 
 @media screen and (max-width: 991px) {
   .order__select--img {
-    padding: 5px;
     width: 43%;
     max-width: 200px;
   }

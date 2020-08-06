@@ -39,14 +39,14 @@
             </div>
             <div class="row justify-content-center mb-5">
                 {% for size in size_item %}
-                    <div class="order__select col-lg-3 text-center">
+                    <div class="order__select col-lg-3 mb-3 mb-lg-0 text-center">
                         <input id="size_{{ size.id }}" type="checkbox" name="size" value="{{ size.title }} {{ size.price }}" onclick="sizeChk(this);">
                         <label for="size_{{ size.id }}">
                             <div class="d-flex d-lg-block">
                                 <img class="order__select--img" src="{{ size.image.url }}">
-                                <div class="text-left">
-                                    <p class="order__select--item mb-1 ml-2 mt-1 mt-lg-0">{{ size.title }}</p>
-                                    <p class="order__select--item order__select--price ml-2">\{{ size.price }}</p>
+                                <div class="d-flex flex-column justify-content-end d-lg-inline-block text-left text-lg-center mt-lg-2">
+                                    <p class="order__select--item mb-1 ml-2 ml-lg-0 mt-1 mt-lg-0 text-left">{{ size.title }}</p>
+                                    <p class="order__select--item order__select--price ml-2 ml-lg-0 mb-lg-0 text-left">\{{ size.price }}</p>
                                 </div>
                             </div>
                         </label>
@@ -75,7 +75,11 @@
                 {% endfor %}
             </div>
             <p class="order__step order__option mb-3 py-1 px-3 px-md-2 rounded-sm-pill">STEP3. オプションをお選びください。<br>
-                <span class="order__step--help d-inline-block mt-1">※コーンはお持ち帰り用に単品でのお渡しとなります。※レジ袋はエコバッグをご持参いただければ不要です。</span>
+                <span class="order__step--help d-inline-block mt-1">
+                    ※コーンはお持ち帰り用に単品でのお渡しとなります。
+                    ※お持ち帰りに30分以上かかる場合はドライアイスをおすすめします。
+                    ※レジ袋はエコバッグをご持参いただければ不要です。
+                </span>
             </p>
             <div class="row">
                 {% for option in option_item %}
