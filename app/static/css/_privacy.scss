@@ -1,0 +1,34 @@
+.privacy {
+    margin-top: 64px;
+    max-width: 900px;
+    list-style: none;
+    &__li {
+        &--heading {
+            font-weight: bold;
+            border-left: 8px solid #ED6D85;
+            background: #ECECED;
+        }
+        &--text {
+            &--ul {
+                padding-left: 64px;
+                padding-right: 24px;
+                list-style-type: lower-alpha;
+            }
+            &--markul {
+                padding-left: 64px;
+                padding-right: 24px;
+                list-style-type: disc;
+            }
+            &--marknone {
+                list-style-type: none;
+            }
+        }
+    }
+}
+
+
+@media screen and ( max-width: 575px ) {
+    .privacy-title {
+        letter-spacing: 1.4px;
+    }
+}

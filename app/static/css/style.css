@@ -194,6 +194,40 @@ main {
   }
 }
 
+.privacy {
+  margin-top: 64px;
+  max-width: 900px;
+  list-style: none;
+}
+
+.privacy__li--heading {
+  font-weight: bold;
+  border-left: 8px solid #ED6D85;
+  background: #ECECED;
+}
+
+.privacy__li--text--ul {
+  padding-left: 64px;
+  padding-right: 24px;
+  list-style-type: lower-alpha;
+}
+
+.privacy__li--text--markul {
+  padding-left: 64px;
+  padding-right: 24px;
+  list-style-type: disc;
+}
+
+.privacy__li--text--marknone {
+  list-style-type: none;
+}
+
+@media screen and (max-width: 575px) {
+  .privacy-title {
+    letter-spacing: 1.4px;
+  }
+}
+
 .company {
   table-layout: fixed;
   border-collapse: collapse;

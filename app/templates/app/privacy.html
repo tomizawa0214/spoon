@@ -7,41 +7,75 @@
 
 {% block content %}
 <h1 class="title">
-    <span>プライバシーポリシー</span>
+    <span class="px-2 p-sm-3">プライバシーポリシー</span>
 </h1>
 
-<table class="company mx-auto">
-    <tbody>
-        <tr>
-            <th class="px-2 py-4 p-sm-4">社名</th>
-            <td class="px-2 py-4 p-sm-4">有限会社プラリネ</td>
-        </tr>
-        <tr>
-            <th class="px-2 py-4 p-sm-4 align-top">所在地</th>
-            <td class="px-2 py-4 p-sm-4">〒370-0074<br class="d-sm-none">
-                <span class="ml-sm-3">群馬県高崎市下小鳥町67番地5</span>
-            </td>
-        </tr>
-        <tr>
-            <th class="px-2 py-4 p-sm-4">電話番号</th>
-            <td class="px-2 py-4 p-sm-4">027-363-8258</td>
-        </tr>
-        <tr>
-            <th class="px-2 py-4 p-sm-4">代表取締役</th>
-            <td class="px-2 py-4 p-sm-4">細谷和利</td>
-        </tr>
-        <tr>
-            <th class="px-2 py-4 p-sm-4">設立</th>
-            <td class="px-2 py-4 p-sm-4">2000年1月</td>
-        </tr>
-        <tr>
-            <th class="px-2 py-4 p-sm-4">資本金</th>
-            <td class="px-2 py-4 p-sm-4">300万円</td>
-        </tr>
-        <tr>
-            <th class="px-2 py-4 p-sm-4 align-top">事業内容</th>
-            <td class="px-2 py-4 p-sm-4">パンの製造・販売、カフェ経営、ジェラート店経営</td>
-        </tr>
-    </tbody>
-</table>
+<ul class="privacy mx-auto p-0">
+    <li class="privacy__li mb-5">
+        <p class="privacy__li--heading mb-2 pl-3 py-2">個人情報取り扱いに関する基本方針</p>
+        <p class="privacy__li--text px-4">有限会社プラリネ（以下、「弊社」といいます）では、サービスを提供する上で以下のプライバシーポリシーに従い、お客様のプライバシーを尊重し個人情報に対して十分な配慮を行うと共に、適切な取り扱いおよび保護に努めます。</p>
+    </li>
+    <li class="privacy__li mb-5">
+        <p class="privacy__li--heading mb-2 pl-3 py-2">個人情報の取得</p>
+        <p class="privacy__li--text px-4">
+            弊社では当サービスのご利用において、お客様の個人情報を収集することがございます。収集するにあたっては利用目的を明記の上、適法かつ公正な手段によります。当サービスで収集する個人情報は以下の通りです。
+            <ul class="privacy__li--text--ul">
+                <li>お名前</li>
+                <li>フリガナ</li>
+                <li>メールアドレス</li>
+                <li>電話番号</li>
+                <li>パスワード</li>
+                <li>性別</li>
+                <li>お誕生日</li>
+                <li>弊社とのお取引履歴及びその内容</li>
+                <li>上記を組み合わせることで特定の個人が識別できる情報</li>
+            </ul>
+        </p>
+    </li>
+    <li class="privacy__li mb-5">
+        <p class="privacy__li--heading mb-2 pl-3 py-2">個人情報の利用目的</p>
+        <p class="privacy__li--text px-4">
+            弊社では当サービスでお客様よりお預かりした個人情報の利用目的は以下の通りです。
+            <ul class="privacy__li--text--ul">
+                <li>ご注文の確認、照会</li>
+                <li>商品お渡し時の確認、照会</li>
+                <li>お問い合わせの返信時</li>
+                <li>当サービスに関する情報やご案内の配信</li>
+                <li>サービス改善に関するマーケティング</li>
+                <li>何らかの理由によりご連絡する必要が生じた場合</li>
+            </ul>
+        </p>
+    </li>
+    <li class="privacy__li mb-5">
+        <p class="privacy__li--heading mb-2 pl-3 py-2">個人情報開示、提供について</p>
+        <p class="privacy__li--text px-4">
+            弊社では以下のいずれかに該当する場合を除き、お客様の断りなく第三者に個人情報を開示、提供することはございません。
+            <ul class="privacy__li--text--markul">
+                <li>ご本人の同意がある場合</li>
+                <li>法的拘束力がある第三者機関からの開示要求がある場合</li>
+                <li>人の生命、身体、財産の保護のために必要がある場合であり、本人の同意を得ることが困難である場合</li>
+            </ul>
+        </p>
+    </li>
+    <li class="privacy__li mb-5">
+        <p class="privacy__li--heading mb-2 pl-3 py-2">個人情報の取り扱いに関する相談等の連絡先</p>
+        <ul class="privacy__li--text--marknone pl-3">
+            <li>有限会社プラリネ</li>
+            <li>電話番号　027-363-8258</li>
+            <li>または<a href="{% url 'contact' %}">お問い合わせフォーム</a>より承ります。</li>
+        </ul>
+    </li>
+    <li class="privacy__li mb-5">
+        <p class="privacy__li--heading mb-2 pl-3 py-2">cookie(クッキー)の使用について</p>
+        <p class="privacy__li--text px-4">弊社では、お客様によりよいサービスを提供するため、cookie （クッキー）を使用することがありますが、これにより個人を特定できる情報の収集を行えるものではなく、お客様のプライバシーを侵害することはございません。 ※cookie （クッキー）とは、サーバーコンピュータからお客様のブラウザに送信され、お客様が使用しているコンピュータのハードディスクに蓄積される情報です。</p>
+    </li>
+    <li class="privacy__li mb-5">
+        <p class="privacy__li--heading mb-2 pl-3 py-2">SSLの使用について</p>
+        <p class="privacy__li--text px-4">個人情報の入力時には、セキュリティ確保のため、これらの情報が傍受、妨害または改ざんされることを防ぐ目的でSSL（Secure Sockets Layer）技術を使用しております。 ※ SSLは情報を暗号化することで、盗聴防止やデータの改ざん防止送受信する機能のことです。SSLを利用する事でより安全に情報を送信する事が可能となります。</p>
+    </li>
+    <li class="privacy__li mb-5">
+        <p class="privacy__li--heading mb-2 pl-3 py-2">プライバシーポリシーの変更</p>
+        <p class="privacy__li--text px-4">弊社では、収集する個人情報の変更、利用目的の変更、またはその他プライバシーポリシーの変更を行う際は、当ページへの変更をもって公表とさせていただきます。</p>
+    </li>
+</ul>
 {% endblock %}
