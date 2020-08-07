@@ -55,9 +55,8 @@ class EmailChangeView(LoginRequiredMixin, View):
             user = self.request.user
             new_email = form.cleaned_data['email']
             
-            # current_site = get_current_site(self.request)
-            # domain = current_site.domain
-            domain = '127.0.0.1:8000'
+            current_site = get_current_site(self.request)
+            domain = current_site.domain
             context = {
                 'protocol': 'https' if self.request.is_secure() else 'http',
                 'domain': domain,
@@ -196,9 +195,8 @@ class SignupDoneView(View):
         user.is_active = False
         user.save()
         
-        # current_site = get_current_site(self.request)
-        # domain = current_site.domain
-        domain = '127.0.0.1:8000'
+        current_site = get_current_site(self.request)
+        domain = current_site.domain
         context = {
             'protocol': self.request.scheme,
             'domain': domain,
