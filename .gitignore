@@ -5,5 +5,5 @@ __pycache__
 *.pyc
 .DS_Store
 media
-local.py
+local_settings.py
 .env
