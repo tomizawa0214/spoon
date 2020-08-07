@@ -905,6 +905,14 @@ main {
   line-height: 16px;
 }
 
+.order__select {
+  opacity: 0;
+  -webkit-transform: translateY(20px);
+          transform: translateY(20px);
+  -webkit-transition: 1s;
+  transition: 1s;
+}
+
 .order__select input[type="radio"], .order__select input[type="checkbox"] {
   display: none;
 }
@@ -938,7 +946,8 @@ main {
 }
 
 .order__select--ename {
-  font-size: 18px;
+  font-size: 14px;
+  font-weight: normal;
   font-family: 'Dancing Script', cursive;
   letter-spacing: 1px;
 }

@@ -47,6 +47,7 @@
         }
     }
     &__select {
+        @include fadeIn;
         input[type="radio"], input[type="checkbox"] {
             display: none;
         }
@@ -73,7 +74,8 @@
             cursor: pointer;
         }
         &--ename {
-            font-size: 18px;
+            font-size: 14px;
+            font-weight: normal;
             font-family: 'Dancing Script', cursive;
             letter-spacing: 1px;
         }

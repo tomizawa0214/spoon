@@ -37,9 +37,9 @@
             <div class="mx-auto text-center">
                 <p id="size_error" class="d-none"></p>
             </div>
-            <div class="row justify-content-center mb-5">
+            <ul class="row justify-content-center list-unstyled mb-5">
                 {% for size in size_item %}
-                    <div class="order__select col-lg-3 mb-3 mb-lg-0 text-center">
+                    <li class="order__select col-lg-3 mb-3 mb-lg-0 text-center">
                         <input id="size_{{ size.id }}" type="checkbox" name="size" value="{{ size.title }} {{ size.price }}" onclick="sizeChk(this);">
                         <label for="size_{{ size.id }}">
                             <div class="d-flex d-lg-block">
@@ -50,32 +50,32 @@
                                 </div>
                             </div>
                         </label>
-                    </div>
+                    </li>
                 {% endfor %}
-            </div>
-            <p class="order__step order__flavor mb-3 py-1 px-3 px-md-2 rounded-sm-pill">STEP2. ジェラートのフレーバーをお選びください。
+            </ul>
+            <p class="order__step order__flavor mb-3 py-1 px-3 px-md-2 rounded-sm-pill">STEP2. ジェラートのフレーバーをお選びください。<br>
                 <span class="order__step--help d-inline-block mt-1">※写真はイメージです。お持ち帰り用は別カップになります。</span>
             </p>
             <div class="class mx-auto text-center">
                 <p id="flavor_error" class="d-none"></p>
             </div>
-            <div class="row mb-5">
+            <ul class="row mb-5 list-unstyled">
                 {% for flavor in flavor_item %}
-                    <div class="order__select col-lg-3 text-center">
+                    <li class="order__select col-lg-3 text-center">
                         <input id="flavor_{{ flavor.id }}" type="checkbox" name="flavor" value="{{ flavor.title }} {{ flavor.price }}" onclick="flavorChk(this);">
                         <label for="flavor_{{ flavor.id }}">
                             <div class="d-flex d-lg-block">
                                 <img class="order__select--img" src="{{ flavor.image.url }}">
-                                <div class="text-left">
-                                    <!-- <p class="order__select--item order__select--ename mb-0 ml-2 mt-1 mt-lg-0">{{ flavor.entitle }}</p> -->
+                                <div class="d-flex flex-column justify-content-end text-left">
+                                    <p class="order__select--item order__select--ename ml-2 my-1 mt-lg-0">{{ flavor.entitle }}</p>
                                     <p class="order__select--item mb-1 ml-2">{{ flavor.title }}</p>
                                     <p class="order__select--item order__select--item--flavor order__select--price ml-2">\{{ flavor.price }}</p>
                                 </div>
                             </div>
                         </label>
-                    </div>
+                    </li>
                 {% endfor %}
-            </div>
+                </ul>
             <p class="order__step order__option mb-3 py-1 px-3 px-md-2 rounded-sm-pill">STEP3. オプションをお選びください。<br>
                 <span class="order__step--help d-inline-block mt-1">
                     ※コーンはお持ち帰り用に単品でのお渡しとなります。
@@ -84,22 +84,22 @@
                     ※写真はイメージです。
                 </span>
             </p>
-            <div class="row">
+            <ul class="row list-unstyled">
                 {% for option in option_item %}
-                    <div class="order__select col-lg-3 text-center">
+                    <li class="order__select col-lg-3 text-center">
                         <input id="option_{{ option.id }}" type="checkbox" name="option" value="{{ option.title }} {{ option.price }}" onclick="to_check()">
                         <label for="option_{{ option.id }}">
                             <div class="d-flex d-lg-block">
                                 <img class="order__select--img" src="{{ option.image.url }}">
-                                <div class="text-left">
+                                <div class="d-flex flex-column justify-content-end text-left">
                                     <p class="order__select--item mb-1 ml-2 mt-1 mt-lg-0">{{ option.title }}</p>
                                     <p class="order__select--item order__select--price ml-2">\{{ option.price }}</p>
                                 </div>
                             </div>
                         </label>
-                    </div>
+                    </li>
                 {% endfor %}
-            </div>
+            </ul>
         </div>
         <!-- カート -->
         <div class="col-sm-6 col-lg-4 px-3">
@@ -207,6 +207,12 @@
 {% block extrajs %}
 <script>
     'use strict'
+
+    animation('.order__select');
+    // スクロールで発動
+    window.addEventListener('scroll', () => {
+        animation('.order__select');
+    });
 
     // ウインドウ幅に応じてbody要素を変更
     if ( window.innerWidth < 576 ) {
