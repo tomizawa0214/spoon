@@ -74,11 +74,11 @@
                 </div>
                 <div class="history__header--wrap d-flex flex-md-column mr-md-4 mr-lg-5">
                     <span class="history__header--wrap--orderday mr-3 mr-md-0">クーポン</span>
-                    <span class="history__header--wrap--coupon">-\{{ order.coupon_price }}</span>
+                    <span class="history__header--wrap--coupon">-&yen;{{ order.coupon_price }}</span>
                 </div>
                 <div class="history__header--wrap d-flex flex-md-column">
                     <span class="history__header--wrap--orderday mr-3 mr-md-0 mr-md-0">合計　　</span>
-                    <span>\{{ order.get_total | intcomma }}</span>
+                    <span>&yen;{{ order.get_total | intcomma }}</span>
                 </div>
             </div>
             <button type="button" id="{{ order.id }}" class="history__header--btn mt-0 mb-4 my-sm-0 mr-sm-3 p-sm-3 p-md-2 btn" onclick="sameOrder(this);" ontouchstart="">再度注文</button>

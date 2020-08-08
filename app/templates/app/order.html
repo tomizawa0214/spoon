@@ -46,7 +46,7 @@
                                 <img class="order__select--img" src="{{ size.image.url }}">
                                 <div class="d-flex flex-column justify-content-end d-lg-inline-block text-left text-lg-center mt-lg-2">
                                     <p class="order__select--item mb-1 ml-2 ml-lg-0 mt-1 mt-lg-0 text-left">{{ size.title }}</p>
-                                    <p class="order__select--item order__select--price ml-2 ml-lg-0 mb-lg-0 text-left">\{{ size.price }}</p>
+                                    <p class="order__select--item order__select--price ml-2 ml-lg-0 mb-lg-0 text-left">&yen;{{ size.price }}</p>
                                 </div>
                             </div>
                         </label>
@@ -67,9 +67,8 @@
                             <div class="d-flex d-lg-block">
                                 <img class="order__select--img" src="{{ flavor.image.url }}">
                                 <div class="d-flex flex-column justify-content-end text-left">
-                                    <p class="order__select--item order__select--ename ml-2 my-1 mt-lg-0">{{ flavor.entitle }}</p>
                                     <p class="order__select--item mb-1 ml-2">{{ flavor.title }}</p>
-                                    <p class="order__select--item order__select--item--flavor order__select--price ml-2">\{{ flavor.price }}</p>
+                                    <p class="order__select--item order__select--item--flavor order__select--price ml-2">&yen;{{ flavor.price }}</p>
                                 </div>
                             </div>
                         </label>
@@ -79,9 +78,9 @@
             <p class="order__step order__option mb-3 py-1 px-3 px-md-2 rounded-sm-pill">STEP3. オプションをお選びください。<br>
                 <span class="order__step--help d-inline-block mt-1">
                     ※コーンはお持ち帰り用に単品でのお渡しとなります。
-                    ※お持ち帰りに30分以上かかる場合はドライアイスをおすすめします。
-                    ※レジ袋はエコバッグをご持参いただければ不要です。
-                    ※写真はイメージです。
+                    お持ち帰りに30分以上かかる場合はドライアイスをおすすめします。
+                    レジ袋はエコバッグをご持参いただければ不要です。
+                    写真はイメージです。
                 </span>
             </p>
             <ul class="row list-unstyled">
@@ -93,7 +92,7 @@
                                 <img class="order__select--img" src="{{ option.image.url }}">
                                 <div class="d-flex flex-column justify-content-end text-left">
                                     <p class="order__select--item mb-1 ml-2 mt-1 mt-lg-0">{{ option.title }}</p>
-                                    <p class="order__select--item order__select--price ml-2">\{{ option.price }}</p>
+                                    <p class="order__select--item order__select--price ml-2">&yen;{{ option.price }}</p>
                                 </div>
                             </div>
                         </label>
@@ -112,7 +111,7 @@
                             <div class="d-flex justify-content-between mx-2">
                                 <strong class="order__cart--content--size">{{ cart.size_title }}</strong>
                                 <div>
-                                    <strong class="order__select--cart--price m-0">\{{ cart.size_price }}</strong>
+                                    <strong class="order__select--cart--price m-0">&yen;{{ cart.size_price }}</strong>
                                     <span id="{{ cart.id }}" onclick="delOrder(this);">
                                         <i class="order__select--cart--delete fas fa-times-circle fa-fw" aria-hidden="true"></i>
                                     </span>
@@ -120,36 +119,36 @@
                             </div>
                             <div class="order__select--cart d-flex justify-content-between mx-2">
                                 <span>{{ cart.flavor_title }}</span>
-                                <span class="order__select--cart--price order__cart--content--flavor">\{{ cart.flavor_price }}</span>
+                                <span class="order__select--cart--price order__cart--content--flavor">&yen;{{ cart.flavor_price }}</span>
                             </div>
                             <div class="order__select--cart d-flex justify-content-between mx-2">
                                 <span>{{ cart.flavor2_title }}</span>
                                 {% if cart.flavor2_title != "" %}
-                                    <span class="order__select--cart--price">\{{ cart.flavor2_price }}</span>
+                                    <span class="order__select--cart--price">&yen;{{ cart.flavor2_price }}</span>
                                 {% endif %}
                             </div>
                             <div class="order__select--cart d-flex justify-content-between mx-2">
                                 <span>{{ cart.option_title }}</span>
                                 {% if cart.option_title != "" %}
-                                    <span class="order__select--cart--price">\{{ cart.option_price }}</span>
+                                    <span class="order__select--cart--price">&yen;{{ cart.option_price }}</span>
                                 {% endif %}
                             </div>
                             <div class="order__select--cart d-flex justify-content-between mx-2">
                                 <span>{{ cart.option2_title }}</span>
                                 {% if cart.option2_title != "" %}
-                                    <span class="order__select--cart--price">\{{ cart.option2_price }}</span>
+                                    <span class="order__select--cart--price">&yen;{{ cart.option2_price }}</span>
                                 {% endif %}
                             </div>
                             <div class="order__select--cart d-flex justify-content-between mx-2">
                                 <span>{{ cart.option3_title }}</span>
                                 {% if cart.option3_title != "" %}
-                                    <span class="order__select--cart--price">\{{ cart.option3_price }}</span>
+                                    <span class="order__select--cart--price">&yen;{{ cart.option3_price }}</span>
                                 {% endif %}
                             </div>
                             <div class="order__select--cart d-flex justify-content-between mx-2">
                                 <span>{{ cart.option4_title }}</span>
                                 {% if cart.option4_title != "" %}
-                                    <span class="order__select--cart--price">\{{ cart.option4_price }}</span>
+                                    <span class="order__select--cart--price">&yen;{{ cart.option4_price }}</span>
                                 {% endif %}
                             </div>
                         </div>
@@ -188,12 +187,12 @@
                 <div class="order__cart--total d-flex justify-content-between mx-2 mb-4">
                     <strong>合計</strong>
                     <span id="total" class="d-none">0</span>
-                    <span id="total_price" class="order__select--price">\{{ get_total_price|intcomma }}</span>
+                    <span id="total_price" class="order__select--price">&yen;{{ get_total_price|intcomma }}</span>
                 </div>
                 <div class="order__btn">
                     <!-- 注文ボタン -->
                     <div class="mx-auto text-center">
-                        <a id="order_plus" class="order__btn--add d-inline-block btn rounded-pill mt-4" ontouchstart="">追加注文</a><br>
+                        <a id="order_plus" class="order__btn--add d-inline-block btn rounded-pill mt-0" ontouchstart="">追加注文</a><br>
                         <a id="order_next" class="order__btn--next d-inline-block btn rounded-pill my-4" href="{% url 'order_user' %}" ontouchstart="">ご注文手続きへ</a>
                     </div>
                 </div>
@@ -262,9 +261,10 @@
 
     // 空の表示
     const order_total = document.querySelector('.order__cart--total');
-    if ( total_price.textContent == '\\0' && flavor_title.textContent == '' ) {
+    if ( total_price.textContent == '\xA50' && flavor_title.textContent == '' ) {
         order_total.className = 'order__cart--total d-none';
         document.querySelector('.order__cart--border').className = 'order__cart--border d-none';
+        document.querySelector('.order__btn').className = 'order__btn d-none';
         order_total.insertAdjacentHTML(
             'beforebegin',
             '<p class="order__none mb-4">カートは空です。<br>ぜひお買い物をお楽しみください。</p>'
@@ -333,6 +333,7 @@
             document.querySelector('.order__none').remove();
             order_total.className = 'order__cart--total d-flex justify-content-between mx-2 mb-4';
             document.querySelector('.order__cart--border').className = 'order__cart--border mx-2';
+            document.querySelector('.order__btn').className = 'order__btn';
         }
 
         // サイズ・オプションの取得金額にデフォルト値を設定
@@ -351,13 +352,13 @@
                 // バリュー値を取得してカートに表示
                 let size_value = size[i].value.split(' ');
                 size_title.textContent = size_value[0];
-                size_price.textContent = '\\' + size_value[1];
+                size_price.textContent = '\xA5' + size_value[1];
                 size_total = Number(size_value[1]);
                 // シングルサイズを選択でフレーバー金額を2倍に変更
                 if ( size[1].checked ) {
                     for ( let g = 0; g < flavorPriceArea.length; g++ ) {
-                        if ( flavorPriceArea[g].textContent == '\\30' ) {
-                            flavorPriceArea[g].textContent = '\\60';
+                        if ( flavorPriceArea[g].textContent == '\xA530' ) {
+                            flavorPriceArea[g].textContent = '\xA560';
                         }
                     }
                 }
@@ -365,8 +366,8 @@
         }
         if ( size[1].checked == false ) {
             for ( let h = 0; h < flavorPriceArea.length; h++ ) {
-                if ( flavorPriceArea[h].textContent == '\\60' ) {
-                    flavorPriceArea[h].textContent = '\\30';
+                if ( flavorPriceArea[h].textContent == '\xA560' ) {
+                    flavorPriceArea[h].textContent = '\xA530';
                 }
             }
         }
@@ -389,21 +390,21 @@
                     // ダブルサイズ選択の場合
                     if ( size[2].checked ) {
                         flavor_title.textContent = flavor_value[0];
-                        flavor_price.textContent =  '\\' + flavor_value[1];
+                        flavor_price.textContent =  '\xA5' + flavor_value[1];
                         flavor2_title.textContent = flavor_value[0];
-                        flavor2_price.textContent = '\\' + flavor_value[1];
+                        flavor2_price.textContent = '\xA5' + flavor_value[1];
                     // シングルサイズ選択の場合
                     } else if ( size[1].checked ) {
                         flavor_title.textContent = flavor_value[0];
-                        flavor_price.textContent =  '\\' + flavor_value[1]*2;
+                        flavor_price.textContent =  '\xA5' + flavor_value[1]*2;
                     } else {
                         flavor_title.textContent = flavor_value[0];
-                        flavor_price.textContent = '\\' + flavor_value[1];
+                        flavor_price.textContent = '\xA5' + flavor_value[1];
                     }
                 // フレーバーが1つ選択されている場合
                 } else if ( flavor_title.textContent != '' ) {
                     flavor2_title.textContent = flavor_value[0];
-                    flavor2_price.textContent = '\\' + flavor_value[1];
+                    flavor2_price.textContent = '\xA5' + flavor_value[1];
                 }
 
                 // ダブルでフレーバーが1つ選択されている場合の合計値
@@ -434,38 +435,39 @@
                 let option_value = option[k].value.split(' ');
                 if ( k == 0 ) {
                     option_title.textContent = option_value[0];
-                    option_price.textContent = '\\' + option_value[1];
+                    option_price.textContent = '\xA5' + option_value[1];
                 } else if ( k == 1 ) {
                     option2_title.textContent = option_value[0];
-                    option2_price.textContent = '\\' + option_value[1];
+                    option2_price.textContent = '\xA5' + option_value[1];
                 } else if ( k == 2 ) {
                     option3_title.textContent = option_value[0];
-                    option3_price.textContent = '\\' + option_value[1];
+                    option3_price.textContent = '\xA5' + option_value[1];
                 } else if ( k == 3 ) {
                     option4_title.textContent = option_value[0];
-                    option4_price.textContent = '\\' + option_value[1];
+                    option4_price.textContent = '\xA5' + option_value[1];
                 }
                 option_total += Number(option_value[1]);
             }
         }
         // 非同期通信状態かリロードされたかを判定
         if ( total.textContent == 0 && postArea.children.length == 0 ) {
-            total_price.textContent = '\\' +  ( size_total + flavor_total + option_total );
+            total_price.textContent = '\xA5' +  ( size_total + flavor_total + option_total );
         } else if ( total.textContent == 0 && '{{ get_total_price }}' > 0 ) {
             // データベースから最新の合計値を取得して足す
             let total_fee = Number('{{ get_total_price }}') + size_total + flavor_total + option_total;
-            total_price.textContent = '\\' + total_fee.toLocaleString();
+            total_price.textContent = '\xA5' + total_fee.toLocaleString();
         } else {
             // カンマを除いて整数値へ変換後、非同期通信で合計値を足す
             let total_flag = total.textContent.replace( /,/g, '');
             let total_fee = Number(total_flag) + size_total + flavor_total + option_total;
-            total_price.textContent = '\\' + total_fee.toLocaleString();
+            total_price.textContent = '\xA5' + total_fee.toLocaleString();
         }
 
         // カートの空表記を判定
-        if ( total_price.textContent == '\\0' && flavor_title.textContent == '' ) {
+        if ( total_price.textContent == '\xA5' + '0' && flavor_title.textContent == '' ) {
             order_total.className = 'order__cart--total d-none';
             document.querySelector('.order__cart--border').className = 'order__cart--border d-none';
+            document.querySelector('.order__btn').className = 'order__btn d-none';
             order_total.insertAdjacentHTML(
                 'beforebegin',
                 '<p class="order__none mb-4">カートは空です。<br>ぜひお買い物をお楽しみください。</p>'
@@ -537,9 +539,9 @@
             option3_price.textContent = '';
             option4_title.textContent = '';
             option4_price.textContent = '';
-            total_price.textContent = '\\' + response.get_total_price.toLocaleString();
+            total_price.textContent = '\xA5' + response.get_total_price.toLocaleString();
             // カートの数値を更新
-            if ( window.innerWidth < 768 ) {
+            if ( window.innerWidth < 576 ) {
                 document.querySelector('.spfooter__menu--badge').textContent = response.count;
             } else {
                 document.querySelector('.header__link--badge').textContent = response.count;
@@ -551,45 +553,45 @@
             const element  = Object.assign(document.createElement('div'), { className: 'd-flex justify-content-between mx-2'});
             const element2  = Object.assign(document.createElement('strong'), { className: 'order__cart--content--size', textContent: response.size_title });
             const element3  = Object.assign(document.createElement('div'));
-            const element4  = Object.assign(document.createElement('strong'), { className: 'order__select--cart--price m-0', textContent: '\\' + response.size_price });
+            const element4  = Object.assign(document.createElement('strong'), { className: 'order__select--cart--price m-0', textContent: '\xA5' + response.size_price });
             const element5  = Object.assign(document.createElement('span'), { id: response.cart_id, innerHTML: '<i class="order__select--cart--delete fas fa-times-circle fa-fw" aria-hidden="true"></i>' });
             const element6  = Object.assign(document.createElement('div'), { className: 'order__select--cart d-flex justify-content-between mx-2'});
             const element7  = Object.assign(document.createElement('span'), { textContent: response.flavor_title });
-            const element8  = Object.assign(document.createElement('span'), { className: 'order__select--cart--price order__cart--content--flavor', textContent: '\\' + response.flavor_price });
+            const element8  = Object.assign(document.createElement('span'), { className: 'order__select--cart--price order__cart--content--flavor', textContent: '\xA5' + response.flavor_price });
             const element9  = Object.assign(document.createElement('div'), { className: 'order__select--cart d-flex justify-content-between mx-2'});
             const element10  = Object.assign(document.createElement('span'), { textContent: response.flavor2_title });
             if ( response.flavor2_title == '' ) {
                 var element11  = Object.assign(document.createElement('span'));
             } else {
-                var element11  = Object.assign(document.createElement('span'), { className: 'order__select--cart--price', textContent: '\\' + response.flavor2_price });
+                var element11  = Object.assign(document.createElement('span'), { className: 'order__select--cart--price', textContent: '\xA5' + response.flavor2_price });
             }
             const element12  = Object.assign(document.createElement('div'), { className: 'order__select--cart d-flex justify-content-between mx-2'});
             const element13  = Object.assign(document.createElement('span'), { textContent: response.option_title });
             if ( response.option_title == '' ) {
                 var element14  = Object.assign(document.createElement('span'));
             } else {
-                var element14  = Object.assign(document.createElement('span'), { className: 'order__select--cart--price', textContent: '\\' + response.option_price });
+                var element14  = Object.assign(document.createElement('span'), { className: 'order__select--cart--price', textContent: '\xA5' + response.option_price });
             }
             const element15  = Object.assign(document.createElement('div'), { className: 'order__select--cart d-flex justify-content-between mx-2'});
             const element16  = Object.assign(document.createElement('span'), { textContent: response.option2_title });
             if ( response.option2_title == '' ) {
                 var element17  = Object.assign(document.createElement('span'));
             } else {
-                var element17  = Object.assign(document.createElement('span'), { className: 'order__select--cart--price', textContent: '\\' + response.option2_price });
+                var element17  = Object.assign(document.createElement('span'), { className: 'order__select--cart--price', textContent: '\xA5' + response.option2_price });
             }
             const element18  = Object.assign(document.createElement('div'), { className: 'order__select--cart d-flex justify-content-between mx-2'});
             const element19  = Object.assign(document.createElement('span'), { textContent: response.option3_title });
             if ( response.option3_title == '' ) {
                 var element20  = Object.assign(document.createElement('span'));
             } else {
-                var element20  = Object.assign(document.createElement('span'), { className: 'order__select--cart--price', textContent: '\\' + response.option3_price });
+                var element20  = Object.assign(document.createElement('span'), { className: 'order__select--cart--price', textContent: '\xA5' + response.option3_price });
             }
             const element21  = Object.assign(document.createElement('div'), { className: 'order__select--cart d-flex justify-content-between mx-2'});
             const element22  = Object.assign(document.createElement('span'), { textContent: response.option4_title });
             if ( response.option4_title == '' ) {
                 var element23  = Object.assign(document.createElement('span'));
             } else {
-                var element23  = Object.assign(document.createElement('span'), { className: 'order__select--cart--price', textContent: '\\' + response.option4_price });
+                var element23  = Object.assign(document.createElement('span'), { className: 'order__select--cart--price', textContent: '\xA5' + response.option4_price });
             }
             const element24  = Object.assign(document.createElement('div'), { id: 'order' + response.cart_id, className: 'mb-3' });
             // 階層に合わせて要素をまとめる
@@ -697,7 +699,7 @@
             let delete_alert = () => {
                 order_alert.remove()
             }
-            setTimeout(delete_alert, 1500);
+            setTimeout(delete_alert, 2000);
         }
     });
 
@@ -740,7 +742,7 @@
             return response.json();
         }).then(response => {
             // 合計値を削除後の金額に変更
-            total_price.textContent = '\\' + response.get_total_price.toLocaleString();
+            total_price.textContent = '\xA5' + response.get_total_price.toLocaleString();
 
             // 仮の合計値も削除後の金額に変更
             total.textContent = response.get_total_price;
@@ -750,16 +752,17 @@
             cart.remove();
 
             // カートの数値を更新
-            if ( window.innerWidth < 768 ) {
+            if ( window.innerWidth < 576 ) {
                 document.querySelector('.spfooter__menu--badge').textContent = response.count;
             } else {
                 document.querySelector('.header__link--badge').textContent = response.count;
             }
 
             // カートの空表記を判定
-            if ( total_price.textContent == '\\0' && flavor_title.textContent == '' ) {
+            if ( total_price.textContent == '\xA5' +'0' && flavor_title.textContent == '' ) {
                 order_total.className = 'order__cart--total d-none';
                 document.querySelector('.order__cart--border').className = 'order__cart--border d-none';
+                document.querySelector('.order__btn').className = 'order__btn d-none';
                 order_total.insertAdjacentHTML(
                     'beforebegin',
                     '<p class="order__none mb-4">カートは空です。<br>ぜひお買い物をお楽しみください。</p>'
@@ -793,12 +796,14 @@
     }
 
     // カートへスクロール
-    const cartJump = document.querySelectorAll('.cart-jump');
-    for ( let i = 0; i < cartJump.length; i++ ) {
-        cartJump[i].addEventListener('click', e => {
-            e.preventDefault();
-            scrollFunc('.order__cart');
-        })
+    if ( window.innerWidth < 576 ) {
+        const cartJump = document.querySelectorAll('.cart-jump');
+        for ( let i = 0; i < cartJump.length; i++ ) {
+            cartJump[i].addEventListener('click', e => {
+                e.preventDefault();
+                scrollFunc('.order__cart');
+            })
+        }
     }
 
     // サイズへスクロール

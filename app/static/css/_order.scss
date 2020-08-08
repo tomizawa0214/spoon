@@ -12,7 +12,7 @@
         background: #FDF5F7;
         font-size: 20px;
         z-index: 9999;
-        animation : fadeOut 1.5s ease-in-out .2s forwards;
+        animation : fadeOut 2s ease-in-out .2s forwards;
         @keyframes fadeOut {
             0% {
                 opacity: 1;
@@ -73,12 +73,6 @@
             line-height: 1;
             cursor: pointer;
         }
-        &--ename {
-            font-size: 14px;
-            font-weight: normal;
-            font-family: 'Dancing Script', cursive;
-            letter-spacing: 1px;
-        }
         &--name {
             line-height: 20px;
         }
@@ -119,11 +113,6 @@
         }
     }
     &__btn {
-        background-color: #FCFCFC;
-        background-image: radial-gradient(#EEE 10%, transparent 20%), radial-gradient(#EEE 10%, transparent 20%);
-        background-position: 0 0, 10px 10px;
-        background-size: 20px 20px;
-        border-top: 3px double rgba(0, 0, 0, .125);
         &--add {
             @include button;
             width: 70%;
@@ -453,9 +442,6 @@
             &--img {
                 width: 43%;
                 max-width: 200px;
-            }
-            &--ename {
-                font-size: 16px;
             }
         }
     }

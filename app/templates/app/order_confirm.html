@@ -59,41 +59,41 @@
                     <div class="d-flex justify-content-between mx-2">
                         <strong>{{ cart.size_title }}</strong>
                         <div>
-                            <strong class="order__select--cart--price m-0">\{{ cart.size_price }}</strong>
+                            <strong class="order__select--cart--price m-0">&yen;{{ cart.size_price }}</strong>
                         </div>
                     </div>
                     <div class="order__select--cart d-flex justify-content-between mx-2">
                         <span>{{ cart.flavor_title }}</span>
-                        <span class="order__select--cart--price m-0">\{{ cart.flavor_price }}</span>
+                        <span class="order__select--cart--price m-0">&yen;{{ cart.flavor_price }}</span>
                     </div>
                     <div class="order__select--cart d-flex justify-content-between mx-2">
                         <span>{{ cart.flavor2_title }}</span>
                         {% if cart.flavor2_title != "" %}
-                            <span class="order__select--cart--price m-0">\{{ cart.flavor2_price }}</span>
+                            <span class="order__select--cart--price m-0">&yen;{{ cart.flavor2_price }}</span>
                         {% endif %}
                     </div>
                     <div class="order__select--cart d-flex justify-content-between mx-2">
                         <span>{{ cart.option_title }}</span>
                         {% if cart.option_title != "" %}
-                            <span class="order__select--cart--price m-0">\{{ cart.option_price }}</span>
+                            <span class="order__select--cart--price m-0">&yen;{{ cart.option_price }}</span>
                         {% endif %}
                     </div>
                     <div class="order__select--cart d-flex justify-content-between mx-2">
                         <span>{{ cart.option2_title }}</span>
                         {% if cart.option2_title != "" %}
-                            <span class="order__select--cart--price m-0">\{{ cart.option2_price }}</span>
+                            <span class="order__select--cart--price m-0">&yen;{{ cart.option2_price }}</span>
                         {% endif %}
                     </div>
                     <div class="order__select--cart d-flex justify-content-between mx-2">
                         <span>{{ cart.option3_title }}</span>
                         {% if cart.option3_title != "" %}
-                            <span class="order__select--cart--price m-0">\{{ cart.option3_price }}</span>
+                            <span class="order__select--cart--price m-0">&yen;{{ cart.option3_price }}</span>
                         {% endif %}
                     </div>
                     <div class="order__select--cart d-flex justify-content-between mx-2">
                         <span>{{ cart.option4_title }}</span>
                         {% if cart.option4_title != "" %}
-                            <span class="order__select--cart--price m-0">\{{ cart.option4_price }}</span>
+                            <span class="order__select--cart--price m-0">&yen;{{ cart.option4_price }}</span>
                         {% endif %}
                     </div>
                 </div>
@@ -105,7 +105,7 @@
             </div>
             <div class="order__cart--total d-flex justify-content-between mx-2 mb-3">
                 <strong>合計</strong>
-                <span class="order__select--price">\{{ get_total_price|intcomma }}</span>
+                <span class="order__select--price">&yen;{{ get_total_price|intcomma }}</span>
             </div>
             <!-- クーポン -->
             <div class="order-ck__coupon mt-3 d-none">
@@ -173,10 +173,10 @@
             // クーポンの利用可否を確認
             if ( '{{ use_coupon }}' == 'valid' ) {
                 cartCoupon.classList.toggle('d-none');
-                selectCouponPrice.textContent = '-\\' + 330
+                selectCouponPrice.textContent = '-\xA5' + 330
                 let totalPriceNum = totalPrice.textContent.slice(1).replace( /,/g, '');
                 let total = Number(totalPriceNum) - 330;
-                totalPrice.textContent = '\\' + total.toLocaleString();
+                totalPrice.textContent = '\xA5' + total.toLocaleString();
             } else {
                 useCoupon.checked = false;
                 // エラーメッセージを表示
@@ -188,7 +188,7 @@
                 cartCoupon.classList.toggle('d-none');
                 let totalPriceNum = totalPrice.textContent.slice(1).replace( /,/g, '');
                 let total = Number(totalPriceNum) + 330;
-                totalPrice.textContent = '\\' + total.toLocaleString();
+                totalPrice.textContent = '\xA5' + total.toLocaleString();
             }
         }
     });
