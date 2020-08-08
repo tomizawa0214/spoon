@@ -38,14 +38,14 @@
             background-image: url("/static/img/slide1.png");
             background-size: cover;
             background-repeat: no-repeat;
-            background-position: 25% 0;
+            background-position: 17% 100%;
         }
         &--image2 {
             @include slideImage;
             background-image: url("/static/img/slide2.png");
             background-size: cover;
             background-repeat: no-repeat;
-            background-position: 72% 0;
+            background-position: 75% 50%;
         }
         &--image3 {
             @include slideImage;
@@ -95,6 +95,15 @@
             }
             &--size {
                 justify-content: space-evenly;
+            }
+        }
+        &__item {
+            &--image2 {
+                @include slideImage;
+                background-image: url("/static/img/slide2.png");
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-position: 67% 100%;
             }
         }
     }
