@@ -4,6 +4,7 @@ db.sqlite3
 __pycache__
 *.pyc
 .DS_Store
+images
 media
 local_settings.py
 .env

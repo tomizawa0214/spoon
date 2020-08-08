@@ -92,9 +92,9 @@
 {% endblock %}
 
 {% block footer_info %}
-    <a class="spfooter__info d-flex justify-content-end align-items-center py-1 pr-1" href="{% url 'order_guide' %}">
+    <a class="spfooter__info d-flex justify-content-end align-items-center p-2" href="{% url 'order_guide' %}">
         <span class="spfooter__info--ename d-inline-block">spoon</span>のお持ち帰り予約
-        <span class="spfooter__info--detail align-self-start ml-3">詳しくはこちら</span>
+        <span class="spfooter__info--detail align-self-end ml-2 mr-1">詳しくはこちら</span>
         <i class="spfooter__info--arrow fas fa-chevron-circle-right fa-fw" aria-hidden="true"></i>
     </a>
 {% endblock %}
@@ -106,24 +106,24 @@
 
     // ウインドウ幅に応じてback-to-topの高さを変更
     const backToTop = document.querySelector('.back-to-top')
-    if ( window.innerWidth < 768 ) {
-        backToTop.style.bottom = '105px';
+    if ( window.innerWidth < 576 ) {
+        backToTop.style.bottom = '113px';
     }
     window.addEventListener('resize', event => {
-        if ( window.innerWidth < 768 ) {
-            backToTop.style.bottom = '105px';
+        if ( window.innerWidth < 576 ) {
+            backToTop.style.bottom = '113px';
         } else {
             backToTop.style.bottom = '15px';
         }
     });
 
     // ウインドウ幅に応じてbody要素を変更
-    if ( window.innerWidth < 768 ) {
-        document.body.style.paddingBottom = '89px';
+    if ( window.innerWidth < 576 ) {
+        document.body.style.paddingBottom = '97px';
     }
     window.addEventListener('resize', event => {
-        if ( window.innerWidth < 768 ) {
-            document.body.style.paddingBottom = '89px';
+        if ( window.innerWidth < 576 ) {
+            document.body.style.paddingBottom = '97px';
         } else {
             document.body.style.paddingBottom = 0;
         }

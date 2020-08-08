@@ -548,7 +548,7 @@ main {
 .spfooter__info {
   position: fixed;
   width: 100%;
-  height: 29px;
+  height: 37px;
   bottom: 60px;
   left: 0;
   z-index: 9998;
@@ -567,6 +567,7 @@ main {
 .spfooter__info--detail {
   font-size: 10px;
   letter-spacing: 0;
+  line-height: 1.7;
 }
 
 .spfooter__info--arrow {
