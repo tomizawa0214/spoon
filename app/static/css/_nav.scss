@@ -28,3 +28,25 @@
         }
     }
 }
+
+
+@media screen and ( min-width: 576px ) and ( max-width: 767px ) {
+    .nav {
+        &__wrap {
+            &--menu {
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                &--li {
+                    border: 1px solid rgba(0, 0, 0, .125);
+                    &--link {
+                        display: block;
+                        height: 60px;
+                        &:hover {
+                            background: rgba(0, 0, 0, .1);
+                        }
+                    }
+                }
+            }
+        }
+    }
+} 

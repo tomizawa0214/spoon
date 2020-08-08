@@ -131,7 +131,7 @@ main {
   background: #FDFDFD;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 576px) {
   body {
     padding: 60px 0;
   }
@@ -811,6 +811,25 @@ main {
   opacity: .5;
   text-decoration: none;
   color: inherit;
+}
+
+@media screen and (min-width: 576px) and (max-width: 767px) {
+  .nav__wrap--menu {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr;
+  }
+  .nav__wrap--menu--li {
+    border: 1px solid rgba(0, 0, 0, 0.125);
+  }
+  .nav__wrap--menu--li--link {
+    display: block;
+    height: 60px;
+  }
+  .nav__wrap--menu--li--link:hover {
+    background: rgba(0, 0, 0, 0.1);
+  }
 }
 
 .about {
