@@ -1303,9 +1303,6 @@ main {
     width: 250px;
     height: 300px;
   }
-  .order__reorder {
-    top: 60px;
-  }
   .order__header {
     position: fixed;
     display: -ms-grid;

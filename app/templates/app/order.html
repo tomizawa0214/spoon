@@ -17,9 +17,6 @@
             <p class="order__step order__size mb-3 py-1 px-3 px-md-2 rounded-sm-pill">STEP1. ジェラートのサイズをお選びください。<br>
                 <span class="order__step--help d-inline-block mt-1">※写真はイメージです。お持ち帰り用は別カップになります。</span>
             </p>
-            <div class="mx-auto text-center">
-                <p id="size_error" class="d-none"></p>
-            </div>
             <ul class="row justify-content-center list-unstyled mb-5">
                 {% for size in size_item %}
                     <li class="order__select col-lg-3 mb-3 mb-lg-0 text-center">
@@ -39,9 +36,6 @@
             <p class="order__step order__flavor mb-3 py-1 px-3 px-md-2 rounded-sm-pill">STEP2. ジェラートのフレーバーをお選びください。<br>
                 <span class="order__step--help d-inline-block mt-1">※写真はイメージです。お持ち帰り用は別カップになります。</span>
             </p>
-            <div class="class mx-auto text-center">
-                <p id="flavor_error" class="d-none"></p>
-            </div>
             <ul class="row mb-5 list-unstyled">
                 {% for flavor in flavor_item %}
                     <li class="order__select col-lg-3 text-center">
@@ -49,7 +43,7 @@
                         <label for="flavor_{{ flavor.id }}">
                             <div class="d-flex d-lg-block">
                                 <img class="order__select--img h-100" src="{{ flavor.image.url }}">
-                                <div class="d-flex flex-column justify-content-end text-left">
+                                <div class="d-flex flex-column justify-content-end text-left mt-lg-2">
                                     <p class="order__select--item mb-1 ml-2">{{ flavor.title }}</p>
                                     <p class="order__select--item order__select--item--flavor order__select--price ml-2">&yen;{{ flavor.price }}</p>
                                 </div>
@@ -73,7 +67,7 @@
                         <label for="option_{{ option.id }}">
                             <div class="d-flex d-lg-block">
                                 <img class="order__select--img h-100" src="{{ option.image.url }}">
-                                <div class="d-flex flex-column justify-content-end text-left">
+                                <div class="d-flex flex-column justify-content-end text-left mt-lg-2">
                                     <p class="order__select--item mb-1 ml-2 mt-1 mt-lg-0">{{ option.title }}</p>
                                     <p class="order__select--item order__select--price ml-2">&yen;{{ option.price }}</p>
                                 </div>
@@ -249,9 +243,6 @@
     const option4_price = document.getElementById('option4_price');
     const total = document.getElementById('total');
     const total_price = document.getElementById('total_price');
-    // エラーフィールドを取得
-    const size_error = document.getElementById('size_error');
-    const flavor_error = document.getElementById('flavor_error');
     // 登録フィールドを取得
     const postArea = document.getElementById('posts')
 
@@ -343,8 +334,6 @@
         // サイズ選択時の挙動
         for ( let i = 0; i < size.length; i++ ) {
             if ( size[i].checked ) {
-                // エラーメッセージを非表示
-                size_error.className = 'd-none';
                 // バリュー値を取得してカートに表示
                 let size_value = size[i].value.split(' ');
                 size_title.textContent = size_value[0];
@@ -376,8 +365,6 @@
         // フレーバー選択時の挙動
         for ( let j = 0; j < flavor.length; j++ ) {
             if ( flavor[j].checked ) {
-                // エラーメッセージを非表示
-                flavor_error.className = 'd-none';
                 // バリュー値を取得してカートに表示
                 let flavor_value = flavor[j].value.split(' ');
 
@@ -630,25 +617,54 @@
 
 
     // 次ページに遷移する前にエラーチェック
-    const next = (next) => {
-        next.addEventListener('click', e => {
-            // サイズが選択されてない場合のエラーを出力
-            if ( size_title.textContent == '' && postArea.children.length == 0 ) {
-                e.preventDefault(); // ページ遷移をキャンセル
-                size_error.className = 'error-msg d-inline-block text-left';
-                size_error.textContent = '※サイズを選択してください。';
-            // フレーバーが選択されてない場合のエラーを出力
-            } else if ( flavor_title.textContent == '' && size_title.textContent != '' ) {
-                e.preventDefault(); // ページ遷移をキャンセル
-                flavor_error.className = 'error-msg d-inline-block text-left';
-                flavor_error.innerHTML = '※フレーバーを選択してください。<br>※ダブルサイズの場合は2つ選択できます。';
-            } else if ( size_title.textContent != '' && flavor_title.textContent != '' ) {
-                cartRegi();
-            }
-        });
-    }
     const nextOrder = document.getElementById('order_next');
-    next(nextOrder);
+    nextOrder.addEventListener('click', e => {
+        // サイズが選択されてない場合のエラーを出力
+        if ( size_title.textContent == '' && postArea.children.length == 0 ) {
+            e.preventDefault(); // ページ遷移をキャンセル
+            const element  = Object.assign(document.createElement('div'), { className: 'order__reorder sticky-top rounded-0 alert alert-warning alert-dismissible fade show m-0' });
+            const element2  = Object.assign(document.createElement('strong'), { innerText: 'サイズを選択してください。' });
+            const element3  = Object.assign(document.createElement('button'), { className: 'order__reorder--btn close', type: 'button' });
+            const element4  = Object.assign(document.createElement('span'), { className: 'order__reorder--close', innerHTML: '&times;' });
+            // 階層に合わせて要素をまとめる
+            element3.appendChild(element4);
+            element.appendChild(element2);
+            element.appendChild(element3);
+            // 最後に追加
+            document.body.insertBefore(element, document.body.firstChild);
+
+            let order_alert = document.querySelector('.order__reorder');
+            order_alert.setAttribute('role', 'alert');
+            let alert_btn = document.querySelector('.order__reorder--btn');
+            alert_btn.setAttribute('data-dismiss', 'alert');
+            alert_btn.setAttribute('aria-label', 'Close');
+            let alert_close = document.querySelector('.order__reorder--close');
+            alert_close.setAttribute('aria-hidden', 'true');
+        // フレーバーが選択されてない場合のエラーを出力
+        } else if ( flavor_title.textContent == '' && size_title.textContent != '' ) {
+            e.preventDefault(); // ページ遷移をキャンセル
+            const element  = Object.assign(document.createElement('div'), { className: 'order__reorder sticky-top rounded-0 alert alert-warning alert-dismissible fade show m-0' });
+            const element2  = Object.assign(document.createElement('strong'), { innerText: 'フレーバーを選択してください。\nダブルサイズの場合は2つ選択できます。' });
+            const element3  = Object.assign(document.createElement('button'), { className: 'order__reorder--btn close', type: 'button' });
+            const element4  = Object.assign(document.createElement('span'), { className: 'order__reorder--close', innerHTML: '&times;' });
+            // 階層に合わせて要素をまとめる
+            element3.appendChild(element4);
+            element.appendChild(element2);
+            element.appendChild(element3);
+            // 最後に追加
+            document.body.insertBefore(element, document.body.firstChild);
+
+            let order_alert = document.querySelector('.order__reorder');
+            order_alert.setAttribute('role', 'alert');
+            let alert_btn = document.querySelector('.order__reorder--btn');
+            alert_btn.setAttribute('data-dismiss', 'alert');
+            alert_btn.setAttribute('aria-label', 'Close');
+            let alert_close = document.querySelector('.order__reorder--close');
+            alert_close.setAttribute('aria-hidden', 'true');
+        } else if ( size_title.textContent != '' && flavor_title.textContent != '' ) {
+            cartRegi();
+        }
+    });
 
     // 追加注文をクリックで発動
     const addOrder = document.getElementById('order_plus')
@@ -657,12 +673,44 @@
 
         // サイズが選択されてない場合のエラーを出力
         if ( size_title.textContent == '' ) {
-            size_error.className = 'error-msg d-inline-block text-left';
-            size_error.textContent = '※サイズを選択してください。';
+            const element  = Object.assign(document.createElement('div'), { className: 'order__reorder sticky-top rounded-0 alert alert-warning alert-dismissible fade show m-0' });
+            const element2  = Object.assign(document.createElement('strong'), { innerText: 'サイズを選択してください。' });
+            const element3  = Object.assign(document.createElement('button'), { className: 'order__reorder--btn close', type: 'button' });
+            const element4  = Object.assign(document.createElement('span'), { className: 'order__reorder--close', innerHTML: '&times;' });
+            // 階層に合わせて要素をまとめる
+            element3.appendChild(element4);
+            element.appendChild(element2);
+            element.appendChild(element3);
+            // 最後に追加
+            document.body.insertBefore(element, document.body.firstChild);
+
+            let order_alert = document.querySelector('.order__reorder');
+            order_alert.setAttribute('role', 'alert');
+            let alert_btn = document.querySelector('.order__reorder--btn');
+            alert_btn.setAttribute('data-dismiss', 'alert');
+            alert_btn.setAttribute('aria-label', 'Close');
+            let alert_close = document.querySelector('.order__reorder--close');
+            alert_close.setAttribute('aria-hidden', 'true');
         // フレーバーが選択されてない場合のエラーを出力
         } else if ( flavor_title.textContent == '' ) {
-            flavor_error.className = 'error-msg d-inline-block text-left';
-            flavor_error.innerHTML = '※フレーバーを選択してください。<br>※ダブルサイズの場合は2つ選択できます。';
+            const element  = Object.assign(document.createElement('div'), { className: 'order__reorder sticky-top rounded-0 alert alert-warning alert-dismissible fade show m-0' });
+            const element2  = Object.assign(document.createElement('strong'), { innerText: 'フレーバーを選択してください。\nダブルサイズの場合は2つ選択できます。' });
+            const element3  = Object.assign(document.createElement('button'), { className: 'order__reorder--btn close', type: 'button' });
+            const element4  = Object.assign(document.createElement('span'), { className: 'order__reorder--close', innerHTML: '&times;' });
+            // 階層に合わせて要素をまとめる
+            element3.appendChild(element4);
+            element.appendChild(element2);
+            element.appendChild(element3);
+            // 最後に追加
+            document.body.insertBefore(element, document.body.firstChild);
+
+            let order_alert = document.querySelector('.order__reorder');
+            order_alert.setAttribute('role', 'alert');
+            let alert_btn = document.querySelector('.order__reorder--btn');
+            alert_btn.setAttribute('data-dismiss', 'alert');
+            alert_btn.setAttribute('aria-label', 'Close');
+            let alert_close = document.querySelector('.order__reorder--close');
+            alert_close.setAttribute('aria-hidden', 'true');
         // サイズもフレーバーも選択されていれば発動
         } else {
             cartRegi();
@@ -771,7 +819,7 @@
 
     // 再注文で登録が無い場合のアラート
     if ( '{{ msg }}' != '' ) {
-        const element  = Object.assign(document.createElement('div'), { className: 'order__reorder sticky-top rounded-0 alert alert-danger alert-dismissible fade show m-0' });
+        const element  = Object.assign(document.createElement('div'), { className: 'order__reorder sticky-top rounded-0 alert alert-warning alert-dismissible fade show m-0' });
         const element2  = Object.assign(document.createElement('strong'), { innerText: '只今、' + '{{ msg }}' + 'はご好評につき、在庫切れとなっております。\n' + '{{ msg }}' + 'を含むご注文のみキャンセルされました。' });
         const element3  = Object.assign(document.createElement('button'), { className: 'order__reorder--btn close', type: 'button' });
         const element4  = Object.assign(document.createElement('span'), { className: 'order__reorder--close', innerHTML: '&times;' });
