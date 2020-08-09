@@ -764,6 +764,7 @@ main {
   }
   .top__item--image1, .top__item--image2, .top__item--image3 {
     height: calc(100vh - 181px);
+    height: calc(var(--vh, 1vh)*100 - 181px);
   }
   .top__item--image2 {
     background-position: 67% 100%;
