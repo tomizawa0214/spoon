@@ -133,7 +133,7 @@ main {
 
 @media screen and (max-width: 576px) {
   body {
-    padding: 60px 0;
+    padding: 60px 0 121px;
   }
 }
 
@@ -468,7 +468,7 @@ main {
 .spnav__bg {
   position: absolute;
   width: 100%;
-  height: calc(100vh - 157px);
+  height: calc(100vh - 181px);
   top: 60px;
   left: 0;
   visibility: hidden;
@@ -480,7 +480,7 @@ main {
 
 .spnav__menu {
   position: absolute;
-  height: calc(100vh - 157px);
+  height: calc(100vh - 181px);
   margin-top: 60px;
   width: 85%;
   max-width: 300px;
@@ -555,7 +555,7 @@ main {
   position: fixed;
   width: 100%;
   height: 37px;
-  bottom: 60px;
+  bottom: 84px;
   left: 0;
   z-index: 9998;
   color: #FDFDFD;
@@ -769,7 +769,7 @@ main {
             justify-content: space-evenly;
   }
   .top__item--image1, .top__item--image2, .top__item--image3 {
-    height: calc(100vh - 157px);
+    height: calc(100% - 181px);
   }
   .top__item--image2 {
     background-position: 67% 100%;
