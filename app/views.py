@@ -157,7 +157,7 @@ class OrderConfirmView(LoginRequiredMixin, View):
                 coupon = 'no'
 
             # カートにシングルサイズを含むか確認
-            if cart_data.filter(size_title='シングルサイズ').exists():
+            if cart_data.filter(size_title='シングルサイズ').exists() and coupon == 'get':
                 use_coupon = 'valid'
             else:
                 use_coupon = 'invalid'

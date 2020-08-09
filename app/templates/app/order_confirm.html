@@ -137,8 +137,8 @@
         <div class="order-ck__cart--help mx-auto mt-1 ml-lg-4 d-none">
             <p class="order-ck__cart--help--text help-text d-sm-block m-0">
                 ※金額がプラスになるフレーバー、オプションは別途料金がかかります。
-                ※クーポンはお誕生月に1回限り利用可能です。
-                ※イラストはイメージです。
+                クーポンはお誕生月に1回限り利用可能です。
+                イラストはイメージです。
             </p>
         </div>
     </div>
@@ -222,10 +222,8 @@
             const url = '{% url "order_thanks" %}';
 
             // クーポン金額を取得
-            if ( '{{ use_coupon }}' == 'valid' ) {
-                var coupon = 280;
-            } else if ( '{{ use_coupon }}' == 'valid_plus' ) {
-                var coupon = 310;
+            if ( '{{ use_coupon }}' == 'valid' && useCoupon.checked ) {
+                var coupon = 330;
             } else {
                 var coupon = 0;
             }
