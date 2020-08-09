@@ -166,12 +166,6 @@ main {
           box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
 }
 
-@media screen and (max-width: 575px) {
-  .back-to-top {
-    bottom: 75px;
-  }
-}
-
 .sctl {
   margin-top: 64px;
   max-width: 700px;
@@ -589,7 +583,7 @@ main {
 .spfooter__menu {
   position: fixed;
   width: 100%;
-  height: 60px;
+  height: 84px;
   bottom: 0;
   left: 0;
   z-index: 9998;
@@ -769,7 +763,7 @@ main {
             justify-content: space-evenly;
   }
   .top__item--image1, .top__item--image2, .top__item--image3 {
-    height: calc(100% - 181px);
+    height: calc(100vh - 181px);
   }
   .top__item--image2 {
     background-position: 67% 100%;

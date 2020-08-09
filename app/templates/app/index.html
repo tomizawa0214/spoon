@@ -107,11 +107,11 @@
     // ウインドウ幅に応じてback-to-topの高さを変更
     const backToTop = document.querySelector('.back-to-top')
     if ( window.innerWidth < 576 ) {
-        backToTop.style.bottom = '113px';
+        backToTop.style.bottom = '137px';
     }
     window.addEventListener('resize', event => {
         if ( window.innerWidth < 576 ) {
-            backToTop.style.bottom = '113px';
+            backToTop.style.bottom = '137px';
         } else {
             backToTop.style.bottom = '15px';
         }

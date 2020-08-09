@@ -99,7 +99,7 @@
         }
         &__item {
             &--image1, &--image2, &--image3 {
-                height: calc(100% - 181px)
+                height: calc(100vh - 181px)
             }
             &--image2 {
                 background-position: 67% 100%;
