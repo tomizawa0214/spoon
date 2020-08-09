@@ -468,7 +468,7 @@ main {
 .spnav__bg {
   position: absolute;
   width: 100%;
-  height: calc(100% - 120px);
+  height: calc(100vh - 157px);
   top: 60px;
   left: 0;
   visibility: hidden;
@@ -480,7 +480,7 @@ main {
 
 .spnav__menu {
   position: absolute;
-  height: calc(100% - 120px);
+  height: calc(100vh - 157px);
   margin-top: 60px;
   width: 85%;
   max-width: 300px;
@@ -491,6 +491,12 @@ main {
           transform: translateX(100%);
   -webkit-transition: .5s ease-out;
   transition: .5s ease-out;
+  overflow-y: scroll;
+}
+
+.spnav__menu::-webkit-scrollbar {
+  display: none;
+  -webkit-appearance: none;
 }
 
 .spnav__menu--link {

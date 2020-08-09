@@ -132,7 +132,7 @@
     &__bg {
         position: absolute;
         width: 100%;
-        height: calc(100% - 120px);
+        height: calc(100vh - 157px);
         top: 60px;
         left: 0;
         visibility: hidden;
@@ -142,7 +142,7 @@
     }
     &__menu {
         position: absolute;
-        height: calc(100% - 120px);
+        height: calc(100vh - 157px);
         margin-top: 60px;
         width: 85%;
         max-width: 300px;
@@ -151,6 +151,11 @@
         background: #FDFDFD;
         transform: translateX(100%);
         transition: .5s ease-out;
+        overflow-y: scroll;
+        &::-webkit-scrollbar {
+            display: none;
+            -webkit-appearance: none;
+        }
         &--link {
             text-decoration: none;
             color: #333;
