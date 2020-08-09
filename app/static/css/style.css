@@ -871,12 +871,6 @@ main {
   }
 }
 
-.order__s {
-  -webkit-box-pack: stretch;
-      -ms-flex-pack: stretch;
-          justify-content: stretch;
-}
-
 .order__alert {
   position: fixed;
   top: 50%;
