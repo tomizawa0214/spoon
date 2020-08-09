@@ -7,23 +7,6 @@
 <title>お持ち帰り予約 - 商品注文 | spoon</title>
 {% endblock %}
 
-{% block order %}
-<div class="order__header align-items-center d-sm-none">
-    <div class="order__header--menu size-jump d-flex flex-column justify-content-center text-center p-2">
-        <img class="order__header--menu--icon" src="{% static 'img/step1.svg' %}" alt="サイズを選ぶ">
-        <span class="order__header--menu--text">サイズを選ぶ</span>
-    </div>
-    <div class="order__header--menu flavor-jump d-flex flex-column justify-content-center text-center p-2">
-        <img class="order__header--menu--icon" src="{% static 'img/step2.svg' %}" alt="フレーバーを選ぶ">
-        <span class="order__header--menu--text">フレーバーを選ぶ</span>
-    </div>
-    <div class="order__header--menu option-jump d-flex flex-column justify-content-center text-center p-2">
-        <img class="order__header--menu--icon" src="{% static 'img/step3.svg' %}" alt="オプションを選ぶ">
-        <span class="order__header--menu--text">オプションを選ぶ</span>
-    </div>
-</div>
-{% endblock %}
-
 {% block content %}
 <div class="mx-auto">
     <div class="row">
@@ -202,6 +185,23 @@
 </div>
 {% endblock %}
 
+{% block order %}
+<div class="order__header align-items-center d-sm-none">
+    <div class="order__header--menu size-jump d-flex flex-column justify-content-center text-center p-2">
+        <img class="order__header--menu--icon" src="{% static 'img/step1.svg' %}" alt="サイズを選ぶ">
+        <span class="order__header--menu--text">サイズを選ぶ</span>
+    </div>
+    <div class="order__header--menu flavor-jump d-flex flex-column justify-content-center text-center p-2">
+        <img class="order__header--menu--icon" src="{% static 'img/step2.svg' %}" alt="フレーバーを選ぶ">
+        <span class="order__header--menu--text">フレーバーを選ぶ</span>
+    </div>
+    <div class="order__header--menu option-jump d-flex flex-column justify-content-center text-center p-2">
+        <img class="order__header--menu--icon" src="{% static 'img/step3.svg' %}" alt="オプションを選ぶ">
+        <span class="order__header--menu--text">オプションを選ぶ</span>
+    </div>
+</div>
+{% endblock %}
+
 
 {% block extrajs %}
 <script>
@@ -215,14 +215,14 @@
 
     // ウインドウ幅に応じてbody要素を変更
     if ( window.innerWidth < 576 ) {
-        document.body.style.paddingTop = '124px';
+        document.body.style.paddingBottom = '132px';
     }
 
     window.addEventListener('resize', event => {
         if ( window.innerWidth < 576 ) {
-            document.body.style.paddingTop = '124px';
+            document.body.style.paddingBottom = '132px';
         } else {
-            document.body.style.paddingTop = 0;
+            document.body.style.paddingBottom = 0;
         }
     });
 

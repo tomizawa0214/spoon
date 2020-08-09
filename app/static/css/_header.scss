@@ -135,7 +135,7 @@
     &__bg {
         position: absolute;
         width: 100%;
-        height: calc(100vh - 165px);
+        height: 100vh;
         top: 60px;
         left: 0;
         visibility: hidden;
@@ -146,7 +146,7 @@
     }
     &__menu {
         position: fixed;
-        height: calc(100vh - 165px);
+        height: 100vh;
         width: 85%;
         max-width: 300px;
         z-index: 10;

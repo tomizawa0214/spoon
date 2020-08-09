@@ -451,7 +451,7 @@ main {
 .spnav__bg {
   position: absolute;
   width: 100%;
-  height: calc(100vh - 165px);
+  height: 100vh;
   top: 60px;
   left: 0;
   visibility: hidden;
@@ -464,7 +464,7 @@ main {
 
 .spnav__menu {
   position: fixed;
-  height: calc(100vh - 165px);
+  height: 100vh;
   width: 85%;
   max-width: 300px;
   z-index: 10;
@@ -1313,8 +1313,8 @@ main {
     -ms-grid-columns: 1fr 1fr 1fr;
         grid-template-columns: 1fr 1fr 1fr;
     width: 100%;
-    top: 60px;
     left: 0;
+    bottom: 68px;
     z-index: 9998;
     background: #FDFDFD;
   }
