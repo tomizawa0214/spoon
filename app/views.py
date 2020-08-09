@@ -187,23 +187,23 @@ class OrderConfirmView(LoginRequiredMixin, View):
         locale.setlocale(locale.LC_TIME, 'ja_JP.UTF-8')
 
         date_list = []
-        def get_weeks(start_day, box):
+        def get_weeks(start_day):
             for i in range(7):
                 if i == 0:
-                    box.append(days[i].strftime("%B%-d日(%a)") + start_day)
+                    date_list.append(days[i].strftime("%B%-d日(%a)") + start_day)
                 else:
-                    box.append(days[i].strftime("%B%-d日(%a)"))
+                    date_list.append(days[i].strftime("%B%-d日(%a)"))
 
         # 現在時刻～16:30
         if dt.time() < datetime.time(16, 31) and today_order == True:
             # 本日から1週間分を取得
             days = [dt + timedelta(days=day) for day in range(7)]
-            get_weeks("【本日】", date_list)
+            get_weeks("【本日】")
         # 現在時刻が16:31以降
         elif dt.time() >= datetime.time(16, 31) or today_order == False:
             # 翌日から1週間分を取得
             days = [dt + timedelta(days=day+1) for day in range(7)]
-            get_weeks("【明日】", date_list)
+            get_weeks("【明日】")
 
         # 当日受付用
         time_list = []
@@ -290,23 +290,23 @@ class OrderUserView(LoginRequiredMixin, View):
         locale.setlocale(locale.LC_TIME, 'ja_JP.UTF-8')
 
         date_list = []
-        def get_weeks(start_day, box):
+        def get_weeks(start_day):
             for i in range(7):
                 if i == 0:
-                    box.append(days[i].strftime("%B%-d日(%a)") + start_day)
+                    date_list.append(days[i].strftime("%B%-d日(%a)") + start_day)
                 else:
-                    box.append(days[i].strftime("%B%-d日(%a)"))
+                    date_list.append(days[i].strftime("%B%-d日(%a)"))
 
         # 現在時刻～16:30
         if dt.time() < datetime.time(16, 31) and today_order == True:
             # 本日から1週間分を取得
             days = [dt + timedelta(days=day) for day in range(7)]
-            get_weeks("【本日】", date_list)
+            get_weeks("【本日】")
         # 現在時刻が16:31以降
         elif dt.time() >= datetime.time(16, 31) or today_order == False:
             # 翌日から1週間分を取得
             days = [dt + timedelta(days=day+1) for day in range(7)]
-            get_weeks("【明日】", date_list)
+            get_weeks("【明日】")
 
         # 当日受付用
         time_list = []
