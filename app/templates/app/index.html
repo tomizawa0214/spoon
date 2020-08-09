@@ -109,33 +109,23 @@
     // カスタム変数--vhの値をドキュメントのルートに設定
     document.documentElement.style.setProperty('--vh', `${vh}px`);
 
-    window.addEventListener('resize', () => {
-        let vh = window.innerHeight * 0.01;
-        document.documentElement.style.setProperty('--vh', `${vh}px`);
-    });
-
     // ウインドウ幅に応じてback-to-topの高さを変更
     const backToTop = document.querySelector('.back-to-top')
-    if ( window.innerWidth < 576 ) {
-        backToTop.style.bottom = '137px';
-    }
-    window.addEventListener('resize', event => {
-        if ( window.innerWidth < 576 ) {
-            backToTop.style.bottom = '137px';
-        } else {
-            backToTop.style.bottom = '15px';
-        }
-    });
 
-    // ウインドウ幅に応じてbody要素を変更
+    // ウインドウ幅に応じて変更
     if ( window.innerWidth < 576 ) {
         document.body.style.paddingBottom = '105px';
+        backToTop.style.bottom = '121px'
     }
     window.addEventListener('resize', event => {
+        let vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
         if ( window.innerWidth < 576 ) {
             document.body.style.paddingBottom = '105px';
+            backToTop.style.bottom = '121px';
         } else {
             document.body.style.paddingBottom = 0;
+            backToTop.style.bottom = '15px';
         }
     });
 
