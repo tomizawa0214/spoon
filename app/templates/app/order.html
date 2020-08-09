@@ -65,7 +65,7 @@
                         <input id="flavor_{{ flavor.id }}" type="checkbox" name="flavor" value="{{ flavor.title }} {{ flavor.price }}" onclick="flavorChk(this);">
                         <label for="flavor_{{ flavor.id }}">
                             <div class="d-flex d-lg-block">
-                                <img class="order__select--img" src="{{ flavor.image.url }}">
+                                <img class="order__select--img h-100" src="{{ flavor.image.url }}">
                                 <div class="d-flex flex-column justify-content-end text-left">
                                     <p class="order__select--item mb-1 ml-2">{{ flavor.title }}</p>
                                     <p class="order__select--item order__select--item--flavor order__select--price ml-2">&yen;{{ flavor.price }}</p>
@@ -89,7 +89,7 @@
                         <input id="option_{{ option.id }}" type="checkbox" name="option" value="{{ option.title }} {{ option.price }}" onclick="to_check()">
                         <label for="option_{{ option.id }}">
                             <div class="d-flex d-lg-block">
-                                <img class="order__select--img" src="{{ option.image.url }}">
+                                <img class="order__select--img h-100" src="{{ option.image.url }}">
                                 <div class="d-flex flex-column justify-content-end text-left">
                                     <p class="order__select--item mb-1 ml-2 mt-1 mt-lg-0">{{ option.title }}</p>
                                     <p class="order__select--item order__select--price ml-2">&yen;{{ option.price }}</p>
