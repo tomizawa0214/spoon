@@ -13,6 +13,7 @@
             color: #E8435F;
             &--ename {
                 @include E-font;
+                font-weight: bold;
                 margin-right: -5px;
             }
         }

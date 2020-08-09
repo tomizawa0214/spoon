@@ -24,6 +24,7 @@
         border: 3px double #E8435F;
         &--ename {
             @include E-font;
+            font-weight: bold;
         }
         &--detail {
             margin-bottom: 2px;
@@ -226,6 +227,7 @@
         transition: .3s;
         &--ename {
             @include E-font;
+            font-weight: bold;
         }
         &--detail {
             font-size: 10px;
