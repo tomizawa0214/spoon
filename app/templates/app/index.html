@@ -8,13 +8,13 @@
 {% block info %}
     {% if user.is_authenticated %}
         <a class="header__info d-flex justify-content-center align-items-center py-1" href="{% url 'order_guide' %}">
-            <span class="header__info--ename d-inline-block">spoon</span>のお持ち帰り予約
+            spoonのお持ち帰り予約
             <span class="header__info--detail align-self-end ml-3">詳しくはこちら</span>
             <i class="header__info--arrow fas fa-chevron-circle-right fa-fw" aria-hidden="true"></i>
         </a>
     {% else %}
         <a class="header__info d-flex justify-content-end align-items-center py-1" href="{% url 'order_guide' %}">
-            <span class="header__info--ename d-inline-block ml-2">spoon</span>のお持ち帰り予約
+            spoonのお持ち帰り予約
             <i class="header__info--arrow fas fa-chevron-circle-right fa-fw mr-2" aria-hidden="true"></i>
         </a>
     {% endif %}
@@ -93,7 +93,7 @@
 
 {% block footer_info %}
     <a class="spfooter__info d-flex justify-content-end align-items-center p-2" href="{% url 'order_guide' %}">
-        <span class="spfooter__info--ename d-inline-block">spoon</span>のお持ち帰り予約
+        spoonのお持ち帰り予約
         <span class="spfooter__info--detail align-self-end ml-2 mr-1">詳しくはこちら</span>
         <i class="spfooter__info--arrow fas fa-chevron-circle-right fa-fw" aria-hidden="true"></i>
     </a>

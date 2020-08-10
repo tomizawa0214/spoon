@@ -22,10 +22,6 @@
         line-height: 1;
         transition: .3s;
         border: 3px double #E8435F;
-        &--ename {
-            @include E-font;
-            font-weight: bold;
-        }
         &--detail {
             margin-bottom: 2px;
             font-size: 10px;
@@ -214,10 +210,6 @@
         letter-spacing: 0;
         background: #E8435F;
         transition: .3s;
-        &--ename {
-            @include E-font;
-            font-weight: bold;
-        }
         &--detail {
             font-size: 10px;
             letter-spacing: 0;

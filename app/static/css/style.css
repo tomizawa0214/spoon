@@ -332,11 +332,6 @@ main {
   border: 3px double #E8435F;
 }
 
-.header__info--ename {
-  font-family: "Montserrat", "Roboto", "游ゴシック体", "Yu Gothic", YuGothic, "游ゴシック", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", MeiryoKe_PGothic, "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
-  font-weight: bold;
-}
-
 .header__info--detail {
   margin-bottom: 2px;
   font-size: 10px;
@@ -553,11 +548,6 @@ main {
   background: #E8435F;
   -webkit-transition: .3s;
   transition: .3s;
-}
-
-.spfooter__info--ename {
-  font-family: "Montserrat", "Roboto", "游ゴシック体", "Yu Gothic", YuGothic, "游ゴシック", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", MeiryoKe_PGothic, "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
-  font-weight: bold;
 }
 
 .spfooter__info--detail {
@@ -1747,15 +1737,21 @@ main {
   margin: 0 5px 0 0;
 }
 
-.history__img {
-  max-height: 100px;
+.history__size-img {
+  max-height: 150px;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+.history__flavor-img {
+  max-height: 95px;
   -o-object-fit: contain;
      object-fit: contain;
 }
 
 .history__option-img {
-  width: 60px;
-  height: 60px;
+  width: 70px;
+  height: 70px;
 }
 
 .history__table {
@@ -1825,9 +1821,11 @@ main {
   .history__table td {
     margin-left: 5px;
   }
-  .history__img {
-    width: 70px;
-    height: 70px;
+  .history__size-img {
+    max-height: 95px;
+  }
+  .history__flavor-img {
+    max-height: 65px;
   }
   .history__option-img {
     width: 50px;
@@ -1887,10 +1885,6 @@ main {
 }
 
 @media screen and (min-width: 576px) and (max-width: 767px) {
-  .history__img {
-    width: 95px;
-    height: 95px;
-  }
   .history__table {
     line-height: 22px;
   }
@@ -2019,12 +2013,6 @@ main {
   color: #E8435F;
 }
 
-.guide__top--title--ename {
-  font-family: "Montserrat", "Roboto", "游ゴシック体", "Yu Gothic", YuGothic, "游ゴシック", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", MeiryoKe_PGothic, "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
-  font-weight: bold;
-  margin-right: -5px;
-}
-
 .guide__top--content {
   font-size: 17px;
   line-height: 1.7;
@@ -2105,11 +2093,6 @@ main {
   font-size: 14px;
   line-height: 22px;
   letter-spacing: .5;
-}
-
-.guide__exuse--ul--msg--ename {
-  font-family: "Montserrat", "Roboto", "游ゴシック体", "Yu Gothic", YuGothic, "游ゴシック", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", MeiryoKe_PGothic, "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
-  margin-right: -5px;
 }
 
 .guide__info {

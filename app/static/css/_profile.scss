@@ -57,13 +57,17 @@
             width: 130px;
         }
     }
-    &__img {
-        max-height: 100px;
+    &__size-img {
+        max-height: 150px;
+        object-fit: contain;
+    }
+    &__flavor-img {
+        max-height: 95px;
         object-fit: contain;
     }
     &__option-img {
-        width: 60px;
-        height: 60px;
+        width: 70px;
+        height: 70px;
     }
     &__table {
         table-layout: fixed;
@@ -113,9 +117,11 @@
                 margin-left: 5px;
             }
         }
-        &__img {
-            width: 70px;
-            height: 70px;
+        &__size-img {
+            max-height: 95px;
+        }
+        &__flavor-img {
+            max-height: 65px;
         }
         &__option-img {
             width: 50px;
@@ -180,10 +186,6 @@
 
 @media screen and ( min-width: 576px ) and ( max-width: 767px ) {
     .history {
-        &__img {
-            width: 95px;
-            height: 95px;
-        }
         &__table {
             line-height: 22px;
             tr:not(:last-of-type) {
