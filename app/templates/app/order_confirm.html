@@ -11,9 +11,6 @@
     <span>お持ち帰り予約</span>
 </h1>
 
-<div class="mx-auto text-center">
-    <p id="user_error" class="d-none"></p>
-</div>
 <div class="row justify-content-center">
     <div class="col-lg-7">
         <table class="order-ck__table mx-auto">
@@ -215,9 +212,44 @@
         const receipt = document.getElementById('receipt')
         if ( name.textContent == '' ||  furigana.textContent == '' || email.textContent == '' || tel.textContent == '' || receipt.textContent == '' ) {
             e.preventDefault(); // ページ遷移をキャンセル
-            const userError = document.getElementById('user_error');
-            userError.className = 'error-msg d-inline-block text-left';
-            userError.textContent = '※ご注文者様の情報を入力してください。';
+            const element  = Object.assign(document.createElement('div'), { className: 'order__reorder sticky-top rounded-0 alert alert-warning alert-dismissible fade show m-0' });
+            const element2  = Object.assign(document.createElement('strong'), { innerText: 'ご注文者様の情報を入力してください。' });
+            const element3  = Object.assign(document.createElement('button'), { className: 'order__reorder--btn close', type: 'button' });
+            const element4  = Object.assign(document.createElement('span'), { className: 'order__reorder--close', innerHTML: '&times;' });
+            // 階層に合わせて要素をまとめる
+            element3.appendChild(element4);
+            element.appendChild(element2);
+            element.appendChild(element3);
+            // 最後に追加
+            document.body.insertBefore(element, document.body.firstChild);
+
+            let order_alert = document.querySelector('.order__reorder');
+            order_alert.setAttribute('role', 'alert');
+            let alert_btn = document.querySelector('.order__reorder--btn');
+            alert_btn.setAttribute('data-dismiss', 'alert');
+            alert_btn.setAttribute('aria-label', 'Close');
+            let alert_close = document.querySelector('.order__reorder--close');
+            alert_close.setAttribute('aria-hidden', 'true');
+        } else if ( totalPrice.textContent == '\xA50' ) {
+            e.preventDefault(); // ページ遷移をキャンセル
+            const element  = Object.assign(document.createElement('div'), { className: 'order__reorder sticky-top rounded-0 alert alert-warning alert-dismissible fade show m-0' });
+            const element2  = Object.assign(document.createElement('strong'), { innerText: 'カートに商品がありません。' });
+            const element3  = Object.assign(document.createElement('button'), { className: 'order__reorder--btn close', type: 'button' });
+            const element4  = Object.assign(document.createElement('span'), { className: 'order__reorder--close', innerHTML: '&times;' });
+            // 階層に合わせて要素をまとめる
+            element3.appendChild(element4);
+            element.appendChild(element2);
+            element.appendChild(element3);
+            // 最後に追加
+            document.body.insertBefore(element, document.body.firstChild);
+
+            let order_alert = document.querySelector('.order__reorder');
+            order_alert.setAttribute('role', 'alert');
+            let alert_btn = document.querySelector('.order__reorder--btn');
+            alert_btn.setAttribute('data-dismiss', 'alert');
+            alert_btn.setAttribute('aria-label', 'Close');
+            let alert_close = document.querySelector('.order__reorder--close');
+            alert_close.setAttribute('aria-hidden', 'true');
         } else {
             const url = '{% url "order_thanks" %}';
 
