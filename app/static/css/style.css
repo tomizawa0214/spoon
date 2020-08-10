@@ -460,7 +460,8 @@ main {
 
 .spnav__menu {
   position: fixed;
-  height: calc(100% - 128px);
+  height: calc(100vh - 128px);
+  height: calc(var(--vh, 1vh)*100 - 128px);
   width: 85%;
   max-width: 300px;
   z-index: 9999;

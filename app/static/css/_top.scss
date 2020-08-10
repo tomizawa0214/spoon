@@ -99,7 +99,6 @@
         }
         &__item {
             &--image1, &--image2, &--image3 {
-                // margin-top: 60px;
                 height: calc(100vh - 165px);
                 height: calc(var(--vh, 1vh)*100 - 165px);
             }
