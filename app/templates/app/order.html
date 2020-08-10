@@ -202,11 +202,10 @@
     'use strict'
 
     // キャッシュの無効化
-    window.onpageshow = function(event) {
-        if (event.persisted) {
-            window.location.reload();
-        }
-    };
+    history.replaceState(null, document.getElementsByTagName('title')[0].innerHTML, null);
+    window.addEventListener('popstate', function(e) {
+        window.location.reload();
+    });
 
     animation('.order__select');
     // スクロールで発動
