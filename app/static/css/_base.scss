@@ -81,6 +81,11 @@ body {
     color: #333;
 }
 
+.btn:active {
+    top: 3px;
+    box-shadow: none;
+}
+
 main {
     margin: 50px 0 80px;
 }
