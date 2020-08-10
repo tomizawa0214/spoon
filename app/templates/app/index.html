@@ -116,7 +116,7 @@
     const bg = document.querySelector('.spnav__bg');
     const spMenu = document.querySelector('.spnav__menu');
     if ( window.innerWidth < 576 ) {
-        document.body.style.paddingBottom = '105px';
+        document.body.style.marginBottom = '105px';
         backToTop.style.bottom = '121px'
         // bg.style.height = 'calc(100vh - 165px)';
         // spMenu.style.height = 'calc(100vh - 165px)';
@@ -126,13 +126,13 @@
         let vh = window.innerHeight * 0.01;
         document.documentElement.style.setProperty('--vh', `${vh}px`);
         if ( window.innerWidth < 576 ) {
-            document.body.style.paddingBottom = '105px';
+            document.body.style.marginBottom = '105px';
             backToTop.style.bottom = '121px';
             // bg.style.height = 'calc(100vh - 165px)';
             // spMenu.style.height = 'calc(100vh - 165px)';
             // spMenu.style.height = 'calc(var(--vh, 1vh)*100 - 165px)';
         } else {
-            document.body.style.paddingBottom = 0;
+            document.body.style.marginBottom = 0;
             backToTop.style.bottom = '15px';
         }
     });

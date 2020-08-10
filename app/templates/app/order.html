@@ -215,14 +215,14 @@
 
     // ウインドウ幅に応じてbody要素を変更
     if ( window.innerWidth < 576 ) {
-        document.body.style.paddingBottom = '132px';
+        document.body.style.marginBottom = '132px';
     }
 
     window.addEventListener('resize', event => {
         if ( window.innerWidth < 576 ) {
-            document.body.style.paddingBottom = '132px';
+            document.body.style.marginBottom = '132px';
         } else {
-            document.body.style.paddingBottom = 0;
+            document.body.style.marginBottom = 0;
         }
     });
 
