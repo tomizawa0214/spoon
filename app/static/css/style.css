@@ -460,10 +460,10 @@ main {
 
 .spnav__menu {
   position: fixed;
-  height: 100vh;
+  height: calc(100vh - 128px);
   width: 85%;
   max-width: 300px;
-  z-index: 10;
+  z-index: 9999;
   right: 0;
   background: #FDFDFD;
   -webkit-transform: translateX(100%);
@@ -532,7 +532,6 @@ main {
 
 .scroll-ng {
   position: fixed;
-  width: 100%;
   top: 0;
 }
 
