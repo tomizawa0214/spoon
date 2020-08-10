@@ -465,6 +465,7 @@ main {
   width: 85%;
   max-width: 300px;
   z-index: 9999;
+  top: 60px;
   right: 0;
   background: #FDFDFD;
   -webkit-transform: translateX(100%);
