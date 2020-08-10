@@ -1154,11 +1154,7 @@ main {
 }
 
 .order-ck__coupon {
-  background-color: #FCFCFC;
-  background-image: radial-gradient(#EEE 10%, transparent 20%), radial-gradient(#EEE 10%, transparent 20%);
-  background-position: 0 0, 10px 10px;
-  background-size: 20px 20px;
-  border-top: 3px double rgba(0, 0, 0, 0.125);
+  background: #FDF5F7;
 }
 
 .order-ck__coupon--content {
