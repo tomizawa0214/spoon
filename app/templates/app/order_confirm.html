@@ -54,7 +54,7 @@
                     <div class="mb-3">
                 {% endif %}
                     <div class="d-flex justify-content-between mx-2">
-                        <strong>{{ cart.size_title }}</strong>
+                        <strong id="size-title">{{ cart.size_title }}</strong>
                         <div>
                             <strong class="order__select--cart--price m-0">&yen;{{ cart.size_price }}</strong>
                         </div>
@@ -230,7 +230,7 @@
             alert_btn.setAttribute('aria-label', 'Close');
             let alert_close = document.querySelector('.order__reorder--close');
             alert_close.setAttribute('aria-hidden', 'true');
-        } else if ( totalPrice.textContent == '\xA50' ) {
+        } else if ( document.getElementById('size-title').textContent == '' ) {
             e.preventDefault(); // ページ遷移をキャンセル
             const element  = Object.assign(document.createElement('div'), { className: 'order__reorder sticky-top rounded-0 alert alert-warning alert-dismissible fade show m-0' });
             const element2  = Object.assign(document.createElement('strong'), { innerText: 'カートに商品がありません。' });
