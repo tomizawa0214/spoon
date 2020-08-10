@@ -72,10 +72,12 @@
                     <span class="history__header--wrap--orderday mr-3 mr-md-0">受取日時</span>
                     <span>{{ order.receipt }}</span>
                 </div>
-                <div class="history__header--wrap d-flex flex-md-column mr-md-4 mr-lg-5">
-                    <span class="history__header--wrap--orderday mr-3 mr-md-0">クーポン</span>
-                    <span class="history__header--wrap--coupon">-&yen;{{ order.coupon_price }}</span>
-                </div>
+                {% if order.coupon_price != 0 %}
+                    <div class="history__header--wrap d-flex flex-md-column mr-md-4 mr-lg-5">
+                        <span class="history__header--wrap--orderday mr-3 mr-md-0">クーポン</span>
+                        <span class="history__header--wrap--coupon">-&yen;{{ order.coupon_price }}</span>
+                    </div>
+                {% endif %}
                 <div class="history__header--wrap d-flex flex-md-column">
                     <span class="history__header--wrap--orderday mr-3 mr-md-0 mr-md-0">合計　　</span>
                     <span>&yen;{{ order.get_total | intcomma }}</span>
