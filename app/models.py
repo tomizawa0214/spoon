@@ -13,6 +13,10 @@ class SizeItem(models.Model):
     def __str__(self):
         return self.title
 
+    class Meta:
+        verbose_name = '【STEP1】サイズ'
+        verbose_name_plural = '【STEP1】サイズ'
+
 
 class FlavorItem(models.Model):
     entitle = models.CharField('英語名称', max_length=100)
@@ -31,6 +35,10 @@ class FlavorItem(models.Model):
     def __str__(self):
         return self.title
 
+    class Meta:
+        verbose_name = '【STEP2】フレーバー'
+        verbose_name_plural = '【STEP2】フレーバー'
+
 
 class OptionItem(models.Model):
     title = models.CharField('名称', max_length=100)
@@ -39,6 +47,10 @@ class OptionItem(models.Model):
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        verbose_name = '【STEP3】オプション'
+        verbose_name_plural = '【STEP3】オプション'
 
 
 class Cart(models.Model):
@@ -72,6 +84,10 @@ class Cart(models.Model):
     def __str__(self):
         return f'{self.user.name}　{self.size_title}'
 
+    class Meta:
+        verbose_name = 'カート'
+        verbose_name_plural = 'カート'
+
 
 class Order(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -80,14 +96,28 @@ class Order(models.Model):
     furigana = models.CharField('フリガナ', max_length=30)
     email = models.EmailField('メールアドレス', max_length=256)
     tel = models.CharField('電話番号', max_length=13)
-    receipt = models.CharField('受取日時', max_length=30)
+    receipt = models.DateTimeField('受取日時', default=timezone.now)
     created = models.DateTimeField('注文日時', default=timezone.now)
     order_day = models.IntegerField('注文受取日')
     count = models.IntegerField('注文番号', default=0)
     coupon_use = models.BooleanField('クーポン利用', default=False)
     coupon_price = models.IntegerField('クーポン金額', default=0)
-    coupon_day = models.DateTimeField('クーポン使用日', default=timezone.now)
+    coupon_day = models.DateTimeField('クーポン利用日', default=timezone.now)
     flag = models.BooleanField(default=False)
+    standby = models.BooleanField(
+        ('準備'),
+        default=False,
+        help_text=(
+            '商品の準備が完了したら選択 '
+        ),
+    )
+    complete = models.BooleanField(
+        ('受け取り'),
+        default=False,
+        help_text=(
+            '受け取りが完了したら選択 '
+        ),
+    )
 
     def get_total(self):
         total = 0
@@ -99,20 +129,28 @@ class Order(models.Model):
     def __str__(self):
         return f'{self.name}　{self.receipt}'
 
+    class Meta:
+        verbose_name = '注文一覧'
+        verbose_name_plural = '注文一覧'
+
 
 class TodayOrder(models.Model):
     name = models.CharField(max_length=30)
     is_active = models.BooleanField(
-            ('当日注文'),
-            default=True,
-            help_text=(
-                '当日注文に対応するかを指定します。 '
-                '選択を解除すると翌日以降の注文になります。'
-            ),
-        )
+        ('当日注文'),
+        default=True,
+        help_text=(
+            '当日注文に対応するかを指定します。 '
+            '選択を解除すると翌日以降の注文になります。'
+        ),
+    )
     
     def __str__(self):
         return self.name
+
+    class Meta:
+        verbose_name = '当日注文の可否'
+        verbose_name_plural = '当日注文の可否'
 
 
 class WhatsNew(models.Model):
@@ -124,6 +162,10 @@ class WhatsNew(models.Model):
             '※45文字以内で入力してください。'
         ),
     )
+
+    class Meta:
+        verbose_name = 'お知らせ'
+        verbose_name_plural = 'お知らせ'
 
     def __str__(self):
         return self.comment
@@ -151,3 +193,7 @@ class PickUp(models.Model):
 
     def __str__(self):
         return self.j_name
+
+    class Meta:
+        verbose_name = 'おすすめ商品'
+        verbose_name_plural = 'おすすめ商品'

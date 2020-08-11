@@ -8,6 +8,7 @@ from django.conf import settings
 from django.core.mail import BadHeaderError, EmailMessage
 from django.http import JsonResponse, HttpResponse
 from django.template.loader import render_to_string
+from django.utils.timezone import make_aware
 from datetime import datetime, timedelta
 from datetime import datetime, date, timedelta
 import datetime
@@ -34,13 +35,11 @@ class OrderThanksView(LoginRequiredMixin, View):
             order.email = request.POST.get('email')
             order.tel = request.POST.get('tel')
             receipt = request.POST.get('receipt')
-            order.receipt = receipt
+            receipt_date = make_aware(datetime.datetime.strptime(receipt, '%Y-%m-%d %H:%M'))
+            order.receipt = receipt_date
 
             # 注文日を登録
-            if receipt[-12] == '月':
-                order_day = int(receipt[-11])
-            else:
-                order_day = int(receipt[-12:-10])
+            order_day = receipt_date.day
             order.order_day = order_day
 
             # クーポン使用有無を登録

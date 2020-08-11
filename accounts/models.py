@@ -63,8 +63,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = []
 
     class Meta:
-        verbose_name = ('user')
-        verbose_name_plural = ('users')
+        verbose_name = ('会員一覧')
+        verbose_name_plural = ('会員一覧')
 
     def clean(self):
         super().clean()

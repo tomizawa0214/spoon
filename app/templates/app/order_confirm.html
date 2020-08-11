@@ -260,15 +260,15 @@
                 var coupon = 0;
             }
 
-            // 日付から【本日】or【翌日】を削除
-            let date = '{{ date }}'.replace( /【本日】/g, '').replace( /【明日】/g, '');
+            // 日付を変換
+            let date = '{{ date }}'.replace(/【本日】/g, '').replace(/【明日】/g, '').replace(/月/g, '/').replace(/日/g, '').slice(0, -3).replace(/\//g, '-');
             // 12月で1月の日付を選択したら翌年を追加
             if ( new Date().getMonth() + 1 == 12 && '{{ date }}'.slice(0, 1) == 1 ) {
                 var year = new Date().getFullYear() + 1;
             } else {
                 var year = new Date().getFullYear();
             }
-            let receipt = year + '年' + date + ' ' + '{{ time }}'
+            let receipt = year + '-' + date + ' ' + '{{ time }}'
 
             // URLのクエリパラメータを管理
             const body = new URLSearchParams();
