@@ -13,14 +13,17 @@
         border-radius: 0;
         @include fadeIn;
         transform: translate(-50%, -50%);
-        overflow-y: scroll;
-        &--btn {
-            @include button;
-        }
-        &--close {
+        &--wrap {
+            height: 100%;
+            overflow-y: scroll;
             &--btn {
-                &:hover {
-                    color: #E8435F !important;
+                @include button;
+            }
+            &--close {
+                &--btn {
+                    &:hover {
+                        color: #E8435F !important;
+                    }
                 }
             }
         }

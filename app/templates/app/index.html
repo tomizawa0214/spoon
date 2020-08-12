@@ -142,28 +142,30 @@
     // クーポン発行有無
     if ( '{{ coupon }}' == 'get' ) {
         const element  = Object.assign(document.createElement('div'), { className: 'top__coupon alert alert-dismissible fade show p-0 m-0'});
+        const element1  = Object.assign(document.createElement('div'), { className: 'top__coupon--wrap'});
         const element2  = Object.assign(document.createElement('div'), { className: 'd-flex flex-column justify-content-center align-items-center'});
         const element3  = Object.assign(document.createElement('img'), { src: "{% static 'img/coupon.svg' %}" });
-        const element4 = Object.assign(document.createElement('a'), { href: "{% url 'order' %}", className: 'top__coupon--btn btn rounded-pill my-4', textContent: 'お持ち帰り予約に進む'});
-        const element5  = Object.assign(document.createElement('button'), { className: 'top__coupon--close close p-1 p-md-2', type: 'button'});
-        const element6  = Object.assign(document.createElement('span'), { className: 'top__coupon--close--btn', innerHTML: '&times;'});
+        const element4 = Object.assign(document.createElement('a'), { href: "{% url 'order' %}", className: 'top__coupon--wrap--btn btn rounded-pill my-4', textContent: 'お持ち帰り予約に進む'});
+        const element5  = Object.assign(document.createElement('button'), { className: 'top__coupon--wrap--close close p-1 p-md-2', type: 'button'});
+        const element6  = Object.assign(document.createElement('span'), { className: 'top__coupon--wrap--close--btn', innerHTML: '&times;'});
         const element7  = Object.assign(document.createElement('div'), { className: 'top__bg'});
         // 階層に合わせて要素をまとめる
         element2.appendChild(element3);
         element2.appendChild(element4);
         element5.appendChild(element6);
-        element.appendChild(element2);
-        element.appendChild(element5);
+        element1.appendChild(element2);
+        element1.appendChild(element5);
+        element.appendChild(element1);
         // 最後に追加
         document.body.insertBefore(element, document.body.firstChild);
         document.body.insertBefore(element7, document.body.firstChild);
 
         let couponAlert = document.querySelector('.top__coupon');
         couponAlert.setAttribute('role', 'alert');
-        let couponBtn = document.querySelector('.top__coupon--close');
+        let couponBtn = document.querySelector('.top__coupon--wrap--close');
         couponBtn.setAttribute('data-dismiss', 'alert');
         couponBtn.setAttribute('aria-label', 'Close');
-        let couponClose = document.querySelector('.top__coupon--close--btn');
+        let couponClose = document.querySelector('.top__coupon--wrap--close--btn');
         couponClose.setAttribute('aria-hidden', 'true');
 
         // フェードイン

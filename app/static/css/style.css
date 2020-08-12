@@ -639,10 +639,14 @@ main {
   transition: 1s;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
+}
+
+.top__coupon--wrap {
+  height: 100%;
   overflow-y: scroll;
 }
 
-.top__coupon--btn {
+.top__coupon--wrap--btn {
   position: relative;
   width: 200px;
   margin: 50px 0 0px;
@@ -656,16 +660,16 @@ main {
   transition: .3s;
 }
 
-.top__coupon--btn:hover {
+.top__coupon--wrap--btn:hover {
   color: #FDFDFD;
   opacity: .7;
 }
 
-.top__coupon--btn i {
+.top__coupon--wrap--btn i {
   margin: 0 5px 0 0;
 }
 
-.top__coupon--close--btn:hover {
+.top__coupon--wrap--close--btn:hover {
   color: #E8435F !important;
 }
 
