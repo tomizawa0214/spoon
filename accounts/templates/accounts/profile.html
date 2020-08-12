@@ -70,7 +70,7 @@
                 </div>
                 <div class="history__header--wrap d-flex flex-md-column mr-md-4 mr-lg-5">
                     <span class="history__header--wrap--orderday mr-3 mr-md-0">受取日時</span>
-                    <span>{{ order.receipt }}</span>
+                    <span>{{ order.receipt | date:"Y年n月j日(l) G:i" | cut:"曜日" }}</span>
                 </div>
                 {% if order.coupon_price != 0 %}
                     <div class="history__header--wrap d-flex flex-md-column mr-md-4 mr-lg-5">
