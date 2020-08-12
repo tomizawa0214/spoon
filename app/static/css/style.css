@@ -468,8 +468,8 @@ main {
   position: fixed;
   width: 85%;
   max-width: 300px;
-  height: calc(100% - 128px);
-  z-index: 9999;
+  height: calc(var(--vh, 1vh)*100 - 128px);
+  z-index: 9998;
   top: 60px;
   right: 0;
   bottom: 0;
@@ -478,6 +478,7 @@ main {
           transform: translateX(100%);
   -webkit-transition: .5s ease-out;
   transition: .5s ease-out;
+  overflow-y: scroll;
 }
 
 .spnav__menu::-webkit-scrollbar {
