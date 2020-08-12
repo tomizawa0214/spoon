@@ -124,8 +124,6 @@
         // spMenu.style.height = 'calc(var(--vh, 1vh)*100 - 165px)';
     }
     window.addEventListener('resize', event => {
-        let vh = window.innerHeight * 0.01;
-        document.documentElement.style.setProperty('--vh', `${vh}px`);
         if ( window.innerWidth < 576 ) {
             document.body.style.marginBottom = '105px';
             backToTop.style.bottom = '121px';
@@ -172,11 +170,14 @@
             couponAlert.style.top = '50%';
         }
         setTimeout(fadeIn, 300);
-
+        
+        // クーポン表示されてる間は背景固定
+        document.body.classList.toggle('scroll-ng');
 
         //フェードアウト & 削除
         const bg = document.querySelector('.top__bg');
         couponBtn.addEventListener('click', () => {
+            document.body.classList.toggle('scroll-ng');
             couponAlert.style.opacity = 0;
             couponAlert.style.transition = '.5s';
             bg.style.opacity = 0;
@@ -184,6 +185,7 @@
             bg.remove();
         });
         bg.addEventListener('click', () => {
+            document.body.classList.toggle('scroll-ng');
             couponAlert.style.opacity = 0;
             couponAlert.style.transition = '.5s';
             bg.style.opacity = 0;
