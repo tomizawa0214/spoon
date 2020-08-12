@@ -126,6 +126,10 @@ class Order(models.Model):
         total -= self.coupon_price
         return total
 
+    def order_number(self):
+        return str(self.order_day) + str(self.count)
+    order_number.short_description = '注文番号'
+
     def __str__(self):
         return f'{self.name}　{self.receipt}'
 
