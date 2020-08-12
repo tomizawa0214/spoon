@@ -189,9 +189,9 @@ class OrderConfirmView(LoginRequiredMixin, View):
         def get_weeks(start_day):
             for i in range(7):
                 if i == 0:
-                    date_list.append(days[i].strftime("%B%-d日(%a)") + start_day)
+                    date_list.append(days[i].strftime('%B%-d日(%a)') + start_day)
                 else:
-                    date_list.append(days[i].strftime("%B%-d日(%a)"))
+                    date_list.append(days[i].strftime('%B%-d日(%a)'))
 
         # 現在時刻～16:30
         if dt.time() < datetime.time(16, 31) and today_order == True:
@@ -292,9 +292,9 @@ class OrderUserView(LoginRequiredMixin, View):
         def get_weeks(start_day):
             for i in range(7):
                 if i == 0:
-                    date_list.append(days[i].strftime("%B%-d日(%a)") + start_day)
+                    date_list.append(days[i].strftime('%B%-d日(%a)') + start_day)
                 else:
-                    date_list.append(days[i].strftime("%B%-d日(%a)"))
+                    date_list.append(days[i].strftime('%B%-d日(%a)'))
 
         # 現在時刻～16:30
         if dt.time() < datetime.time(16, 31) and today_order == True:

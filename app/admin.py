@@ -39,8 +39,8 @@ class CompleteListFilter(admin.SimpleListFilter):
             return queryset.all()
 
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('name', 'furigana', 'order_number', 'receipt', 'standby', 'complete')
-    ordering = ('-receipt',)
+    list_display = ('name', 'furigana', 'order_number', 'receipt_datetime', 'standby', 'complete')
+    ordering = ('receipt',)
     list_filter = (StandbyListFilter, CompleteListFilter)
     list_editable = ('standby', 'complete')
 

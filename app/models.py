@@ -3,6 +3,8 @@ from django.db import models
 from django.utils import timezone
 from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFill
+import locale
+import pytz
 
 
 class SizeItem(models.Model):
@@ -129,6 +131,11 @@ class Order(models.Model):
     def order_number(self):
         return str(self.order_day) + str(self.count)
     order_number.short_description = '注文番号'
+
+    def receipt_datetime(self):
+        locale.setlocale(locale.LC_TIME, 'ja_JP.UTF-8')
+        return self.receipt.astimezone(pytz.timezone('Asia/Tokyo')).strftime('%B%-d日(%a)　%H:%M')
+    receipt_datetime.short_description = '受取日時'
 
     def __str__(self):
         return f'{self.name}　{self.receipt}'
