@@ -337,7 +337,10 @@ class ProfileView(LoginRequiredMixin, View):
                 if FlavorItem.objects.filter(title=same_cart.flavor_title, is_active=True).exists():
                     flavoritem = FlavorItem.objects.get(title=same_cart.flavor_title)
                     cart.flavor_title = flavoritem.title
-                    cart.flavor_price = flavoritem.price
+                    if sizeitem.title == 'シングルサイズ':
+                        cart.flavor_price = flavoritem.price*2
+                    else:
+                        cart.flavor_price = flavoritem.price
                 else:
                     error_flag.append(same_cart.flavor_title)
 
