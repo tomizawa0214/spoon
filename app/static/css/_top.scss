@@ -16,6 +16,10 @@
         &--wrap {
             height: 100%;
             overflow-y: scroll;
+            &::-webkit-scrollbar {
+                display: none;
+                -webkit-appearance: none;
+            }
             &--btn {
                 @include button;
             }
@@ -124,10 +128,12 @@
                 width: 100%;
                 object-fit: contain;
             }
-            &--btn {
-                margin: 35px 0 !important;
-                width: 250px;
-                font-size: 18px;
+            &--wrap {
+                &--btn {
+                    margin: 35px 0 !important;
+                    width: 250px;
+                    font-size: 18px;
+                }
             }
         }
     }

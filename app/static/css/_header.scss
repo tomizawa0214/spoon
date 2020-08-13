@@ -142,7 +142,6 @@
         background: #FDFDFD;
         transform: translateX(100%);
         transition: .5s ease-out;
-        overflow-y: scroll;
         &::-webkit-scrollbar {
             display: none;
             -webkit-appearance: none;

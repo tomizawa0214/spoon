@@ -478,7 +478,6 @@ main {
           transform: translateX(100%);
   -webkit-transition: .5s ease-out;
   transition: .5s ease-out;
-  overflow-y: scroll;
 }
 
 .spnav__menu::-webkit-scrollbar {
@@ -646,6 +645,11 @@ main {
   overflow-y: scroll;
 }
 
+.top__coupon--wrap::-webkit-scrollbar {
+  display: none;
+  -webkit-appearance: none;
+}
+
 .top__coupon--wrap--btn {
   position: relative;
   width: 200px;
@@ -782,7 +786,7 @@ main {
     -o-object-fit: contain;
        object-fit: contain;
   }
-  .top__coupon--btn {
+  .top__coupon--wrap--btn {
     margin: 35px 0 !important;
     width: 250px;
     font-size: 18px;
