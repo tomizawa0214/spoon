@@ -63,8 +63,12 @@ class OptionItemAdmin(admin.ModelAdmin):
     list_display = ('title', 'price')
 
 
+class WhatsNewAdmin(admin.ModelAdmin):
+    list_display = ('date', 'comment')
+
+
 admin.site.register(PickUp)
-admin.site.register(WhatsNew)
+admin.site.register(WhatsNew, WhatsNewAdmin)
 admin.site.register(TodayOrder, TodayOrderAdmin)
 admin.site.register(Order, OrderAdmin)
 admin.site.register(Cart)
