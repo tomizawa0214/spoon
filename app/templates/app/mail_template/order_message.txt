@@ -15,7 +15,7 @@ spoonをご利用いただき、ありがとうございます。
 ●【お名前】{{ order_latest.name }} 様
 ●【メールアドレス】{{ order_latest.email }}
 ●【電話番号】{{ order_latest.tel }}
-●【受取日時】{{ order_latest.receipt }}
+●【受取日時】{{ order_latest.receipt|date:"Y年n月j日(l) G:i"|cut:"曜日" }}
 ●【ご注文日時】{{ order_latest.created|date:"Y年n月j日(l) G:i"|cut:"曜日" }}
 -----------------------------------------
 {% for cart in order_latest.cart.all %}●【サイズ】{{ cart.size_title }}
