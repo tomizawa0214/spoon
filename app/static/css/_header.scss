@@ -142,29 +142,33 @@
         background: #FDFDFD;
         transform: translateX(100%);
         transition: .5s ease-out;
-        &::-webkit-scrollbar {
-            display: none;
-            -webkit-appearance: none;
-        }
-        &--link {
-            text-decoration: none;
-            color: #333;
-            font-weight: 600;
-            transition: .3s;
-            &--e {
-                @include E-font;
-                letter-spacing: 3px;
+        &--wrap {
+            height: 100%;
+            overflow-y: scroll;
+            &::-webkit-scrollbar {
+                display: none;
+                -webkit-appearance: none;
             }
-            &--j {
-                vertical-align: 2px;
-                letter-spacing: 1px;
-                font-size: 12px;
-            }
-            &:hover {
-                background: rgba(0, 0, 0, .1);
+            &--link {
                 text-decoration: none;
-                color: inherit;
-                opacity: .5;
+                color: #333;
+                font-weight: 600;
+                transition: .3s;
+                &--e {
+                    @include E-font;
+                    letter-spacing: 3px;
+                }
+                &--j {
+                    vertical-align: 2px;
+                    letter-spacing: 1px;
+                    font-size: 12px;
+                }
+                &:hover {
+                    background: rgba(0, 0, 0, .1);
+                    text-decoration: none;
+                    color: inherit;
+                    opacity: .5;
+                }
             }
         }
     }

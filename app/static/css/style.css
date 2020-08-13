@@ -480,12 +480,17 @@ main {
   transition: .5s ease-out;
 }
 
-.spnav__menu::-webkit-scrollbar {
+.spnav__menu--wrap {
+  height: 100%;
+  overflow-y: scroll;
+}
+
+.spnav__menu--wrap::-webkit-scrollbar {
   display: none;
   -webkit-appearance: none;
 }
 
-.spnav__menu--link {
+.spnav__menu--wrap--link {
   text-decoration: none;
   color: #333;
   font-weight: 600;
@@ -493,18 +498,18 @@ main {
   transition: .3s;
 }
 
-.spnav__menu--link--e {
+.spnav__menu--wrap--link--e {
   font-family: "Montserrat", "Roboto", "游ゴシック体", "Yu Gothic", YuGothic, "游ゴシック", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", MeiryoKe_PGothic, "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
   letter-spacing: 3px;
 }
 
-.spnav__menu--link--j {
+.spnav__menu--wrap--link--j {
   vertical-align: 2px;
   letter-spacing: 1px;
   font-size: 12px;
 }
 
-.spnav__menu--link:hover {
+.spnav__menu--wrap--link:hover {
   background: rgba(0, 0, 0, 0.1);
   text-decoration: none;
   color: inherit;
