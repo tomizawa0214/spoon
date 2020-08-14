@@ -1567,6 +1567,14 @@ main {
   overflow-y: scroll;
 }
 
+.signup__terms--ul {
+  list-style-type: decimal;
+}
+
+.signup__terms--ul--ul {
+  list-style-type: lower-alpha;
+}
+
 .signup__btn {
   position: relative;
   width: 200px;
