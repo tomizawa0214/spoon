@@ -55,8 +55,9 @@ class SizeItemAdmin(admin.ModelAdmin):
 
 
 class FlavorItemAdmin(admin.ModelAdmin):
-    list_display = ('title', 'price', 'is_active')
-    list_editable = ('is_active',)
+    list_display = ('title', 'price', 'is_active', 'sort')
+    list_editable = ('is_active', 'sort')
+    ordering = ('sort',)
 
 
 class OptionItemAdmin(admin.ModelAdmin):

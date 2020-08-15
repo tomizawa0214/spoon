@@ -368,7 +368,7 @@ class OrderUserView(LoginRequiredMixin, View):
 class OrderView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         size_item = SizeItem.objects.all()
-        flavor_item = FlavorItem.objects.filter(is_active=True)
+        flavor_item = FlavorItem.objects.filter(is_active=True).order_by('sort')
         option_item = OptionItem.objects.all()
 
         # 再注文を受けてデータベース登録が無い場合の処理

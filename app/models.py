@@ -25,6 +25,7 @@ class FlavorItem(models.Model):
     title = models.CharField('日本語名称', max_length=100)
     price = models.IntegerField('価格', default=0)
     image = models.ImageField('画像', upload_to='images')
+    sort = models.IntegerField('並び順', default=0)
     is_active = models.BooleanField(
             ('掲載判定'),
             default=True,
