@@ -1,0 +1,70 @@
+{% extends "app/base.html" %}
+
+{% block title %}
+<title>商品メニュー | spoon</title>
+{% endblock %}
+
+{% block content %}
+<h1 class="title">
+    <span>商品メニュー</span>
+</h1>
+
+<div class="menu mx-auto text-center">
+    <p class="d-inline-block text-left mb-5">
+        フレッシュな旬のフルーツを中心に、旬の素材をたっぷりと使ったspoonジェラート。<br>
+        素材の味を活かし、あっさりした味わいや濃厚な味わいのジェラートまで常時20種類をご用意しています。
+    </p>
+    <ul class="row list-unstyled">
+        {% for flavor in flavor_item %}
+            <li class="menu__item col-4 col-sm-3 col-lg-2 mb-4 px-2 px-sm-4">
+                <div>
+                    <img class="menu__item--img mb-2" src="{{ flavor.image.url }}">
+                    <p class="menu__item--name text-left m-0">
+                        {% if flavor.price > 0 %}&#9733;{% endif %}{{ flavor.title }}
+                    </p>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+    <div class="d-md-flex justify-content-between mt-5">
+        <div>
+            <ul class="menu__item--type d-flex justify-content-sm-center list-unstyled m-0">
+                <li class="d-flex flex-column flex-lg-row align-items-center text-left mr-sm-5 mr-lg-4">
+                    <span class="menu__item--type--name mb-1 mb-sm-0 mr-lg-2">M:ミニ</span>
+                    <span class="menu__item--type--price">&yen;280</span>
+                </li>
+                <li class="d-flex flex-column flex-lg-row align-items-center text-left mr-sm-5 mr-lg-4">
+                    <span class="menu__item--type--name mb-1 mb-sm-0 mr-lg-2">S:シングル</span>
+                    <span class="menu__item--type--price">&yen;330</span>
+                </li>
+                <li class="d-flex flex-column flex-lg-row align-items-center text-left mr-sm-5 mr-lg-4">
+                    <span class="menu__item--type--name mb-1 mb-sm-0 mr-lg-2">W:ダブル</span>
+                    <span class="menu__item--type--price">&yen;440</span>
+                </li>
+                <li class="d-flex flex-column flex-lg-row align-items-center text-left mr-md-5 mr-lg-4">
+                    <span class="menu__item--type--name mb-1 mb-sm-0 mr-lg-2">コーン</span>
+                    <span class="menu__item--type--price">&yen;50</span>
+                </li>
+            </ul>
+            <p class="help-text d-sm-block text-left text-sm-center text-md-left m-0 mt-1">※★が付いているメニューは、金額がプラスになります。</p>
+        </div>
+        <div>
+            <a class="menu__btn btn m-md-0 rounded-pill" href="{% url 'order' %}" ontouchstart="">お持ち帰り注文はコチラ</a>
+        </div>
+    </div>
+    <p class="menu__baked text-left text-md-center py-2 mb-0">店頭ではグラノーラやクッキーなどの手づくり焼菓子も販売しております。ぜひご賞味ください！</p>
+</div>
+{% endblock %}
+
+
+{% block extrajs %}
+<script>
+    'use strict'
+
+    animation('.menu__item');
+    // スクロールで発動
+    window.addEventListener('scroll', () => {
+        animation('.menu__item');
+    });
+</script>
+{% endblock %}

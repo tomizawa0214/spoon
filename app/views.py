@@ -497,6 +497,15 @@ class DeleteOrderView(LoginRequiredMixin, View):
         return JsonResponse(data)
 
 
+class MenuView(View):
+    def get(self, request, *args, **kwargs):
+        flavor_item = FlavorItem.objects.filter(is_active=True).order_by('sort')
+
+        return render(request, 'app/menu.html', {
+            'flavor_item': flavor_item
+        })
+
+
 class AboutView(View):
     def get(self, request, *args, **kwargs):
         return render(request, 'app/about.html')
@@ -564,6 +573,7 @@ class ContactThanksView(View):
 class SctlView(View):
     def get(self, request, *args, **kwargs):
         return render(request, 'app/sctl.html')
+
 
 class PrivacyView(View):
     def get(self, request, *args, **kwargs):

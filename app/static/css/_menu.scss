@@ -1,0 +1,51 @@
+.menu {
+    &__item {
+        @include fadeIn;
+        &--img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        &--name {
+            font-size: 14px;
+            font-weight: bold;
+            line-height: 1;
+        }
+        &--type {
+            line-height: 1;
+            &--price {
+                color: #E8435F;
+                font-size: 30px;
+                font-weight: bold;
+                letter-spacing: 0;
+            }
+        }
+    }
+    &__btn {
+        @include button;
+        width: 250px;
+    }
+    &__baked {
+        margin-top: 50px;
+        letter-spacing: .3px;
+        background: #F2F8ED;
+    }
+}
+
+
+@media screen and ( max-width: 575px ) {
+    .menu {
+        &__item {
+            &--type {
+                justify-content: space-evenly;
+                &--name {
+                    font-size: 13px;
+                    letter-spacing: 0;
+                }
+                &--price {
+                    font-size: 25px;
+                }
+            }
+        }
+    }
+}
