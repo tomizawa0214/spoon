@@ -236,9 +236,8 @@ main {
 
 @media screen and (max-width: 575px) {
   .menu__item--type {
-    -webkit-box-pack: space-evenly;
-        -ms-flex-pack: space-evenly;
-            justify-content: space-evenly;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
   }
   .menu__item--type--name {
     font-size: 13px;
