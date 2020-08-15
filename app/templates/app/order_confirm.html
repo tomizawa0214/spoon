@@ -100,12 +100,15 @@
                 <span>クーポンご利用</span>
                 <span class="order-ck__cart--coupon--price"></span>
             </div>
-            <div class="order__cart--total d-flex justify-content-between mx-2 mb-3">
+            <div class="order__cart--total d-flex justify-content-between mx-2">
                 <strong>合計</strong>
                 <span class="order__select--price">&yen;{{ get_total_price|intcomma }}</span>
             </div>
+            <div class="text-center">
+                <a class="order-ck__btn-cart btn rounded-pill my-4" href="{% url 'order' %}" ontouchstart="">注文内容を変更</a>
+            </div>
             <!-- クーポン -->
-            <div class="order-ck__coupon mt-3 d-none">
+            <div class="order-ck__coupon d-none">
                 <div class="order-ck__coupon--content mx-auto">
                     <div class="order-ck__coupon--content--left">
                         <span class="order-ck__coupon--content--left--ribbon">SPECIAL</span>
@@ -140,8 +143,7 @@
         </div>
     </div>
 </div>
-<div class="position-relative text-center">
-    <a class="back-btn btn d-none d-sm-block rounded-pill" href="{% url 'order_user' %}" ontouchstart="">戻る</a>
+<div class="text-center">
     <a id="order_done" class="order-ck__btn btn rounded-pill" href="{% url 'order_thanks' %}" ontouchstart="">注文を確定</a>
 </div>
 {% endblock %}

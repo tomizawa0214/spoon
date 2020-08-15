@@ -298,6 +298,16 @@
     &__btn {
         @include button;
     }
+    &__btn-cart {
+        @include button;
+        color: #E8435F;
+        background: #FDFDFD;
+        box-shadow: 0 3px 0 #C9C9C9;
+        border: 2px solid #E8435F;
+        &:hover {
+            color: #E8435F;
+        }
+    }
 }
 
 
