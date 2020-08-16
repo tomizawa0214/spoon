@@ -105,6 +105,9 @@
             }
             &--size {
                 justify-content: space-evenly;
+                &--price {
+                    font-size: 28px;
+                }
             }
         }
         &__item {
