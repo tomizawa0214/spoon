@@ -170,7 +170,7 @@
                     <!-- 注文ボタン -->
                     <div class="mx-auto text-center">
                         <a id="order_plus" class="order__btn--add d-inline-block btn rounded-pill mt-0" ontouchstart="">追加注文</a><br>
-                        <a id="order_next" class="order__btn--next d-inline-block btn rounded-pill my-4" href="{% url 'order_user' %}" ontouchstart="">ご注文手続きへ</a>
+                        <a id="order_next" class="order__btn--next d-inline-block btn rounded-pill my-4" ontouchstart="">ご注文手続きへ</a>
                     </div>
                 </div>
             </div>
@@ -669,6 +669,7 @@
             alert_close.setAttribute('aria-hidden', 'true');
         } else if ( size_title.textContent != '' && flavor_title.textContent != '' ) {
             cartRegi();
+            window.location.href = '{% url "order_user" %}';
         }
     });
 

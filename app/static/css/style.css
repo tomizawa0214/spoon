@@ -1150,6 +1150,7 @@ main {
   font-weight: bold;
   -webkit-transition: .3s;
   transition: .3s;
+  color: #FDFDFD !important;
   width: 70%;
 }
 

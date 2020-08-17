@@ -126,6 +126,7 @@
         }
         &--next {
             @include button;
+            color: #FDFDFD !important;
             width: 70%;
         }
     }
