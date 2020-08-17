@@ -203,7 +203,7 @@
 
     // キャッシュの無効化
     history.replaceState(null, document.getElementsByTagName('title')[0].innerHTML, null);
-    window.addEventListener('popstate', function(e) {
+    window.addEventListener('popstate', e => {
         window.location.reload();
     });
 
@@ -665,6 +665,8 @@
             }).catch(error => {
                 console.log(error);
             });
+        } else if ( postArea.children.length != 0 ) {
+            window.location.href = '{% url "order_user" %}';
         }
     });
 
