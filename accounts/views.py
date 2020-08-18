@@ -1,5 +1,5 @@
 from django.views import View
-from accounts.forms import ProfileForm, SignupUserForm, EmailChangeForm
+from accounts.forms import ProfileForm, SignupUserForm, EmailChangeForm, DeleteForm
 from django.shortcuts import render, redirect
 from accounts.models import CustomUser
 from app.models import SizeItem, FlavorItem, OptionItem, Cart, Order
@@ -18,26 +18,54 @@ from django.urls import reverse_lazy, reverse
 User = get_user_model()
 
 
-class DeleteCompleteView(LoginRequiredMixin, View):
+class DeleteCompleteView(View):
     def get(self, request, *args, **kwargs):
-        user = self.request.user
-        subject = render_to_string('accounts/mail_template/delete_subject.txt', {'user': user})
-        message = render_to_string('accounts/mail_template/delete_message.txt', {'user': user})
-
-        try:
-            send_mail(subject, message, None, [user.email])
-        except BadHeaderError:
-            return HttpResponse("無効なヘッダが検出されました。")
-
-        # ログインしている現在のユーザーを削除
-        user.delete()
-
         return render(request, 'accounts/delete_complete.html')
 
 
 class DeleteConfirmView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
-        return render(request, 'accounts/delete_confirm.html')
+        form = DeleteForm(request.POST or None)
+
+        return render(request, 'accounts/delete_confirm.html', {
+            'form': form
+        })
+
+    
+    def post(self, request, *args, **kwargs):
+        form = DeleteForm(request.POST or None)
+
+        if form.is_valid():
+            user = self.request.user
+            reason_list = request.POST.getlist('reason_list')
+            message = form.cleaned_data['message']
+            
+            context = {
+                'user': user,
+                'reason_list': reason_list,
+                'message': message
+            }
+
+            subject = render_to_string('accounts/mail_template/delete_subject.txt', context)
+            body = render_to_string('accounts/mail_template/delete_message.txt', context)
+            to_list = [user.email]
+            bcc_list = [settings.EMAIL_HOST_USER]
+
+            try:
+                message = EmailMessage(subject=subject, body=body, to=to_list, bcc=bcc_list)
+                message.send()
+            except BadHeaderError:
+                return HttpResponse("無効なヘッダが検出されました。")
+
+            # ログインしている現在のユーザーを削除
+            user.delete()
+            
+            return redirect('delete_complete')
+            
+        return render(request, 'accounts/delete_confirm.html', {
+            'form': form,
+            'error': '※お手数ですが、ご選択をお願いいたします。'
+        })
 
 
 class EmailChangeView(LoginRequiredMixin, View):

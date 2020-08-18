@@ -1,5 +1,47 @@
 .delete {
-    &__btn {
-        @include button;
+    &__alert {
+        &--text {
+            font-size: 14px;
+            line-height: 1.4;
+        }
+    }
+    &__form {
+        &--table {
+            table-layout: fixed;
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: #F2F8ED;
+        }
+        &--btn {
+            @include button;
+        }
+    }
+}
+
+
+@media screen and ( min-width: 576px ) {
+    .delete {
+        &__form {
+            &--table {
+                max-width: 800px;
+                border-spacing: 20px 32px;
+                &--body {
+                    th {
+                        width: 145px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and ( min-width: 768px ) {
+    .delete {
+        &__form {
+            &--table {
+                border-spacing: 24px 36px;
+            }
+        }
     }
 }

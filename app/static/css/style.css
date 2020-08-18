@@ -2531,7 +2531,20 @@ main {
   }
 }
 
-.delete__btn {
+.delete__alert--text {
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.delete__form--table {
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #F2F8ED;
+}
+
+.delete__form--btn {
   position: relative;
   width: 200px;
   margin: 50px 0 0px;
@@ -2545,11 +2558,27 @@ main {
   transition: .3s;
 }
 
-.delete__btn:hover {
+.delete__form--btn:hover {
   color: #FDFDFD;
   opacity: .7;
 }
 
-.delete__btn i {
+.delete__form--btn i {
   margin: 0 5px 0 0;
+}
+
+@media screen and (min-width: 576px) {
+  .delete__form--table {
+    max-width: 800px;
+    border-spacing: 20px 32px;
+  }
+  .delete__form--table--body th {
+    width: 145px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .delete__form--table {
+    border-spacing: 24px 36px;
+  }
 }

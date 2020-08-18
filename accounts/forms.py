@@ -54,3 +54,18 @@ class ProfileForm(forms.Form):
         required=False,
         label='誕生日'
     )
+
+
+class DeleteForm(forms.Form):
+    reason_list = forms.MultipleChoiceField (
+        label='退会理由',
+        widget=forms.CheckboxSelectMultiple,
+        choices= (
+            ('メニューの料金が高い', 'メニューの料金が高い'),
+            ('メニューに魅力を感じない', 'メニューに魅力を感じない'),
+            ('会員特典に魅力を感じない', '会員特典に魅力を感じない'),
+            ('サービスが使いにくい', 'サービスが使いにくい'),
+            ('他にもっと良いサービスを見つけた', '他にもっと良いサービスを見つけた'),
+        )
+    )
+    message = forms.CharField(label='その他', widget=forms.Textarea(), required=False)

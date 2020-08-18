@@ -1,4 +1,5 @@
 {% extends "app/base.html" %}
+{% load widget_tweaks %}
 {% load static %}
 
 {% block title %}
@@ -16,16 +17,86 @@
 
 <div class="mx-auto text-center m-0">
     <p class="delete__text d-inline-block text-left mb-5">退会手続きを実行します。</p><br>
-    <p class="d-inline-block text-left m-0">
-        下記ボタンを押すと退会手続きを実行します。<br>
-        会員サービスのご利用はできなくなり、<br class="d-none d-sm-block">
-        お客様の情報はすべて削除されます。<br>
-        会員情報は元に戻せません。本当によろしいですか？
+    <p class="d-inline-block text-left">
+        これまでspoonの会員サービスをご利用いただき、誠にありがとうございました。<br>
+        spoonではお客様により良いサービスを提供できるよう努めております。<br>
+        率直なご意見・ご要望をお聞かせください。<br>
     </p>
+    <form method="POST" class="delete__form text-center">
+        {% csrf_token %}
+        <table class="delete__form--table d-table mx-auto card p-4 p-sm-3">
+            <tbody class="delete__form--table--body mx-auto">
+                <tr class="d-block d-sm-table-row">
+                    <th class="d-block d-sm-table-cell text-left align-top mb-2 mb-sm-0">
+                        <label class="m-0">退会理由
+                            <span class="signup__required">【必須】</span>
+                            <span class="help-text font-weight-normal">※複数選択可</span>
+                        </label>
+                    </th>
+                    <td class="d-block d-sm-table-cell mb-4">
+                        {% for reason in form.reason_list %}
+                            <p class="text-left mb-1">{{ reason }}</p>
+                        {% endfor %}
+                        <p class="error-msg text-left m-0">
+                            {{ error }}
+                        </p>
+                    </td>
+                </tr>
+                <tr class="d-block d-sm-table-row">
+                    <th class="d-block d-sm-table-cell text-left align-top">
+                        <label for="id_message" class="m-0">その他
+                            <span class="font-weight-normal">【※任意】</span>
+                        </label>
+                    </th>
+                    <td class="d-block d-sm-table-cell">
+                        {% render_field form.message class="form-control" placeholder="自由記入欄" %}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="mt-5">
+            下記ボタンを押すと<br class="d-sm-none">退会手続きを実行します。<br>
+            本当によろしいですか？
+        </p>
+        <button type="submit" class="delete__form--btn btn rounded-pill mt-3" ontouchstart="">はい、退会します</button><br>
+        <button type="button" class="deleteno__btn btn rounded-pill mt-4" onclick="history.back()" ontouchstart="">いいえ、退会しません</button>
+    </form>
 </div>
+{% endblock %}
 
-<div class="text-center">
-    <a class="delete__btn btn rounded-pill mb-0" href="{% url 'delete_complete' %}" ontouchstart="">はい、退会します</a><br>
-    <button type="button" class="deleteno__btn btn rounded-pill mt-4" onclick="history.back()" ontouchstart="">いいえ、退会しません</button>
-</div>
+
+{% block extrajs %}
+<script>
+    'use strict'
+
+    // 注意事項のアラート
+    const element  = Object.assign(document.createElement('div'), { className: 'delete__alert sticky-top rounded-0 alert alert-danger alert-dismissible fade show m-0' });
+    const element1  = Object.assign(document.createElement('strong'), { className: 'alert-heading', innerHTML: '<i class="fas fa-exclamation-triangle fa-fw mr-1" aria-hidden="true"></i>注意事項' });
+    const element2  = Object.assign(document.createElement('p'), { className: 'delete__alert--text mt-1 mb-0', innerHTML: '退会するとお客様の情報はすべて削除され、会員情報は元に戻せません。<br>短期間に再登録を複数回行うことは禁じております。あらかじめご了承くださいませ。' });
+    const element3  = Object.assign(document.createElement('button'), { className: 'delete__alert--btn close', type: 'button' });
+    const element4  = Object.assign(document.createElement('span'), { className: 'delete__alert--close', innerHTML: '&times;' });
+    // 階層に合わせて要素をまとめる
+    element3.appendChild(element4);
+    element.appendChild(element1);
+    element.appendChild(element2);
+    element.appendChild(element3);
+    // 最後に追加
+    document.body.insertBefore(element, document.body.firstChild);
+
+    let deleteAlert = document.querySelector('.delete__alert');
+    deleteAlert.setAttribute('role', 'alert');
+    let alertBtn = document.querySelector('.delete__alert--btn');
+    alertBtn.setAttribute('data-dismiss', 'alert');
+    alertBtn.setAttribute('aria-label', 'Close');
+    let alertClose = document.querySelector('.delete__alert--close');
+    alertClose.setAttribute('aria-hidden', 'true');
+
+    // エラーメッセージ解除
+    let reason = document.getElementsByName('reason_list');
+    for (let i = 0; i < reason.length; i++) {
+        reason[i].addEventListener('click', () => {
+            document.querySelector('.error-msg').classList.add('d-none');
+        })
+    }
+</script>
 {% endblock %}
