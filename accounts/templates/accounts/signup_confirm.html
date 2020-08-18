@@ -47,7 +47,8 @@
             </tr>
         </tbody>
     </table>
-    <div class="text-center">
+    <div class="position-relative text-center">
+        <a class="back-btn d-none d-sm-block btn rounded-pill"  href="{% url 'account_signup' %}" ontouchstart="">戻る</a>
         <a id="signup_done" class="signup__btn btn rounded-pill" href="{% url 'account_signup_done' %}" ontouchstart="">
             <i class="fas fa-user-plus fa-fw" aria-hidden="true"></i>登録
         </a>

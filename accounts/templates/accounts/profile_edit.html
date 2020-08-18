@@ -68,9 +68,12 @@
             </tbody>
         </table>
         <p class="help-text d-block text-left mt-1 mb-0">※性別・誕生日は初回登録以降変更できません。</p>
-        <button class="profile__btn btn rounded-pill" type="submit" ontouchstart="">
-            <i class="fas fa-user-plus fa-fw" aria-hidden="true"></i>登録
-        </button>
+        <div class="position-relative">
+            <button type="button" class="d-none d-sm-block back-btn btn rounded-pill" onclick="history.back()" ontouchstart="">戻る</button>
+            <button class="profile__btn btn rounded-pill" type="submit" ontouchstart="">
+                <i class="fas fa-user-plus fa-fw" aria-hidden="true"></i>登録
+            </button>
+        </div>
     </form>
 </div>
 {% endblock %}
