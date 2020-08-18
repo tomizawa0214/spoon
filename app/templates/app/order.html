@@ -201,11 +201,17 @@
 <script>
     'use strict'
 
-    // キャッシュの無効化
-    history.replaceState(null, document.getElementsByTagName('title')[0].innerHTML, null);
-    window.addEventListener('popstate', e => {
-        window.location.reload();
-    });
+    // // キャッシュの無効化
+    // history.replaceState(null, document.getElementsByTagName('title')[0].innerHTML, null);
+    // window.addEventListener('popstate', e => {
+    //     window.location.reload();
+    // });
+
+    window.onpageshow = e => {
+        if (e.persisted || window.performance && window.performance.navigation.type == 2) {
+            window.location.reload();
+        }
+    };
 
     animation('.order__select');
     // スクロールで発動
