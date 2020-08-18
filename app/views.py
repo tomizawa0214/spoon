@@ -368,7 +368,8 @@ class OrderUserView(LoginRequiredMixin, View):
 class OrderView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         size_item = SizeItem.objects.all()
-        flavor_item = FlavorItem.objects.filter(is_active=True).order_by('sort')
+        flavor_item = FlavorItem.objects.filter(web_only=False, is_active=True).order_by('sort')
+        flavor_web = FlavorItem.objects.filter(web_only=True, is_active=True).order_by('sort')
         option_item = OptionItem.objects.all()
 
         # 再注文を受けてデータベース登録が無い場合の処理
@@ -386,6 +387,7 @@ class OrderView(LoginRequiredMixin, View):
         return render(request, 'app/order.html', {
             'size_item': size_item,
             'flavor_item': flavor_item,
+            'flavor_web': flavor_web,
             'option_item': option_item,
             'cart_data': cart_data,
             'get_total_price': get_total_price,
@@ -499,10 +501,12 @@ class DeleteOrderView(LoginRequiredMixin, View):
 
 class MenuView(View):
     def get(self, request, *args, **kwargs):
-        flavor_item = FlavorItem.objects.filter(is_active=True).order_by('sort')
+        flavor_item = FlavorItem.objects.filter(web_only=False, is_active=True).order_by('sort')
+        flavor_web = FlavorItem.objects.filter(web_only=True, is_active=True).order_by('sort')
 
         return render(request, 'app/menu.html', {
-            'flavor_item': flavor_item
+            'flavor_item': flavor_item,
+            'flavor_web': flavor_web,
         })
 
 

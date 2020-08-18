@@ -14,6 +14,24 @@
         フレッシュな旬のフルーツを中心に、旬の素材をたっぷりと使ったspoonジェラート。<br>
         素材の味を活かし、あっさりした味わいや濃厚な味わいのジェラートまで常時20種類をご用意しています。
     </p>
+    <div class="mx-auto text-center">
+        <p class="menu__flavor-type d-inline-block mb-4">WEB限定フレーバー</p>
+    </div>
+    <ul class="row list-unstyled">
+        {% for flavor in flavor_web %}
+            <li class="menu__item col-4 col-sm-3 col-lg-2 mb-4 px-2 px-sm-4">
+                <div>
+                    <img class="menu__item--img mb-2" src="{{ flavor.image.url }}">
+                    <p class="menu__item--name text-left m-0">
+                        {% if flavor.price > 0 %}&#9733;{% endif %}{{ flavor.title }}
+                    </p>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+    <div class="mx-auto text-center">
+        <p class="menu__flavor-type d-inline-block mb-4">人気の定番フレーバー</p>
+    </div>
     <ul class="row list-unstyled">
         {% for flavor in flavor_item %}
             <li class="menu__item col-4 col-sm-3 col-lg-2 mb-4 px-2 px-sm-4">

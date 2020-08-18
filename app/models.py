@@ -26,6 +26,7 @@ class FlavorItem(models.Model):
     price = models.IntegerField('価格', default=0)
     image = models.ImageField('画像', upload_to='images')
     sort = models.IntegerField('並び順', default=0)
+    web_only = models.BooleanField('WEB限定', default=False)
     is_active = models.BooleanField(
             ('掲載判定'),
             default=True,
@@ -33,7 +34,7 @@ class FlavorItem(models.Model):
                 'このフレーバーを掲載するかを指定します。 '
                 '選択を解除すると非表示になります。'
             ),
-        )
+    )
 
     def __str__(self):
         return self.title

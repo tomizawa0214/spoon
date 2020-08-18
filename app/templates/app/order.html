@@ -36,6 +36,28 @@
             <p class="order__step order__flavor mb-3 py-1 px-3 px-md-2 rounded-sm-pill">STEP2. ジェラートのフレーバーをお選びください。<br>
                 <span class="order__step--help d-inline-block mt-1">※写真はイメージです。お持ち帰り用は別カップになります。</span>
             </p>
+            <div class="mx-auto text-center">
+                <p class="order__flavor-type d-inline-block">WEB限定フレーバー</p>
+            </div>
+            <ul class="row mb-5 list-unstyled">
+                {% for flavor in flavor_web %}
+                    <li class="order__select col-lg-3 text-center">
+                        <input id="flavor_{{ flavor.id }}" type="checkbox" name="flavor" value="{{ flavor.title }} {{ flavor.price }}" onclick="flavorChk(this);">
+                        <label for="flavor_{{ flavor.id }}">
+                            <div class="d-flex d-lg-block">
+                                <img class="order__select--img h-100" src="{{ flavor.image.url }}">
+                                <div class="d-flex flex-column justify-content-end text-left mt-lg-2">
+                                    <p class="order__select--item mb-1 ml-2">{{ flavor.title }}</p>
+                                    <p class="order__select--item order__select--item--flavor order__select--price ml-2">&yen;{{ flavor.price }}</p>
+                                </div>
+                            </div>
+                        </label>
+                    </li>
+                {% endfor %}
+            </ul>
+            <div class="mx-auto text-center">
+                <p class="order__flavor-type d-inline-block">人気の定番フレーバー</p>
+            </div>
             <ul class="row mb-5 list-unstyled">
                 {% for flavor in flavor_item %}
                     <li class="order__select col-lg-3 text-center">
@@ -201,12 +223,7 @@
 <script>
     'use strict'
 
-    // // キャッシュの無効化
-    // history.replaceState(null, document.getElementsByTagName('title')[0].innerHTML, null);
-    // window.addEventListener('popstate', e => {
-    //     window.location.reload();
-    // });
-
+    // キャッシュの無効化
     window.onpageshow = e => {
         if (e.persisted || window.performance && window.performance.navigation.type == 2) {
             window.location.reload();
