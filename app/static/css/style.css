@@ -261,12 +261,8 @@ main {
     -ms-flex-pack: distribute;
         justify-content: space-around;
   }
-  .menu__item--type--name {
-    font-size: 13px;
-    letter-spacing: 0;
-  }
   .menu__item--type--price {
-    font-size: 23px;
+    font-size: 28px;
   }
 }
 
