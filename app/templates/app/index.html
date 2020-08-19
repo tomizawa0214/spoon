@@ -120,13 +120,13 @@
     const topImage3 = document.querySelector('.top__item--image3');
     if ( window.innerWidth < 576 ) {
         document.body.style.marginBottom = '105px';
-        backToTop.style.bottom = '121px'
+        backToTop.style.bottom = '120px'
         spMenu.style.height = 'calc(var(--vh, 1vh)*100 - 165px)';
     }
     window.addEventListener('resize', event => {
         if ( window.innerWidth < 576 ) {
             document.body.style.marginBottom = '105px';
-            backToTop.style.bottom = '121px';
+            backToTop.style.bottom = '120px';
             let vh = window.innerHeight * 0.01;
             document.documentElement.style.setProperty('--vh', `${vh}px`);
             topImage1.style.height = 'calc(var(--vh, 1vh)*100 - 165px)';

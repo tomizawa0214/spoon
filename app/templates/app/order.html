@@ -236,16 +236,20 @@
         animation('.order__select');
     });
 
+    const backToTop = document.querySelector('.back-to-top')
     // ウインドウ幅に応じてbody要素を変更
     if ( window.innerWidth < 576 ) {
         document.body.style.marginBottom = '132px';
+        backToTop.style.bottom = '147px'
     }
 
     window.addEventListener('resize', event => {
         if ( window.innerWidth < 576 ) {
             document.body.style.marginBottom = '132px';
+            backToTop.style.bottom = '147px'
         } else {
             document.body.style.marginBottom = 0;
+            backToTop.style.bottom = '15px';
         }
     });
 

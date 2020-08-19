@@ -172,6 +172,12 @@ main {
           box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
 }
 
+@media screen and (max-width: 575px) {
+  .back-to-top {
+    bottom: 83px;
+  }
+}
+
 .menu__flavor-type {
   position: relative;
   padding: 11px 30px 8px;
