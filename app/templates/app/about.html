@@ -13,31 +13,32 @@
         </h1>
         <div class="about row justify-content-center">
             <div class="col-sm-10 col-md-6 col-lg-5 col-xl-6 about__fadein">
-                <img class="w-100" src="{% static 'img/about1_ダミー.png' %}">
+                <img class="w-100" src="{% static 'img/about1.png' %}">
             </div>
             <div class="col-sm-10 col-md-6 col-lg-7 col-xl-6">
                 <h2 class="about__subheading mt-3 mt-md-0 about__fadein">手づくりジェラート専門店</h2>
-                <p class="about__msg about__fadein">spoonの美味しさは、一度食べたらきっとわかっていただけるでしょう。なんといっても特徴は、その“食感”。伝統的な製造工程に基づき、独自の製法で仕上げる「シンプルななめらかさ」への追求を日々続けてきました。口に入れれば、香りが広がりながら舌の上でしっとりととろけて、やがて、ほのかな甘みの余韻を残しつつフワッと消えていく…。食べた瞬間は濃厚なのに、スーッと喉を通り過ぎていくサッパリとした食感は、他のジェラートとは違うspoonならではのオリジナルの味わいです。</p>
+                <p class="about__msg about__fadein">spoonのジェラートを口に入れた瞬間、ほわっと、ふんわりした舌ざわりとともに、素材の味が香り豊かに広がります。それぞれに使用する材料や配合、甘さのバランスにもとことんこだわり、さっぱりした後味もその魅力の一つ。お客様のもっと食べたい！また食べたい！を目指して、他のジェラートとは違うspoonならではの味を追求しています。</p>
             </div>
         </div>
         <div class="about row justify-content-center">
             <div class="col-sm-10 col-md-6 col-lg-7 col-xl-6 order-2 order-md-1">
-                <h2 class="about__subheading mt-3 mt-md-0 about__fadein">新鮮素材のオリジナルフレーバー</h2>
-                <p class="about__msg about__fadein">理想の味に近づける為、様々な産地からベストな素材を取り寄せ、試作を重ね商品企画が出来上がるまでに1年以上かけるフレーバーもあります。 spoonでしか食べる事のできないオリジナリティ溢れたフレーバーは、お客様の「笑顔」と「驚き」の為に、納得するまで何度も何度も試作を繰り返し、完成させます。 すべての方が笑顔になれる「幸せなひととき」を、心をこめてお届けします。</p>
+                <h2 class="about__subheading mt-3 mt-md-0 about__fadein">30種類以上のオリジナルフレーバー</h2>
+                <p class="about__msg about__fadein">見た目でも楽しむことのできるspoonのジェラート。お店に入ると色鮮やかに並ぶたくさんのジェラートに驚かれることでしょう。そんなワクワク感と選ぶ楽しみもご提供したく、現在は30種類以上のジェラートを取り揃えております（季節限定含む）。<a href="{% url 'order_guide' %}">spoonのお持ち帰り予約</a>でご注文いただくと、WEB限定フレーバーも含めて全種類お楽しみいただけます。ぜひ自分好みのフレーバーを見つけてみてください。</p>
             </div>
             <div class="col-sm-10 col-md-6 col-lg-5 col-xl-6 flex-first order-1 order-md-2 about__fadein">
-                <img class="w-100" src="{% static 'img/about2_ダミー.png' %}">
+                <img class="w-100" src="{% static 'img/about2.png' %}">
             </div>
         </div>
         <div class="about row justify-content-center">
             <div class="col-sm-10 col-md-6 col-lg-5 col-xl-6 about__fadein">
-                <img class="w-100" src="{% static 'img/about3_ダミー.png' %}">
+                <img class="w-100" src="{% static 'img/about3.png' %}">
             </div>
             <div class="col-sm-10 col-md-6 col-lg-7 col-xl-6 mb-0">
-                <h2 class="about__subheading mt-3 mt-md-0 about__fadein">ジェラートの秘密</h2>
-                <p class="about__msg about__fadein">ジェラートは、栄養学的に見ても優れた商品です。ジェラートの原料牛乳は、米食中心の日本人の栄養バランスを整える最も良い食品と言われています。牛乳のタンパク質（protein）は、米のタンパク質とよく補充し合ってさらに良質のタンパク質に変身します。またカルシウム、ビタミンB2も簡単に他の商品よりも早く、確実に吸収されます。子供から大人まで、安心しておすすめ出来ます。</p>
+                <h2 class="about__subheading mt-3 mt-md-0 about__fadein">ご自宅でも楽しめるspoonジェラート</h2>
+                <p class="about__msg about__fadein">大切な方への手みやげに、一つ一つ丁寧に手づくりしたジェラートはいかがでしょう？お店で選び、その場で食べることもジェラートショップならではの楽しみ方ですが、その美味しさをお持ち帰りしたいとのお声もいただきます。<a href="{% url 'order_guide' %}">spoonのお持ち帰り予約</a>でご注文いただけば、お持ち帰りでも口あたりなめらかな、ひんやりジェラートをご提供できます。ぜひお試しください。</p>
             </div>
         </div>
+        <p class="help-text px-3">※写真はすべてイメージです。spoonのお持ち帰り予約サービスのご利用には<a href="{% url 'account_signup' %}">無料会員登録</a>が必要です。</p>
     </div>
     {% include 'app/sidebar.html' %}
 </div>
