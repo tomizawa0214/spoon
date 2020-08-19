@@ -151,25 +151,17 @@ main {
   right: 15px;
   bottom: 15px;
   z-index: 9998;
-  text-align: center;
-  font-size: 20px;
-  line-height: 38px;
-  color: rgba(0, 0, 0, 0.2);
-  border-radius: 50%;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  background: rgba(0, 0, 0, 0.02);
   cursor: pointer;
-  -webkit-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
   opacity: 0;
 }
 
-.back-to-top:hover {
-  color: #FDFDFD;
-  border: none;
-  background: #E8435F;
-  -webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
-          box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
+.back-to-top__img {
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+
+.back-to-top__img:hover {
+  opacity: .5;
 }
 
 @media screen and (max-width: 575px) {
