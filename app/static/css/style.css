@@ -390,6 +390,14 @@ main {
   text-decoration: underline;
 }
 
+.access__info--table--time {
+  line-height: 1.2;
+}
+
+.access__info--table--time--help {
+  line-height: 1.2;
+}
+
 @media screen and (min-width: 992px) {
   .access {
     -webkit-box-align: start;
@@ -2143,12 +2151,16 @@ main {
   letter-spacing: .5px;
 }
 
-.sidebar__store--map {
+.sidebar__store--info {
+  letter-spacing: .5px;
+}
+
+.sidebar__store--info--map {
   color: #1B95E0;
   text-decoration: none;
 }
 
-.sidebar__store--map:hover {
+.sidebar__store--info--map:hover {
   text-decoration: underline;
 }
 
