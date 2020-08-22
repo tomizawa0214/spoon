@@ -166,6 +166,13 @@ main {
   opacity: .5;
 }
 
+@media screen and (min-width: 576px) {
+  .back-to-top {
+    right: 30px;
+    bottom: 30px;
+  }
+}
+
 @media screen and (max-width: 575px) {
   .back-to-top {
     bottom: 83px;
