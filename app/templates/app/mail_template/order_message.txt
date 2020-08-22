@@ -11,18 +11,51 @@ spoonをご利用いただき、ありがとうございます。
 ※こちらの番号を店頭レジにてお伝えください。
 
 ＜ご注文情報＞
------------------------------------------
 ●【お名前】{{ order_latest.name }} 様
-●【メールアドレス】{{ order_latest.email }}
+●【メールアドレス】
+{{ order_latest.email }}
 ●【電話番号】{{ order_latest.tel }}
 ●【受取日時】{{ order_latest.receipt|date:"Y年n月j日(l) G:i"|cut:"曜日" }}
-●【ご注文日時】{{ order_latest.created|date:"Y年n月j日(l) G:i"|cut:"曜日" }}
------------------------------------------
-{% for cart in order_latest.cart.all %}●【サイズ】{{ cart.size_title }}
-{% if cart.flavor2_title == "" %}●【フレーバー】{{ cart.flavor_title }}{% else %}●【フレーバー】{{ cart.flavor_title }}・{{ cart.flavor2_title }}{% endif %}
-{% if cart.option_title == "" and cart.option2_title == "" and cart.option3_title == "" and cart.option4_title == "" %}●【オプション】なし{% elif cart.option_title != "" and cart.option2_title == "" and cart.option3_title == "" and cart.option4_title == "" %}●【オプション】{{ cart.option_title }}{% elif cart.option_title == "" and cart.option2_title != "" and cart.option3_title == "" and cart.option4_title == "" %}●【オプション】{{ cart.option2_title }}{% elif cart.option_title == "" and cart.option2_title == "" and cart.option3_title != "" and cart.option4_title == "" %}●【オプション】{{ cart.option3_title }}{% elif cart.option_title == "" and cart.option2_title == "" and cart.option3_title == ""  and cart.option4_title != "" %}●【オプション】{{ cart.option4_title }}{% elif cart.option_title != "" and cart.option2_title != "" and cart.option3_title == "" and cart.option4_title == "" %}●【オプション】{{ cart.option_title }}・{{ cart.option2_title }}{% elif cart.option_title != "" and cart.option2_title == "" and cart.option3_title != "" and cart.option4_title == "" %} ●【オプション】{{ cart.option_title }}・{{ cart.option3_title }}{% elif cart.option_title != "" and cart.option2_title == "" and cart.option3_title == "" and cart.option4_title != "" %}●【オプション】{{ cart.option_title }}・{{ cart.option4_title }}{% elif cart.option_title == "" and cart.option2_title != "" and cart.option3_title != "" and cart.option4_title == "" %}●【オプション】{{ cart.option2_title }}・{{ cart.option3_title }}{% elif cart.option_title == "" and cart.option2_title != "" and cart.option3_title == "" and cart.option4_title != "" %}●【オプション】{{ cart.option2_title }}・{{ cart.option4_title }}{% elif cart.option_title == "" and cart.option2_title == "" and cart.option3_title != "" and cart.option4_title != "" %}●【オプション】{{ cart.option3_title }}・{{ cart.option4_title }}{% elif cart.option_title != "" and cart.option2_title != "" and cart.option3_title != "" and cart.option4_title == "" %}●【オプション】{{ cart.option_title }}・{{ cart.option2_title }}・{{ cart.option3_title }}{% elif cart.option_title == "" and cart.option2_title != "" and cart.option3_title != "" and cart.option4_title != "" %}●【オプション】{{ cart.option2_title }}・{{ cart.option3_title }}・{{ cart.option4_title }}{% elif cart.option_title != "" and cart.option2_title == "" and cart.option3_title != "" and cart.option4_title != "" %}●【オプション】{{ cart.option_title }}・{{ cart.option3_title }}・{{ cart.option4_title }}{% elif cart.option_title != "" and cart.option2_title != "" and cart.option3_title == "" and cart.option4_title != "" %}●【オプション】{{ cart.option_title }}・{{ cart.option2_title }}・{{ cart.option4_title }}{% elif cart.option_title != "" and cart.option2_title != "" and cart.option3_title != "" and cart.option4_title != "" %}●【オプション】{{ cart.option_title }}・{{ cart.option2_title }}・{{ cart.option3_title }}・{{ cart.option4_title }}{% endif %}
------------------------------------------
-{% endfor %}{% if coupon_price == 0 %}●合計 ￥{{ order_latest.get_total|intcomma }}（税込）{% else %}●クーポンご利用　-￥{{ coupon_price }}
+●【注文日時】{{ order_latest.created|date:"Y年n月j日(l) G:i"|cut:"曜日" }}
+
+＜商品情報＞{% for cart in order_latest.cart.all %}
+●{{ cart.size_title }}（￥{{ cart.size_price }}）
+{% if cart.flavor2_title == "" %}・{{ cart.flavor_title }}（￥{{ cart.flavor_price }}）{% else %}・{{ cart.flavor_title }}（￥{{ cart.flavor_price }}）
+・{{ cart.flavor2_title }}（￥{{ cart.flavor2_price }}）{% endif %}{% if cart.option_title == "" and cart.option2_title == "" and cart.option3_title == "" and cart.option4_title == "" %}{% elif cart.option_title != "" and cart.option2_title == "" and cart.option3_title == "" and cart.option4_title == "" %}
+・{{ cart.option_title }}（￥{{ cart.option_price }}）{% elif cart.option_title == "" and cart.option2_title != "" and cart.option3_title == "" and cart.option4_title == "" %}
+・{{ cart.option2_title }}（￥{{ cart.option2_price }}）{% elif cart.option_title == "" and cart.option2_title == "" and cart.option3_title != "" and cart.option4_title == "" %}
+・{{ cart.option3_title }}（￥{{ cart.option3_price }}）{% elif cart.option_title == "" and cart.option2_title == "" and cart.option3_title == ""  and cart.option4_title != "" %}
+・{{ cart.option4_title }}（￥{{ cart.option4_price }}）{% elif cart.option_title != "" and cart.option2_title != "" and cart.option3_title == "" and cart.option4_title == "" %}
+・{{ cart.option_title }}（￥{{ cart.option_price }}）
+・{{ cart.option2_title }}（￥{{ cart.option2_price }}）{% elif cart.option_title != "" and cart.option2_title == "" and cart.option3_title != "" and cart.option4_title == "" %} 
+・{{ cart.option_title }}（￥{{ cart.option_price }}）
+・{{ cart.option3_title }}（￥{{ cart.option3_price }}）{% elif cart.option_title != "" and cart.option2_title == "" and cart.option3_title == "" and cart.option4_title != "" %}
+・{{ cart.option_title }}（￥{{ cart.option_price }}）
+・{{ cart.option4_title }}（￥{{ cart.option4_price }}）{% elif cart.option_title == "" and cart.option2_title != "" and cart.option3_title != "" and cart.option4_title == "" %}
+・{{ cart.option2_title }}（￥{{ cart.option2_price }}）
+・{{ cart.option3_title }}（￥{{ cart.option3_price }}）{% elif cart.option_title == "" and cart.option2_title != "" and cart.option3_title == "" and cart.option4_title != "" %}
+・{{ cart.option2_title }}（￥{{ cart.option2_price }}）
+・{{ cart.option4_title }}（￥{{ cart.option4_price }}）{% elif cart.option_title == "" and cart.option2_title == "" and cart.option3_title != "" and cart.option4_title != "" %}
+・{{ cart.option3_title }}（￥{{ cart.option3_price }}）
+・{{ cart.option4_title }}（￥{{ cart.option4_price }}）{% elif cart.option_title != "" and cart.option2_title != "" and cart.option3_title != "" and cart.option4_title == "" %}
+・{{ cart.option_title }}（￥{{ cart.option_price }}）
+・{{ cart.option2_title }}（￥{{ cart.option2_price }}）
+・{{ cart.option3_title }}（￥{{ cart.option3_price }}）{% elif cart.option_title == "" and cart.option2_title != "" and cart.option3_title != "" and cart.option4_title != "" %}
+・{{ cart.option2_title }}（￥{{ cart.option2_price }}）
+・{{ cart.option3_title }}（￥{{ cart.option3_price }}）
+・{{ cart.option4_title }}（￥{{ cart.option4_price }}）{% elif cart.option_title != "" and cart.option2_title == "" and cart.option3_title != "" and cart.option4_title != "" %}
+・{{ cart.option_title }}（￥{{ cart.option_price }}）
+・{{ cart.option3_title }}（￥{{ cart.option3_price }}）
+・{{ cart.option4_title }}（￥{{ cart.option4_price }}）{% elif cart.option_title != "" and cart.option2_title != "" and cart.option3_title == "" and cart.option4_title != "" %}
+・{{ cart.option_title }}（￥{{ cart.option_price }}）
+・{{ cart.option2_title }}（￥{{ cart.option2_price }}）
+・{{ cart.option4_title }}（￥{{ cart.option4_price }}）{% elif cart.option_title != "" and cart.option2_title != "" and cart.option3_title != "" and cart.option4_title != "" %}
+・{{ cart.option_title }}（￥{{ cart.option_price }}）
+・{{ cart.option2_title }}（￥{{ cart.option2_price }}）
+・{{ cart.option3_title }}（￥{{ cart.option3_price }}）
+・{{ cart.option4_title }}（￥{{ cart.option4_price }}）{% endif %}
+{% if forloop.last %}━━━━━━━━━━━━━━━━━━━━{% else %}-----------------------------------------{% endif %}{% endfor %}
+{% if coupon_price == 0 %}●合計 ￥{{ order_latest.get_total|intcomma }}（税込）{% else %}●クーポンご利用　-￥{{ coupon_price }}
 ●合計 ￥{{ order_latest.get_total|intcomma }}（税込）{% endif %}
 
 ご注文いただきました商品は店頭にてご用意してお待ちしております。
