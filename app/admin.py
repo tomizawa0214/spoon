@@ -39,7 +39,7 @@ class CompleteListFilter(admin.SimpleListFilter):
             return queryset.all()
 
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('name', 'furigana', 'order_number', 'receipt_datetime', 'standby', 'complete')
+    list_display = ('name', 'furigana', 'order_number', 'total_price', 'receipt_datetime', 'standby', 'complete')
     ordering = ('receipt',)
     list_filter = (StandbyListFilter, CompleteListFilter)
     list_editable = ('standby', 'complete')
@@ -55,8 +55,8 @@ class SizeItemAdmin(admin.ModelAdmin):
 
 
 class FlavorItemAdmin(admin.ModelAdmin):
-    list_display = ('title', 'price', 'is_active', 'sort')
-    list_editable = ('is_active', 'sort')
+    list_display = ('title', 'price', 'is_active', 'web_only', 'sort')
+    list_editable = ('is_active', 'web_only', 'sort')
     ordering = ('sort',)
 
 

@@ -130,6 +130,14 @@ class Order(models.Model):
         total -= self.coupon_price
         return total
 
+    def total_price(self):
+        total = 0
+        for cart in self.cart.all():
+            total += cart.get_total_item_price()
+        total -= self.coupon_price
+        return '￥' + '{:,}'.format(total)
+    total_price.short_description = '合計金額'
+
     def order_number(self):
         return str(self.order_day) + str(self.count)
     order_number.short_description = '注文番号'
