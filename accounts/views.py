@@ -358,6 +358,7 @@ class ProfileView(LoginRequiredMixin, View):
                     sizeitem = SizeItem.objects.get(title=same_cart.size_title)
                     cart.size_title = sizeitem.title 
                     cart.size_price = sizeitem.price
+                    cart.size_image = sizeitem.image
                 else:
                     error_flag.append(same_cart.size_title)
 
@@ -369,6 +370,7 @@ class ProfileView(LoginRequiredMixin, View):
                         cart.flavor_price = flavoritem.price*2
                     else:
                         cart.flavor_price = flavoritem.price
+                    cart.flavor_image = flavoritem.image
                 else:
                     error_flag.append(same_cart.flavor_title)
 
@@ -377,6 +379,7 @@ class ProfileView(LoginRequiredMixin, View):
                     flavoritem = FlavorItem.objects.get(title=same_cart.flavor2_title)
                     cart.flavor2_title = flavoritem.title
                     cart.flavor2_price = flavoritem.price
+                    cart.flavor2_image = flavoritem.image
                 elif same_cart.flavor2_title == '':
                     cart.flavor2_title = ''
                 else:
@@ -387,6 +390,7 @@ class ProfileView(LoginRequiredMixin, View):
                     optionitem = OptionItem.objects.get(title=same_cart.option_title)
                     cart.option_title = optionitem.title
                     cart.option_price = optionitem.price
+                    cart.option_image = optionitem.image
                 elif same_cart.option_title == '':
                     cart.option_title = ''
                 else:
@@ -397,6 +401,7 @@ class ProfileView(LoginRequiredMixin, View):
                     optionitem = OptionItem.objects.get(title=same_cart.option2_title)
                     cart.option2_title = optionitem.title
                     cart.option2_price = optionitem.price
+                    cart.option2_image = optionitem.image
                 elif same_cart.option2_title == '':
                     cart.option2_title = ''
                 else:
@@ -407,6 +412,7 @@ class ProfileView(LoginRequiredMixin, View):
                     optionitem = OptionItem.objects.get(title=same_cart.option3_title)
                     cart.option3_title = optionitem.title
                     cart.option3_price = optionitem.price
+                    cart.option3_image = optionitem.image
                 elif same_cart.option3_title == '':
                     cart.option3_title = ''
                 else:
@@ -417,6 +423,7 @@ class ProfileView(LoginRequiredMixin, View):
                     optionitem = OptionItem.objects.get(title=same_cart.option4_title)
                     cart.option4_title = optionitem.title
                     cart.option4_price = optionitem.price
+                    cart.option4_image = optionitem.image
                 elif same_cart.option4_title == '':
                     cart.option4_title = ''
                 else:
