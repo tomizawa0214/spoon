@@ -15,10 +15,10 @@
         素材の味を活かし、あっさりした味わいや濃厚な味わいのジェラートまで常時20種類をご用意しています。
     </p>
     <div class="menu__item mx-auto text-center">
-        <p class="menu__flavor-type d-inline-block mb-4">WEB限定フレーバー</p>
+        <p class="menu__flavor-type d-inline-block mb-4">人気の定番フレーバー</p>
     </div>
     <ul class="row list-unstyled">
-        {% for flavor in flavor_web %}
+        {% for flavor in flavor_item %}
             <li class="menu__item col-4 col-sm-3 col-lg-2 mb-4 px-2 px-sm-4">
                 <div>
                     <img class="menu__item--img mb-2" src="{{ flavor.image.url }}">
@@ -30,10 +30,10 @@
         {% endfor %}
     </ul>
     <div class="menu__item mx-auto text-center">
-        <p class="menu__flavor-type d-inline-block mb-4">人気の定番フレーバー</p>
+        <p class="menu__flavor-type d-inline-block mb-4">WEB限定フレーバー</p>
     </div>
     <ul class="row list-unstyled">
-        {% for flavor in flavor_item %}
+        {% for flavor in flavor_web %}
             <li class="menu__item col-4 col-sm-3 col-lg-2 mb-4 px-2 px-sm-4">
                 <div>
                     <img class="menu__item--img mb-2" src="{{ flavor.image.url }}">
