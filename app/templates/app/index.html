@@ -104,28 +104,6 @@
 <script>
     'use strict';
 
-    // 公開日案内告知
-    const el  = Object.assign(document.createElement('div'), { className: 'delete__alert sticky-top rounded-0 alert alert-danger alert-dismissible fade show m-0' });
-    const el1  = Object.assign(document.createElement('strong'), { className: 'alert-heading', innerHTML: '<i class="fas fa-exclamation-triangle fa-fw mr-1" aria-hidden="true"></i>「spoonのお持ち帰り予約」のお知らせ' });
-    const el2  = Object.assign(document.createElement('p'), { className: 'delete__alert--text mt-1 mb-0', innerHTML: '「spoonのお持ち帰り予約」は現在準備中です。大変恐れ入りますが、今しばらくお待ちくださいませ。' });
-    const el3  = Object.assign(document.createElement('button'), { className: 'delete__alert--btn close', type: 'button' });
-    const el4  = Object.assign(document.createElement('span'), { className: 'delete__alert--close', innerHTML: '&times;' });
-    // 階層に合わせて要素をまとめる
-    el3.appendChild(el4);
-    el.appendChild(el1);
-    el.appendChild(el2);
-    el.appendChild(el3);
-    // 最後に追加
-    document.body.insertBefore(el, document.body.firstChild);
-
-    let deleteAlert = document.querySelector('.delete__alert');
-    deleteAlert.setAttribute('role', 'alert');
-    let alertBtn = document.querySelector('.delete__alert--btn');
-    alertBtn.setAttribute('data-dismiss', 'alert');
-    alertBtn.setAttribute('aria-label', 'Close');
-    let alertClose = document.querySelector('.delete__alert--close');
-    alertClose.setAttribute('aria-hidden', 'true');
-
     // 最初に、ビューポートの高さを取得し、0.01を掛けて1%の値を算出して、vh単位の値を取得
     let vh = window.innerHeight * 0.01;
     // カスタム変数--vhの値をドキュメントのルートに設定
