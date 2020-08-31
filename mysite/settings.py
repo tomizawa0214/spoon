@@ -12,11 +12,12 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'app',
     'accounts',
-    'django.contrib.sites',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'django.contrib.humanize',
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
     'imagekit',
 ]
 
