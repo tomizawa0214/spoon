@@ -43,14 +43,14 @@
         </h1>
         
         <div class="text-center">
-            <div class="d-inline-block text-left">
+            <ul class="d-inline-block text-left list-unstyled m-0">
                 {% for news in news_data %}
-                    <p class="top__news mb-3">
-                        <span class="top__news--date">{{ news.date | date:"Y/m/d" }}</span><br class="d-sm-none">
-                        <span class="ml-sm-3">{{ news.comment }}</span>
-                    </p>
+                    <li class="top__news mb-4 d-sm-flex">
+                        <p class="top__news--date m-0">{{ news.date | date:"Y/m/d" }}</p>
+                        <p class="m-0 ml-sm-3">{{ news.comment }}</p>
+                    </li>
                 {% endfor %}
-            </div>
+            </ul>
         </div>
 
         <h1 class="title mt-5">
