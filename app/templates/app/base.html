@@ -51,7 +51,7 @@
                 </div>
             </div>
             <div class="spnav__bg"></div>
-            <div class="spnav__menu">
+            <div class="spnav__menu d-none">
                 <div class="spnav__menu--wrap d-flex flex-column">
                     <a class="spnav__menu--wrap--link row m-0 py-3 justify-content-center" href="{% url 'menu' %}">
                         <span class="spnav__menu--wrap--link--e col-5 p-0">MENU</span>
@@ -238,6 +238,9 @@
         <script src="{% static 'js/smoothscroll.js' %}"></script>
         <script>
             'use strict';
+            window.addEventListener('DOMContentLoaded', () => {
+                document.querySelector('.spnav__menu').classList.remove('d-none');
+            });
 
             // スマホ用メニューバー
             document.querySelector('.spnav__header--btn').addEventListener('click', () => {
