@@ -5,6 +5,7 @@ from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFill
 import locale
 import pytz
+import textwrap
 
 
 class SizeItem(models.Model):
@@ -86,7 +87,7 @@ class Cart(models.Model):
         return self.size_price + self.flavor_price + self.flavor2_price + self.option_price + self.option2_price + self.option3_price + self.option4_price
 
     def __str__(self):
-        return f'{self.user.name}　{self.size_title}'
+        return f'【{self.size_title}　{self.flavor_title}　{self.flavor2_title}　{self.option_title}　{self.option2_title}　{self.option3_title}　{self.option4_title}'
 
     class Meta:
         verbose_name = 'カート'

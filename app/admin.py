@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import PickUp, WhatsNew, TodayOrder, Order, Cart, SizeItem, FlavorItem, OptionItem
 
+
 class StandbyListFilter(admin.SimpleListFilter):
     title = '注文の準備'
     parameter_name = 'standby'
@@ -37,12 +38,14 @@ class CompleteListFilter(admin.SimpleListFilter):
             return queryset.filter(complete=False)
         else:
             return queryset.all()
+            
 
 class OrderAdmin(admin.ModelAdmin):
     list_display = ('name', 'furigana', 'order_number', 'total_price', 'receipt_datetime', 'standby', 'complete')
     ordering = ('receipt',)
     list_filter = (StandbyListFilter, CompleteListFilter)
     list_editable = ('standby', 'complete')
+    filter_horizontal = ('cart',)
 
 
 class TodayOrderAdmin(admin.ModelAdmin):
