@@ -238,9 +238,9 @@
         <script src="{% static 'js/smoothscroll.js' %}"></script>
         <script>
             'use strict';
-            window.addEventListener('DOMContentLoaded', () => {
+            window.onload = () => {
                 document.querySelector('.spnav__menu').classList.remove('d-none');
-            });
+            };
 
             // スマホ用メニューバー
             document.querySelector('.spnav__header--btn').addEventListener('click', () => {
