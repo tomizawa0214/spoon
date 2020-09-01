@@ -238,7 +238,7 @@ class SignupDoneView(View):
         except BadHeaderError:
             return HttpResponse("無効なヘッダが検出されました。")
 
-        return redirect('account_signup_done')
+        return JsonResponse({'data': 'data'})
 
 
 class SignupConfirmView(View):

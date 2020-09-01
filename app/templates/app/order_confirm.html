@@ -144,7 +144,7 @@
     </div>
 </div>
 <div class="text-center">
-    <a id="order_done" class="order-ck__btn btn rounded-pill" href="{% url 'order_thanks' %}" ontouchstart="">注文を確定</a>
+    <a id="order_done" class="order-ck__btn btn rounded-pill" ontouchstart="">注文を確定</a>
 </div>
 {% endblock %}
 
@@ -253,6 +253,44 @@
             let alert_close = document.querySelector('.order__reorder--close');
             alert_close.setAttribute('aria-hidden', 'true');
         } else {
+            // 処理中表示
+            const element  = Object.assign(document.createElement('div'), { className: 'order-ck__loading'});
+            const element2  = Object.assign(document.createElement('div'), { className: 'order-ck__loading--circle my-4 mx-auto'});
+            const element3  = Object.assign(document.createElement('div'), { className: 'order-ck__loading--circle--child'});
+            const element4  = Object.assign(document.createElement('div'), { className: 'order-ck__loading--circle--2 order-ck__loading--circle--child'});
+            const element5  = Object.assign(document.createElement('div'), { className: 'order-ck__loading--circle--3 order-ck__loading--circle--child'});
+            const element6  = Object.assign(document.createElement('div'), { className: 'order-ck__loading--circle--4 order-ck__loading--circle--child'});
+            const element7  = Object.assign(document.createElement('div'), { className: 'order-ck__loading--circle--5 order-ck__loading--circle--child'});
+            const element8  = Object.assign(document.createElement('div'), { className: 'order-ck__loading--circle--6 order-ck__loading--circle--child'});
+            const element9  = Object.assign(document.createElement('div'), { className: 'order-ck__loading--circle--7 order-ck__loading--circle--child'});
+            const element10  = Object.assign(document.createElement('div'), { className: 'order-ck__loading--circle--8 order-ck__loading--circle--child'});
+            const element11  = Object.assign(document.createElement('div'), { className: 'order-ck__loading--circle--9 order-ck__loading--circle--child'});
+            const element12  = Object.assign(document.createElement('div'), { className: 'order-ck__loading--circle--10 order-ck__loading--circle--child'});
+            const element13  = Object.assign(document.createElement('div'), { className: 'order-ck__loading--circle--11 order-ck__loading--circle--child'});
+            const element14  = Object.assign(document.createElement('div'), { className: 'order-ck__loading--circle--12 order-ck__loading--circle--child'});
+            const element15 = Object.assign(document.createElement('p'), { className: 'order-ck__loading--processing text-center mb-1', textContent: '注文処理中...'});
+            const element16 = Object.assign(document.createElement('p'), { className: 'order-ck__loading--text text-center mb-4', textContent: 'このままお待ちください'});
+            const element17  = Object.assign(document.createElement('div'), { className: 'order-ck__bg'});
+            // 階層に合わせて要素をまとめる
+            element2.appendChild(element3);
+            element2.appendChild(element4);
+            element2.appendChild(element5);
+            element2.appendChild(element6);
+            element2.appendChild(element7);
+            element2.appendChild(element8);
+            element2.appendChild(element9);
+            element2.appendChild(element10);
+            element2.appendChild(element11);
+            element2.appendChild(element12);
+            element2.appendChild(element13);
+            element2.appendChild(element14);
+            element.appendChild(element2);
+            element.appendChild(element15);
+            element.appendChild(element16);
+            // 最後に追加
+            document.body.insertBefore(element, document.body.firstChild);
+            document.body.insertBefore(element17, document.body.firstChild);
+
             const url = '{% url "order_thanks" %}';
 
             // クーポン金額を取得
@@ -288,6 +326,12 @@
                     'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
                     'X-CSRFToken': csrftoken,
                 }
+            }).then(response => {
+                return response.json();
+            }).then(response => {
+                document.querySelector('.order-ck__loading').remove();
+                document.querySelector('.order-ck__bg').remove();
+                window.location.href = '{% url "order_thanks" %}';
             })
         }
     });
