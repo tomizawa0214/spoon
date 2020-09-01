@@ -237,17 +237,24 @@
     });
 
     const backToTop = document.querySelector('.back-to-top')
+    const bg = document.querySelector('.spnav__bg');
+    const spMenu = document.querySelector('.spnav__menu');
     // ウインドウ幅に応じてbody要素を変更
-    if ( window.innerWidth < 576 ) {
+    var currentWidth = window.innerWidth;
+    if ( currentWidth < 576 ) {
         document.body.style.marginBottom = '132px';
         backToTop.style.bottom = '147px'
+        spMenu.style.height = 'calc(var(--vh, 1vh)*100 - 192px)';
+        bg.style.height = 'calc(var(--vh, 1vh)*100 - 192px)';
     }
-
     window.addEventListener('resize', event => {
-        if ( window.innerWidth < 576 ) {
+        if ( currentWidth != window.innerWidth && window.innerWidth < 576 ) {
             document.body.style.marginBottom = '132px';
             backToTop.style.bottom = '147px'
-        } else {
+            spMenu.style.height = 'calc(var(--vh, 1vh)*100 - 192px)';
+            bg.style.height = 'calc(var(--vh, 1vh)*100 - 192px)';
+            currentWidth = window.innerWidth;
+        } else if ( window.innerWidth >= 576 ) {
             document.body.style.marginBottom = 0;
             backToTop.style.bottom = '30px';
         }
