@@ -241,6 +241,10 @@
             window.onload = () => {
                 document.querySelector('.spnav__menu').classList.remove('d-none');
                 document.querySelector('.back-to-top').classList.remove('d-none');
+                const topImage = document.getElementById('slides')
+                if ( topImage ) {
+                    topImage.classList.remove('d-none');
+                }
             };
 
             // スマホ用メニューバー

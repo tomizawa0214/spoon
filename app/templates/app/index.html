@@ -21,13 +21,13 @@
 {% endblock %}
 
 {% block slider %}
-<div id= "slides" class="top carousel slide carousel-fade" data-ride="carousel" data-interval="3000">
+<div id= "slides" class="top carousel slide carousel-fade d-none" data-ride="carousel" data-interval="3000">
     <ul class="carousel-indicators">
         <li data-target="#slides" data-slide-to="0" class="active"></li>
         <li data-target="#slides" data-slide-to="1"></li>
         <li data-target="#slides" data-slide-to="2"></li>
     </ul>
-    <div class="carousel-inner d-none">
+    <div class="carousel-inner">
         <div class="top__item--image1 carousel-item active"></div>
         <div class="top__item--image2 carousel-item"></div>
         <div class="top__item--image3 carousel-item"></div>
@@ -103,10 +103,6 @@
 {% block extrajs %}
 <script>
     'use strict';
-
-    window.onload = () => {
-        document.querySelector('.carousel-inner').classList.remove('d-none');
-    };
 
     // 最初に、ビューポートの高さを取得し、0.01を掛けて1%の値を算出して、vh単位の値を取得
     let vh = window.innerHeight * 0.01;
