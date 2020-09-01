@@ -33,7 +33,7 @@
 
     <body>
         <!-- Back To Top -->
-        <div class="back-to-top" data-toggle="tooltip" data-placement="left" title="Back to Top">
+        <div class="back-to-top d-none" data-toggle="tooltip" data-placement="left" title="Back to Top">
             <img class="back-to-top__img" src="{% static 'img/back-to-top.svg' %}">
         </div>
         
@@ -240,6 +240,7 @@
             'use strict';
             window.onload = () => {
                 document.querySelector('.spnav__menu').classList.remove('d-none');
+                document.querySelector('.back-to-top').classList.remove('d-none');
             };
 
             // スマホ用メニューバー
