@@ -47,6 +47,11 @@ class OrderAdmin(admin.ModelAdmin):
     list_editable = ('standby', 'complete')
     filter_horizontal = ('cart',)
 
+    class Media:  
+        css = {
+            'all': ('css/widgets_admin.css',)
+        }
+
 
 class TodayOrderAdmin(admin.ModelAdmin):
     list_display = ('name', 'is_active')
