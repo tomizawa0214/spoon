@@ -6,6 +6,21 @@
         border-collapse: separate;
         border-spacing: 24px 24px;
         background: #F2F8ED;
+        &--email-warning {
+            font-size: 12px;
+            line-height: 18px;
+            letter-spacing: .3px;
+            &--icon {
+                color: #E8435F;
+            }
+            &--detail {
+                color: #1B95E0;
+                text-decoration: none;
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
     }
     &__btn {
         @include button;

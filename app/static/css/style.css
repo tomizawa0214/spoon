@@ -2941,6 +2941,25 @@ main {
   background: #F2F8ED;
 }
 
+.email-change__form--email-warning {
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: .3px;
+}
+
+.email-change__form--email-warning--icon {
+  color: #E8435F;
+}
+
+.email-change__form--email-warning--detail {
+  color: #1B95E0;
+  text-decoration: none;
+}
+
+.email-change__form--email-warning--detail:hover {
+  text-decoration: underline;
+}
+
 .email-change__btn {
   position: relative;
   width: 200px;
