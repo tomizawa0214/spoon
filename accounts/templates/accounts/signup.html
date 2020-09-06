@@ -292,10 +292,10 @@
         <p class="mt-2 mb-0">
             <label class="m-0">
                 <span class="signup__required">【必須】</span>
-                <input type="checkbox" id="agree" class="mr-1" disabled>規約に同意する
+                <input type="checkbox" id="agree" class="mr-1">規約に同意する
             </label>
         </p>
-        <button id="next" class="signup__btn btn rounded-pill" type="submit" ontouchstart="" disabled>確認画面へ</button>
+        <button  type="submit" id="next" class="signup__btn btn rounded-pill" ontouchstart="" disabled>確認画面へ</button>
     </form>
 </div>
 {% endblock %}
@@ -322,31 +322,9 @@
     const element3 = Object.assign(document.createElement('span'),{ className: 'ml-1', textContent: '日'});
     day.parentNode.insertBefore(element3, day.nextSibling);
 
-    //利用規約のスクロールを判定
+    // 同意チェックが付いたら遷移OK
     const agree = document.getElementById('agree');
     const next = document.getElementById('next');
-    const elm = document.getElementById('scrollTerms');
-
-    // 要素の表示領域を取得
-    let height = elm.offsetHeight;
-
-    // スクロールイベントを定義
-    elm.onscroll = () => {
-        // 要素のスクロール分を含めた高さを取得
-        let scrollHeight = elm.scrollHeight;
-        // 要素のスクロール位置を取得
-        let scrollTop = elm.scrollTop;
-        // 現在の表示位置の高さ 
-        let scrollPosition = height + scrollTop;
-        // スクロールの最終値
-        let proximity = 0;
-
-        if (( scrollHeight - scrollPosition ) / scrollHeight <= proximity ) {
-            agree.disabled = false;
-        }
-    }
-
-    // 同意チェックが付いたら遷移OK
     agree.addEventListener('click', () => {
         if ( agree.checked ) {
             next.disabled = false;
