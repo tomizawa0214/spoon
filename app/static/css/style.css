@@ -1945,21 +1945,102 @@ main {
   text-decoration: underline;
 }
 
+.signup__terms-modal {
+  position: relative;
+  padding: 10px;
+  width: 200px;
+  font-size: 14px;
+  color: #8C8C8C;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  cursor: pointer;
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+
+.signup__terms-modal::after {
+  content: "＋";
+  position: absolute;
+  font-size: 20px;
+  top: 10px;
+  right: 10px;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+}
+
+.signup__terms-modal:hover {
+  background: #F2F8ED;
+}
+
 .signup__terms {
-  max-width: 1000px;
-  height: 300px;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+}
+
+.signup__terms--bg {
+  width: 100%;
+  height: 100%;
+  opacity: .7;
+  background: #000;
+}
+
+.signup__terms--wrap {
+  position: absolute;
+  width: calc(100% - 60px);
+  height: calc(100vh - 120px);
+  max-width: 800px;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.signup__terms--wrap--block {
+  width: 100%;
+  height: 100%;
+  padding: 60px 40px;
+  background: #FDFDFD;
+}
+
+.signup__terms--wrap--block--content {
+  width: 100%;
+  height: 100%;
   font-size: 14px;
   line-height: 22px;
   letter-spacing: .5px;
   overflow-y: scroll;
 }
 
-.signup__terms--ul {
+.signup__terms--wrap--block--content--title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.signup__terms--wrap--block--content--ul {
   list-style-type: decimal;
 }
 
-.signup__terms--ul--ul {
+.signup__terms--wrap--block--content--ul--ul {
   list-style-type: lower-alpha;
+}
+
+.signup__terms--wrap--close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 30px;
+  opacity: .5;
+  cursor: pointer;
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+
+.signup__terms--wrap--close:hover {
+  color: #E8435F;
 }
 
 .signup__btn {
@@ -2201,6 +2282,9 @@ main {
   }
   .signup__table th {
     letter-spacing: .6px;
+  }
+  .signup__terms--wrap--block {
+    padding: 40px 30px;
   }
   .signup-ck__table {
     max-width: 380px;
