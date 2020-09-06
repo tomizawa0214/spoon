@@ -10,6 +10,20 @@
         border-collapse: separate;
         border-spacing: 0;
         background: #F2F8ED;
+        &--body {
+            &--email-warning {
+                &--icon {
+                    color: #E8435F;
+                }
+                &--detail {
+                    color: #1B95E0;
+                    text-decoration: none;
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
     }
     &__terms {
         max-width: 1000px;

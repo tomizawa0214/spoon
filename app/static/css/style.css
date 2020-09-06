@@ -1913,6 +1913,19 @@ main {
   background: #F2F8ED;
 }
 
+.signup__table--body--email-warning--icon {
+  color: #E8435F;
+}
+
+.signup__table--body--email-warning--detail {
+  color: #1B95E0;
+  text-decoration: none;
+}
+
+.signup__table--body--email-warning--detail:hover {
+  text-decoration: underline;
+}
+
 .signup__terms {
   max-width: 1000px;
   height: 300px;
