@@ -32,7 +32,7 @@
                             <span class="signup__required">【必須】</span>
                         </label>
                     </th>
-                    <td class="d-block d-md-table-cell text-left mb-4">
+                    <td id="email-form" class="d-block d-md-table-cell text-left mb-4">
                         {% render_field form.email class="form-control" placeholder="メールアドレス" %}
                         {% for field in form %}
                             <p class="error-msg email_error d-none m-0">
@@ -83,6 +83,34 @@
             email_error[i].className = 'error-msg email_error d-none m-0'
             email.className = 'form-control'
         })
+    }
+
+    // リアルタイムバリデーション
+    email.oninput = () => {
+        const emailForm = document.getElementById('email-form');
+        let settingInfo = (link, carrier)  => {
+            const element  = Object.assign(
+                document.createElement('p'), {
+                    className: 'contact__form--table--body--email-warning text-left mt-1 mb-0',
+                    innerHTML: `<i class="contact__form--table--body--email-warning--icon fas fa-exclamation-triangle fa-fw mr-1" aria-hidden="true"></i>\
+                        お問い合わせ内容の確認メールが「spoon.gelato.takasaki@gmail.com」から届きます。\
+                        <b>受信許可設定（迷惑メール設定）</b>はお済みですか？\
+                        <a class="contact__form--table--body--email-warning--detail" href=${link} target="_blank" rel="noopener">${carrier}</a>`
+                }
+            );
+            emailForm.insertBefore(element, email.nextSibling);
+        }
+        if ( email.value.match(/ezweb.ne.jp/) && emailForm.children.length == 4 ) {
+            settingInfo('https://www.au.com/support/service/mobile/trouble/mail/email/filter/detail/domain/', 'au受信リスト設定');
+        } else if ( email.value.match(/softbank.jp/) && emailForm.children.length == 4 ) {
+            settingInfo('https://www.softbank.jp/mobile/support/mail/antispam/email-i/white/', 'SoftBank受信リスト設定');
+        } else if ( email.value.match(/docomo.ne.jp/) && emailForm.children.length == 4 ) {
+            settingInfo('https://www.nttdocomo.co.jp/info/spam_mail/domain/', 'docomo受信リスト設定');
+        } else if ( (email.value.match(/ezweb.ne.jp/) || email.value.match(/softbank.jp/) || email.value.match(/docomo.ne.jp/)) && emailForm.children.length == 5 ) {
+            ;
+        } else if ( (!email.value.match(/ezweb.ne.jp/) || !email.value.match(/softbank.jp/) || !email.value.match(/docomo.ne.jp/)) && emailForm.children.length == 5 ) {
+            document.querySelector('.contact__form--table--body--email-warning').remove()
+        }
     }
 </script>
 {% endblock %}
