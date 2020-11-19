@@ -284,7 +284,7 @@ class OrderUserView(LoginRequiredMixin, View):
 
         # 現在日時を取得
         dt = datetime.datetime.now()
-        # dt = datetime.datetime(2020, 7, 26, 18, 10)
+        # dt = datetime.datetime(2020, 12, 24)
         # 日本語表記の曜日名・月名
         locale.setlocale(locale.LC_TIME, 'ja_JP.UTF-8')
 
@@ -301,11 +301,27 @@ class OrderUserView(LoginRequiredMixin, View):
             # 本日から1週間分を取得
             days = [dt + timedelta(days=day) for day in range(7)]
             get_weeks("【本日】")
+
         # 現在時刻が16:31以降
         elif dt.time() >= datetime.time(16, 31) or today_order == False:
             # 翌日から1週間分を取得
             days = [dt + timedelta(days=day+1) for day in range(7)]
             get_weeks("【明日】")
+
+        # 11月30日(月)は営業
+        if dt.month == 11 and dt.day >= 25:
+            date_list = [j for j in date_list if '(火)' not in j]
+        # 12月は月火定休
+        elif dt.month == 12:
+            date_list = [j for j in date_list if '(月)' not in j and '(火)' not in j]
+
+        # 年末年始休業（12/31～1/5）
+        if (dt.month == 12 and dt.day > 24) or (dt.month == 1 and dt.day <= 5):
+            date_list = [j for j in date_list if '12月31日' not in j and '1月1日' not in j and '1月2日' not in j and '1月3日' not in j and '1月4日' not in j and '1月5日' not in j]
+
+        # 12月の火曜日と1月5日のみ【明日】追加
+        if (dt.month == 12 and dt.weekday() == 1) or (dt.month == 1 and dt.day == 5):
+            date_list[0] += '【明日】'
 
         # 当日受付用
         time_list = []

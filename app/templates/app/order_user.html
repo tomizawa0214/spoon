@@ -75,22 +75,25 @@
                             <span class="signup__required">【必須】</span>
                         </label>
                     </th>
-                    <td class="d-block d-sm-flex mb-4">
-                        <select id="date" name="date" class="order-user__form--body--select--date form-control mb-2 mb-sm-0 mr-sm-3" onchange="timeChange();">
-                            {% for date in date_list %}
-                                <option value="{{ date }}">{{ date }}</option>
-                            {% endfor %}
-                        </select>
-                        <select id="specified_time" name="time" class="order-user__form--body--select--time form-control">
-                            {% for time in time_list %}
-                                <option value="{{ time }}">{{ time }}</option>
-                            {% endfor %}
-                        </select>
-                        <select id="full_time" name="fulltime" class="order-user__form--body--select--time d-none form-control">
-                            {% for fulltime in fulltime_list %}
-                                <option value="{{ fulltime }}">{{ fulltime }}</option>
-                            {% endfor %}
-                        </select>
+                    <td class="d-block mb-4">
+                        <div class="d-sm-flex">
+                            <select id="date" name="date" class="order-user__form--body--select--date form-control mb-2 mb-sm-0 mr-sm-3" onchange="timeChange();">
+                                {% for date in date_list %}
+                                    <option value="{{ date }}">{{ date }}</option>
+                                {% endfor %}
+                            </select>
+                            <select id="specified_time" name="time" class="order-user__form--body--select--time form-control">
+                                {% for time in time_list %}
+                                    <option value="{{ time }}">{{ time }}</option>
+                                {% endfor %}
+                            </select>
+                            <select id="full_time" name="fulltime" class="order-user__form--body--select--time d-none form-control">
+                                {% for fulltime in fulltime_list %}
+                                    <option value="{{ fulltime }}">{{ fulltime }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <p class="error-msg text-left mt-1 mb-0">※12月は毎週月曜日、火曜日を休業日とさせていただきます。<br class="d-none d-sm-block">※年末年始12/31～1/5を休業日とさせていただきます。</p>
                     </td>
                 </tr>
             </tbody>
