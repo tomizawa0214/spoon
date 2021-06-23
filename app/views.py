@@ -205,23 +205,23 @@ class OrderConfirmView(LoginRequiredMixin, View):
             days = [dt + timedelta(days=day+1) for day in range(7)]
             get_weeks("【明日】")
 
-        # 6月の休業日
+        # 7月の休業日
         date_list = [
                         j for j in date_list if \
-                        '5月31日' not in j and \
-                        '6月1日' not in j and \
-                        '6月7日' not in j and \
-                        '6月8日' not in j and \
-                        '6月14日' not in j and \
-                        '6月15日' not in j and \
-                        '6月21日' not in j and \
-                        '6月22日' not in j and \
                         '6月28日' not in j and \
-                        '6月29日' not in j
+                        '6月29日' not in j and \
+                        '7月5日' not in j and \
+                        '7月6日' not in j and \
+                        '7月12日' not in j and \
+                        '7月13日' not in j and \
+                        '7月19日' not in j and \
+                        '7月20日' not in j and \
+                        '7月26日' not in j and \
+                        '7月27日' not in j
                     ]
 
-        # 6月の火曜日は【明日】追加
-        if ((dt.month == 6) and dt.weekday() == 1 and dt.time() < datetime.time(16, 31) and today_order == True):
+        # 7月の火曜日は【明日】追加
+        if ((dt.month == 7) and dt.weekday() == 1 and dt.time() < datetime.time(16, 31) and today_order == True):
             date_list[0] += '【明日】'
 
         # 当日受付用
@@ -308,7 +308,7 @@ class OrderUserView(LoginRequiredMixin, View):
 
         # 現在日時を取得
         dt = datetime.datetime.now()
-        # dt = datetime.datetime(2021, 6, 29, 12, 10)
+        # dt = datetime.datetime(2021, 7, 7, 12, 10)
         # 日本語表記の曜日名・月名
         locale.setlocale(locale.LC_TIME, 'ja_JP.UTF-8')
 
@@ -331,23 +331,23 @@ class OrderUserView(LoginRequiredMixin, View):
             days = [dt + timedelta(days=day+1) for day in range(7)]
             get_weeks("【明日】")
 
-        # 6月の休業日
+        # 7月の休業日
         date_list = [
                         j for j in date_list if \
-                        '5月31日' not in j and \
-                        '6月1日' not in j and \
-                        '6月7日' not in j and \
-                        '6月8日' not in j and \
-                        '6月14日' not in j and \
-                        '6月15日' not in j and \
-                        '6月21日' not in j and \
-                        '6月22日' not in j and \
                         '6月28日' not in j and \
-                        '6月29日' not in j
+                        '6月29日' not in j and \
+                        '7月5日' not in j and \
+                        '7月6日' not in j and \
+                        '7月12日' not in j and \
+                        '7月13日' not in j and \
+                        '7月19日' not in j and \
+                        '7月20日' not in j and \
+                        '7月26日' not in j and \
+                        '7月27日' not in j
                     ]
 
-        # 6月の火曜日は【明日】追加
-        if ((dt.month == 6) and dt.weekday() == 1 and dt.time() < datetime.time(16, 31) and today_order == True):
+        # 7月の火曜日は【明日】追加
+        if ((dt.month == 7) and dt.weekday() == 1 and dt.time() < datetime.time(16, 31) and today_order == True):
             date_list[0] += '【明日】'
 
         # 当日受付用
