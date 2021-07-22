@@ -304,8 +304,8 @@ class OrderUserView(LoginRequiredMixin, View):
             today_order = False
 
         # 現在日時を取得
-        # dt = datetime.datetime.now()
-        dt = datetime.datetime(2021, 8, 4, 14, 10)
+        dt = datetime.datetime.now()
+        # dt = datetime.datetime(2021, 8, 4, 14, 10)
         # 日本語表記の曜日名・月名
         locale.setlocale(locale.LC_TIME, 'ja_JP.UTF-8')
 
