@@ -205,19 +205,19 @@ class OrderConfirmView(LoginRequiredMixin, View):
             days = [dt + timedelta(days=day+1) for day in range(7)]
             get_weeks("【明日】")
 
-        # 9月の休業日
+        # 10月の休業日
         date_list = [
             j for j in date_list if \
-            '8月24日' not in j and \
-            '8月31日' not in j and \
-            '9月7日' not in j and \
-            '9月14日' not in j and \
             '9月21日' not in j and \
-            '9月28日' not in j
+            '9月28日' not in j and \
+            '10月5日' not in j and \
+            '10月12日' not in j and \
+            '10月19日' not in j and \
+            '10月26日' not in j
         ]
 
-        # 8月、9月の火曜日は【明日】追加
-        if ((dt.month == 8 or dt.month == 9) and dt.weekday() == 1 and dt.time() < datetime.time(16, 31) and today_order == True):
+        # 9月、10月の火曜日は【明日】追加
+        if ((dt.month == 9 or dt.month == 10) and dt.weekday() == 1 and dt.time() < datetime.time(16, 31) and today_order == True):
             date_list[0] += '【明日】'
 
         # 当日受付用
@@ -304,7 +304,7 @@ class OrderUserView(LoginRequiredMixin, View):
 
         # 現在日時を取得
         dt = datetime.datetime.now()
-        # dt = datetime.datetime(2021, 9, 20, 13, 10)
+        # dt = datetime.datetime(2021, 10, 26, 12, 10)
         # 日本語表記の曜日名・月名
         locale.setlocale(locale.LC_TIME, 'ja_JP.UTF-8')
 
@@ -327,19 +327,19 @@ class OrderUserView(LoginRequiredMixin, View):
             days = [dt + timedelta(days=day+1) for day in range(7)]
             get_weeks("【明日】")
 
-        # 9月の休業日
+        # 10月の休業日
         date_list = [
             j for j in date_list if \
-            '8月24日' not in j and \
-            '8月31日' not in j and \
-            '9月7日' not in j and \
-            '9月14日' not in j and \
             '9月21日' not in j and \
-            '9月28日' not in j
+            '9月28日' not in j and \
+            '10月5日' not in j and \
+            '10月12日' not in j and \
+            '10月19日' not in j and \
+            '10月26日' not in j
         ]
 
-        # 8月、9月の火曜日は【明日】追加
-        if ((dt.month == 8 or dt.month == 9) and dt.weekday() == 1 and dt.time() < datetime.time(16, 31) and today_order == True):
+        # 9月、10月の火曜日は【明日】追加
+        if ((dt.month == 9 or dt.month == 10) and dt.weekday() == 1 and dt.time() < datetime.time(16, 31) and today_order == True):
             date_list[0] += '【明日】'
 
         # 当日受付用
