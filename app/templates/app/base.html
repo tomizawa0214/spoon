@@ -189,7 +189,7 @@
                 </li>
             </ul>
             <div class="footer__copy d-flex justify-content-center">
-                <small class="my-4 text-center">&copy; 2021 Praline</small>
+                <small class="my-4 text-center">&copy; <span id="copy_year"></span> Praline</small>
             </div>
         </footer>
 
@@ -238,6 +238,13 @@
         <script src="{% static 'js/smoothscroll.js' %}"></script>
         <script>
             'use strict';
+
+            // コピーライトの年を設定
+            var currentTime = new Date();
+            var year = currentTime.getFullYear()
+            var copy_year = document.getElementById('copy_year');
+            copy_year.innerHTML = year;
+
             window.onload = () => {
                 document.querySelector('.spnav__menu').classList.remove('d-none');
                 document.querySelector('.back-to-top').classList.remove('d-none');
