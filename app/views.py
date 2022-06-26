@@ -209,6 +209,7 @@ class OrderConfirmView(LoginRequiredMixin, View):
         date_list = [
             j for j in date_list if \
             '6月28日' not in j and \
+            '7月4日' not in j and \
             '7月5日' not in j and \
             '7月12日' not in j and \
             '7月19日' not in j and \
@@ -251,7 +252,7 @@ class OrderConfirmView(LoginRequiredMixin, View):
                     break
 
         # 休業日は明日以降の予約
-        if (dt.month == 6 and dt.day == 28) or dt.day == 5 or dt.day == 12 or dt.day == 19 or dt.day == 26:
+        if (dt.month == 6 and dt.day == 28) or dt.day == 4 or dt.day == 5 or dt.day == 12 or dt.day == 19 or dt.day == 26:
             get_fulltimes(time_list)
         else:
             # 現在時刻が11:00～16:30
@@ -303,7 +304,7 @@ class OrderUserView(LoginRequiredMixin, View):
 
         # 現在日時を取得
         dt = datetime.datetime.now()
-        # dt = datetime.datetime(2022, 7, 26, 12, 10)
+        # dt = datetime.datetime(2022, 7, 4, 12, 10)
         # 日本語表記の曜日名・月名
         locale.setlocale(locale.LC_TIME, 'ja_JP.UTF-8')
 
@@ -330,6 +331,7 @@ class OrderUserView(LoginRequiredMixin, View):
         date_list = [
             j for j in date_list if \
             '6月28日' not in j and \
+            '7月4日' not in j and \
             '7月5日' not in j and \
             '7月12日' not in j and \
             '7月19日' not in j and \
@@ -372,7 +374,7 @@ class OrderUserView(LoginRequiredMixin, View):
                     break
 
         # 休業日は明日以降の予約
-        if (dt.month == 6 and dt.day == 28) or dt.day == 5 or dt.day == 12 or dt.day == 19 or dt.day == 26:
+        if (dt.month == 6 and dt.day == 28) or dt.day == 4 or dt.day == 5 or dt.day == 12 or dt.day == 19 or dt.day == 26:
             get_fulltimes(time_list)
         else:
             # 現在時刻が11:00～16:30
