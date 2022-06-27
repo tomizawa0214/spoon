@@ -241,8 +241,8 @@ class OrderConfirmView(LoginRequiredMixin, View):
                 else:
                     break
 
-        def get_fulltimes(box):
-            handle_time = datetime.datetime.combine(datetime.date.today(), datetime.time(11, 30))
+        def get_fulltimes(box, hour, minute):
+            handle_time = datetime.datetime.combine(datetime.date.today(), datetime.time(hour, minute))
             while(True):
                 box.append(handle_time.strftime('%H:%M'))
                 next_time = handle_time + timedelta(minutes=30)
@@ -251,10 +251,11 @@ class OrderConfirmView(LoginRequiredMixin, View):
                 else:
                     break
 
-        # 休業日は明日以降の予約
+        # 今日が休業日の場合
         if (dt.month == 6 and dt.day == 28) or dt.day == 4 or dt.day == 5 or dt.day == 12 or dt.day == 19 or dt.day == 26:
-            get_fulltimes(time_list)
-        else:
+            get_fulltimes(time_list, 13, 00) # 休業日の翌日は平日
+        # 土日祝は11:30～
+        elif (dt.weekday() == 5) or (dt.weekday() == 6) or (dt.month == 7 and dt.day == 18):
             # 現在時刻が11:00～16:30
             if datetime.time(11) <= dt.time() < datetime.time(16, 31) and today_order == True:
                 # 現在時刻から30分後を取得
@@ -269,16 +270,36 @@ class OrderConfirmView(LoginRequiredMixin, View):
                 get_times(after_30)
             # 現在時刻が16:31～翌10:59
             elif dt.time() >= datetime.time(16, 31) or dt.time() < datetime.time(11) or today_order == False:
-                get_fulltimes(time_list)
+                get_fulltimes(time_list, 11, 30)
+        # 平日は12:30～
+        else:
+            # 現在時刻が12:30～16:30
+            if datetime.time(12, 30) <= dt.time() < datetime.time(16, 31) and today_order == True:
+                # 現在時刻から30分後を取得
+                after_30 = dt.replace(second=0, microsecond=0) + timedelta(minutes=30)
+                # 30分後の一の位を取得
+                after_30_one = ''.join(list(reversed(str(after_30.minute))))[0]
+                # 10分毎の値に丸める
+                if after_30_one != "0":
+                    round_time = 10 - int(after_30_one)
+                    after_30 += timedelta(minutes=round_time)
+                # 10分毎のリストを作成
+                get_times(after_30)
+            # 現在時刻が16:31～翌10:59
+            elif dt.time() >= datetime.time(16, 31) or dt.time() < datetime.time(12, 30) or today_order == False:
+                get_fulltimes(time_list, 13, 00)
 
-        fulltime_list = []
-        get_fulltimes(fulltime_list)
+        holiday_list = []
+        get_fulltimes(holiday_list, 11, 30)
+        weekday_list = []
+        get_fulltimes(weekday_list, 13, 00)
 
         return render(request, 'app/order_user.html', {
             'form': form,
             'date_list': date_list,
             'time_list': time_list,
-            'fulltime_list': fulltime_list
+            'weekday_list': weekday_list,
+            'holiday_list': holiday_list
         })
 
 
@@ -304,7 +325,7 @@ class OrderUserView(LoginRequiredMixin, View):
 
         # 現在日時を取得
         dt = datetime.datetime.now()
-        # dt = datetime.datetime(2022, 7, 4, 12, 10)
+        # dt = datetime.datetime(2022, 7, 12, 12, 20)
         # 日本語表記の曜日名・月名
         locale.setlocale(locale.LC_TIME, 'ja_JP.UTF-8')
 
@@ -363,8 +384,8 @@ class OrderUserView(LoginRequiredMixin, View):
                 else:
                     break
 
-        def get_fulltimes(box):
-            handle_time = datetime.datetime.combine(datetime.date.today(), datetime.time(11, 30))
+        def get_fulltimes(box, hour, minute):
+            handle_time = datetime.datetime.combine(datetime.date.today(), datetime.time(hour, minute))
             while(True):
                 box.append(handle_time.strftime('%H:%M'))
                 next_time = handle_time + timedelta(minutes=30)
@@ -373,10 +394,11 @@ class OrderUserView(LoginRequiredMixin, View):
                 else:
                     break
 
-        # 休業日は明日以降の予約
+        # 今日が休業日の場合
         if (dt.month == 6 and dt.day == 28) or dt.day == 4 or dt.day == 5 or dt.day == 12 or dt.day == 19 or dt.day == 26:
-            get_fulltimes(time_list)
-        else:
+            get_fulltimes(time_list, 13, 00) # 休業日の翌日は平日
+        # 土日祝は11:30～
+        elif (dt.weekday() == 5) or (dt.weekday() == 6) or (dt.month == 7 and dt.day == 18):
             # 現在時刻が11:00～16:30
             if datetime.time(11) <= dt.time() < datetime.time(16, 31) and today_order == True:
                 # 現在時刻から30分後を取得
@@ -391,16 +413,39 @@ class OrderUserView(LoginRequiredMixin, View):
                 get_times(after_30)
             # 現在時刻が16:31～翌10:59
             elif dt.time() >= datetime.time(16, 31) or dt.time() < datetime.time(11) or today_order == False:
-                get_fulltimes(time_list)
+                get_fulltimes(time_list, 11, 30)
+        # 平日は12:30～
+        else:
+            # 現在時刻が12:30～16:30
+            if datetime.time(12, 30) <= dt.time() < datetime.time(16, 31) and today_order == True:
+                # 現在時刻から30分後を取得
+                after_30 = dt.replace(second=0, microsecond=0) + timedelta(minutes=30)
+                # 30分後の一の位を取得
+                after_30_one = ''.join(list(reversed(str(after_30.minute))))[0]
+                # 10分毎の値に丸める
+                if after_30_one != "0":
+                    round_time = 10 - int(after_30_one)
+                    after_30 += timedelta(minutes=round_time)
+                # 10分毎のリストを作成
+                get_times(after_30)
+            # 現在時刻が16:31～翌10:59
+            elif dt.time() >= datetime.time(16, 31) or dt.time() < datetime.time(12, 30) or today_order == False:
+                get_fulltimes(time_list, 13, 00)
 
-        fulltime_list = []
-        get_fulltimes(fulltime_list)
+        holiday_list = []
+        get_fulltimes(holiday_list, 11, 30)
+        weekday_list = []
+        get_fulltimes(weekday_list, 13, 00)
 
+        print(time_list)
+        print(holiday_list)
+        print(weekday_list)
         return render(request, 'app/order_user.html', {
             'form': form,
             'date_list': date_list,
             'time_list': time_list,
-            'fulltime_list': fulltime_list
+            'weekday_list': weekday_list,
+            'holiday_list': holiday_list
         })
 
 

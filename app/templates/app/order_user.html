@@ -87,9 +87,14 @@
                                     <option value="{{ time }}">{{ time }}</option>
                                 {% endfor %}
                             </select>
-                            <select id="full_time" name="fulltime" class="order-user__form--body--select--time d-none form-control">
-                                {% for fulltime in fulltime_list %}
-                                    <option value="{{ fulltime }}">{{ fulltime }}</option>
+                            <select id="holidaytime" name="holidaytime" class="order-user__form--body--select--time d-none form-control">
+                                {% for holidaytime in holiday_list %}
+                                    <option value="{{ holidaytime }}">{{ holidaytime }}</option>
+                                {% endfor %}
+                            </select>
+                            <select id="weekdaytime" name="weekdaytime" class="order-user__form--body--select--time d-none form-control">
+                                {% for weekdaytime in weekday_list %}
+                                    <option value="{{ weekdaytime }}">{{ weekdaytime }}</option>
                                 {% endfor %}
                             </select>
                         </div>
@@ -100,7 +105,7 @@
         </table>
         <div class="order-user__help mx-auto mt-1">
             <p class="help-text text-left m-0">
-                ※当日のご注文受付は16:30までとさせていただきます。また店舗の状況により当日注文をお受けいたしかねる場合がございます。ご了承ください。※16:30以降にご注文の場合は翌日11:30以降のお受け取りとなります。
+                ※当日のご注文受付は16:30までとさせていただきます。また店舗の状況により当日注文をお受けいたしかねる場合がございます。ご了承ください。※16:30以降にご注文の場合は、翌日が土日祝で11:30以降、平日で13:00以降のお受け取りとなります。
             </p>
         </div>
         <div class="position-relative">
@@ -119,15 +124,24 @@
     // 本日を選択時のみ指定時間に変更
     let date = document.getElementById('date');
     let specified_time = document.getElementById('specified_time');
-    let full_time = document.getElementById('full_time');
+    let holidaytime = document.getElementById('holidaytime');
+    let weekdaytime = document.getElementById('weekdaytime');
 
     let timeChange = () => {
-        if ( date.value.match(/本日/)) {
+        if (date.value.indexOf('本日') !== -1) {
+            console.log("本日")
             specified_time.className = 'order-user__form--body--select--time d-block form-control';
-            full_time.className = 'd-none';
-        } else {
+            holidaytime.className = 'd-none';
+        } else if ((date.value.indexOf('(土)') !== -1) || (date.value.indexOf('(日)') !== -1) || (date.value.indexOf('7月18日(月)') !== -1))  {
+            console.log("土日祝")
             specified_time.className = 'd-none';
-            full_time.className = 'order-user__form--body--select--time d-block form-control';
+            weekdaytime.className = 'd-none';
+            holidaytime.className = 'order-user__form--body--select--time d-block form-control';
+        } else {
+            console.log("平日")
+            specified_time.className = 'd-none';
+            holidaytime.className = 'd-none';
+            weekdaytime.className = 'order-user__form--body--select--time d-block form-control';
         }
     }
 
