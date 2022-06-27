@@ -95,6 +95,8 @@ ACCOUNT_USERNAME_REQUIRED = False
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # 3桁のカンマ区切りを設定
