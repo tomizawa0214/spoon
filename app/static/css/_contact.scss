@@ -27,7 +27,42 @@
         &--btn {
             @include button;
         }
+        &--recaptcha {
+            margin: 40px 0 0;
+            text-align: left !important;
+            color: #767676;
+            small {
+                position: relative;
+                display: inline-block;
+                padding: 0 0 0 18px;
+                font-size: 12px;
+                &::before {
+                    content: "";
+                    display: inline-block;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    padding: 0 0 0 20px;
+                    width: 14px;
+                    height: 20px;
+                    background-repeat: no-repeat;
+                    background-image: url(../img/nav_icon_recaptcha.svg);
+                }
+                a {
+                    color: #1B95E0;
+                    text-decoration: none;
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
     }
+}
+
+// reCAPTCHA3
+.grecaptcha-badge {
+    visibility: hidden;
 }
 
 @media screen and ( min-width: 768px ) {
@@ -41,6 +76,9 @@
                         width: 208px;
                     }
                 }
+            }
+            &--recaptcha {
+                text-align: center !important;
             }
         }
     }

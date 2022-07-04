@@ -2630,6 +2630,45 @@ main {
   margin: 0 5px 0 0;
 }
 
+.contact__form--recaptcha {
+  margin: 40px 0 0;
+  text-align: left !important;
+  color: #767676;
+}
+
+.contact__form--recaptcha small {
+  position: relative;
+  display: inline-block;
+  padding: 0 0 0 18px;
+  font-size: 12px;
+}
+
+.contact__form--recaptcha small::before {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0 0 0 20px;
+  width: 14px;
+  height: 20px;
+  background-repeat: no-repeat;
+  background-image: url(../img/nav_icon_recaptcha.svg);
+}
+
+.contact__form--recaptcha small a {
+  color: #1B95E0;
+  text-decoration: none;
+}
+
+.contact__form--recaptcha small a:hover {
+  text-decoration: underline;
+}
+
+.grecaptcha-badge {
+  visibility: hidden;
+}
+
 @media screen and (min-width: 768px) {
   .contact__form--table {
     max-width: 800px;
@@ -2637,6 +2676,9 @@ main {
   }
   .contact__form--table--body th {
     width: 208px;
+  }
+  .contact__form--recaptcha {
+    text-align: center !important;
   }
 }
 
@@ -3116,3 +3158,4 @@ main {
     border-spacing: 24px 36px;
   }
 }
+/*# sourceMappingURL=style.css.map */

@@ -58,19 +58,23 @@
                         {% render_field form.message class="form-control" placeholder="メッセージ" %}
                     </td>
                 </tr>
+                {{ form.captcha }}
             </tbody>
         </table>
         <button type="submit" class="contact__form--btn btn rounded-pill" ontouchstart="">
             <i class="fas fa-paper-plane fa-fw" aria-hidden="true"></i>送信
         </button>
+        <div class="contact__form--recaptcha">
+            <small>このサイトはreCAPTCHAによって保護されています。Googleの<a href="https://policies.google.com/privacy" target="_blank" rel="noopener">プライバシーポリシー</a>と<a href="https://policies.google.com/terms" target="_blank" rel="noopener">利用規約</a>が適用されます。</small>
+        </div>
     </form>
 </div>
 {% endblock %}
 
 {% block extrajs %}
+<script src="https://www.google.com/recaptcha/api.js"></script>
 <script>
     'use strict';
-
     // エラーメッセージ（メールアドレス）
     const email_error = document.querySelectorAll('.email_error');
     const email = document.getElementById('id_email');
