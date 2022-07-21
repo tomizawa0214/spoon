@@ -127,7 +127,7 @@ class OrderConfirmView(LoginRequiredMixin, View):
             date = request.POST.get('date')
             if '本日' in date:
                 time = request.POST.get('time')
-            elif '(土)' in date or '(日)' in date or '7月18日' in date:
+            elif '(土)' in date or '(日)' in date or '8月11日' in date:
                 time = request.POST.get('holidaytime')
             else:
                 time = request.POST.get('weekdaytime')
@@ -351,8 +351,8 @@ class OrderUserView(LoginRequiredMixin, View):
             today_order = False
 
         # 現在日時を取得
-        # dt = datetime.datetime.now()
-        dt = datetime.datetime(2022, 7, 20, 12, 20)
+        dt = datetime.datetime.now()
+        # dt = datetime.datetime(2022, 7, 20, 12, 20)
         # 日本語表記の曜日名・月名
         locale.setlocale(locale.LC_TIME, 'ja_JP.UTF-8')
 
