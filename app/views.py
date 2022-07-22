@@ -127,7 +127,7 @@ class OrderConfirmView(LoginRequiredMixin, View):
             date = request.POST.get('date')
             if '本日' in date:
                 time = request.POST.get('time')
-            elif '(土)' in date or '(日)' in date or '8月11日' in date:
+            elif '(土)' in date or '(日)' in date or '8月11日' in date: # 土日祝
                 time = request.POST.get('holidaytime')
             else:
                 time = request.POST.get('weekdaytime')
@@ -207,19 +207,19 @@ class OrderConfirmView(LoginRequiredMixin, View):
             days = [dt + timedelta(days=day+1) for day in range(7)]
             get_weeks("【明日】")
 
-        # 7月の休業日
+        # 8月の休業日
         date_list = [
             j for j in date_list if \
-            '6月28日' not in j and \
-            '7月4日' not in j and \
-            '7月5日' not in j and \
-            '7月12日' not in j and \
-            '7月19日' not in j and \
-            '7月26日' not in j
+            '7月26日' not in j and \
+            '8月2日' not in j and \
+            '8月9日' not in j and \
+            '8月16日' not in j and \
+            '8月23日' not in j and \
+            '8月30日' not in j
         ]
 
-        # 7月の火曜日は【明日】追加
-        if ((dt.month == 6 and dt.day == 28) or dt.day == 5 or dt.day == 12 or dt.day == 19 or dt.day == 26) and dt.time() < datetime.time(16, 31) and today_order == True:
+        # 8月の火曜日は【明日】追加
+        if ((dt.month == 7 and dt.day == 26) or (dt.month == 8 and dt.day == 2) or (dt.month == 8 and dt.day == 9) or (dt.month == 8 and dt.day == 16) or (dt.month == 8 and dt.day == 23) or (dt.month == 8 and dt.day == 30)) and dt.time() < datetime.time(16, 31) and today_order == True:
             date_list[0] += '【明日】'
 
         # 当日受付用
@@ -253,35 +253,12 @@ class OrderConfirmView(LoginRequiredMixin, View):
                 else:
                     break
 
-        # 6月の平日は11:00～
-        if (dt.month == 6 and dt.day != 28):
-            # 現在時刻が11:00～16:30
-            if datetime.time(11) <= dt.time() < datetime.time(16, 31) and today_order == True:
-                # 現在時刻から30分後を取得
-                after_30 = dt.replace(second=0, microsecond=0) + timedelta(minutes=30)
-                # 30分後の一の位を取得
-                after_30_one = ''.join(list(reversed(str(after_30.minute))))[0]
-                # 10分毎の値に丸める
-                if after_30_one != "0":
-                    round_time = 10 - int(after_30_one)
-                    after_30 += timedelta(minutes=round_time)
-                # 10分毎のリストを作成
-                get_times(after_30)
-            # 現在時刻が16:31～翌10:59
-            elif (dt.month == 6 and dt.day == 30) and dt.time() >= datetime.time(16, 31) or dt.time() < datetime.time(11) or today_order == False:
-                get_fulltimes(time_list, 13, 00)
-            elif dt.time() >= datetime.time(16, 31) or dt.time() < datetime.time(11) or today_order == False:
-                get_fulltimes(time_list, 11, 30)
-        
-        elif (dt.month == 6 and dt.day == 28):
-            get_fulltimes(time_list, 11, 30)
-            
         # 今日が休業日の場合
-        elif dt.day == 4 or dt.day == 5 or dt.day == 12 or dt.day == 19 or dt.day == 26:
+        if ((dt.month == 7 and dt.day == 26) or (dt.month == 8 and dt.day == 2) or (dt.month == 8 and dt.day == 9) or (dt.month == 8 and dt.day == 16) or (dt.month == 8 and dt.day == 23) or (dt.month == 8 and dt.day == 30)):
             get_fulltimes(time_list, 13, 00) # 休業日の翌日は平日
 
         # 土日祝は11:30～
-        elif (dt.weekday() == 5) or (dt.weekday() == 6) or (dt.month == 7 and dt.day == 18):
+        elif (dt.weekday() == 5) or (dt.weekday() == 6) or (dt.month == 8 and dt.day == 11):
             # 現在時刻が11:00～16:30
             if datetime.time(11) <= dt.time() < datetime.time(16, 31) and today_order == True:
                 # 現在時刻から30分後を取得
@@ -352,7 +329,7 @@ class OrderUserView(LoginRequiredMixin, View):
 
         # 現在日時を取得
         dt = datetime.datetime.now()
-        # dt = datetime.datetime(2022, 7, 20, 12, 20)
+        # dt = datetime.datetime(2022, 8, 23, 12, 20)
         # 日本語表記の曜日名・月名
         locale.setlocale(locale.LC_TIME, 'ja_JP.UTF-8')
 
@@ -375,19 +352,19 @@ class OrderUserView(LoginRequiredMixin, View):
             days = [dt + timedelta(days=day+1) for day in range(7)]
             get_weeks("【明日】")
 
-        # 7月の休業日
+        # 8月の休業日
         date_list = [
             j for j in date_list if \
-            '6月28日' not in j and \
-            '7月4日' not in j and \
-            '7月5日' not in j and \
-            '7月12日' not in j and \
-            '7月19日' not in j and \
-            '7月26日' not in j
+            '7月26日' not in j and \
+            '8月2日' not in j and \
+            '8月9日' not in j and \
+            '8月16日' not in j and \
+            '8月23日' not in j and \
+            '8月30日' not in j
         ]
 
-        # 7月の火曜日は【明日】追加
-        if ((dt.month == 6 and dt.day == 28) or dt.day == 5 or dt.day == 12 or dt.day == 19 or dt.day == 26) and dt.time() < datetime.time(16, 31) and today_order == True:
+        # 8月の火曜日は【明日】追加
+        if ((dt.month == 7 and dt.day == 26) or (dt.month == 8 and dt.day == 2) or (dt.month == 8 and dt.day == 9) or (dt.month == 8 and dt.day == 16) or (dt.month == 8 and dt.day == 23) or (dt.month == 8 and dt.day == 30)) and dt.time() < datetime.time(16, 31) and today_order == True:
             date_list[0] += '【明日】'
 
         # 当日受付用
@@ -420,36 +397,13 @@ class OrderUserView(LoginRequiredMixin, View):
                     handle_time = next_time
                 else:
                     break
-
-        # 6月の平日は11:00～
-        if (dt.month == 6 and dt.day != 28):
-            # 現在時刻が11:00～16:30
-            if datetime.time(11) <= dt.time() < datetime.time(16, 31) and today_order == True:
-                # 現在時刻から30分後を取得
-                after_30 = dt.replace(second=0, microsecond=0) + timedelta(minutes=30)
-                # 30分後の一の位を取得
-                after_30_one = ''.join(list(reversed(str(after_30.minute))))[0]
-                # 10分毎の値に丸める
-                if after_30_one != "0":
-                    round_time = 10 - int(after_30_one)
-                    after_30 += timedelta(minutes=round_time)
-                # 10分毎のリストを作成
-                get_times(after_30)
-            # 現在時刻が16:31～翌10:59
-            elif (dt.month == 6 and dt.day == 30) and dt.time() >= datetime.time(16, 31) or dt.time() < datetime.time(11) or today_order == False:
-                get_fulltimes(time_list, 13, 00)
-            elif dt.time() >= datetime.time(16, 31) or dt.time() < datetime.time(11) or today_order == False:
-                get_fulltimes(time_list, 11, 30)
-        
-        elif (dt.month == 6 and dt.day == 28):
-            get_fulltimes(time_list, 11, 30)
             
         # 今日が休業日の場合
-        elif dt.day == 4 or dt.day == 5 or dt.day == 12 or dt.day == 19 or dt.day == 26:
+        if ((dt.month == 7 and dt.day == 26) or (dt.month == 8 and dt.day == 2) or (dt.month == 8 and dt.day == 9) or (dt.month == 8 and dt.day == 16) or (dt.month == 8 and dt.day == 23) or (dt.month == 8 and dt.day == 30)):
             get_fulltimes(time_list, 13, 00) # 休業日の翌日は平日
 
         # 土日祝は11:30～
-        elif (dt.weekday() == 5) or (dt.weekday() == 6) or (dt.month == 7 and dt.day == 18):
+        elif (dt.weekday() == 5) or (dt.weekday() == 6) or (dt.month == 8 and dt.day == 11):
             # 現在時刻が11:00～16:30
             if datetime.time(11) <= dt.time() < datetime.time(16, 31) and today_order == True:
                 # 現在時刻から30分後を取得

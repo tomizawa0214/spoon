@@ -98,7 +98,7 @@
                                 {% endfor %}
                             </select>
                         </div>
-                        <p class="error-msg text-left mt-1 mb-0">※誠に勝手ながら、7月は4日(月)と毎週火曜日を休業日とさせていただきます。</p>
+                        <p class="error-msg text-left mt-1 mb-0">※誠に勝手ながら、8月は毎週火曜日を休業日とさせていただきます。</p>
                     </td>
                 </tr>
             </tbody>
@@ -132,7 +132,7 @@
             console.log("本日")
             specified_time.className = 'order-user__form--body--select--time d-block form-control';
             holidaytime.className = 'd-none';
-        } else if ((date.value.indexOf('(土)') !== -1) || (date.value.indexOf('(日)') !== -1) || (date.value.indexOf('7月18日') !== -1) || (date.value.indexOf('6月29日') !== -1) || (date.value.indexOf('6月30日') !== -1))  {
+        } else if ((date.value.indexOf('(土)') !== -1) || (date.value.indexOf('(日)') !== -1) || (date.value.indexOf('8月11日') !== -1))  { // 土日祝
             console.log("土日祝")
             specified_time.className = 'd-none';
             weekdaytime.className = 'd-none';
