@@ -207,19 +207,18 @@ class OrderConfirmView(LoginRequiredMixin, View):
             days = [dt + timedelta(days=day+1) for day in range(7)]
             get_weeks("【明日】")
 
-        # 8月の休業日
+        # 9月の休業日
         date_list = [
             j for j in date_list if \
-            '7月26日' not in j and \
-            '8月2日' not in j and \
-            '8月9日' not in j and \
-            '8月16日' not in j and \
-            '8月23日' not in j and \
-            '8月30日' not in j
+            '8月30日' not in j and \
+            '9月6日' not in j and \
+            '9月13日' not in j and \
+            '9月20日' not in j and \
+            '9月27日' not in j
         ]
 
-        # 8月の火曜日は【明日】追加
-        if ((dt.month == 7 and dt.day == 26) or (dt.month == 8 and dt.day == 2) or (dt.month == 8 and dt.day == 9) or (dt.month == 8 and dt.day == 16) or (dt.month == 8 and dt.day == 23) or (dt.month == 8 and dt.day == 30)) and dt.time() < datetime.time(16, 31) and today_order == True:
+        # 9月の火曜日は【明日】追加
+        if ((dt.month == 8 and dt.day == 30) or (dt.month == 9 and dt.day == 6) or (dt.month == 9 and dt.day == 13) or (dt.month == 9 and dt.day == 20) or (dt.month == 9 and dt.day == 27)) and dt.time() < datetime.time(16, 31) and today_order == True:
             date_list[0] += '【明日】'
 
         # 当日受付用
@@ -254,11 +253,11 @@ class OrderConfirmView(LoginRequiredMixin, View):
                     break
 
         # 今日が休業日の場合
-        if ((dt.month == 7 and dt.day == 26) or (dt.month == 8 and dt.day == 2) or (dt.month == 8 and dt.day == 9) or (dt.month == 8 and dt.day == 16) or (dt.month == 8 and dt.day == 23) or (dt.month == 8 and dt.day == 30)):
+        if ((dt.month == 8 and dt.day == 30) or (dt.month == 9 and dt.day == 6) or (dt.month == 9 and dt.day == 13) or (dt.month == 9 and dt.day == 20) or (dt.month == 9 and dt.day == 27)):
             get_fulltimes(time_list, 13, 00) # 休業日の翌日は平日
 
         # 土日祝は11:30～
-        elif (dt.weekday() == 5) or (dt.weekday() == 6) or (dt.month == 8 and dt.day == 11):
+        elif (dt.weekday() == 5) or (dt.weekday() == 6) or (dt.month == 9 and dt.day == 19) or (dt.month == 9 and dt.day == 23):
             # 現在時刻が11:00～16:30
             if datetime.time(11) <= dt.time() < datetime.time(16, 31) and today_order == True:
                 # 現在時刻から30分後を取得
@@ -329,7 +328,7 @@ class OrderUserView(LoginRequiredMixin, View):
 
         # 現在日時を取得
         dt = datetime.datetime.now()
-        # dt = datetime.datetime(2022, 8, 23, 12, 20)
+        # dt = datetime.datetime(2022, 9, 18, 12, 20)
         # 日本語表記の曜日名・月名
         locale.setlocale(locale.LC_TIME, 'ja_JP.UTF-8')
 
@@ -352,19 +351,18 @@ class OrderUserView(LoginRequiredMixin, View):
             days = [dt + timedelta(days=day+1) for day in range(7)]
             get_weeks("【明日】")
 
-        # 8月の休業日
+        # 9月の休業日
         date_list = [
             j for j in date_list if \
-            '7月26日' not in j and \
-            '8月2日' not in j and \
-            '8月9日' not in j and \
-            '8月16日' not in j and \
-            '8月23日' not in j and \
-            '8月30日' not in j
+            '8月30日' not in j and \
+            '9月6日' not in j and \
+            '9月13日' not in j and \
+            '9月20日' not in j and \
+            '9月27日' not in j
         ]
 
-        # 8月の火曜日は【明日】追加
-        if ((dt.month == 7 and dt.day == 26) or (dt.month == 8 and dt.day == 2) or (dt.month == 8 and dt.day == 9) or (dt.month == 8 and dt.day == 16) or (dt.month == 8 and dt.day == 23) or (dt.month == 8 and dt.day == 30)) and dt.time() < datetime.time(16, 31) and today_order == True:
+        # 9月の火曜日は【明日】追加
+        if ((dt.month == 8 and dt.day == 30) or (dt.month == 9 and dt.day == 6) or (dt.month == 9 and dt.day == 13) or (dt.month == 9 and dt.day == 20) or (dt.month == 9 and dt.day == 27)) and dt.time() < datetime.time(16, 31) and today_order == True:
             date_list[0] += '【明日】'
 
         # 当日受付用
@@ -399,11 +397,11 @@ class OrderUserView(LoginRequiredMixin, View):
                     break
             
         # 今日が休業日の場合
-        if ((dt.month == 7 and dt.day == 26) or (dt.month == 8 and dt.day == 2) or (dt.month == 8 and dt.day == 9) or (dt.month == 8 and dt.day == 16) or (dt.month == 8 and dt.day == 23) or (dt.month == 8 and dt.day == 30)):
+        if ((dt.month == 8 and dt.day == 30) or (dt.month == 9 and dt.day == 6) or (dt.month == 9 and dt.day == 13) or (dt.month == 9 and dt.day == 20) or (dt.month == 9 and dt.day == 27)):
             get_fulltimes(time_list, 13, 00) # 休業日の翌日は平日
 
         # 土日祝は11:30～
-        elif (dt.weekday() == 5) or (dt.weekday() == 6) or (dt.month == 8 and dt.day == 11):
+        elif (dt.weekday() == 5) or (dt.weekday() == 6) or (dt.month == 9 and dt.day == 19) or (dt.month == 9 and dt.day == 23):
             # 現在時刻が11:00～16:30
             if datetime.time(11) <= dt.time() < datetime.time(16, 31) and today_order == True:
                 # 現在時刻から30分後を取得
