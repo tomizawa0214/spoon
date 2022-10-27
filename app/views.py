@@ -211,9 +211,13 @@ class OrderConfirmView(LoginRequiredMixin, View):
         date_list = [
             j for j in date_list if \
             '11月1日' not in j and \
+            '11月7日' not in j and \
             '11月8日' not in j and \
+            '11月14日' not in j and \
             '11月15日' not in j and \
+            '11月21日' not in j and \
             '11月22日' not in j and \
+            '11月28日' not in j and \
             '11月29日' not in j
         ]
 
@@ -330,7 +334,7 @@ class OrderUserView(LoginRequiredMixin, View):
 
         # 現在日時を取得
         dt = datetime.datetime.now()
-        # dt = datetime.datetime(2022, 11, 22, 12, 20)
+        # dt = datetime.datetime(2022, 11, 7, 18, 20)
         # 日本語表記の曜日名・月名
         locale.setlocale(locale.LC_TIME, 'ja_JP.UTF-8')
 
@@ -357,9 +361,13 @@ class OrderUserView(LoginRequiredMixin, View):
         date_list = [
             j for j in date_list if \
             '11月1日' not in j and \
+            '11月7日' not in j and \
             '11月8日' not in j and \
+            '11月14日' not in j and \
             '11月15日' not in j and \
+            '11月21日' not in j and \
             '11月22日' not in j and \
+            '11月28日' not in j and \
             '11月29日' not in j
         ]
 
@@ -401,7 +409,7 @@ class OrderUserView(LoginRequiredMixin, View):
         # 今日が休業日の場合
         if ((dt.month == 11 and dt.day == 1) or (dt.month == 11 and dt.day == 8) or (dt.month == 11 and dt.day == 15) or (dt.month == 11 and dt.day == 29)):
             get_fulltimes(time_list, 13, 00) # 休業日の翌日は平日
-        elif dt.month == 11 and dt.day == 22:
+        elif (dt.month == 11 and dt.day == 21) or (dt.month == 11 and dt.day == 22):
             get_fulltimes(time_list, 11, 30) # 休業日の翌日は祝日
 
         # 土日祝は11:30～
