@@ -125,12 +125,10 @@ class OrderConfirmView(LoginRequiredMixin, View):
             email = form.cleaned_data['email']
             tel = form.cleaned_data['tel']
             date = request.POST.get('date')
-            if '本日' in date:
+            if '本日' in date or '明日' in date:
                 time = request.POST.get('time')
-            elif '(土)' in date or '(日)' in date or '11月3日' in date or '11月23日' in date: # 土日祝
-                time = request.POST.get('holidaytime')
             else:
-                time = request.POST.get('weekdaytime')
+                time = request.POST.get('fulltime')
 
             # ログインユーザーの注文未完了レコードをすべて取得
             cart_data = Cart.objects.filter(user=request.user, ordered=False).order_by('id')
@@ -207,22 +205,22 @@ class OrderConfirmView(LoginRequiredMixin, View):
             days = [dt + timedelta(days=day+1) for day in range(7)]
             get_weeks("【明日】")
 
-        # 11月の休業日
+        # 12月の休業日
         date_list = [
             j for j in date_list if \
-            '11月1日' not in j and \
-            '11月7日' not in j and \
-            '11月8日' not in j and \
-            '11月14日' not in j and \
-            '11月15日' not in j and \
-            '11月21日' not in j and \
-            '11月22日' not in j and \
-            '11月28日' not in j and \
-            '11月29日' not in j
+            '12月5日' not in j and \
+            '12月6日' not in j and \
+            '12月13日' not in j and \
+            '12月19日' not in j and \
+            '12月20日' not in j and \
+            '12月26日' not in j and \
+            '12月27日' not in j and \
+            '12月30日' not in j and \
+            '12月31日' not in j
         ]
 
-        # 11月の火曜日は【明日】追加
-        if ((dt.month == 11 and dt.day == 1) or (dt.month == 11 and dt.day == 8) or (dt.month == 11 and dt.day == 15) or (dt.month == 11 and dt.day == 22) or (dt.month == 11 and dt.day == 29)) and dt.time() < datetime.time(16, 31) and today_order == True:
+        # 12月の火曜日は【明日】追加
+        if ((dt.month == 12 and dt.day == 6) or (dt.month == 12 and dt.day == 13) or (dt.month == 12 and dt.day == 20) or (dt.month == 12 and dt.day == 27)) and dt.time() < datetime.time(16, 31) and today_order == True:
             date_list[0] += '【明日】'
 
         # 当日受付用
@@ -256,31 +254,9 @@ class OrderConfirmView(LoginRequiredMixin, View):
                 else:
                     break
 
-        # 今日が休業日の場合
-        if ((dt.month == 11 and dt.day == 1) or (dt.month == 11 and dt.day == 8) or (dt.month == 11 and dt.day == 15) or (dt.month == 11 and dt.day == 29)):
-            get_fulltimes(time_list, 13, 00) # 休業日の翌日は平日
-        elif dt.month == 11 and dt.day == 22:
-            get_fulltimes(time_list, 11, 30) # 休業日の翌日は祝日
-
-        # 土日祝は11:30～
-        elif (dt.weekday() == 5) or (dt.weekday() == 6) or (dt.month == 11 and dt.day == 3) or (dt.month == 11 and dt.day == 23):
-            # 現在時刻が11:00～16:30
-            if datetime.time(11) <= dt.time() < datetime.time(16, 31) and today_order == True:
-                # 現在時刻から30分後を取得
-                after_30 = dt.replace(second=0, microsecond=0) + timedelta(minutes=30)
-                # 30分後の一の位を取得
-                after_30_one = ''.join(list(reversed(str(after_30.minute))))[0]
-                # 10分毎の値に丸める
-                if after_30_one != "0":
-                    round_time = 10 - int(after_30_one)
-                    after_30 += timedelta(minutes=round_time)
-                # 10分毎のリストを作成
-                get_times(after_30)
-            # 現在時刻が16:31～翌10:59
-            elif dt.time() >= datetime.time(16, 31) or dt.time() < datetime.time(11) or today_order == False:
-                get_fulltimes(time_list, 11, 30)
-
-        # 平日は12:30～
+        # 休業日は明日以降の予約
+        if ((dt.month == 12 and dt.day == 6) or (dt.month == 12 and dt.day == 13) or (dt.month == 12 and dt.day == 20) or (dt.month == 12 and dt.day == 27)):
+            get_fulltimes(time_list)
         else:
             # 現在時刻が12:30～16:30
             if datetime.time(12, 30) <= dt.time() < datetime.time(16, 31) and today_order == True:
@@ -296,19 +272,16 @@ class OrderConfirmView(LoginRequiredMixin, View):
                 get_times(after_30)
             # 現在時刻が16:31～翌10:59
             elif dt.time() >= datetime.time(16, 31) or dt.time() < datetime.time(12, 30) or today_order == False:
-                get_fulltimes(time_list, 13, 00)
+                get_fulltimes(time_list)
 
-        holiday_list = []
-        get_fulltimes(holiday_list, 11, 30)
-        weekday_list = []
-        get_fulltimes(weekday_list, 13, 00)
+        fulltime_list = []
+        get_fulltimes(fulltime_list)
 
         return render(request, 'app/order_user.html', {
             'form': form,
             'date_list': date_list,
             'time_list': time_list,
-            'weekday_list': weekday_list,
-            'holiday_list': holiday_list
+            'fulltime_list': fulltime_list
         })
 
 
@@ -333,8 +306,8 @@ class OrderUserView(LoginRequiredMixin, View):
             today_order = False
 
         # 現在日時を取得
-        dt = datetime.datetime.now()
-        # dt = datetime.datetime(2022, 11, 7, 18, 20)
+        # dt = datetime.datetime.now()
+        dt = datetime.datetime(2022, 12, 21, 14, 20)
         # 日本語表記の曜日名・月名
         locale.setlocale(locale.LC_TIME, 'ja_JP.UTF-8')
 
@@ -357,22 +330,22 @@ class OrderUserView(LoginRequiredMixin, View):
             days = [dt + timedelta(days=day+1) for day in range(7)]
             get_weeks("【明日】")
 
-        # 11月の休業日
+        # 12月の休業日
         date_list = [
             j for j in date_list if \
-            '11月1日' not in j and \
-            '11月7日' not in j and \
-            '11月8日' not in j and \
-            '11月14日' not in j and \
-            '11月15日' not in j and \
-            '11月21日' not in j and \
-            '11月22日' not in j and \
-            '11月28日' not in j and \
-            '11月29日' not in j
+            '12月5日' not in j and \
+            '12月6日' not in j and \
+            '12月13日' not in j and \
+            '12月19日' not in j and \
+            '12月20日' not in j and \
+            '12月26日' not in j and \
+            '12月27日' not in j and \
+            '12月30日' not in j and \
+            '12月31日' not in j
         ]
 
-        # 11月の火曜日は【明日】追加
-        if ((dt.month == 11 and dt.day == 1) or (dt.month == 11 and dt.day == 8) or (dt.month == 11 and dt.day == 15) or (dt.month == 11 and dt.day == 22) or (dt.month == 11 and dt.day == 29)) and dt.time() < datetime.time(16, 31) and today_order == True:
+        # 12月の火曜日は【明日】追加
+        if ((dt.month == 12 and dt.day == 6) or (dt.month == 12 and dt.day == 13) or (dt.month == 12 and dt.day == 20) or (dt.month == 12 and dt.day == 27)) and dt.time() < datetime.time(16, 31) and today_order == True:
             date_list[0] += '【明日】'
 
         # 当日受付用
@@ -396,8 +369,8 @@ class OrderUserView(LoginRequiredMixin, View):
                 else:
                     break
 
-        def get_fulltimes(box, hour, minute):
-            handle_time = datetime.datetime.combine(datetime.date.today(), datetime.time(hour, minute))
+        def get_fulltimes(box):
+            handle_time = datetime.datetime.combine(datetime.date.today(), datetime.time(13, 00))
             while(True):
                 box.append(handle_time.strftime('%H:%M'))
                 next_time = handle_time + timedelta(minutes=30)
@@ -406,31 +379,9 @@ class OrderUserView(LoginRequiredMixin, View):
                 else:
                     break
             
-        # 今日が休業日の場合
-        if ((dt.month == 11 and dt.day == 1) or (dt.month == 11 and dt.day == 8) or (dt.month == 11 and dt.day == 15) or (dt.month == 11 and dt.day == 29)):
-            get_fulltimes(time_list, 13, 00) # 休業日の翌日は平日
-        elif (dt.month == 11 and dt.day == 21) or (dt.month == 11 and dt.day == 22):
-            get_fulltimes(time_list, 11, 30) # 休業日の翌日は祝日
-
-        # 土日祝は11:30～
-        elif (dt.weekday() == 5) or (dt.weekday() == 6) or (dt.month == 10 and dt.day == 10) or (dt.month == 11 and dt.day == 3):
-            # 現在時刻が11:00～16:30
-            if datetime.time(11) <= dt.time() < datetime.time(16, 31) and today_order == True:
-                # 現在時刻から30分後を取得
-                after_30 = dt.replace(second=0, microsecond=0) + timedelta(minutes=30)
-                # 30分後の一の位を取得
-                after_30_one = ''.join(list(reversed(str(after_30.minute))))[0]
-                # 10分毎の値に丸める
-                if after_30_one != "0":
-                    round_time = 10 - int(after_30_one)
-                    after_30 += timedelta(minutes=round_time)
-                # 10分毎のリストを作成
-                get_times(after_30)
-            # 現在時刻が16:31～翌10:59
-            elif dt.time() >= datetime.time(16, 31) or dt.time() < datetime.time(11) or today_order == False:
-                get_fulltimes(time_list, 11, 30)
-
-        # 平日は12:30～
+        # 休業日は明日以降の予約
+        if ((dt.month == 12 and dt.day == 6) or (dt.month == 12 and dt.day == 13) or (dt.month == 12 and dt.day == 20) or (dt.month == 12 and dt.day == 27)):
+            get_fulltimes(time_list)
         else:
             # 現在時刻が12:30～16:30
             if datetime.time(12, 30) <= dt.time() < datetime.time(16, 31) and today_order == True:
@@ -446,22 +397,18 @@ class OrderUserView(LoginRequiredMixin, View):
                 get_times(after_30)
             # 現在時刻が16:31～翌10:59
             elif dt.time() >= datetime.time(16, 31) or dt.time() < datetime.time(12, 30) or today_order == False:
-                get_fulltimes(time_list, 13, 00)
+                get_fulltimes(time_list)
 
-        holiday_list = []
-        get_fulltimes(holiday_list, 11, 30)
-        weekday_list = []
-        get_fulltimes(weekday_list, 13, 00)
-
+        fulltime_list = []
+        get_fulltimes(fulltime_list)
         print(time_list)
-        print(holiday_list)
-        print(weekday_list)
+        print(fulltime_list)
+
         return render(request, 'app/order_user.html', {
             'form': form,
             'date_list': date_list,
             'time_list': time_list,
-            'weekday_list': weekday_list,
-            'holiday_list': holiday_list
+            'fulltime_list': fulltime_list
         })
 
 
