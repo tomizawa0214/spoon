@@ -205,24 +205,27 @@ class OrderConfirmView(LoginRequiredMixin, View):
             days = [dt + timedelta(days=day+1) for day in range(10)]
             get_weeks("【明日】")
 
-        # 3月の休業日
+        # 4月の休業日
         date_list = [
             j for j in date_list if \
-            '3月6日' not in j and \
-            '3月7日' not in j and \
-            '3月13日' not in j and \
-            '3月14日' not in j and \
-            '3月20日' not in j and \
-            '3月27日' not in j and \
-            '3月28日' not in j
+            '3月28日' not in j and \
+            '4月3日' not in j and \
+            '4月4日' not in j and \
+            '4月10日' not in j and \
+            '4月11日' not in j and \
+            '4月17日' not in j and \
+            '4月18日' not in j and \
+            '4月24日' not in j and \
+            '4月25日' not in j
         ]
 
-        # 3月の20日と火曜日は【明日】追加
+        # 3/28と4月の火曜日は【明日】追加
         if (
-            (dt.month == 3 and dt.day == 7) or \
-            (dt.month == 3 and dt.day == 14) or \
-            (dt.month == 3 and dt.day == 20) or \
-            (dt.month == 3 and dt.day == 28)
+            (dt.month == 3 and dt.day == 28) or \
+            (dt.month == 4 and dt.day == 4) or \
+            (dt.month == 4 and dt.day == 11) or \
+            (dt.month == 4 and dt.day == 18) or \
+            (dt.month == 4 and dt.day == 25)
         ) and dt.time() < datetime.time(16, 31) and today_order == True:
             date_list[0] += '【明日】'
 
@@ -259,13 +262,15 @@ class OrderConfirmView(LoginRequiredMixin, View):
 
         # 休業日は明日以降の予約
         if (
-            (dt.month == 3 and dt.day == 6) or \
-            (dt.month == 3 and dt.day == 7) or \
-            (dt.month == 3 and dt.day == 13) or \
-            (dt.month == 3 and dt.day == 14) or \
-            (dt.month == 3 and dt.day == 20) or \
-            (dt.month == 3 and dt.day == 27) or \
-            (dt.month == 3 and dt.day == 28)
+            (dt.month == 3 and dt.day == 28) or \
+            (dt.month == 4 and dt.day == 3) or \
+            (dt.month == 4 and dt.day == 4) or \
+            (dt.month == 4 and dt.day == 10) or \
+            (dt.month == 4 and dt.day == 11) or \
+            (dt.month == 4 and dt.day == 17) or \
+            (dt.month == 4 and dt.day == 18) or \
+            (dt.month == 4 and dt.day == 24) or \
+            (dt.month == 3 and dt.day == 25)
         ):
             get_fulltimes(time_list)
         else:
@@ -318,7 +323,7 @@ class OrderUserView(LoginRequiredMixin, View):
 
         # 現在日時を取得
         dt = datetime.datetime.now()
-        # dt = datetime.datetime(2023, 3, 21, 14, 20)
+        # dt = datetime.datetime(2023, 4, 5, 14, 20)
         # 日本語表記の曜日名・月名
         locale.setlocale(locale.LC_TIME, 'ja_JP.UTF-8')
 
@@ -341,24 +346,27 @@ class OrderUserView(LoginRequiredMixin, View):
             days = [dt + timedelta(days=day+1) for day in range(10)]
             get_weeks("【明日】")
 
-        # 3月の休業日
+        # 4月の休業日
         date_list = [
             j for j in date_list if \
-            '3月6日' not in j and \
-            '3月7日' not in j and \
-            '3月13日' not in j and \
-            '3月14日' not in j and \
-            '3月20日' not in j and \
-            '3月27日' not in j and \
-            '3月28日' not in j
+            '3月28日' not in j and \
+            '4月3日' not in j and \
+            '4月4日' not in j and \
+            '4月10日' not in j and \
+            '4月11日' not in j and \
+            '4月17日' not in j and \
+            '4月18日' not in j and \
+            '4月24日' not in j and \
+            '4月25日' not in j
         ]
 
-        # 3月の20日と火曜日は【明日】追加
+        # 3/28と4月の火曜日は【明日】追加
         if (
-            (dt.month == 3 and dt.day == 7) or \
-            (dt.month == 3 and dt.day == 14) or \
-            (dt.month == 3 and dt.day == 20) or \
-            (dt.month == 3 and dt.day == 28)
+            (dt.month == 3 and dt.day == 28) or \
+            (dt.month == 4 and dt.day == 4) or \
+            (dt.month == 4 and dt.day == 11) or \
+            (dt.month == 4 and dt.day == 18) or \
+            (dt.month == 4 and dt.day == 25)
         ) and dt.time() < datetime.time(16, 31) and today_order == True:
             date_list[0] += '【明日】'
 
@@ -395,13 +403,15 @@ class OrderUserView(LoginRequiredMixin, View):
             
         # 休業日は明日以降の予約
         if (
-            (dt.month == 3 and dt.day == 6) or \
-            (dt.month == 3 and dt.day == 7) or \
-            (dt.month == 3 and dt.day == 13) or \
-            (dt.month == 3 and dt.day == 14) or \
-            (dt.month == 3 and dt.day == 20) or \
-            (dt.month == 3 and dt.day == 27) or \
-            (dt.month == 3 and dt.day == 28)
+            (dt.month == 3 and dt.day == 28) or \
+            (dt.month == 4 and dt.day == 3) or \
+            (dt.month == 4 and dt.day == 4) or \
+            (dt.month == 4 and dt.day == 10) or \
+            (dt.month == 4 and dt.day == 11) or \
+            (dt.month == 4 and dt.day == 17) or \
+            (dt.month == 4 and dt.day == 18) or \
+            (dt.month == 4 and dt.day == 24) or \
+            (dt.month == 3 and dt.day == 25)
         ):
             get_fulltimes(time_list)
         else:
