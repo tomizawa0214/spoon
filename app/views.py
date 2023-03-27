@@ -572,10 +572,12 @@ class MenuView(View):
     def get(self, request, *args, **kwargs):
         flavor_item = FlavorItem.objects.filter(web_only=False, is_active=True).order_by('sort')
         flavor_web = FlavorItem.objects.filter(web_only=True, is_active=True).order_by('sort')
+        size_item = SizeItem.objects.order_by('id')
 
         return render(request, 'app/menu.html', {
             'flavor_item': flavor_item,
             'flavor_web': flavor_web,
+            'size_item': size_item,
         })
 
 
