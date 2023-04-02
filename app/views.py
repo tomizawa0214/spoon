@@ -446,10 +446,10 @@ class OrderUserView(LoginRequiredMixin, View):
 
 class OrderView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
-        size_item = SizeItem.objects.all()
+        size_item = SizeItem.objects.order_by('id')
         flavor_item = FlavorItem.objects.filter(web_only=False, is_active=True).order_by('sort')
         flavor_web = FlavorItem.objects.filter(web_only=True, is_active=True).order_by('sort')
-        option_item = OptionItem.objects.all()
+        option_item = OptionItem.objects.order_by('id')
 
         # 再注文を受けてデータベース登録が無い場合の処理
         msg = ''
