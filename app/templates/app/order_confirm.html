@@ -152,7 +152,7 @@
 {% block extrajs %}
 <script>
     'use strict';
-
+    
     // クーポン発行
     if ( '{{ coupon }}' == 'get' ) {
         const helpCoupon = document.querySelector('.order-ck__cart--help');
@@ -162,6 +162,7 @@
     }
 
     // クーポン利用
+    let singlePrice = Number('{{ single_price }}')
     const cartCoupon = document.querySelector('.order-ck__cart--coupon');
     const useCoupon = document.querySelector('.order-ck__coupon--content--main--ckbox');
     const selectCouponPrice = document.querySelector('.order-ck__cart--coupon--price');
@@ -172,9 +173,9 @@
             // クーポンの利用可否を確認
             if ( '{{ use_coupon }}' == 'valid' ) {
                 cartCoupon.classList.toggle('d-none');
-                selectCouponPrice.textContent = '-\xA5' + 330
+                selectCouponPrice.textContent = '-\xA5' + singlePrice
                 let totalPriceNum = totalPrice.textContent.slice(1).replace( /,/g, '');
-                let total = Number(totalPriceNum) - 330;
+                let total = Number(totalPriceNum) - singlePrice;
                 totalPrice.textContent = '\xA5' + total.toLocaleString();
             } else {
                 useCoupon.checked = false;
@@ -186,7 +187,7 @@
             if ( '{{ use_coupon }}' == 'valid' ) {
                 cartCoupon.classList.toggle('d-none');
                 let totalPriceNum = totalPrice.textContent.slice(1).replace( /,/g, '');
-                let total = Number(totalPriceNum) + 330;
+                let total = Number(totalPriceNum) + singlePrice;
                 totalPrice.textContent = '\xA5' + total.toLocaleString();
             }
         }
@@ -295,7 +296,7 @@
 
             // クーポン金額を取得
             if ( '{{ use_coupon }}' == 'valid' && useCoupon.checked ) {
-                var coupon = 330;
+                var coupon = singlePrice;
             } else {
                 var coupon = 0;
             }

@@ -110,8 +110,13 @@ class OrderConfirmView(LoginRequiredMixin, View):
         else:
             coupon = 'no'
 
+        # シングルサイズを取得
+        single_size_data = SizeItem.objects.filter(title='シングルサイズ')[0]
+        single_price = single_size_data.price
+
         return render(request, 'app/order_confirm.html', {
             'cart_data': cart_data,
+            'single_price': single_price,
             'get_total_price': get_total_price,
             'coupon': coupon
         })
@@ -161,6 +166,10 @@ class OrderConfirmView(LoginRequiredMixin, View):
             else:
                 use_coupon = 'invalid'
 
+            # シングルサイズを取得
+            single_size_data = SizeItem.objects.filter(title='シングルサイズ')[0]
+            single_price = single_size_data.price
+
             return render(request, 'app/order_confirm.html', {
                 'name': name,
                 'furigana': furigana,
@@ -169,6 +178,7 @@ class OrderConfirmView(LoginRequiredMixin, View):
                 'date': date,
                 'time': time,
                 'cart_data': cart_data,
+                'single_price': single_price,
                 'get_total_price': get_total_price,
                 'coupon': coupon,
                 'use_coupon': use_coupon
