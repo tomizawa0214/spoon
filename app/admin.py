@@ -75,12 +75,16 @@ class OptionItemAdmin(admin.ModelAdmin):
 class WhatsNewAdmin(admin.ModelAdmin):
     list_display = ('date', 'comment')
 
+class CartAdmin(admin.ModelAdmin):
+    list_display = ('user', 'size_title', 'flavor_title', 'flavor2_title', 'option_title', 'option2_title', 'option3_title', 'option4_title', 'ordered')
+    list_filter = ('ordered',)
+
 
 admin.site.register(PickUp)
 admin.site.register(WhatsNew, WhatsNewAdmin)
 admin.site.register(TodayOrder, TodayOrderAdmin)
 admin.site.register(Order, OrderAdmin)
-admin.site.register(Cart)
+admin.site.register(Cart, CartAdmin)
 admin.site.register(SizeItem, SizeItemAdmin)
 admin.site.register(FlavorItem, FlavorItemAdmin)
 admin.site.register(OptionItem, OptionItemAdmin)
