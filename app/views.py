@@ -215,25 +215,27 @@ class OrderConfirmView(LoginRequiredMixin, View):
             days = [dt + timedelta(days=day+1) for day in range(10)]
             get_weeks("【明日】")
 
-        # 8月の休業日
+        # 9月の休業日
         date_list = [
             j for j in date_list if \
-            '7月31日' not in j and \
-            '8月1日' not in j and \
-            '8月7日' not in j and \
-            '8月8日' not in j and \
-            '8月21日' not in j and \
-            '8月22日' not in j and \
             '8月28日' not in j and \
-            '8月29日' not in j
+            '8月29日' not in j and \
+            '9月4日' not in j and \
+            '9月5日' not in j and \
+            '9月11日' not in j and \
+            '9月12日' not in j and \
+            '9月19日' not in j and \
+            '9月25日' not in j and \
+            '9月26日' not in j
         ]
 
-        # 8月の火曜日は【明日】追加
+        # 9月の火曜日は【明日】追加
         if (
-            (dt.month == 8 and dt.day == 1) or \
-            (dt.month == 8 and dt.day == 8) or \
-            (dt.month == 8 and dt.day == 22) or \
-            (dt.month == 8 and dt.day == 29)
+            (dt.month == 8 and dt.day == 29) or \
+            (dt.month == 9 and dt.day == 5) or \
+            (dt.month == 9 and dt.day == 12) or \
+            (dt.month == 9 and dt.day == 19) or \
+            (dt.month == 9 and dt.day == 26)
         ) and dt.time() < datetime.time(16, 31) and today_order == True:
             date_list[0] += '【明日】'
 
@@ -270,14 +272,15 @@ class OrderConfirmView(LoginRequiredMixin, View):
 
         # 休業日は明日以降の予約
         if (
-            (dt.month == 7 and dt.day == 31) or \
-            (dt.month == 8 and dt.day == 1) or \
-            (dt.month == 8 and dt.day == 7) or \
-            (dt.month == 8 and dt.day == 8) or \
-            (dt.month == 8 and dt.day == 21) or \
-            (dt.month == 8 and dt.day == 22) or \
             (dt.month == 8 and dt.day == 28) or \
-            (dt.month == 8 and dt.day == 29)
+            (dt.month == 8 and dt.day == 29) or \
+            (dt.month == 9 and dt.day == 4) or \
+            (dt.month == 9 and dt.day == 5) or \
+            (dt.month == 9 and dt.day == 11) or \
+            (dt.month == 9 and dt.day == 12) or \
+            (dt.month == 9 and dt.day == 19) or \
+            (dt.month == 9 and dt.day == 25) or \
+            (dt.month == 9 and dt.day == 26)
         ):
             get_fulltimes(time_list)
         else:
@@ -353,25 +356,27 @@ class OrderUserView(LoginRequiredMixin, View):
             days = [dt + timedelta(days=day+1) for day in range(10)]
             get_weeks("【明日】")
 
-        # 8月の休業日
+        # 9月の休業日
         date_list = [
             j for j in date_list if \
-            '7月31日' not in j and \
-            '8月1日' not in j and \
-            '8月7日' not in j and \
-            '8月8日' not in j and \
-            '8月21日' not in j and \
-            '8月22日' not in j and \
             '8月28日' not in j and \
-            '8月29日' not in j
+            '8月29日' not in j and \
+            '9月4日' not in j and \
+            '9月5日' not in j and \
+            '9月11日' not in j and \
+            '9月12日' not in j and \
+            '9月19日' not in j and \
+            '9月25日' not in j and \
+            '9月26日' not in j
         ]
 
-        # 8月の火曜日は【明日】追加
+        # 9月の火曜日は【明日】追加
         if (
-            (dt.month == 8 and dt.day == 1) or \
-            (dt.month == 8 and dt.day == 8) or \
-            (dt.month == 8 and dt.day == 22) or \
-            (dt.month == 8 and dt.day == 29)
+            (dt.month == 8 and dt.day == 29) or \
+            (dt.month == 9 and dt.day == 5) or \
+            (dt.month == 9 and dt.day == 12) or \
+            (dt.month == 9 and dt.day == 19) or \
+            (dt.month == 9 and dt.day == 26)
         ) and dt.time() < datetime.time(16, 31) and today_order == True:
             date_list[0] += '【明日】'
 
@@ -408,14 +413,15 @@ class OrderUserView(LoginRequiredMixin, View):
             
         # 休業日は明日以降の予約
         if (
-            (dt.month == 7 and dt.day == 31) or \
-            (dt.month == 8 and dt.day == 1) or \
-            (dt.month == 8 and dt.day == 7) or \
-            (dt.month == 8 and dt.day == 8) or \
-            (dt.month == 8 and dt.day == 21) or \
-            (dt.month == 8 and dt.day == 22) or \
             (dt.month == 8 and dt.day == 28) or \
-            (dt.month == 8 and dt.day == 29)
+            (dt.month == 8 and dt.day == 29) or \
+            (dt.month == 9 and dt.day == 4) or \
+            (dt.month == 9 and dt.day == 5) or \
+            (dt.month == 9 and dt.day == 11) or \
+            (dt.month == 9 and dt.day == 12) or \
+            (dt.month == 9 and dt.day == 19) or \
+            (dt.month == 9 and dt.day == 25) or \
+            (dt.month == 9 and dt.day == 26)
         ):
             get_fulltimes(time_list)
         else:
